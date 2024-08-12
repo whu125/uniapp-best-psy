@@ -10,7 +10,8 @@ export type CustomRequestOptions = UniApp.RequestOptions & {
 } & IUniUploadFileOptions // 添加uni.uploadFile参数类型
 
 // 请求基准地址
-const baseUrl = import.meta.env.VITE_SERVER_BASEURL
+// const baseUrl = import.meta.env.VITE_SERVER_BASEURL
+const baseUrl = 'http://localhoost:8081'
 
 // 拦截器配置
 const httpInterceptor = {

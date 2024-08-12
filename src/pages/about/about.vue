@@ -13,8 +13,9 @@
   >
     <view class="text-center text-3xl mt-8">
       鸽友们好，我是
-      <text class="text-red-500">菲鸽</text>
+      <text class="text-red-50">菲鸽</text>
     </view>
+
     <RequestComp />
     <UploadComp />
   </view>
