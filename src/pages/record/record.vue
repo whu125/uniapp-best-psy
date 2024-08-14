@@ -1,7 +1,7 @@
 <route lang="json5">
 {
   style: {
-    navigationBarTitleText: '关于',
+    navigationBarTitleText: '旅程记录',
   },
 }
 </route>
@@ -12,7 +12,7 @@
     :style="{ marginTop: safeAreaInsets?.top + 'px' }"
   >
     <view class="text-center text-3xl mt-8">
-      鸽友们好，我是
+      鸽友们好，我是我是
       <text class="text-red-50">菲鸽</text>
     </view>
 
