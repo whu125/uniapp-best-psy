@@ -14,19 +14,24 @@
     <view class="text-center text-3xl mt-8">
       鸽友们好，我是我是
       <text class="text-red-50">菲鸽</text>
+      <wd-button type="success" @click="testLogin">成功按钮</wd-button>
     </view>
 
-    <RequestComp />
-    <UploadComp />
+    <!-- <RequestComp />
+    <UploadComp /> -->
   </view>
 </template>
 
 <script lang="ts" setup>
-import RequestComp from './components/request.vue'
-import UploadComp from './components/upload.vue'
+// import RequestComp from './components/request.vue'
+// import UploadComp from './components/upload.vue'
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
+
+const testLogin = () => {
+  uni.navigateTo({ url: '/pages/test/test' })
+}
 </script>
 
 <style lang="scss" scoped>

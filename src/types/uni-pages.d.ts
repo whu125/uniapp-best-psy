@@ -5,8 +5,10 @@
 
 interface NavigateToOptions {
   url: "/pages/home/home" |
+       "/pages/login/login" |
        "/pages/my/my" |
        "/pages/record/record" |
+       "/pages/test/test" |
        "/pages/tool/tool";
 }
 interface RedirectToOptions extends NavigateToOptions {}

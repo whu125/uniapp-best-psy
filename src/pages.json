@@ -59,6 +59,11 @@
       }
     },
     {
+      "path": "pages/login/login",
+      "type": "page",
+      "style": {}
+    },
+    {
       "path": "pages/my/my",
       "type": "page",
       "style": {
@@ -71,6 +76,14 @@
       "type": "page",
       "style": {
         "navigationBarTitleText": "旅程记录"
+      }
+    },
+    {
+      "path": "pages/test/test",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "test"
       }
     },
     {
