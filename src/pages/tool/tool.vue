@@ -2,8 +2,8 @@
  * @Author: wenhao zhang zhangwenhao@answerai.pro
  * @Date: 2024-08-12 11:12:02
  * @LastEditors: wenhao zhang zhangwenhao@answerai.pro
- * @LastEditTime: 2024-08-12 11:20:16
- * @FilePath: /my-project/src/pages/index/index.vue
+ * @LastEditTime: 2024-08-15 21:46:21
+ * @FilePath: /my-project/src/pages/tool/tool.vue
  * @Description: 
  * 
  * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
@@ -23,6 +23,14 @@
     :style="{ marginTop: safeAreaInsets?.top + 'px' }"
   >
     工具
+  </view>
+
+  <view class="text-center text-lg main-title-color">
+    这是zwh写的视频测试
+
+    <player-component id="tvp-id" playerid="tvp" vid="t3560gug9kt">
+      <!-- 里面可以放插槽 -->
+    </player-component>
   </view>
 </template>
 
