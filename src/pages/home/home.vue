@@ -26,75 +26,54 @@
       <view class="header">
         <view class="title">我的旅程</view>
       </view>
-      <view class="date-selector">
-        <view class="date-item">
-          STA
-          <br />
-          18
-        </view>
-        <view class="date-item active">
-          SUN
-          <br />
-          19
-        </view>
-        <view class="date-item">
-          MON
-          <br />
-          20
-        </view>
-        <view class="date-item">
-          TUE
-          <br />
-          21
-        </view>
-        <view class="date-item">
-          STA
-          <br />
-          22
-        </view>
-      </view>
       <view class="todo-list">
         <view class="todo-item">
-          <view class="todo-time">09：00-09：30</view>
-          <view class="todo-content">
-            相聊会议，市场入帗分析，竖果团队讨论，开发进度同步讨论等。
+          <view class="todo-time">旅程一</view>
+          <view class="todo-content">完成时间: 2024-08-14 14:30</view>
+          <view class="flex flex-justify-center">
+            <wd-button type="info" size="medium">已完成</wd-button>
+            <wd-button type="error" size="medium">问卷</wd-button>
           </view>
-          <button class="todo-button">立即完成</button>
         </view>
         <view class="todo-item">
-          <view class="todo-time">10：00-12：30</view>
-          <view class="todo-content">
-            客户需求功能讨论需求评审，调研平台现系统功能，需口器登录模块，实现需求功能
+          <view class="todo-time">旅程二</view>
+          <view class="todo-content">开启时间: 2024-08-12 14:30</view>
+          <view class="flex flex-justify-center">
+            <wd-button type="success" size="medium">进入旅程</wd-button>
+            <wd-button type="info" size="medium">问卷</wd-button>
           </view>
-          <button class="todo-button">立即完成</button>
         </view>
         <view class="todo-item">
-          <view class="todo-time">14：00-16：36</view>
-          <view class="todo-content">
-            确定需求相关具体功能以及上线时间，撰写需求文档，完成相关功能模块，实现代码用户界面
+          <view class="todo-time">旅程三</view>
+          <view class="todo-content">开启时间: 2024-08-12 14:30</view>
+          <view class="flex flex-justify-center">
+            <wd-button type="warning" size="medium">等待开启</wd-button>
+            <wd-button type="info" size="medium">问卷</wd-button>
           </view>
-          <button class="todo-button">立即完成</button>
         </view>
         <view class="todo-item">
-          <view class="todo-time">14：00-16：36</view>
-          <view class="todo-content">
-            确定需求相关具体功能以及上线时间，撰写需求文档，完成相关功能模块，实现代码用户界面
+          <view class="todo-time">旅程四</view>
+          <view class="todo-content">开启时间: 2024-08-12 14:30</view>
+          <view class="flex flex-justify-center">
+            <wd-button type="warning" size="medium">等待开启</wd-button>
+            <wd-button type="info" size="medium">问卷</wd-button>
           </view>
-          <button class="todo-button">立即完成</button>
         </view>
         <view class="todo-item">
-          <view class="todo-time">14：00-16：36</view>
-          <view class="todo-content">
-            确定需求相关具体功能以及上线时间，撰写需求文档，完成相关功能模块，实现代码用户界面
+          <view class="todo-time">旅程五</view>
+          <view class="todo-content">开启时间: 2024-08-12 14:30</view>
+          <view class="flex flex-justify-center">
+            <wd-button type="warning" size="medium">等待开启</wd-button>
+            <wd-button type="info" size="medium">问卷</wd-button>
           </view>
-          <button class="todo-button">立即完成</button>
         </view>
         <view class="todo-item">
-          <view class="todo-time">14：00-16：36</view>
-          <view class="todo-content">
-            确定需求相关具体功能以及上线时间，撰写需求文档，完成相关功能模块，实现代码用户界面
+          <view class="todo-time">旅程六</view>
+          <view class="todo-content">开启时间: 2024-08-12 14:30</view>
+          <view class="flex flex-justify-center">
+            <wd-button type="warning" size="medium">等待开启</wd-button>
+            <wd-button type="info" size="medium">问卷</wd-button>
           </view>
-          <button class="todo-button">立即完成</button>
         </view>
       </view>
     </view>
@@ -107,6 +86,7 @@
 
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
+import { getUserInfo, User } from '@/service/index/user'
 
 defineOptions({
   name: 'Home',
@@ -122,37 +102,6 @@ const description = ref(
 onLoad(() => {
   console.log(author)
 })
-
-const wiexinLogin = () => {
-  console.log('weixin login')
-  uni.login({
-    provider: 'weixin',
-    onlyAuthorize: true, // 微信登录仅请求授权认证
-    success: function (event) {
-      const { code } = event
-      console.log(code)
-
-      // 客户端成功获取授权临时票据（code）,向业务服务器发起登录请求。
-      uni.request({
-        url: 'http://localhost:8081/loginByWechat', // 仅为示例，并非真实接口地址。
-        method: 'POST',
-        data: {
-          code: event.code,
-        },
-        success: (res) => {
-          // 获得token完成登录
-          const token = res.data.obj
-          console.log(token)
-          uni.setStorageSync('token', token)
-        },
-      })
-    },
-    fail: function (err) {
-      // 登录授权失败 err.code是错误码
-      console.log(err)
-    },
-  })
-}
 </script>
 
 <style>

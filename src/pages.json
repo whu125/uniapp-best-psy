@@ -78,22 +78,9 @@
       "type": "page",
       "style": {
         "navigationStyle": "custom",
-        "navigationBarTitleText": "工具箱",
-        "mp-weixin": {
-      "usingComponents": {
-        "player-component": "plugin://player/video"
-      }
-    }
+        "navigationBarTitleText": "工具箱"
       }
     }
   ],
-  
-  "plugins": {
-    "player": {
-       "version": "2.4.16",
-       "provider": "wxa75efa648b60994b"
-    }
-  },
-
   "subPackages": []
 }
