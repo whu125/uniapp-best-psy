@@ -4,6 +4,7 @@
     navigationStyle: 'custom',
     navigationBarTitleText: '个人信息',
   },
+  needLogin: true,
 }
 </route>
 <template>

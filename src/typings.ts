@@ -15,13 +15,34 @@ type IUniUploadFileOptions = {
   formData?: any
 }
 
+// type IUserInfo = {
+//   nickname?: string
+//   avatar?: string
+//   /** 微信的 openid，非微信没有这个字段 */
+//   openid?: string
+//   token?: string
+// }
+
 type IUserInfo = {
-  nickname?: string
-  avatar?: string
-  /** 微信的 openid，非微信没有这个字段 */
-  openid?: string
-  token?: string
+  userId: string
+  username: string
+  wechatId: string
+  wechatName: string
+  phone: string
+  currProgress: number
+  avatar: string
+  token: string
 }
+
+// export interface User {
+//   userId: string
+//   username: string
+//   wechatId: string
+//   wechatName: string
+//   phone: string
+//   currProgress: number
+//   avatar: string
+// }
 
 enum TestEnum {
   A = 'a',

@@ -56,12 +56,16 @@
       "style": {
         "navigationStyle": "custom",
         "navigationBarTitleText": "我的旅程"
-      }
+      },
+      "needLogin": true
     },
     {
       "path": "pages/login/login",
       "type": "page",
-      "style": {}
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "login"
+      }
     },
     {
       "path": "pages/my/my",
@@ -69,22 +73,22 @@
       "style": {
         "navigationStyle": "custom",
         "navigationBarTitleText": "个人信息"
-      }
+      },
+      "needLogin": true
     },
     {
       "path": "pages/record/record",
       "type": "page",
       "style": {
         "navigationBarTitleText": "旅程记录"
-      }
+      },
+      "needLogin": true
     },
     {
-      "path": "pages/test/test",
+      "path": "pages/test2/test2",
       "type": "page",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "test"
-      }
+      "style": {},
+      "needLogin": true
     },
     {
       "path": "pages/tool/tool",
@@ -92,7 +96,8 @@
       "style": {
         "navigationStyle": "custom",
         "navigationBarTitleText": "工具箱"
-      }
+      },
+      "needLogin": true
     }
   ],
   "subPackages": []

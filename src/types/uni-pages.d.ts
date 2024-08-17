@@ -8,7 +8,7 @@ interface NavigateToOptions {
        "/pages/login/login" |
        "/pages/my/my" |
        "/pages/record/record" |
-       "/pages/test/test" |
+       "/pages/test2/test2" |
        "/pages/tool/tool";
 }
 interface RedirectToOptions extends NavigateToOptions {}

@@ -15,6 +15,7 @@
     navigationStyle: 'custom',
     navigationBarTitleText: '工具箱',
   },
+  needLogin: true,
 }
 </route>
 <template>

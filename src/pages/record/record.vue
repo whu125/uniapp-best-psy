@@ -3,6 +3,7 @@
   style: {
     navigationBarTitleText: '旅程记录',
   },
+  needLogin: true,
 }
 </route>
 
@@ -30,7 +31,7 @@
 const { safeAreaInsets } = uni.getSystemInfoSync()
 
 const testLogin = () => {
-  uni.navigateTo({ url: '/pages/test/test' })
+  uni.navigateTo({ url: '/pages/test2/test2' })
 }
 </script>
 

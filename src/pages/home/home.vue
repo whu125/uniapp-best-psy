@@ -15,6 +15,7 @@
     navigationStyle: 'custom',
     navigationBarTitleText: '我的旅程',
   },
+  needLogin: true,
 }
 </route>
 <template>
