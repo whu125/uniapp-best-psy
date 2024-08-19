@@ -2,8 +2,8 @@
  * @Author: wenhao zhang zhangwenhao@answerai.pro
  * @Date: 2024-08-12 11:12:02
  * @LastEditors: wenhao zhang zhangwenhao@answerai.pro
- * @LastEditTime: 2024-08-12 11:20:16
- * @FilePath: /my-project/src/pages/index/index.vue
+ * @LastEditTime: 2024-08-18 23:57:36
+ * @FilePath: /my-project/src/pages/home/home.vue
  * @Description: 
  * 
  * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
@@ -35,6 +35,7 @@
             <wd-button type="info" size="medium">已完成</wd-button>
             <wd-button type="error" size="medium">问卷</wd-button>
           </view>
+          <button class="todo-button" @click="ToGanPage()">进入干预测试</button>
         </view>
         <view class="todo-item">
           <view class="todo-time">旅程二</view>
@@ -43,6 +44,7 @@
             <wd-button type="success" size="medium">进入旅程</wd-button>
             <wd-button type="info" size="medium">问卷</wd-button>
           </view>
+          <button class="todo-button" @click="ToLogin()">测试登陆页面</button>
         </view>
         <view class="todo-item">
           <view class="todo-time">旅程三</view>
@@ -103,6 +105,49 @@ const description = ref(
 onLoad(() => {
   console.log(author)
 })
+
+const wiexinLogin = () => {
+  console.log('weixin login')
+  uni.login({
+    provider: 'weixin',
+    onlyAuthorize: true, // 微信登录仅请求授权认证
+    success: function (event) {
+      const { code } = event
+      console.log(code)
+
+      // 客户端成功获取授权临时票据（code）,向业务服务器发起登录请求。
+      uni.request({
+        url: 'http://localhost:8081/loginByWechat', // 仅为示例，并非真实接口地址。
+        method: 'POST',
+        data: {
+          code: event.code,
+        },
+        success: (res) => {
+          // 获得token完成登录
+          const token = res.data.obj
+          console.log(token)
+          uni.setStorageSync('token', token)
+        },
+      })
+    },
+    fail: function (err) {
+      // 登录授权失败 err.code是错误码
+      console.log(err)
+    },
+  })
+}
+
+const ToGanPage = () => {
+  uni.navigateTo({
+    url: '/pages/ganyu/ganyu',
+  })
+}
+
+const ToLogin = () => {
+  uni.navigateTo({
+    url: '/pages/login/login',
+  })
+}
 </script>
 
 <style>

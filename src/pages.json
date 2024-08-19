@@ -68,6 +68,15 @@
       }
     },
     {
+      "path": "pages/ganyu/ganyu",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "干预测试"
+      }
+    },
+   
+    {
       "path": "pages/my/my",
       "type": "page",
       "style": {
