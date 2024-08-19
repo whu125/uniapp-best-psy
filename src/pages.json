@@ -56,15 +56,6 @@
       "style": {
         "navigationStyle": "custom",
         "navigationBarTitleText": "我的旅程"
-      },
-      "needLogin": true
-    },
-    {
-      "path": "pages/login/login",
-      "type": "page",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "login"
       }
     },
     {
@@ -75,7 +66,14 @@
         "navigationBarTitleText": "干预测试"
       }
     },
-   
+    {
+      "path": "pages/login/login",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "login"
+      }
+    },
     {
       "path": "pages/my/my",
       "type": "page",

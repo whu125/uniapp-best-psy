@@ -2,7 +2,7 @@
  * @Author: wenhao zhang zhangwenhao@answerai.pro
  * @Date: 2024-08-12 11:12:02
  * @LastEditors: wenhao zhang zhangwenhao@answerai.pro
- * @LastEditTime: 2024-08-18 23:57:36
+ * @LastEditTime: 2024-08-19 00:07:52
  * @FilePath: /my-project/src/pages/home/home.vue
  * @Description: 
  * 
@@ -15,7 +15,7 @@
     navigationStyle: 'custom',
     navigationBarTitleText: '我的旅程',
   },
-  needLogin: true,
+ 
 }
 </route>
 <template>

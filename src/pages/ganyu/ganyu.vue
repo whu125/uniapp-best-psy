@@ -2,7 +2,7 @@
  * @Author: wenhao zhang zhangwenhao@answerai.pro
  * @Date: 2024-08-12 11:12:02
  * @LastEditors: wenhao zhang zhangwenhao@answerai.pro
- * @LastEditTime: 2024-08-16 07:20:20
+ * @LastEditTime: 2024-08-19 00:12:50
  * @FilePath: /my-project/src/pages/ganyu/ganyu.vue
  * @Description: 
  * 
@@ -25,6 +25,10 @@
         工具
       </view>
     
+      <view>
+        <wd-button type="info" size="medium" @click="ToHome()">返回</wd-button>
+
+      </view>
       
     </template>
     
@@ -37,6 +41,10 @@
     
     // 获取屏幕边界到安全区域距离
     const { safeAreaInsets } = uni.getSystemInfoSync()
+
+    const ToHome=()=>{
+      uni.switchTab({ url: '/pages/home/home' })
+    }
     </script>
     
     <style>

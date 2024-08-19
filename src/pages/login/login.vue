@@ -12,7 +12,11 @@
     class="bg-white overflow-hidden pt-2 px-4"
     :style="{ marginTop: safeAreaInsets?.top + 'px' }"
   >
-    <view class="login-form">
+
+    <view>
+      <wt-botton type="info">微信一键登陆</wt-botton>
+    </view>
+    <!-- <view class="login-form">
       <view class="tab-bar">
         <text class="active">登录</text>
         <text>注册</text>
@@ -24,14 +28,14 @@
       <text class="forget-password">忘记密码</text>
 
       <button class="login-btn" @tap="login">登录</button>
-    </view>
+    </view> -->
 
     <!-- 社交媒体图标 -->
-    <view class="social-icons">
+    <!-- <view class="social-icons">
       <view class="icon" @click="wiexinLogin">微信</view>
       <view class="icon">QQ</view>
       <view class="icon">微博</view>
-    </view>
+    </view> -->
   </view>
 </template>
 
