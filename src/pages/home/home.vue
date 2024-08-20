@@ -15,7 +15,6 @@
     navigationStyle: 'custom',
     navigationBarTitleText: '我的旅程',
   },
- 
 }
 </route>
 <template>
@@ -41,10 +40,10 @@
           <view class="todo-time">旅程二</view>
           <view class="todo-content">开启时间: 2024-08-12 14:30</view>
           <view class="flex flex-justify-center">
-            <wd-button type="success" size="medium">进入旅程</wd-button>
+            <wd-button type="success" size="medium">进入干预</wd-button>
             <wd-button type="info" size="medium">问卷</wd-button>
           </view>
-          <button class="todo-button" @click="ToLogin()">测试登陆页面</button>
+          <!-- <button class="todo-button" @click="ToLogin()">测试登陆页面</button> -->
         </view>
         <view class="todo-item">
           <view class="todo-time">旅程三</view>

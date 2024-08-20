@@ -1,93 +1,119 @@
-<!--
- * @Author: wenhao zhang zhangwenhao@answerai.pro
- * @Date: 2024-08-12 11:12:02
- * @LastEditors: wenhao zhang zhangwenhao@answerai.pro
- * @LastEditTime: 2024-08-19 00:12:50
- * @FilePath: /my-project/src/pages/ganyu/ganyu.vue
- * @Description: 
- * 
- * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
--->
-<!-- 使用 type="home" 属性设置首页，其他页面不需要设置，默认为page；推荐使用json5，更强大，且允许注释 -->
 <route lang="json5">
-{
-  style: {
-    navigationStyle: 'custom',
-    navigationBarTitleText: '干预测试',
-  },
-}
+	{
+	style: {
+	navigationStyle: 'custom',
+	navigationBarTitleText: '干预测试',
+	},
+	}
 </route>
 <template>
-  <view
-    class="bg-white overflow-hidden pt-2 px-4"
-    :style="{ marginTop: safeAreaInsets?.top + 'px' }"
-  >
-    工具
-  </view>
+	<view class="bg-white overflow-hidden pt-2 px-4" :style="{ marginTop: safeAreaInsets?.top + 'px' }" w-full h-full>
+		<wd-navbar title="干预" left-arrow @click-left="ToHome()"></wd-navbar>
+		<view :style="{ height: contentHeight + 'px' }" style="overflow-y: scroll;">
+			<view>
+				{{inter.questions[currQuestion-1].content}}
+			</view>
+			<view style="display: flex; justify-content: center;">
+				<wd-img :width="200" :height="200" :src="inter.questions[currQuestion-1].url" :enable-preview="true" />
+			</view>
+		</view>
 
-  <view>
-    <wd-button type="info" size="medium" @click="ToHome()">返回</wd-button>
-  </view>
+		<wd-radio-group v-model="currAnswer" shape="dot" @change="handleRadioChange"
+			v-if="inter.questions[currQuestion-1].questionType == 'select'">
+			<wd-radio v-for="(currOption, index) in currOptions" :key="index"
+				:value="currOption">{{currOption}}</wd-radio>
+		</wd-radio-group>
+		<wd-textarea v-model="currAnswer" placeholder="请填写想法" @confirm="handelInputChange" @blur="handelInputChange"
+			v-if="inter.questions[currQuestion-1].questionType == 'fill'" clearable />
 
-  <!-- 根据全局状态判断是问卷还是干预 -->
-  <view>
-    <view v-for="(question, index) in questions" :key="question.id">
-      <!-- 显示题目标题 -->
-      <h3>{{ index + 1 }}. {{ question.title }}</h3>
-
-      <!-- 生成对应的单选框组 -->
-      <wd-radio-group v-model="value" inline shape="button">
-        <wd-radio v-for="option in question.options" :key="option.value" :value="option.value">
-          {{ option.text }}
-        </wd-radio>
-      </wd-radio-group>
-
-      <view>
-        <wd-button type="info" size="medium" @click="ToHome()">下一页</wd-button>
-      </view>
-    </view>
-  </view>
+		<wd-pagination v-model="currQuestion" :total-page="inter.questions.length" @change="handlePageChange"
+			show-icon></wd-pagination>
+	</view>
 </template>
 
 <script lang="ts" setup>
-import PLATFORM from '@/utils/platform'
+	import PLATFORM from '@/utils/platform'
 
-defineOptions({
-  name: 'tool',
-})
+	defineOptions({
+		name: 'tool',
+	})
 
-// 获取屏幕边界到安全区域距离
-const { safeAreaInsets } = uni.getSystemInfoSync()
+	// 获取屏幕边界到安全区域距离
+	const { safeAreaInsets } = uni.getSystemInfoSync()
+	const systemInfo = uni.getSystemInfoSync()
+	const contentHeight = systemInfo.windowHeight - safeAreaInsets.top - 100
+	onLoad(() => {
+		if (inter.value.questions[currQuestion.value - 1].questionType == "select") {
+			currOptions.value = inter.value.questions[currQuestion.value - 1].options.split(';')
+		}
+	})
 
-const ToHome = () => {
-  uni.switchTab({ url: '/pages/home/home' })
-}
-const value = ref()
-const answers = ref([])
-const questions = ref([
-  {
-    id: 1,
-    title: '你喜欢什么颜色？',
-    options: [
-      { value: 'a', text: '红色' },
-      { value: 'b', text: '蓝色' },
-      { value: 'c', text: '黄色' },
-      { value: 'd', text: '绿色' },
-    ],
-  },
-  {
-    id: 2,
-    title: '你喜欢什么水果？',
-    options: [
-      { value: 'a', text: '苹果' },
-      { value: 'b', text: '香蕉' },
-    ],
-  },
-])
+	const ToHome = () => {
+		uni.switchTab({ url: '/pages/home/home' })
+		submit()
+	}
+	const currQuestion = ref<number>(1)
+	const currAnswer = ref<String>()
+	const currOptions = ref([])
+	const answers = ref(new Map())
+
+	const inter = ref({
+		interId: 1,
+		questions: [
+			{
+				questionId: 1,
+				content: '你喜欢什么颜色',
+				options: '红色;蓝色;绿色',
+				url: 'http://115.159.83.61:9000/mindease/f0744620-034b-4e01-8afe-2301b74a6dc5_pixel.png',
+				questionType: 'select',
+			},
+			{
+				questionId: 2,
+				content: '你喜欢什么水果',
+				options: '苹果;香蕉;葡萄',
+				url: '',
+				questionType: 'select',
+			},
+			{
+				questionId: 3,
+				content: '描述你今天早上的的心情',
+				options: '',
+				url: '',
+				questionType: 'fill',
+			},
+		],
+	})
+
+	const handlePageChange = ({ value }) => {
+		currQuestion.value = value
+		console.log(currQuestion.value)
+		currAnswer.value = ""
+		if (inter.value.questions[currQuestion.value - 1].questionType == "select") {
+			currOptions.value = inter.value.questions[currQuestion.value - 1].options.split(';')
+		} else {
+			currOptions.value = []
+		}
+	}
+	
+	const handelInputChange = ({ value }) => {
+		currAnswer.value = value
+		answers.value.set(currQuestion.value - 1, currAnswer.value)
+		console.log(answers.value)
+	}
+
+	const handleRadioChange = () => {
+		answers.value.set(currQuestion.value - 1, currAnswer.value)
+		console.log(answers.value)
+	}
+
+	const submit = () => {
+		const answersString = Array.from(answers.value.values()).join(';');
+		console.log(answersString)
+	}
 </script>
 
 <style>
-.main-title-color {
-  color: #d14328;
-}
+	.main-title-color {
+		color: #d14328;
+	}
 </style>
