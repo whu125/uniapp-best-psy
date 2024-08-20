@@ -12,9 +12,11 @@
     class="bg-white overflow-hidden pt-2 px-4"
     :style="{ marginTop: safeAreaInsets?.top + 'px' }"
   >
-
     <view>
       <wt-botton type="info">微信一键登陆</wt-botton>
+      <view>
+        <wd-button type="info" size="medium" @click="ToHome()">返回</wd-button>
+      </view>
     </view>
     <!-- <view class="login-form">
       <view class="tab-bar">
@@ -50,6 +52,9 @@ defineOptions({
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
+const ToHome = () => {
+  uni.switchTab({ url: '/pages/home/home' })
+}
 
 const loginInfo = ref({
   wechatId: null,
