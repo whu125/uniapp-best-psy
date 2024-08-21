@@ -11,7 +11,7 @@ export type CustomRequestOptions = UniApp.RequestOptions & {
 
 // 请求基准地址
 // const baseUrl = import.meta.env.VITE_SERVER_BASEURL
-const baseUrl = 'http://localhoost:8081'
+const baseUrl = 'http://localhost:8081'
 
 // 拦截器配置
 const httpInterceptor = {

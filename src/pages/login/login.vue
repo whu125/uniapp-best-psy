@@ -75,7 +75,7 @@ const wiexinLogin = () => {
       console.log(code)
       // 客户端成功获取授权临时票据（code）,向业务服务器发起登录请求。
       uni.request({
-        url: 'http://localhost:8081/loginByWechat', // 仅为示例，并非真实接口地址。
+        url: 'http://localhost:8081/loginByWechat',
         method: 'POST',
         data: {
           code: event.code,

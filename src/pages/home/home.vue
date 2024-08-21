@@ -27,54 +27,14 @@
         <view class="title">我的旅程</view>
       </view>
       <view class="todo-list">
-        <view class="todo-item">
-          <view class="todo-time">旅程一</view>
-          <view class="todo-content">完成时间: 2024-08-14 14:30</view>
+        <view class="todo-item" v-for="inter in inters">
+          <view class="todo-time">旅程{{inter.title}}</view>
+          <view class="todo-content">开启时间: 2024-08-12 14:30</view>
           <view class="flex flex-justify-center">
-            <wd-button type="info" size="medium">已完成</wd-button>
+			<wd-button type="info" size="medium" v-if="inter.progress < userInfo.progress">已完成</wd-button>
+            <wd-button type="success" size="medium" @click="ToGanPage()" v-if="inter.progress == userInfo.progress">进入干预</wd-button>
+			<wd-button type="warning" size="medium" v-if="inter.progress > userInfo.progress">等待开启</wd-button>
             <wd-button type="error" size="medium">问卷</wd-button>
-          </view>
-          <button class="todo-button" @click="ToGanPage()">进入干预测试</button>
-        </view>
-        <view class="todo-item">
-          <view class="todo-time">旅程二</view>
-          <view class="todo-content">开启时间: 2024-08-12 14:30</view>
-          <view class="flex flex-justify-center">
-            <wd-button type="success" size="medium">进入干预</wd-button>
-            <wd-button type="info" size="medium">问卷</wd-button>
-          </view>
-          <!-- <button class="todo-button" @click="ToLogin()">测试登陆页面</button> -->
-        </view>
-        <view class="todo-item">
-          <view class="todo-time">旅程三</view>
-          <view class="todo-content">开启时间: 2024-08-12 14:30</view>
-          <view class="flex flex-justify-center">
-            <wd-button type="warning" size="medium">等待开启</wd-button>
-            <wd-button type="info" size="medium">问卷</wd-button>
-          </view>
-        </view>
-        <view class="todo-item">
-          <view class="todo-time">旅程四</view>
-          <view class="todo-content">开启时间: 2024-08-12 14:30</view>
-          <view class="flex flex-justify-center">
-            <wd-button type="warning" size="medium">等待开启</wd-button>
-            <wd-button type="info" size="medium">问卷</wd-button>
-          </view>
-        </view>
-        <view class="todo-item">
-          <view class="todo-time">旅程五</view>
-          <view class="todo-content">开启时间: 2024-08-12 14:30</view>
-          <view class="flex flex-justify-center">
-            <wd-button type="warning" size="medium">等待开启</wd-button>
-            <wd-button type="info" size="medium">问卷</wd-button>
-          </view>
-        </view>
-        <view class="todo-item">
-          <view class="todo-time">旅程六</view>
-          <view class="todo-content">开启时间: 2024-08-12 14:30</view>
-          <view class="flex flex-justify-center">
-            <wd-button type="warning" size="medium">等待开启</wd-button>
-            <wd-button type="info" size="medium">问卷</wd-button>
           </view>
         </view>
       </view>
@@ -100,6 +60,18 @@ const author = ref('菲鸽')
 const description = ref(
   'unibest 是一个集成了多种工具和技术的 uniapp 开发模板，由 uniapp + Vue3 + Ts + Vite4 + UnoCss + UniUI + VSCode 构建，模板具有代码提示、自动格式化、统一配置、代码片段等功能，并内置了许多常用的基本组件和基本功能，让你编写 uniapp 拥有 best 体验。',
 )
+
+const inters = ref([
+	{ title: '一', progress: 0 }, 
+	{ title: '二', progress: 1 }, 
+	{ title: '三', progress: 2 }, 
+	{ title: '四', progress: 3 }, 
+	{ title: '五', progress: 4 }, 
+	{ title: '六', progress: 5 },
+])
+const userInfo = ref({
+	progress: 2
+})
 // 测试 uni API 自动引入
 onLoad(() => {
   console.log(author)
