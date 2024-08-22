@@ -147,14 +147,13 @@ const handleRadioChange = () => {
 
 const submit = async () => {
   console.log(answers.value)
+  const jsonObject = Object.fromEntries(answers.value)
   const res = await submitInter({
     userId: '1',
     interId: interId.value,
     endTime: getFormattedDate(),
-    answers: answers.value,
+    answers: jsonObject,
   })
-  console.log(res)
-  console.log('res')
 }
 </script>
 

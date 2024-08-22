@@ -134,9 +134,11 @@ const ToGanPage = async (interId: number) => {
     startTime: getFormattedDate(),
   })
   console.log(res)
-  uni.navigateTo({
-    url: `/pages/ganyu/ganyu?interId=${interId}`,
-  })
+  if (res.code === 200) {
+    uni.navigateTo({
+      url: `/pages/ganyu/ganyu?interId=${interId}`,
+    })
+  }
 }
 
 const ToLogin = () => {

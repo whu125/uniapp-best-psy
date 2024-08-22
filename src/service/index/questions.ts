@@ -18,7 +18,7 @@ export interface ISubmitInter {
   userId: string
   interId: number
   endTime: string
-  answers: Map<number, string>
+  answers: string
 }
 
 /** POST 请求 */
