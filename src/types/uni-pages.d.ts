@@ -6,6 +6,7 @@
 interface NavigateToOptions {
   url: "/pages/home/home" |
        "/pages/ganyu/ganyu" |
+       "/pages/ganyu/inquire" |
        "/pages/login/login" |
        "/pages/my/my" |
        "/pages/record/record" |

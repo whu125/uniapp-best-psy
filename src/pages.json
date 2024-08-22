@@ -67,6 +67,14 @@
       }
     },
     {
+      "path": "pages/ganyu/inquire",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "干预测试"
+      }
+    },
+    {
       "path": "pages/login/login",
       "type": "page",
       "style": {
