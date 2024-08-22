@@ -7,63 +7,70 @@
 }
 </route>
 <template>
-  <view v-if="true">
-    <inquire></inquire>
-  </view>
-  <view v-if="false">
-    <view
-      class="bg-white overflow-hidden pt-2 px-4"
-      :style="{ marginTop: safeAreaInsets?.top + 'px' }"
-      w-full
-      h-full
-    >
-      <wd-navbar title="干预" left-arrow @click-left="ToHome()"></wd-navbar>
-      <view :style="{ height: contentHeight + 'px' }" style="overflow-y: scroll">
+  <view class="bg-white pt-2 px-4" :style="{ marginTop: safeAreaInsets?.top + 'px' }" w-full h-full>
+    <wd-navbar title="干预" left-arrow @click-left="ToHome()"></wd-navbar>
+    <view class="middle-container">
+      <view class="content" :style="{ height: contentHeight + 'px' }">
         <view>
-          {{ questions.value[currQuestion - 1].content }}
+          {{ questions[currQuestion - 1].content }}
         </view>
         <view style="display: flex; justify-content: center">
           <wd-img
             :width="200"
             :height="200"
-            :src="questions.value[currQuestion - 1].url"
+            :src="questions[currQuestion - 1].url"
             :enable-preview="true"
           />
         </view>
+        <view style="width: 100%; height: 800px; background-color: yellow"></view>
+        <view style="width: 100%; height: 10px; background-color: red"></view>
+        <view style="width: 100%; height: 80px; background-color: blue"></view>
       </view>
 
-      <wd-radio-group
-        v-model="currAnswer"
-        shape="dot"
-        @change="handleRadioChange"
-        v-if="inter.questions[currQuestion - 1].questionType == 'select'"
-      >
-        <wd-radio v-for="(currOption, index) in currOptions" :key="index" :value="currOption">
-          {{ currOption }}
-        </wd-radio>
-      </wd-radio-group>
-      <wd-textarea
-        v-model="currAnswer"
-        placeholder="请填写想法"
-        @confirm="handelInputChange"
-        @blur="handelInputChange"
-        v-if="inter.questions[currQuestion - 1].questionType == 'fill'"
-        clearable
-      />
+      <view class="fixed-bottom">
+        <wd-radio-group
+          v-model="currAnswer"
+          shape="dot"
+          @change="handleRadioChange"
+          v-if="questions[currQuestion - 1].questionType == 'select'"
+          size="large"
+        >
+          <wd-radio v-for="(currOption, index) in currOptions" :key="index" :value="currOption">
+            {{ currOption }}
+          </wd-radio>
+        </wd-radio-group>
+        <wd-textarea
+          v-model="currAnswer"
+          placeholder="请填写想法"
+          @change="handelInputChange"
+          v-if="questions[currQuestion - 1].questionType == 'fill'"
+          clearable
+        />
 
-      <wd-pagination
-        v-model="currQuestion"
-        :total-page="inter.questions.length"
-        @change="handlePageChange"
-        show-icon
-      ></wd-pagination>
+        <wd-pagination
+          v-model="currQuestion"
+          :total-page="questions.length"
+          @change="handlePageChange"
+          show-icon
+        ></wd-pagination>
+      </view>
+    </view>
+
+    <view class="submit-btn">
+      <wd-button type="success" @click="submit" v-if="isFinish">提交</wd-button>
     </view>
   </view>
 </template>
 
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
-import inquire from './inquire.vue'
+import {
+  getQuestionByInterId,
+  IQuestionItem,
+  submitInter,
+  ISubmitInter,
+} from '@/service/index/questions'
+import { getFormattedDate } from '@/utils/getTime'
 
 defineOptions({
   name: 'tool',
@@ -72,12 +79,7 @@ defineOptions({
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const systemInfo = uni.getSystemInfoSync()
-const contentHeight = systemInfo.windowHeight - safeAreaInsets.top - 100
-onLoad(() => {
-  if (inter.value.questions[currQuestion.value - 1].questionType == 'select') {
-    currOptions.value = inter.value.questions[currQuestion.value - 1].options.split(';')
-  }
-})
+const contentHeight = systemInfo.windowHeight - safeAreaInsets.top - 120
 
 const ToHome = () => {
   uni.switchTab({ url: '/pages/home/home' })
@@ -87,42 +89,48 @@ const currQuestion = ref<number>(1)
 const currAnswer = ref<string>()
 const currOptions = ref([])
 const answers = ref(new Map())
-
-const inter = ref({
-  interId: 1,
-  questions: [
-    {
-      questionId: 1,
-      content: '你喜欢什么颜色',
-      options: '红色;蓝色;绿色',
-      url: 'http://115.159.83.61:9000/mindease/f0744620-034b-4e01-8afe-2301b74a6dc5_pixel.png',
-      questionType: 'select',
-    },
-    {
-      questionId: 2,
-      content: '你喜欢什么水果',
-      options: '苹果;香蕉;葡萄',
-      url: '',
-      questionType: 'select',
-    },
-    {
-      questionId: 3,
-      content: '描述你今天早上的的心情',
-      options: '',
-      url: '',
-      questionType: 'fill',
-    },
-  ],
+const interId = ref<number>()
+const questions = ref<IQuestionItem[]>([])
+const isEmpty = ref<boolean>(false)
+const isFinish = computed(() => {
+  for (let i = 0; i < answers.value.size; i++) {
+    const value = answers.value.get(i)
+    if (value === '' || value === null || value === undefined) {
+      return false
+    }
+  }
+  if (questions.value.length <= 0 || questions.value.length !== answers.value.size) {
+    return false
+  }
+  return true
 })
+
+onLoad((options) => {
+  interId.value = options.interId
+  console.log(interId.value)
+  getQuestion()
+})
+
+const getQuestion = async () => {
+  const res = await getQuestionByInterId(interId.value)
+  console.log(res)
+  questions.value = res.data
+  if (questions.value[currQuestion.value - 1].questionType === 'select') {
+    currOptions.value = questions.value[currQuestion.value - 1].options.split(';')
+  }
+}
 
 const handlePageChange = ({ value }) => {
   currQuestion.value = value
-  console.log(currQuestion.value)
   currAnswer.value = ''
-  if (inter.value.questions[currQuestion.value - 1].questionType == 'select') {
-    currOptions.value = inter.value.questions[currQuestion.value - 1].options.split(';')
+  if (questions.value[currQuestion.value - 1].questionType === 'select') {
+    currOptions.value = questions.value[currQuestion.value - 1].options.split(';')
   } else {
     currOptions.value = []
+  }
+
+  if (answers.value.has(currQuestion.value - 1)) {
+    currAnswer.value = answers.value.get(currQuestion.value - 1)
   }
 }
 
@@ -137,14 +145,43 @@ const handleRadioChange = () => {
   console.log(answers.value)
 }
 
-const submit = () => {
-  const answersString = Array.from(answers.value.values()).join(';')
-  console.log(answersString)
+const submit = async () => {
+  console.log(answers.value)
+  const res = await submitInter({
+    userId: '1',
+    interId: interId.value,
+    endTime: getFormattedDate(),
+    answers: answers.value,
+  })
+  console.log(res)
+  console.log('res')
 }
 </script>
 
 <style>
 .main-title-color {
   color: #d14328;
+}
+
+.middle-container {
+  display: flex;
+  flex-direction: column;
+  height: 80vh; /* 容器高度设置为视口高度 */
+}
+
+.fixed-bottom {
+  z-index: 1000; /* 确保底部栏在最上面 */
+  flex-shrink: 0; /* 防止底部栏在缩小时被压缩 */
+}
+
+.content {
+  flex-grow: 1; /* 允许中间内容区域填充剩余空间 */
+  padding: 10px; /* 根据需要添加内边距 */
+  overflow-y: scroll;
+}
+
+.submit-btn {
+  position: absolute;
+  right: 15px;
 }
 </style>

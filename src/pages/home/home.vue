@@ -27,13 +27,24 @@
         <view class="title">我的旅程</view>
       </view>
       <view class="todo-list">
-        <view class="todo-item" v-for="inter in inters">
-          <view class="todo-time">旅程{{inter.title}}</view>
+        <view class="todo-item" v-for="(inter, index) in inters" :key="index">
+          <view class="todo-time">旅程{{ inter.title }}</view>
           <view class="todo-content">开启时间: 2024-08-12 14:30</view>
           <view class="flex flex-justify-center">
-			<wd-button type="info" size="medium" v-if="inter.progress < userInfo.progress">已完成</wd-button>
-            <wd-button type="success" size="medium" @click="ToGanPage()" v-if="inter.progress == userInfo.progress">进入干预</wd-button>
-			<wd-button type="warning" size="medium" v-if="inter.progress > userInfo.progress">等待开启</wd-button>
+            <wd-button type="info" size="medium" v-if="inter.interId < userInfo.curr_progress">
+              已完成
+            </wd-button>
+            <wd-button
+              type="success"
+              size="medium"
+              @click="ToGanPage(inter.interId)"
+              v-if="inter.interId == userInfo.curr_progress"
+            >
+              进入干预
+            </wd-button>
+            <wd-button type="warning" size="medium" v-if="inter.interId > userInfo.curr_progress">
+              等待开启
+            </wd-button>
             <wd-button type="error" size="medium">问卷</wd-button>
           </view>
         </view>
@@ -49,6 +60,8 @@
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
 import { getUserInfo, User } from '@/service/index/user'
+import { startInter, IStartInter } from '@/service/index/questions'
+import { getFormattedDate } from '@/utils/getTime'
 
 defineOptions({
   name: 'Home',
@@ -62,15 +75,21 @@ const description = ref(
 )
 
 const inters = ref([
-	{ title: '一', progress: 0 }, 
-	{ title: '二', progress: 1 }, 
-	{ title: '三', progress: 2 }, 
-	{ title: '四', progress: 3 }, 
-	{ title: '五', progress: 4 }, 
-	{ title: '六', progress: 5 },
+  { title: '一', interId: 1 },
+  { title: '二', interId: 2 },
+  { title: '三', interId: 3 },
+  { title: '四', interId: 4 },
+  { title: '五', interId: 5 },
+  { title: '六', interId: 6 },
 ])
 const userInfo = ref({
-	progress: 2
+  userId: 1,
+  username: 'yz',
+  wechatId: '123456789wechat',
+  wechatName: 'yz-wechat',
+  phone: '1234567890',
+  avatar: '',
+  curr_progress: 1,
 })
 // 测试 uni API 自动引入
 onLoad(() => {
@@ -95,7 +114,7 @@ const wiexinLogin = () => {
         },
         success: (res) => {
           // 获得token完成登录
-          const token = res.data.obj
+          const token = res.data
           console.log(token)
           uni.setStorageSync('token', token)
         },
@@ -108,9 +127,15 @@ const wiexinLogin = () => {
   })
 }
 
-const ToGanPage = () => {
+const ToGanPage = async (interId: number) => {
+  const res = await startInter({
+    userId: '1',
+    interId,
+    startTime: getFormattedDate(),
+  })
+  console.log(res)
   uni.navigateTo({
-    url: '/pages/ganyu/ganyu',
+    url: `/pages/ganyu/ganyu?interId=${interId}`,
   })
 }
 
