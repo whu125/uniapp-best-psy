@@ -31,18 +31,18 @@
           <view class="todo-time">旅程{{ inter.title }}</view>
           <view class="todo-content">开启时间: 2024-08-12 14:30</view>
           <view class="flex flex-justify-center">
-            <wd-button type="info" size="medium" v-if="inter.interId < userInfo.curr_progress">
+            <wd-button type="info" size="medium" v-if="inter.interId < userInfo.currProgress">
               已完成
             </wd-button>
             <wd-button
               type="success"
               size="medium"
               @click="ToGanPage(inter.interId)"
-              v-if="inter.interId == userInfo.curr_progress"
+              v-if="inter.interId == userInfo.currProgress"
             >
               进入干预
             </wd-button>
-            <wd-button type="warning" size="medium" v-if="inter.interId > userInfo.curr_progress">
+            <wd-button type="warning" size="medium" v-if="inter.interId > userInfo.currProgress">
               等待开启
             </wd-button>
             <wd-button type="error" size="medium">问卷</wd-button>
@@ -62,6 +62,7 @@ import PLATFORM from '@/utils/platform'
 import { getUserInfo, User } from '@/service/index/user'
 import { startInter, IStartInter } from '@/service/index/questions'
 import { getFormattedDate } from '@/utils/getTime'
+import { useUserStore } from '@/store/user'
 
 defineOptions({
   name: 'Home',
@@ -69,10 +70,8 @@ defineOptions({
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
-const author = ref('菲鸽')
-const description = ref(
-  'unibest 是一个集成了多种工具和技术的 uniapp 开发模板，由 uniapp + Vue3 + Ts + Vite4 + UnoCss + UniUI + VSCode 构建，模板具有代码提示、自动格式化、统一配置、代码片段等功能，并内置了许多常用的基本组件和基本功能，让你编写 uniapp 拥有 best 体验。',
-)
+const userStore = useUserStore()
+const userInfo = userStore.userInfo
 
 const inters = ref([
   { title: '一', interId: 1 },
@@ -82,19 +81,8 @@ const inters = ref([
   { title: '五', interId: 5 },
   { title: '六', interId: 6 },
 ])
-const userInfo = ref({
-  userId: 1,
-  username: 'yz',
-  wechatId: '123456789wechat',
-  wechatName: 'yz-wechat',
-  phone: '1234567890',
-  avatar: '',
-  curr_progress: 1,
-})
 // 测试 uni API 自动引入
-onLoad(() => {
-  console.log(author)
-})
+onLoad(() => {})
 
 const wiexinLogin = () => {
   console.log('weixin login')
@@ -129,7 +117,7 @@ const wiexinLogin = () => {
 
 const ToGanPage = async (interId: number) => {
   const res = await startInter({
-    userId: '1',
+    userId: userInfo.userId,
     interId,
     startTime: getFormattedDate(),
   })

@@ -71,6 +71,8 @@ import {
   ISubmitInter,
 } from '@/service/index/questions'
 import { getFormattedDate } from '@/utils/getTime'
+import { useUserStore } from '@/store/user'
+import { useInterStore } from '@/store/inter'
 
 defineOptions({
   name: 'tool',
@@ -80,10 +82,11 @@ defineOptions({
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const systemInfo = uni.getSystemInfoSync()
 const contentHeight = systemInfo.windowHeight - safeAreaInsets.top - 120
+const userStore = useUserStore()
+const interStore = useInterStore()
 
 const ToHome = () => {
   uni.switchTab({ url: '/pages/home/home' })
-  submit()
 }
 const currQuestion = ref<number>(1)
 const currAnswer = ref<string>()
@@ -107,8 +110,11 @@ const isFinish = computed(() => {
 
 onLoad((options) => {
   interId.value = options.interId
-  console.log(interId.value)
   getQuestion()
+})
+
+onUnload(() => {
+  storeInter()
 })
 
 const getQuestion = async () => {
@@ -118,6 +124,7 @@ const getQuestion = async () => {
   if (questions.value[currQuestion.value - 1].questionType === 'select') {
     currOptions.value = questions.value[currQuestion.value - 1].options.split(';')
   }
+  checkIfUnfinished()
 }
 
 const handlePageChange = ({ value }) => {
@@ -146,14 +153,38 @@ const handleRadioChange = () => {
 }
 
 const submit = async () => {
-  console.log(answers.value)
   const jsonObject = Object.fromEntries(answers.value)
   const res = await submitInter({
-    userId: '1',
+    userId: userStore.userInfo.userId,
     interId: interId.value,
     endTime: getFormattedDate(),
     answers: jsonObject,
   })
+  if (res.code === 200) {
+    const userInfo = userStore.userInfo
+    userInfo.currProgress = userInfo.currProgress + 1
+    ToHome()
+  }
+}
+
+const checkIfUnfinished = () => {
+  const interStatus = interStore.interInfo
+  console.log(interStatus)
+  if (interStatus.interId != null && interStatus.answers != null) {
+    answers.value = new Map(interStatus.answers)
+    if (answers.value.has(currQuestion.value - 1)) {
+      currAnswer.value = answers.value.get(currQuestion.value - 1)
+    }
+  }
+}
+
+const storeInter = () => {
+  const interStatus = {
+    interId: interId.value,
+    answers: answers.value,
+  }
+
+  interStore.setInterInfo(interStatus)
 }
 </script>
 

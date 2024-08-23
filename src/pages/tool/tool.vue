@@ -21,18 +21,22 @@
 <template>
   <view
     class="bg-white overflow-hidden pt-2 px-4"
-    :style="{ marginTop: safeAreaInsets?.top + 'px' }"
+    :style="{ marginTop: safeAreaInsets?.top + 100 + 'px' }"
   >
-    工具
+    <wd-grid border :column="2">
+      <wd-grid-item icon="heart" text="社会支持" />
+      <wd-grid-item icon="clock" text="睡眠放松" />
+      <wd-grid-item icon="eye-close" text="正念冥想" />
+      <wd-grid-item icon="chart-bubble" text="呼吸训练" />
+    </wd-grid>
   </view>
 
-  <view class="text-center text-lg main-title-color">
+  <!-- <view class="text-center text-lg main-title-color">
     这是zwh写的视频测试
 
-    <player-component id="tvp-id" playerid="tvp" vid="t3560gug9kt">
-      <!-- 里面可以放插槽 -->
-    </player-component>
-  </view>
+    <player-component id="tvp-id" playerid="tvp" vid="t3560gug9kt"></player-component>
+    
+  </view> -->
 </template>
 
 <script lang="ts" setup>
