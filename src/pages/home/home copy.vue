@@ -1,3 +1,14 @@
+<!--
+ * @Author: wenhao zhang zhangwenhao@answerai.pro
+ * @Date: 2024-08-12 11:12:02
+ * @LastEditors: wenhao zhang zhangwenhao@answerai.pro
+ * @LastEditTime: 2024-08-19 00:07:52
+ * @FilePath: /my-project/src/pages/home/home.vue
+ * @Description: 
+ * 
+ * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
+-->
+<!-- 使用 type="home" 属性设置首页，其他页面不需要设置，默认为page；推荐使用json5，更强大，且允许注释 -->
 <route lang="json5" type="home">
 {
   style: {
@@ -10,10 +21,8 @@
   <view
     class="bg-white overflow-hidden pt-2 px-4"
     :style="{ marginTop: safeAreaInsets?.top + 'px' }"
-    w-full
-    h-full
   >
-    <!-- <view class="container">
+    <view class="container">
       <view class="header">
         <view class="title">我的旅程</view>
       </view>
@@ -40,31 +49,11 @@
           </view>
         </view>
       </view>
-    </view> -->
-
-    <view class="main-container">
-      <view class="start-inter">
-        <view class="title">站点导览</view>
-        <view class="text">有时候你能做的最有效的事情是放松。</view>
-        <view>
-          <wd-button type="success">进入旅程</wd-button>
-        </view>
-      </view>
-      <view class="sub-container">
-        <view class="inter-task">
-          <view class="title">站点任务</view>
-          <view class="icon">
-            <wd-icon name="list" color="#ffffff" />
-          </view>
-        </view>
-        <view class="inter-next">
-          <view class="title">下一站地图</view>
-          <view class="icon">
-            <wd-icon name="add-circle" color="#ffffff" />
-          </view>
-        </view>
-      </view>
     </view>
+
+    <!-- <view class="flex flex-justify-center">
+      <wd-button type="success" @click="wiexinLogin">微信登录</wd-button>
+    </view> -->
   </view>
 </template>
 
@@ -151,7 +140,7 @@ const ToLogin = () => {
 .main-title-color {
   color: #d14328;
 }
-/*
+
 .container {
   box-sizing: border-box;
   max-width: 414px;
@@ -229,75 +218,5 @@ const ToLogin = () => {
   background-color: #e6e6ff;
   border: none;
   border-radius: 5px;
-}
-  */
-
-.main-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 90vh;
-}
-
-.sub-container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: auto;
-  margin-top: 20px;
-}
-
-.start-inter {
-  display: flex;
-  flex-direction: column;
-  width: 90%;
-  height: auto;
-  padding: 15px;
-  background-color: #d14328;
-  border-radius: 10px;
-}
-
-.inter-task {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 45%;
-  height: auto;
-  background-color: cadetblue;
-  border-radius: 10px;
-}
-
-.inter-next {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 45%;
-  height: auto;
-  background-color: gray;
-  border-radius: 10px;
-}
-
-.title {
-  margin-top: 15px;
-  font-size: 18px;
-  color: white;
-}
-
-.text {
-  margin-top: 10px;
-  margin-bottom: 15px;
-  font-size: 15px;
-  color: white;
-}
-
-.icon {
-  width: auto;
-  height: auto;
-  margin-top: 5px;
-  margin-bottom: 15px;
 }
 </style>

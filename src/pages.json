@@ -59,6 +59,14 @@
       }
     },
     {
+      "path": "pages/home/home copy",
+      "type": "home",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "我的旅程"
+      }
+    },
+    {
       "path": "pages/ganyu/ganyu",
       "type": "page",
       "style": {

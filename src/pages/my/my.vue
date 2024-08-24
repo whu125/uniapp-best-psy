@@ -14,8 +14,14 @@
   >
     <view class="container">
       <view class="header">
-        <view class="avatar">🐧</view>
-        <view>user_name</view>
+        <!-- <view class="avatar">🐧</view> -->
+        <wd-img
+          :width="100"
+          :height="100"
+          round
+          src="https://ss0.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3498215567,1247959937&fm=253&gp=0.jpg"
+        />
+        <view>{{ userInfo.username }}</view>
         <!-- <button class="login-btn">登录</button>
         <p>免费注册</p> -->
       </view>
@@ -54,7 +60,7 @@
           意见反馈
           <span>></span>
         </li>
-        <li class="menu-item">
+        <li class="menu-item" @click="logout()">
           退出登录
           <span>></span>
         </li>
@@ -69,6 +75,9 @@
 
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
+import { useUserStore } from '@/store/user'
+const userStore = useUserStore()
+const userInfo = userStore.userInfo
 
 defineOptions({
   name: 'my',
@@ -76,6 +85,10 @@ defineOptions({
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
+
+const logout = () => {
+  userStore.clearUserInfo()
+}
 </script>
 
 <style>
