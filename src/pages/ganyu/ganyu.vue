@@ -7,63 +7,74 @@
 }
 </route>
 <template>
-  <view class="bg-white pt-2 px-4" :style="{ marginTop: safeAreaInsets?.top + 'px' }" w-full h-full>
-    <wd-navbar title="干预" left-arrow @click-left="ToHome()"></wd-navbar>
-    <view class="middle-container">
-      <view class="content" :style="{ height: contentHeight + 'px' }">
-        <view>
-          {{ questions[currQuestion - 1].content }}
+  <view v-if="1">
+    <Inquire></Inquire>
+  </view>
+  <view v-if="0">
+    <view
+      class="bg-white pt-2 px-4"
+      :style="{ marginTop: safeAreaInsets?.top + 'px' }"
+      w-full
+      h-full
+    >
+      <wd-navbar title="干预" left-arrow @click-left="ToHome()"></wd-navbar>
+      <view class="middle-container">
+        <view class="content" :style="{ height: contentHeight + 'px' }">
+          <view>
+            {{ questions[currQuestion - 1].content }}
+          </view>
+          <view style="display: flex; justify-content: center">
+            <wd-img
+              :width="200"
+              :height="200"
+              :src="questions[currQuestion - 1].url"
+              :enable-preview="true"
+            />
+          </view>
+          <view style="width: 100%; height: 800px; background-color: yellow"></view>
+          <view style="width: 100%; height: 10px; background-color: red"></view>
+          <view style="width: 100%; height: 80px; background-color: blue"></view>
         </view>
-        <view style="display: flex; justify-content: center">
-          <wd-img
-            :width="200"
-            :height="200"
-            :src="questions[currQuestion - 1].url"
-            :enable-preview="true"
+
+        <view class="fixed-bottom">
+          <wd-radio-group
+            v-model="currAnswer"
+            shape="dot"
+            @change="handleRadioChange"
+            v-if="questions[currQuestion - 1].questionType == 'select'"
+            size="large"
+          >
+            <wd-radio v-for="(currOption, index) in currOptions" :key="index" :value="currOption">
+              {{ currOption }}
+            </wd-radio>
+          </wd-radio-group>
+          <wd-textarea
+            v-model="currAnswer"
+            placeholder="请填写想法"
+            @change="handelInputChange"
+            v-if="questions[currQuestion - 1].questionType == 'fill'"
+            clearable
           />
+
+          <wd-pagination
+            v-model="currQuestion"
+            :total-page="questions.length"
+            @change="handlePageChange"
+            show-icon
+          ></wd-pagination>
         </view>
-        <view style="width: 100%; height: 800px; background-color: yellow"></view>
-        <view style="width: 100%; height: 10px; background-color: red"></view>
-        <view style="width: 100%; height: 80px; background-color: blue"></view>
       </view>
 
-      <view class="fixed-bottom">
-        <wd-radio-group
-          v-model="currAnswer"
-          shape="dot"
-          @change="handleRadioChange"
-          v-if="questions[currQuestion - 1].questionType == 'select'"
-          size="large"
-        >
-          <wd-radio v-for="(currOption, index) in currOptions" :key="index" :value="currOption">
-            {{ currOption }}
-          </wd-radio>
-        </wd-radio-group>
-        <wd-textarea
-          v-model="currAnswer"
-          placeholder="请填写想法"
-          @change="handelInputChange"
-          v-if="questions[currQuestion - 1].questionType == 'fill'"
-          clearable
-        />
-
-        <wd-pagination
-          v-model="currQuestion"
-          :total-page="questions.length"
-          @change="handlePageChange"
-          show-icon
-        ></wd-pagination>
+      <view class="submit-btn">
+        <wd-button type="success" @click="submit" v-if="isFinish">提交</wd-button>
       </view>
-    </view>
-
-    <view class="submit-btn">
-      <wd-button type="success" @click="submit" v-if="isFinish">提交</wd-button>
     </view>
   </view>
 </template>
 
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
+import Inquire from '@/pages/ganyu/inquire'
 import {
   getQuestionByInterId,
   IQuestionItem,

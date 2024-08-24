@@ -17,7 +17,7 @@
     <view :style="{ height: contentHeight + 'px' }" style="overflow-y: scroll">
       <view v-for="(question, index) in questions" :key="question.id">
         <!-- 显示题目标题 -->
-        <h3>{{ index + 1 }}. {{ question.title }}</h3>
+        <h3>{{ index + 1 }}. {{ question.question }}</h3>
 
         <!-- 生成对应的单选框组 -->
         <wd-radio-group v-model="answers[question.id]" shape="button">
@@ -41,6 +41,7 @@
 
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
+import { getInquiryByPos } from '@/service/ganyu/inquiry'
 
 defineOptions({
   name: 'tool',
@@ -50,7 +51,16 @@ defineOptions({
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const systemInfo = uni.getSystemInfoSync()
 const contentHeight = systemInfo.windowHeight - safeAreaInsets.top - 100
-onLoad(() => {})
+onLoad(async () => {
+  console.log('请求getInquiryByPos')
+  const res = await getInquiryByPos('2-pre')
+  console.log(res)
+  questions.value = res.data
+  questions.value.forEach((item) => {
+    item.options = JSON.parse(item.options)
+  })
+  console.log(questions.value)
+})
 
 const ToHome = () => {
   uni.switchTab({ url: '/pages/home/home' })
@@ -62,24 +72,7 @@ const currOptions = ref([])
 // const answers = ref(new Map())
 const value = ref()
 const answers = ref({})
-const questions = ref([
-  {
-    id: 1,
-    title: '你喜欢什么颜色？',
-    options: [
-      { value: 'a', text: '红色' },
-      { value: 'b', text: '蓝色' },
-    ],
-  },
-  {
-    id: 2,
-    title: '你喜欢什么水果？',
-    options: [
-      { value: 'a', text: '苹果' },
-      { value: 'b', text: '香蕉' },
-    ],
-  },
-])
+const questions = ref([])
 
 function handelInputChange({ value }) {
   currAnswer.value = value
