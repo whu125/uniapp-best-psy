@@ -14,24 +14,20 @@
     h-full
   >
     <wd-navbar title="问卷" left-arrow @click-left="ToHome()"></wd-navbar>
+    <!-- <wd-loading type="outline" /> -->
     <view :style="{ height: contentHeight + 'px' }" style="overflow-y: scroll">
-      <view v-for="(question, index) in questions" :key="question.id">
-        <!-- 显示题目标题 -->
-        <h3>{{ index + 1 }}. {{ question.question }}</h3>
+      <view class="mb-5 mt-2">
+        <view v-for="(question, index) in pageQuestions" :key="question.id" class="mb-5">
+          <!-- 显示题目标题 -->
+          <h3>{{ index + 1 }}. {{ question.question }}</h3>
 
-        <!-- 生成对应的单选框组 -->
-        <wd-radio-group v-model="answers[question.inquiryId]" shape="button">
-          <wd-radio v-for="option in question.options" :key="option.score" :value="option.score">
-            {{ option.text }}
-          </wd-radio>
-        </wd-radio-group>
-      </view>
-
-      <wd-button @click="submit()">提交</wd-button>
-
-      <view class="flex">
-        <wd-button @click="submit()">上一页</wd-button>
-        <wd-button @click="changeNext()">下一页</wd-button>
+          <!-- 生成对应的单选框组 -->
+          <wd-radio-group v-model="answers[question.inquiryId]" shape="button">
+            <wd-radio v-for="option in question.options" :key="option.score" :value="option.score">
+              {{ option.text }}
+            </wd-radio>
+          </wd-radio-group>
+        </view>
       </view>
     </view>
 
@@ -41,6 +37,18 @@
       @change="handlePageChange"
       show-icon
     ></wd-pagination> -->
+  </view>
+  <view class="absolute bottom-10 w-full">
+    <view class="flex justify-between">
+      <view>
+        <wd-button @click="changeLast()" v-show="curGroup - 1 > 0">上一页</wd-button>
+      </view>
+
+      <view>
+        <wd-button @click="changeNext()" v-if="!islastFlag">下一页</wd-button>
+        <wd-button @click="changeNext()" v-if="islastFlag">提交</wd-button>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -63,6 +71,10 @@ onLoad(async () => {
   questions.value = res.data
   questions.value.forEach((item) => {
     item.options = JSON.parse(item.options)
+    console.log(item)
+    if (item.groupIndex == curGroup.value) {
+      pageQuestions.value.push(item)
+    }
   })
   console.log(questions.value)
 })
@@ -71,6 +83,8 @@ const ToHome = () => {
   uni.switchTab({ url: '/pages/home/home' })
   submit()
 }
+const curGroup = ref(1)
+const islastFlag = ref(false)
 const currQuestion = ref<number>(1)
 const currAnswer = ref<string>()
 const currOptions = ref([])
@@ -78,10 +92,26 @@ const currOptions = ref([])
 const value = ref()
 const answers = ref({})
 const questions = ref([])
+const pageQuestions = ref([])
 
 const changeNext = () => {
-  currQuestion.value++
-  currAnswer.value = ''
+  curGroup.value++
+  pageQuestions.value = []
+  questions.value.forEach((item) => {
+    if (item.groupIndex == curGroup.value) {
+      pageQuestions.value.push(item)
+    }
+  })
+}
+
+const changeLast = () => {
+  curGroup.value--
+  pageQuestions.value = []
+  questions.value.forEach((item) => {
+    if (item.groupIndex == curGroup.value) {
+      pageQuestions.value.push(item)
+    }
+  })
 }
 
 const submit = () => {
