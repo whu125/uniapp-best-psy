@@ -7,10 +7,7 @@
 }
 </route>
 <template>
-  <view v-if="1">
-    <Inquire></Inquire>
-  </view>
-  <view v-if="0">
+  <view>
     <view
       class="bg-white pt-2 px-4"
       :style="{ marginTop: safeAreaInsets?.top + 'px' }"
@@ -74,7 +71,6 @@
 
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
-import Inquire from '@/pages/ganyu/inquire'
 import {
   getQuestionByInterId,
   IQuestionItem,

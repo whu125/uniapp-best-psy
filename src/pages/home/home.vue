@@ -47,7 +47,8 @@
         <view class="title">站点导览</view>
         <view class="text">有时候你能做的最有效的事情是放松。</view>
         <view>
-          <wd-button type="success">进入旅程</wd-button>
+          <wd-button type="success" @click="ToGanPage(1)">进入旅程</wd-button>
+          <wd-button type="success" @click="ToInquiry()">测试进入问卷</wd-button>
         </view>
       </view>
       <view class="sub-container">
@@ -143,6 +144,12 @@ const ToGanPage = async (interId: number) => {
 const ToLogin = () => {
   uni.navigateTo({
     url: '/pages/login/login',
+  })
+}
+
+const ToInquiry = () => {
+  uni.navigateTo({
+    url: '/pages/inquiry/inquiry',
   })
 }
 </script>

@@ -59,7 +59,7 @@
       }
     },
     {
-      "path": "pages/home/home copy",
+      "path": "pages/home/home origin",
       "type": "home",
       "style": {
         "navigationStyle": "custom",
@@ -75,7 +75,7 @@
       }
     },
     {
-      "path": "pages/ganyu/inquire",
+      "path": "pages/inquiry/inquiry",
       "type": "page",
       "style": {
         "navigationStyle": "custom",

@@ -20,14 +20,19 @@
         <h3>{{ index + 1 }}. {{ question.question }}</h3>
 
         <!-- 生成对应的单选框组 -->
-        <wd-radio-group v-model="answers[question.id]" shape="button">
-          <wd-radio v-for="option in question.options" :key="option.value" :value="option.value">
+        <wd-radio-group v-model="answers[question.inquiryId]" shape="button">
+          <wd-radio v-for="option in question.options" :key="option.score" :value="option.score">
             {{ option.text }}
           </wd-radio>
         </wd-radio-group>
       </view>
 
       <wd-button @click="submit()">提交</wd-button>
+
+      <view class="flex">
+        <wd-button @click="submit()">上一页</wd-button>
+        <wd-button @click="changeNext()">下一页</wd-button>
+      </view>
     </view>
 
     <!-- <wd-pagination
@@ -74,21 +79,15 @@ const value = ref()
 const answers = ref({})
 const questions = ref([])
 
-function handelInputChange({ value }) {
-  currAnswer.value = value
-  answers.value.set(currQuestion.value - 1, currAnswer.value)
-  console.log(answers.value)
-}
-
-const handleRadioChange = () => {
-  answers.value.set(currQuestion.value - 1, currAnswer.value)
-  console.log(answers.value)
+const changeNext = () => {
+  currQuestion.value++
+  currAnswer.value = ''
 }
 
 const submit = () => {
   // const answersString = Array.from(answers.value.values()).join(';')
   // console.log(answersString)
-  console.log(answers)
+  console.log(answers.value)
 }
 </script>
 
