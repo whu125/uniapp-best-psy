@@ -148,8 +148,9 @@ const ToLogin = () => {
 }
 
 const ToInquiry = () => {
+  const position = '2-pre'
   uni.navigateTo({
-    url: '/pages/inquiry/inquiry',
+    url: `/pages/inquiry/inquiry?position=${position}`,
   })
 }
 </script>
