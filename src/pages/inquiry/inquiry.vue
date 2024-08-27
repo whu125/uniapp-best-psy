@@ -46,7 +46,7 @@
 
       <view>
         <wd-button @click="changeNext()" v-if="!islastFlag">下一页</wd-button>
-        <wd-button @click="changeNext()" v-if="islastFlag">提交</wd-button>
+        <wd-button @click="submit()" v-if="islastFlag">提交</wd-button>
       </view>
     </view>
   </view>
@@ -54,7 +54,7 @@
 
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
-import { getInquiryByPos } from '@/service/ganyu/inquiry'
+import { getInquiryByPos, submitInquiry, InquiryResultArray } from '@/service/ganyu/inquiry'
 
 defineOptions({
   name: 'tool',
@@ -102,6 +102,7 @@ const changeNext = () => {
       pageQuestions.value.push(item)
     }
   })
+  islastFlag.value = true
 }
 
 const changeLast = () => {
@@ -112,12 +113,25 @@ const changeLast = () => {
       pageQuestions.value.push(item)
     }
   })
+  islastFlag.value = false
 }
+const formData = ref<InquiryResultArray>([
+  { userId: '1', inquiryId: 1, position: '2-pre', score: 0 },
+  { userId: '1', inquiryId: 1, position: '', score: 0 },
+  { userId: '1', inquiryId: 1, position: '', score: 0 },
+  { userId: '1', inquiryId: 1, position: '', score: 0 },
+  { userId: '1', inquiryId: 1, position: '', score: 0 },
+])
 
-const submit = () => {
+const submit = async () => {
   // const answersString = Array.from(answers.value.values()).join(';')
   // console.log(answersString)
-  console.log(answers.value)
+
+  const res = await submitInquiry(formData.value)
+  console.log(res)
+
+  // if (res.code === 200) {
+  // 根据positon设置不同的跳转逻辑
 }
 </script>
 
