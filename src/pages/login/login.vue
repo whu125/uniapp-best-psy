@@ -10,34 +10,40 @@
 <template>
   <view
     class="bg-white overflow-hidden pt-2 px-4"
-    :style="{ marginTop: safeAreaInsets?.top + 'px' }"
+    :style="{ marginTop: safeAreaInsets?.top + 30 + 'px' }"
   >
-    <view>
+    <!-- <view>
       <wt-botton type="info">微信一键登陆</wt-botton>
       <view>
         <wd-button type="info" size="medium" @click="ToHome()">返回</wd-button>
       </view>
-    </view>
-    <!-- <view class="login-form">
-      <view class="tab-bar">
-        <text class="active">登录</text>
-        <text>注册</text>
-      </view>
-
-      <wd-input type="text" v-model="loginInfo.wechatId" placeholder="请输入微信号" />
-      <wd-input v-model="loginInfo.wechatPassword" clearable show-password="false" />
-
-      <text class="forget-password">忘记密码</text>
-
-      <button class="login-btn" @tap="login">登录</button>
     </view> -->
+    <wd-tabs animated>
+      <block>
+        <wd-tab title="登录">
+          <view class="content">
+            <view style="display: flex; justify-content: center; margin-top: 50px">
+              <wd-img
+                :width="120"
+                :height="120"
+                src="https://open.weixin.qq.com/zh_CN/htmledition/res/assets/res-design-download/icon64_appwx_logo.png"
+              />
+            </view>
 
-    <!-- 社交媒体图标 -->
-    <!-- <view class="social-icons">
-      <view class="icon" @click="wiexinLogin">微信</view>
-      <view class="icon">QQ</view>
-      <view class="icon">微博</view>
-    </view> -->
+            <view style="margin-top: 20px">
+              <wd-divider>授权登录</wd-divider>
+            </view>
+
+            <view style="margin-top: 20px">
+              <wd-button block @click="wiexinLogin" type="success">微信一键登陆</wd-button>
+            </view>
+          </view>
+        </wd-tab>
+        <wd-tab title="注册">
+          <view class="content">注册页面</view>
+        </wd-tab>
+      </block>
+    </wd-tabs>
   </view>
 </template>
 
@@ -52,6 +58,8 @@ defineOptions({
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
+const userStore = useUserStore()
+
 const ToHome = () => {
   uni.switchTab({ url: '/pages/home/home' })
 }
@@ -60,6 +68,7 @@ const loginInfo = ref({
   wechatId: null,
   wechatPassword: null,
 })
+
 const login = () => {
   // 实现登录逻辑
   console.log('登录123')
@@ -80,15 +89,16 @@ const wiexinLogin = () => {
         data: {
           code: event.code,
         },
-        success: (res) => {
+        success: async (res) => {
           // 获得token完成登录
-          const token = res.data.obj
-          console.log(token)
-          const userInfo = getUserInfo()
-          const userStore = useUserStore()
-          userStore.setUserInfo(userInfo)
-
-          uni.setStorageSync('token', token)
+          userStore.setUserToken(res.data.data)
+          console.log(userStore.userInfo.token)
+          const getInfoRes = await getUserInfo(userStore.userInfo.token)
+          userStore.setUserInfo(getInfoRes.data)
+          console.log(getInfoRes.data)
+          console.log('-----------------userinfo------------------')
+          console.log(userStore.userInfo)
+          ToHome()
         },
       })
     },
@@ -103,92 +113,5 @@ const wiexinLogin = () => {
 <style>
 .main-title-color {
   color: #d14328;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background: linear-gradient(to bottom, #87cefa, #ffffff);
-}
-
-.status-bar {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  color: #ffffff;
-}
-
-.illustration {
-  flex: 1;
-  /* 添加插图样式 */
-}
-
-.login-form {
-  padding: 20px;
-  background: #ffffff;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-}
-
-.tab-bar {
-  display: flex;
-  margin-bottom: 20px;
-}
-
-.tab-bar text {
-  margin-right: 20px;
-  font-size: 18px;
-  color: #999999;
-}
-
-.tab-bar .active {
-  color: #87cefa;
-  border-bottom: 2px solid #87cefa;
-}
-
-.input {
-  width: 100%;
-  height: 40px;
-  padding: 0 10px;
-  margin-bottom: 10px;
-  border: 1px solid #eeeeee;
-  border-radius: 20px;
-}
-
-.input-wrapper {
-  position: relative;
-}
-
-.forget-password {
-  margin-bottom: 20px;
-  font-size: 14px;
-  color: #999999;
-  text-align: right;
-}
-
-.login-btn {
-  width: 100%;
-  height: 40px;
-  color: #ffffff;
-  background: linear-gradient(to right, #87cefa, #4169e1);
-  border: none;
-  border-radius: 20px;
-}
-
-.social-icons {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
-
-.icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: #eeeeee;
-  border-radius: 50%;
 }
 </style>

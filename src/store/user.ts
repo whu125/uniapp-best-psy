@@ -22,6 +22,10 @@ export const useUserStore = defineStore(
       userInfo.value = val
     }
 
+    const setUserToken = (token: string) => {
+      userInfo.value.token = token
+    }
+
     const clearUserInfo = () => {
       userInfo.value = { ...initState }
     }
@@ -29,7 +33,8 @@ export const useUserStore = defineStore(
     const reset = () => {
       userInfo.value = { ...initState }
     }
-    const isLogined = computed(() => !!userInfo.value.token)
+    // const isLogined = computed(() => !!userInfo.value.token)
+    const isLogined = computed(() => userInfo.value.token !== '' && userInfo.value.token !== null)
 
     return {
       userInfo,
@@ -37,6 +42,7 @@ export const useUserStore = defineStore(
       clearUserInfo,
       isLogined,
       reset,
+      setUserToken,
     }
   },
   {

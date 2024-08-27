@@ -64,6 +64,14 @@
           退出登录
           <span>></span>
         </li>
+        <li class="menu-item" @click="toLogin()">
+          登陆测试
+          <span>></span>
+        </li>
+        <li class="menu-item" @click="checkLogin()">
+          检查登录
+          <span>></span>
+        </li>
       </ul>
       <view class="flex flex-justify-center flex-items-center flex-col mt-1">
         <view class="small-gray-text">咨询师信箱: example@qq.com</view>
@@ -83,11 +91,27 @@ defineOptions({
   name: 'my',
 })
 
+onLoad(() => {
+  console.log(userStore.userInfo)
+})
+
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
 
 const logout = () => {
   userStore.clearUserInfo()
+}
+
+const toLogin = () => {
+  uni.navigateTo({
+    url: '/pages/login/login',
+  })
+}
+
+const checkLogin = () => {
+  uni.navigateTo({
+    url: '/pages/test2/test2',
+  })
 }
 </script>
 
