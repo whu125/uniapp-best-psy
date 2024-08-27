@@ -56,15 +56,21 @@
 import PLATFORM from '@/utils/platform'
 import { getInquiryByPos, submitInquiry, InquiryResultArray } from '@/service/ganyu/inquiry'
 
+import { useUserStore } from '@/store/user'
+
 defineOptions({
   name: 'tool',
 })
 
+const position = ref('')
+const userStore = useUserStore()
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const systemInfo = uni.getSystemInfoSync()
 const contentHeight = systemInfo.windowHeight - safeAreaInsets.top - 100
-onLoad(async () => {
+onLoad(async (param) => {
+  position.value = param.position
+  console.log(position.value)
   console.log('请求getInquiryByPos')
   const res = await getInquiryByPos('2-pre')
   console.log(res)
@@ -115,18 +121,27 @@ const changeLast = () => {
   })
   islastFlag.value = false
 }
-const formData = ref<InquiryResultArray>([
-  { userId: '1', inquiryId: 1, position: '2-pre', score: 0 },
-  { userId: '1', inquiryId: 1, position: '', score: 0 },
-  { userId: '1', inquiryId: 1, position: '', score: 0 },
-  { userId: '1', inquiryId: 1, position: '', score: 0 },
-  { userId: '1', inquiryId: 1, position: '', score: 0 },
-])
+// const formData = ref<InquiryResultArray>([
+//   { userId: '1', inquiryId: 1, position: '2-pre', score: 0 },
+//   { userId: '1', inquiryId: 1, position: '', score: 0 },
+//   { userId: '1', inquiryId: 1, position: '', score: 0 },
+//   { userId: '1', inquiryId: 1, position: '', score: 0 },
+//   { userId: '1', inquiryId: 1, position: '', score: 0 },
+// ])
 
 const submit = async () => {
   // const answersString = Array.from(answers.value.values()).join(';')
   // console.log(answersString)
-
+  const formData = ref<InquiryResultArray>([])
+  for (const [inquiryId, score] of Object.entries(answers.value)) {
+    formData.value.push({
+      userId: userStore.userInfo.userId,
+      inquiryId: parseInt(inquiryId),
+      position: position.value,
+      score: parseInt(score),
+    })
+  }
+  console.log(formData.value)
   const res = await submitInquiry(formData.value)
   console.log(res)
 
