@@ -14,3 +14,11 @@ export interface User {
 export const getUserInfo = (token: string) => {
   return http.post<User>('/user/getUserInfo', { token }, {})
 }
+
+export const logout = () => {
+  return http.post<null>('/logout', {}, {})
+}
+
+export const test = () => {
+  return http.post('/question/test', {}, {})
+}

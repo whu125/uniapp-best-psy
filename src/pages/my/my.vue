@@ -60,7 +60,7 @@
           意见反馈
           <span>></span>
         </li>
-        <li class="menu-item" @click="logout()">
+        <li class="menu-item" @click="logoutByToken()">
           退出登录
           <span>></span>
         </li>
@@ -70,6 +70,10 @@
         </li>
         <li class="menu-item" @click="checkLogin()">
           检查登录
+          <span>></span>
+        </li>
+        <li class="menu-item" @click="testAPI()">
+          检测接口
           <span>></span>
         </li>
       </ul>
@@ -84,6 +88,7 @@
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
 import { useUserStore } from '@/store/user'
+import { logout, test } from '@/service/index/user'
 const userStore = useUserStore()
 const userInfo = ref(userStore.userInfo)
 
@@ -102,11 +107,15 @@ onShow(() => {
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
 
-const logout = () => {
-  userStore.clearUserInfo()
-  uni.navigateTo({
-    url: '/pages/my/my',
-  })
+const logoutByToken = async () => {
+  const res = await logout()
+  console.log(res)
+  if (res.code === 200) {
+    userStore.clearUserInfo()
+    uni.navigateTo({
+      url: '/pages/my/my',
+    })
+  }
 }
 
 const toLogin = () => {
@@ -119,6 +128,11 @@ const checkLogin = () => {
   uni.navigateTo({
     url: '/pages/test2/test2',
   })
+}
+
+const testAPI = async () => {
+  const res = await test()
+  console.log(res)
 }
 </script>
 
