@@ -91,13 +91,14 @@ const wiexinLogin = () => {
         },
         success: async (res) => {
           // 获得token完成登录
-          userStore.setUserToken(res.data.data)
-          console.log(userStore.userInfo.token)
+          const token = res.data.data
+          userStore.setUserToken(token)
           const getInfoRes = await getUserInfo(userStore.userInfo.token)
           userStore.setUserInfo(getInfoRes.data)
-          console.log(getInfoRes.data)
+          userStore.setUserToken(token)
           console.log('-----------------userinfo------------------')
           console.log(userStore.userInfo)
+          console.log(userStore.userInfo.token)
           ToHome()
         },
       })

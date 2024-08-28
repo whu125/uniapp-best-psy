@@ -19,7 +19,7 @@ export const useUserStore = defineStore(
     const userInfo = ref<IUserInfo>({ ...initState })
 
     const setUserInfo = (val: IUserInfo) => {
-      userInfo.value = val
+      userInfo.value = { ...val }
     }
 
     const setUserToken = (token: string) => {

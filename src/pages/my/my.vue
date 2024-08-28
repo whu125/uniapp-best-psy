@@ -85,7 +85,7 @@
 import PLATFORM from '@/utils/platform'
 import { useUserStore } from '@/store/user'
 const userStore = useUserStore()
-const userInfo = userStore.userInfo
+const userInfo = ref(userStore.userInfo)
 
 defineOptions({
   name: 'my',
@@ -95,11 +95,18 @@ onLoad(() => {
   console.log(userStore.userInfo)
 })
 
+onShow(() => {
+  userInfo.value = userStore.userInfo
+})
+
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
 
 const logout = () => {
   userStore.clearUserInfo()
+  uni.navigateTo({
+    url: '/pages/my/my',
+  })
 }
 
 const toLogin = () => {
