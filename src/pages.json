@@ -107,8 +107,7 @@
       "style": {
         "navigationStyle": "custom",
         "navigationBarTitleText": "个人信息"
-      },
-      "needLogin": true
+      }
     },
     {
       "path": "pages/my/my_new",
@@ -134,8 +133,7 @@
       "style": {
         "navigationStyle": "custom",
         "navigationBarTitleText": "工具箱"
-      },
-      "needLogin": true
+      }
     }
   ],
   "subPackages": []
