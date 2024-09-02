@@ -8,9 +8,10 @@
 }
 </route>
 <template>
+  <tabbar selected="1"></tabbar>
   <view
     class="bg-white overflow-hidden pt-2 px-4"
-    :style="{ marginTop: safeAreaInsets?.top + 100 + 'px' }"
+    :style="{ marginTop: safeAreaInsets?.top + 'px' }"
     w-full
     h-full
   >
@@ -45,6 +46,7 @@
 
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
+import tabbar from '@/pages/tabbar/tabbar.vue'
 
 defineOptions({
   name: 'tool',
@@ -62,6 +64,8 @@ const toMoodDiary = () => {
 const handleClickLeft = () => {
   uni.navigateBack()
 }
+
+uni.hideTabBar()
 </script>
 
 <style>

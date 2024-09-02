@@ -10,16 +10,18 @@ interface NavigateToOptions {
        "/pages/inquiry/inquiry" |
        "/pages/login/login" |
        "/pages/login/login_origin" |
+       "/pages/mood/mood" |
        "/pages/my/my" |
        "/pages/my/my_new" |
        "/pages/record/record" |
+       "/pages/tabbar/tabbar" |
        "/pages/test2/test2" |
        "/pages/tool/tool";
 }
 interface RedirectToOptions extends NavigateToOptions {}
 
 interface SwitchTabOptions {
-  url: "/pages/home/home" | "/pages/tool/tool" | "/pages/record/record" | "/pages/my/my"
+  url: "/pages/home/home" | "/pages/tool/tool" | "/pages/my/my"
 }
 
 type ReLaunchOptions = NavigateToOptions | SwitchTabOptions;

@@ -8,6 +8,7 @@
 }
 </route>
 <template>
+  <tabbar selected="2"></tabbar>
   <view
     class="bg-white overflow-hidden pt-2 px-4"
     :style="{ marginTop: safeAreaInsets?.top + 'px' }"
@@ -89,9 +90,12 @@
 import PLATFORM from '@/utils/platform'
 import { useUserStore } from '@/store/user'
 import { logout, test } from '@/service/index/user'
+import tabbar from '@/pages/tabbar/tabbar.vue'
+
 const userStore = useUserStore()
 const userInfo = ref(userStore.userInfo)
 
+uni.hideTabBar()
 defineOptions({
   name: 'my',
 })
