@@ -85,7 +85,14 @@
       }
     },
     {
-<<<<<<< HEAD
+      "path": "pages/login/login_origin",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "login"
+      }
+    },
+    {
       "path": "pages/mood/mood",
       "type": "page",
       "style": {
@@ -93,14 +100,6 @@
         "navigationBarTitleText": "心情日记"
       },
       "needLogin": true
-=======
-      "path": "pages/login/login_origin",
-      "type": "page",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "login"
-      }
->>>>>>> 5c098531c60ee81bacf0a357cb6df84bcf9acd67
     },
     {
       "path": "pages/my/my",

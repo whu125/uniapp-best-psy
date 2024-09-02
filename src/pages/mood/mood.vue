@@ -9,8 +9,10 @@
 </route>
 <template>
   <view
-    class="bg-white overflow-hidden pt-2 px-4 main-container"
-    :style="{ marginTop: safeAreaInsets?.top + 100 + 'px' }"
+    class="bg-white overflow-hidden pt-2 px-4"
+    :style="{ marginTop: safeAreaInsets?.top + 'px' }"
+    w-full
+    h-full
   >
     <wd-navbar title="心情日记" left-arrow @click-left="handleClickLeft"></wd-navbar>
     <view>
@@ -41,12 +43,5 @@ const handleClickLeft = () => {
 <style>
 .main-title-color {
   color: #d14328;
-}
-
-.main-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 </style>
