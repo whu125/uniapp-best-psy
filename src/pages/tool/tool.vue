@@ -4,7 +4,7 @@
     navigationStyle: 'custom',
     navigationBarTitleText: '工具箱',
   },
-  needLogin: true,
+  // needLogin: true,
 }
 </route>
 <template>
