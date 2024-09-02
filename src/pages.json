@@ -36,12 +36,6 @@
         "text": "工具箱"
       },
       {
-        "iconPath": "static/tabbar/record.png",
-        "selectedIconPath": "static/tabbar/recordHL.png",
-        "pagePath": "pages/record/record",
-        "text": "旅程记录"
-      },
-      {
         "iconPath": "static/tabbar/person.png",
         "selectedIconPath": "static/tabbar/personHL.png",
         "pagePath": "pages/my/my",
@@ -91,6 +85,15 @@
       }
     },
     {
+      "path": "pages/mood/mood",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "心情日记"
+      },
+      "needLogin": true
+    },
+    {
       "path": "pages/my/my",
       "type": "page",
       "style": {
@@ -101,11 +104,7 @@
     },
     {
       "path": "pages/record/record",
-      "type": "page",
-      "style": {
-        "navigationBarTitleText": "旅程记录"
-      },
-      "needLogin": true
+      "type": "page"
     },
     {
       "path": "pages/test2/test2",

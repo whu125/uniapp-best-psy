@@ -1,11 +1,11 @@
-<route lang="json5">
+<!-- <route lang="json5">
 {
   style: {
     navigationBarTitleText: '旅程记录',
   },
   needLogin: true,
 }
-</route>
+</route> -->
 
 <template>
   <view

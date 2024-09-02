@@ -1,14 +1,3 @@
-<!--
- * @Author: wenhao zhang zhangwenhao@answerai.pro
- * @Date: 2024-08-12 11:12:02
- * @LastEditors: wenhao zhang zhangwenhao@answerai.pro
- * @LastEditTime: 2024-08-15 21:46:21
- * @FilePath: /my-project/src/pages/tool/tool.vue
- * @Description: 
- * 
- * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
--->
-<!-- 使用 type="home" 属性设置首页，其他页面不需要设置，默认为page；推荐使用json5，更强大，且允许注释 -->
 <route lang="json5">
 {
   style: {
@@ -22,13 +11,28 @@
   <view
     class="bg-white overflow-hidden pt-2 px-4"
     :style="{ marginTop: safeAreaInsets?.top + 100 + 'px' }"
+    w-full
+    h-full
   >
-    <wd-grid border :column="2">
-      <wd-grid-item icon="heart" text="社会支持" />
-      <wd-grid-item icon="clock" text="睡眠放松" />
-      <wd-grid-item icon="eye-close" text="正念冥想" />
-      <wd-grid-item icon="chart-bubble" text="呼吸训练" />
-    </wd-grid>
+    <wd-navbar title="工具箱" left-arrow @click-left="handleClickLeft"></wd-navbar>
+    <view class="main-container">
+      <view>
+        <wd-img
+          :width="200"
+          :height="200"
+          src="http://115.159.83.61:9000/mindease/dcce124f-af8d-4a69-8051-3445485c63fb_tool_logo.png"
+        />
+      </view>
+
+      <wd-grid border :column="2">
+        <wd-grid-item icon="heart" text="社会支持" />
+        <wd-grid-item icon="clock" text="睡眠放松" />
+        <wd-grid-item icon="eye-close" text="正念冥想" />
+        <wd-grid-item icon="chart-bubble" text="呼吸训练" />
+        <wd-grid-item @click="toMoodDiary" icon="chat" text="心情日记" />
+        <wd-grid-item icon="a-precisemonitor" text="认知解离" />
+      </wd-grid>
+    </view>
   </view>
 
   <!-- <view class="text-center text-lg main-title-color">
@@ -48,10 +52,27 @@ defineOptions({
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
+
+const toMoodDiary = () => {
+  uni.navigateTo({
+    url: '/pages/mood/mood',
+  })
+}
+
+const handleClickLeft = () => {
+  uni.navigateBack()
+}
 </script>
 
 <style>
 .main-title-color {
   color: #d14328;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 </style>

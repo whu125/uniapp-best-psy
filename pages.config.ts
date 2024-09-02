@@ -38,12 +38,12 @@ export default defineUniPages({
         pagePath: 'pages/tool/tool',
         text: '工具箱',
       },
-      {
-        iconPath: 'static/tabbar/record.png',
-        selectedIconPath: 'static/tabbar/recordHL.png',
-        pagePath: 'pages/record/record',
-        text: '旅程记录',
-      },
+      // {
+      //   iconPath: 'static/tabbar/record.png',
+      //   selectedIconPath: 'static/tabbar/recordHL.png',
+      //   pagePath: 'pages/record/record',
+      //   text: '旅程记录',
+      // },
       {
         iconPath: 'static/tabbar/person.png',
         selectedIconPath: 'static/tabbar/personHL.png',
