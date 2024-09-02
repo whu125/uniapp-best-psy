@@ -9,8 +9,9 @@ interface NavigateToOptions {
        "/pages/ganyu/ganyu" |
        "/pages/inquiry/inquiry" |
        "/pages/login/login" |
-       "/pages/mood/mood" |
+       "/pages/login/login_origin" |
        "/pages/my/my" |
+       "/pages/my/my_new" |
        "/pages/record/record" |
        "/pages/test2/test2" |
        "/pages/tool/tool";
@@ -18,7 +19,7 @@ interface NavigateToOptions {
 interface RedirectToOptions extends NavigateToOptions {}
 
 interface SwitchTabOptions {
-  url: "/pages/home/home" | "/pages/tool/tool" | "/pages/my/my"
+  url: "/pages/home/home" | "/pages/tool/tool" | "/pages/record/record" | "/pages/my/my"
 }
 
 type ReLaunchOptions = NavigateToOptions | SwitchTabOptions;
