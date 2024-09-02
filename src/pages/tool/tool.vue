@@ -57,24 +57,9 @@ import tabbar from '@/pages/tabbar/tabbar.vue'
 defineOptions({
   name: 'tool',
 })
-
+uni.hideTabBar()
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
-<<<<<<< HEAD
-=======
-
-const toMoodDiary = () => {
-  uni.navigateTo({
-    url: '/pages/mood/mood',
-  })
-}
-
-const handleClickLeft = () => {
-  uni.navigateBack()
-}
-
-uni.hideTabBar()
->>>>>>> 2d5d4b722eab7b3efb8505fe3e189bdef4899b53
 </script>
 
 <style>
