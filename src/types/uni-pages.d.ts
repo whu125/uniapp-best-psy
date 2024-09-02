@@ -14,6 +14,7 @@ interface NavigateToOptions {
        "/pages/my/my" |
        "/pages/my/my_new" |
        "/pages/record/record" |
+       "/pages/tabbar/tabbar" |
        "/pages/test2/test2" |
        "/pages/tool/tool";
 }

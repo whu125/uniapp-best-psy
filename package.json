@@ -90,6 +90,7 @@
     "@dcloudio/uni-mp-weixin": "3.0.0-alpha-4010520240507001",
     "czg": "^1.9.3",
     "dayjs": "1.11.10",
+    "less": "^4.2.0",
     "pinia": "2.0.36",
     "pinia-plugin-persistedstate": "3.2.1",
     "qs": "6.5.3",

@@ -7,6 +7,7 @@
 }
 </route>
 <template>
+  <tabbar selected="0"></tabbar>
   <view
     class="bg-white overflow-hidden pt-2 px-4"
     :style="{ marginTop: safeAreaInsets?.top + 'px' }"
@@ -75,6 +76,7 @@ import { getUserInfo, User } from '@/service/index/user'
 import { startInter, IStartInter } from '@/service/index/questions'
 import { getFormattedDate } from '@/utils/getTime'
 import { useUserStore } from '@/store/user'
+import tabbar from '@/pages/tabbar/tabbar.vue'
 
 defineOptions({
   name: 'Home',
@@ -95,7 +97,7 @@ const inters = ref([
 ])
 // 测试 uni API 自动引入
 onLoad(() => {})
-
+uni.hideTabBar()
 const wiexinLogin = () => {
   console.log('weixin login')
   uni.login({

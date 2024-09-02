@@ -8,6 +8,7 @@
 }
 </route>
 <template>
+  <tabbar selected="1"></tabbar>
   <view
     class="bg-white overflow-hidden pt-2 px-4"
     :style="{ marginTop: safeAreaInsets?.top + 'px' }"
@@ -51,6 +52,7 @@
 
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
+import tabbar from '@/pages/tabbar/tabbar.vue'
 
 defineOptions({
   name: 'tool',
@@ -58,6 +60,21 @@ defineOptions({
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
+<<<<<<< HEAD
+=======
+
+const toMoodDiary = () => {
+  uni.navigateTo({
+    url: '/pages/mood/mood',
+  })
+}
+
+const handleClickLeft = () => {
+  uni.navigateBack()
+}
+
+uni.hideTabBar()
+>>>>>>> 2d5d4b722eab7b3efb8505fe3e189bdef4899b53
 </script>
 
 <style>

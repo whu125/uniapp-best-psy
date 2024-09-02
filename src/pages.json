@@ -119,6 +119,10 @@
       "type": "page"
     },
     {
+      "path": "pages/tabbar/tabbar",
+      "type": "page"
+    },
+    {
       "path": "pages/test2/test2",
       "type": "page",
       "style": {},
