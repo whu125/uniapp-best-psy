@@ -9,7 +9,9 @@ interface NavigateToOptions {
        "/pages/ganyu/ganyu" |
        "/pages/inquiry/inquiry" |
        "/pages/login/login" |
+       "/pages/login/login_origin" |
        "/pages/my/my" |
+       "/pages/my/my_new" |
        "/pages/record/record" |
        "/pages/test2/test2" |
        "/pages/tool/tool";

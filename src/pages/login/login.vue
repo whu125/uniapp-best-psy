@@ -1,4 +1,3 @@
-/* stylelint-disable order/properties-order */
 <route lang="json5">
 {
   style: {
@@ -8,53 +7,61 @@
 }
 </route>
 <template>
-  <view
-    class="bg-white overflow-hidden pt-2 px-4"
-    :style="{ marginTop: safeAreaInsets?.top + 30 + 'px' }"
-  >
-    <!-- <view>
-      <wt-botton type="info">微信一键登陆</wt-botton>
-      <view>
-        <wd-button type="info" size="medium" @click="ToHome()">返回</wd-button>
-      </view>
-    </view> -->
-    <wd-tabs animated>
-      <block>
-        <wd-tab title="登录">
-          <view class="content">
-            <view style="display: flex; justify-content: center; margin-top: 50px">
-              <wd-img
-                :width="120"
-                :height="120"
-                src="https://open.weixin.qq.com/zh_CN/htmledition/res/assets/res-design-download/icon64_appwx_logo.png"
-              />
-            </view>
+  <div class="app-container">
+    <div class="content">
+      <h1 class="title">
+        <span>每一刻</span>
+        <span>悦心相伴</span>
+      </h1>
+      <h2 class="subtitle">MindEase</h2>
 
-            <view style="margin-top: 20px">
-              <wd-divider>授权登录</wd-divider>
-            </view>
+      <div class="buttons">
+        <!-- <wd-button type="info" class="login-btn counselor">咨询师登录</wd-button>
+        <wd-button type="info" class="login-btn user">用户登录</wd-button> -->
+        <wd-button type="info" size="large" @click="adminLogin()">咨询师登录</wd-button>
+        <view v-show="agreed" class="flex">
+          <wd-button
+            type="info"
+            size="large"
+            open-type="getPhoneNumber"
+            @getphonenumber="getPhoneNumber"
+          >
+            用户登录
+          </wd-button>
+        </view>
+        <view v-show="!agreed" class="flex">
+          <wd-button type="info" size="large" clickable="false" @click="check()">
+            用户登录
+          </wd-button>
+        </view>
+      </div>
 
-            <view style="margin-top: 20px">
-              <!-- <wd-button block @click="weixinLogin" type="success">微信一键登陆</wd-button> -->
-              <wd-button block open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">
-                微信一键登录
-              </wd-button>
-            </view>
-          </view>
-        </wd-tab>
-        <wd-tab title="注册">
-          <view class="content">注册页面</view>
-        </wd-tab>
-      </block>
-    </wd-tabs>
-  </view>
+      <div class="agreement">
+        <wd-checkbox v-model="agreed" @change="handleAgreementChange">
+          同意用户协议、隐私协议
+        </wd-checkbox>
+      </div>
+
+      <p class="note">注：该小程序非商业应用，仅为科学研究使用，用户为参与研究人员，请勿转载</p>
+    </div>
+  </div>
+  <!-- <wd-message-box></wd-message-box> -->
+  <!-- <wd-button @click="alert">alert</wd-button> -->
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import PLATFORM from '@/utils/platform'
+import { useMessage, useToast } from 'wot-design-uni'
 import { useUserStore } from '@/store'
 import { getUserInfo, getPhoneNumberApi } from '@/service/index/user'
 
+const toast = useToast()
+
+const message = useMessage()
+
+const agreed = ref(false)
+
+const passwd = ref()
 defineOptions({
   name: 'login',
 })
@@ -78,10 +85,26 @@ const login = () => {
 }
 
 // const openid = ref()
-
+const check = () => {
+  message.alert('请先同意用户协议、隐私协议')
+}
+const adminLogin = () => {
+  message.prompt({
+    title: '请输入密钥',
+    inputValue: passwd.value,
+  })
+}
 const getPhoneNumber = async (e) => {
+  if (e.errMsg === 'getPhoneNumber:fail user deny') {
+    return
+  }
   // 在bindgetphonenumber回调中获取code动态令牌
+  toast.loading('登录中...')
   const res = await weixinLogin()
+
+  await new Promise((resolve) => setTimeout(resolve, 2000))
+  // todo:如果点了拒绝
+  toast.close()
 
   console.log('获取手机号的动态令牌:', e) // 动态令牌
   const openid = userStore.userInfo.userId
@@ -147,10 +170,87 @@ const weixinLogin = async () => {
     },
   })
 }
+const handleAgreementChange = () => {
+  // console.log('agreed:', agreed.value)
+}
 </script>
 
-<style>
-.main-title-color {
-  color: #d14328;
+<style scoped>
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-image: url('http://115.159.83.61:9000/mindease/login.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  font-weight: bold;
+  color: #000;
+}
+
+.status-icons {
+  display: flex;
+  gap: 5px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.title {
+  margin-bottom: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.subtitle {
+  margin-bottom: 30px;
+  font-size: 24px;
+  color: #333;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 80%;
+  max-width: 300px;
+}
+
+.login-btn {
+  padding: 12px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  background-color: #5f9ea0;
+  border: none;
+  border-radius: 5px;
+}
+
+.agreement {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.note {
+  position: absolute;
+  bottom: 20px;
+  padding: 0 20px;
+  font-size: 12px;
+  color: #666;
+  text-align: center;
 }
 </style>

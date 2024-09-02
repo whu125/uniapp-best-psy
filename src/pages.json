@@ -91,6 +91,14 @@
       }
     },
     {
+      "path": "pages/login/login_origin",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "login"
+      }
+    },
+    {
       "path": "pages/my/my",
       "type": "page",
       "style": {
@@ -98,6 +106,10 @@
         "navigationBarTitleText": "个人信息"
       },
       "needLogin": true
+    },
+    {
+      "path": "pages/my/my_new",
+      "type": "page"
     },
     {
       "path": "pages/record/record",

@@ -25,7 +25,7 @@
         <!-- <button class="login-btn">登录</button>
         <p>免费注册</p> -->
       </view>
-      <view class="quick-actions">
+      <!-- <view class="quick-actions">
         <view class="quick-action">
           ⭐
           <br />
@@ -46,7 +46,7 @@
           <br />
           历史
         </view>
-      </view>
+      </view> -->
       <ul class="menu-list">
         <li class="menu-item">
           新手指南
@@ -65,7 +65,7 @@
           <span>></span>
         </li>
         <li class="menu-item" @click="toLogin()">
-          登陆测试
+          进入登录页面
           <span>></span>
         </li>
         <li class="menu-item" @click="checkLogin()">
