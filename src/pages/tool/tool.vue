@@ -25,20 +25,12 @@
         />
       </view>
 
-      <wd-grid border :column="2" clickable>
-        <wd-grid-item icon="heart" text="社会支持" />
-        <wd-grid-item icon="clock" text="睡眠放松" />
-        <wd-grid-item icon="eye-close" text="正念冥想" />
-        <wd-grid-item icon="chart-bubble" text="呼吸训练" />
-        <wd-grid-item
-          link-type="navigateTo"
-          url="/pages/mood/mood"
-          @itemclick="click"
-          icon="chat"
-          text="心情日记"
-        ></wd-grid-item>
-        <wd-grid-item icon="a-precisemonitor" text="认知解离" />
-      </wd-grid>
+      <view class="card-container">
+        <view class="card" v-for="(tool, index) in toolList" :key="index">
+          <image class="img" :src="tool.iconUrl" />
+          <view class="grid-font">{{ tool.toolName }}</view>
+        </view>
+      </view>
     </view>
   </view>
 
@@ -60,6 +52,29 @@ defineOptions({
 uni.hideTabBar()
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
+
+const toolList = ref([
+  {
+    toolName: '心情日记',
+    iconUrl:
+      'http://115.159.83.61:9000/mindease/3f60c461-ba7b-4d30-bbcc-c4af0a6f21a2_xinqingriji.png',
+  },
+  {
+    toolName: '能量日记',
+    iconUrl:
+      'http://115.159.83.61:9000/mindease/e84856b4-0af9-4c97-9115-9e94ac199e95_nengliangriji.png',
+  },
+  {
+    toolName: '自动思维',
+    iconUrl:
+      'http://115.159.83.61:9000/mindease/eb6c055b-1be4-43ab-a808-f60a753e75b9_zidongsiwei.png',
+  },
+  {
+    toolName: '认知解离',
+    iconUrl:
+      'http://115.159.83.61:9000/mindease/2d508b6f-4690-461f-a9eb-8056659f1865_renzhijieli.png',
+  },
+])
 </script>
 
 <style>
@@ -72,5 +87,38 @@ const { safeAreaInsets } = uni.getSystemInfoSync()
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: auto;
+}
+
+.img {
+  width: 45px;
+  height: 45px;
+}
+
+.grid-font {
+  margin-left: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  width: 40%;
+  height: 60px;
+  padding: 10px;
+  margin: 18px 0 18px 0;
+  border-color: darkgrey;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgb(139, 139, 139);
 }
 </style>

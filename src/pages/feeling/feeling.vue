@@ -38,10 +38,8 @@
       <view class="response-font">听到你这么{{ selectedMood }}，我也感到很{{ selectedMood }}!</view>
 
       <view class="edit-mood-container" @click="switchEditMood">
-        <view class="edit-mood">
-          <view><wd-icon name="edit-outline" size="22px"></wd-icon></view>
-          <view class="edit-mood-font">编辑心情</view>
-        </view>
+        <view><wd-icon name="chevron-right-circle" size="40px"></wd-icon></view>
+        <view class="edit-mood-font">下一步</view>
       </view>
     </view>
 
@@ -50,9 +48,10 @@
       <view style="margin-top: 20px">
         <wd-textarea v-model="moodInput" placeholder="记录你的此时此刻……" />
       </view>
-      <view class="edit-mood-btn">
-        <view>
-          <wd-button type="success" @click="submitMoodInput">确认</wd-button>
+      <view @click="submitMoodInput">
+        <view class="edit-mood-container">
+          <view><wd-icon name="check-circle" size="40px"></wd-icon></view>
+          <view class="edit-mood-font">添加到日记簿</view>
         </view>
       </view>
     </view>
@@ -172,29 +171,16 @@ const selectMood = (mood: string) => {
 }
 
 .edit-mood-container {
-  position: absolute;
-  right: 20px;
-}
-
-.edit-mood-btn {
-  display: flex;
-  flex-direction: row-reverse;
-  margin: 30px 20px 0 0;
-}
-
-.edit-mood-font {
-  font-size: 14px;
-  font-weight: bold;
-  color: #129948;
-  text-align: center;
-}
-
-.edit-mood {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-right: 15px;
+}
+
+.edit-mood-font {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .mood-container {

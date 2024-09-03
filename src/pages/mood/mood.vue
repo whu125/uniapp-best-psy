@@ -19,7 +19,7 @@
       <wd-img
         :width="200"
         :height="200"
-        src="http://115.159.83.61:9000/mindease/dcce124f-af8d-4a69-8051-3445485c63fb_tool_logo.png"
+        src="http://115.159.83.61:9000/mindease/aac1111a-bd1d-4b57-882c-02ad94febe99_diary-logo.png"
       />
     </view>
     <view class="font">觉察你的此时此刻，记录你的每日情绪</view>
