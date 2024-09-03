@@ -15,12 +15,27 @@
     h-full
   >
     <wd-navbar title="心情日记" left-arrow @click-left="handleClickLeft"></wd-navbar>
-    <view>
+    <view class="big-icon">
       <wd-img
         :width="200"
         :height="200"
         src="http://115.159.83.61:9000/mindease/dcce124f-af8d-4a69-8051-3445485c63fb_tool_logo.png"
       />
+    </view>
+    <view class="font">觉察你的此时此刻，记录你的每日情绪</view>
+    <view>
+      <wd-card>
+        <view class="card-content" @click="startRecord">
+          <view class="card-title">开始记录</view>
+          <view><wd-icon name="edit-1" size="23px" /></view>
+        </view>
+      </wd-card>
+      <wd-card>
+        <view class="card-content">
+          <view class="card-title">查看日记</view>
+          <view><wd-icon name="copy" size="22px" /></view>
+        </view>
+      </wd-card>
     </view>
   </view>
 </template>
@@ -29,7 +44,7 @@
 import PLATFORM from '@/utils/platform'
 
 defineOptions({
-  name: 'tool',
+  name: 'mood',
 })
 
 // 获取屏幕边界到安全区域距离
@@ -38,10 +53,39 @@ const { safeAreaInsets } = uni.getSystemInfoSync()
 const handleClickLeft = () => {
   uni.navigateBack()
 }
+
+const startRecord = () => {
+  uni.navigateTo({
+    url: '/pages/feeling/feeling',
+  })
+}
 </script>
 
 <style>
 .main-title-color {
   color: #d14328;
+}
+
+.font {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.big-icon {
+  display: flex;
+  justify-content: center;
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.card-title {
+  font-size: 20px;
 }
 </style>

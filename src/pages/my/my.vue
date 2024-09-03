@@ -116,7 +116,7 @@ const logoutByToken = async () => {
   console.log(res)
   if (res.code === 200) {
     userStore.clearUserInfo()
-    uni.navigateTo({
+    uni.switchTab({
       url: '/pages/my/my',
     })
   }

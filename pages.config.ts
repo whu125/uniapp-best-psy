@@ -18,7 +18,7 @@ export default defineUniPages({
   },
   tabBar: {
     color: '#999999',
-    selectedColor: '#1296db',
+    selectedColor: '#5A9685',
     backgroundColor: '#F8F8F8',
     borderStyle: 'black',
     height: '50px',
@@ -27,8 +27,8 @@ export default defineUniPages({
     spacing: '3px',
     list: [
       {
-        iconPath: 'static/tabbar/home.png',
-        selectedIconPath: 'static/tabbar/homeHL.png',
+        iconPath: 'static/tabbar/location.png',
+        selectedIconPath: 'static/tabbar/locationHL.png',
         pagePath: 'pages/home/home',
         text: '我的旅程',
       },
@@ -45,8 +45,8 @@ export default defineUniPages({
       //   text: '旅程记录',
       // },
       {
-        iconPath: 'static/tabbar/person.png',
-        selectedIconPath: 'static/tabbar/personHL.png',
+        iconPath: 'static/tabbar/personal.png',
+        selectedIconPath: 'static/tabbar/personalHL.png',
         pagePath: 'pages/my/my',
         text: '个人信息',
       },

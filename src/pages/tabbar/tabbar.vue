@@ -32,14 +32,14 @@ const props = defineProps({
 // 为选中颜色
 const color = ref('#000')
 // 选中的颜色
-const selectedColor = ref('#ffb2b2')
+const selectedColor = ref('#5A9685')
 // 菜单栏集合 - 与 pages.json -> tabbar 配置一样
 const tabBarList = ref([
   {
     id: 0,
     pagePath: '/pages/home/home',
-    iconPath: '../../static/tabbar/lvcheng.png',
-    selectedIconPath: '../../static/tabbar/lvcheng.png',
+    iconPath: '../../static/tabbar/location.png',
+    selectedIconPath: '../../static/tabbar/locationHL.png',
     text: '悦心旅程',
   },
   {
