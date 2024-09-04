@@ -3,14 +3,14 @@ import { ref } from 'vue'
 
 // const initState = { nickname: '', avatar: '' }
 const initState = {
-  userId: '1',
-  username: 'yz',
-  wechatId: '123456789wechat',
-  wechatName: 'yz-wechat',
-  phone: '1234567890',
-  currProgress: 1,
-  avatar: '',
-  token: '',
+  // userId: '1',
+  // username: 'yz',
+  // wechatId: '123456789wechat',
+  // wechatName: 'yz-wechat',
+  // phone: '1234567890',
+  // currProgress: 1,
+  // avatar: '',
+  // token: '',
 }
 
 export const useUserStore = defineStore(

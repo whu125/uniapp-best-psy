@@ -72,6 +72,11 @@
           <span class="label">关于我们</span>
           <span class="arrow">›</span>
         </div>
+        <div class="menu-item" @click="toLogin()">
+          <span class="icon">ℹ️</span>
+          <span class="label">进入登录页面</span>
+          <span class="arrow">›</span>
+        </div>
       </div>
     </div>
   </view>
@@ -91,14 +96,23 @@ defineOptions({
   name: 'my',
 })
 
-onLoad(() => {
-  console.log(userStore.userInfo)
-})
+// onLoad(() => {
+//   console.log(userStore.userInfo)
+// })
 
 onShow(() => {
   userInfo.value = userStore.userInfo
+  console.log('userInfo:', userInfo.value)
+
+  if (Object.keys(userInfo.value).length === 0 && userInfo.value.constructor === Object) {
+    // 如果 userInfo.value 是一个空对象，则执行以下代码
+    getUserInfo()
+  }
 })
 
+const getUserInfo = () => {
+  console.log('获取用户信息')
+}
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
 

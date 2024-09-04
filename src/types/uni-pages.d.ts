@@ -9,6 +9,7 @@ interface NavigateToOptions {
        "/pages/admin/admin" |
        "/pages/feeling/feeling" |
        "/pages/ganyu/ganyu" |
+       "/pages/ganyu/ganyu_temp" |
        "/pages/inquiry/inquiry" |
        "/pages/inquiry/inquiry_new" |
        "/pages/inquiry/start" |
@@ -21,7 +22,9 @@ interface NavigateToOptions {
        "/pages/record/record" |
        "/pages/tabbar/tabbar" |
        "/pages/test2/test2" |
-       "/pages/tool/tool";
+       "/pages/tool/tool" |
+       "/pages/1/daoru/1" |
+       "/pages/1/daoru/2";
 }
 interface RedirectToOptions extends NavigateToOptions {}
 

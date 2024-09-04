@@ -50,6 +50,7 @@
         <view>
           <wd-button type="success" @click="ToGanPage(1)">进入旅程</wd-button>
           <wd-button type="success" @click="ToInquiry()">测试进入问卷</wd-button>
+          <wd-button type="success" @click="ToAdmin()">测试进入管理端</wd-button>
         </view>
       </view>
       <view class="sub-container">
@@ -130,17 +131,20 @@ const wiexinLogin = () => {
 }
 
 const ToGanPage = async (interId: number) => {
-  const res = await startInter({
-    userId: userInfo.userId,
-    interId,
-    startTime: getFormattedDate(),
+  uni.navigateTo({
+    url: `/pages/ganyu/ganyu_temp`,
   })
-  console.log(res)
-  if (res.code === 200) {
-    uni.navigateTo({
-      url: `/pages/ganyu/ganyu?interId=${interId}`,
-    })
-  }
+  // const res = await startInter({
+  //   userId: userInfo.userId,
+  //   interId,
+  //   startTime: getFormattedDate(),
+  // })
+  // console.log(res)
+  // if (res.code === 200) {
+  //   uni.navigateTo({
+  //     // url: `/pages/ganyu/ganyu?interId=${interId}`,
+  //   })
+  // }
 }
 
 const ToLogin = () => {
@@ -156,6 +160,12 @@ const ToInquiry = () => {
   // })
   uni.navigateTo({
     url: '/pages/inquiry/start',
+  })
+}
+
+const ToAdmin = () => {
+  uni.navigateTo({
+    url: '/pages/admin/admin',
   })
 }
 </script>
