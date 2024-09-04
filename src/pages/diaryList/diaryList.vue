@@ -65,7 +65,6 @@ const imageMap = new Map([
 ])
 
 onShow(async () => {
-  console.log(imageMap.get('悲伤'))
   const res = await getAllMoodDiary()
   if (res.code === 200) {
     diaryList.value = res.data
@@ -88,7 +87,6 @@ const handleClickLeft = () => {
 .container {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   width: 100%;
   margin: 45px 0 20px 0;
 }
@@ -101,9 +99,9 @@ const handleClickLeft = () => {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .emoji {
-  width: 10px;
-  height: 10px;
-  margin-right: 8px;
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
 }
 .info {
   flex: 1;
