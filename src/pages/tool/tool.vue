@@ -18,16 +18,17 @@
     <wd-navbar title="工具箱"></wd-navbar>
     <view class="main-container">
       <view>
-        <wd-img
-          :width="200"
-          :height="200"
-          src="http://115.159.83.61:9000/mindease/dcce124f-af8d-4a69-8051-3445485c63fb_tool_logo.png"
-        />
+        <img src="../../static/images/tool/tool_logo.png" style="width: 200px; height: 200px" />
       </view>
 
       <view class="card-container">
-        <view class="card" v-for="(tool, index) in toolList" :key="index">
-          <image class="img" :src="tool.iconUrl" />
+        <view
+          class="card"
+          v-for="(tool, index) in toolList"
+          :key="index"
+          @click="ToTool(tool.toolName)"
+        >
+          <img class="img" :src="tool.iconUrl" />
           <view class="grid-font">{{ tool.toolName }}</view>
         </view>
       </view>
@@ -36,9 +37,7 @@
 
   <!-- <view class="text-center text-lg main-title-color">
     这是zwh写的视频测试
-
     <player-component id="tvp-id" playerid="tvp" vid="t3560gug9kt"></player-component>
-    
   </view> -->
 </template>
 
@@ -56,25 +55,29 @@ const { safeAreaInsets } = uni.getSystemInfoSync()
 const toolList = ref([
   {
     toolName: '心情日记',
-    iconUrl:
-      'http://115.159.83.61:9000/mindease/3f60c461-ba7b-4d30-bbcc-c4af0a6f21a2_xinqingriji.png',
+    iconUrl: '../../static/images/tool/xinqingriji.png',
   },
   {
     toolName: '能量日记',
-    iconUrl:
-      'http://115.159.83.61:9000/mindease/e84856b4-0af9-4c97-9115-9e94ac199e95_nengliangriji.png',
+    iconUrl: '../../static/images/tool/nengliangriji.png',
   },
   {
     toolName: '自动思维',
-    iconUrl:
-      'http://115.159.83.61:9000/mindease/eb6c055b-1be4-43ab-a808-f60a753e75b9_zidongsiwei.png',
+    iconUrl: '../../static/images/tool/zidongsiwei.png',
   },
   {
     toolName: '认知解离',
-    iconUrl:
-      'http://115.159.83.61:9000/mindease/2d508b6f-4690-461f-a9eb-8056659f1865_renzhijieli.png',
+    iconUrl: '../../static/images/tool/renzhijieli.png',
   },
 ])
+
+const ToTool = (toolNmae: string) => {
+  if (toolNmae === '心情日记') {
+    uni.navigateTo({
+      url: '/pages/mood/mood',
+    })
+  }
+}
 </script>
 
 <style>

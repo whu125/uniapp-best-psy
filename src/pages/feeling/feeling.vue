@@ -30,7 +30,7 @@
 
       <view class="mood-container">
         <view class="mood-font" v-for="(mood, index) in moodList" :key="index">
-          <wd-img @click="selectMood(mood.desc)" :width="45" :height="45" :src="mood.iconUrl" />
+          <img :src="mood.iconUrl" style="width: 50px" @click="selectMood(mood.desc)" />
           <view>{{ mood.desc }}</view>
         </view>
       </view>
@@ -48,7 +48,7 @@
       <view style="margin-top: 20px">
         <wd-textarea v-model="moodInput" placeholder="记录你的此时此刻……" />
       </view>
-      <view @click="submitMoodInput">
+      <view @click="submitDiary">
         <view class="edit-mood-container">
           <view><wd-icon name="check-circle" size="40px"></wd-icon></view>
           <view class="edit-mood-font">添加到日记簿</view>
@@ -60,7 +60,14 @@
 
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
-import { useToast } from 'wot-design-uni'
+import { useToast, useNotify } from 'wot-design-uni'
+import { useUserStore } from '@/store/user'
+import {
+  addMoodDiary,
+  editMoodDiary,
+  IAddFeelingItem,
+  IEditFeelingItem,
+} from '@/service/index/feeling'
 
 defineOptions({
   name: 'feeling',
@@ -68,6 +75,8 @@ defineOptions({
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
+const userStore = useUserStore()
+const { showNotify, closeNotify } = useNotify()
 const timeValue = ref<number>(Date.now())
 const toast = useToast()
 const selectedMood = ref<string>('开心')
@@ -75,32 +84,27 @@ const editMood = ref<boolean>(false)
 const moodInput = ref<string>('')
 const moodList = ref([
   {
-    iconUrl:
-      'http://115.159.83.61:9000/mindease/6846e9df-c6ea-4417-ae28-be8698157b7a_mood-happy.png',
+    iconUrl: '../../static/images/tool/moodDiary/mood-happy.png',
     desc: '开心',
   },
   {
-    iconUrl:
-      'http://115.159.83.61:9000/mindease/1e9ad183-2f14-48c8-a40b-e73474d5874e_mood-calm.png',
+    iconUrl: '../../static/images/tool/moodDiary/mood-calm.png',
     desc: '平静',
   },
   {
-    iconUrl:
-      'http://115.159.83.61:9000/mindease/1733d7f9-0923-4193-b0d4-6b91c1f738f0_mood-angry.png',
+    iconUrl: '../../static/images/tool/moodDiary/mood-angry.png',
     desc: '生气',
   },
   {
-    iconUrl:
-      'http://115.159.83.61:9000/mindease/75e65718-a6c8-416e-ad75-a05eb478a48f_mood-upset.png',
+    iconUrl: '../../static/images/tool/moodDiary/mood-upset.png',
     desc: '沮丧',
   },
   {
-    iconUrl:
-      'http://115.159.83.61:9000/mindease/6d0a7fe0-e68a-4487-ab9c-5d409bab9199_mood-anxious.png',
+    iconUrl: '../../static/images/tool/moodDiary/mood-anxious.png',
     desc: '焦虑',
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/mindease/832a11ec-7fb5-4da4-b418-69d14ce1d704_mood-sad.png',
+    iconUrl: '../../static/images/tool/moodDiary/mood-sad.png',
     desc: '悲伤',
   },
 ])
@@ -115,10 +119,6 @@ const handleClickLeft = () => {
 
 const switchEditMood = () => {
   editMood.value = !editMood.value
-}
-
-const submitMoodInput = () => {
-  console.log(moodInput.value)
 }
 
 const beforeConfirm = (value, resolve, picker) => {
@@ -136,6 +136,24 @@ const beforeConfirm = (value, resolve, picker) => {
 
 const handleConfirm = ({ value }) => {
   console.log(new Date(value))
+}
+
+const submitDiary = async () => {
+  const feeling: IAddFeelingItem = {
+    userId: userStore.userInfo.userId,
+    diaryDate: String(timeValue.value),
+    diaryContent: moodInput.value,
+    diaryMood: selectedMood.value,
+  }
+  const res = await addMoodDiary(feeling)
+  if (res.code === 200) {
+    uni.redirectTo({
+      url: '/pages/mood/mood',
+    })
+    toast.success('提交成功')
+  } else {
+    showNotify({ type: 'danger', message: '出了一些小问题' })
+  }
 }
 
 const selectMood = (mood: string) => {

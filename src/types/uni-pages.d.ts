@@ -5,11 +5,12 @@
 
 interface NavigateToOptions {
   url: "/pages/home/home" |
-       "/pages/home/home origin" |
        "/pages/admin/admin" |
+       "/pages/diaryList/diaryList" |
        "/pages/feeling/feeling" |
        "/pages/ganyu/ganyu" |
        "/pages/ganyu/ganyu_temp" |
+       "/pages/home/home2" |
        "/pages/inquiry/inquiry" |
        "/pages/inquiry/inquiry_new" |
        "/pages/inquiry/start" |

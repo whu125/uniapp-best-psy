@@ -4,7 +4,7 @@
     navigationStyle: 'custom',
     navigationBarTitleText: '临时页面',
   },
-  // needLogin: true,
+  needLogin: true,
 }
 </route>
 <template>

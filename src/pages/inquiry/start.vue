@@ -4,7 +4,7 @@
     navigationStyle: 'default',
     navigationBarTitleText: '打卡',
   },
-  // needLogin: true,
+  needLogin: true,
 }
 </route>
 

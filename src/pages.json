@@ -53,7 +53,7 @@
       }
     },
     {
-      "path": "pages/home/home origin",
+      "path": "pages/admin/admin",
       "type": "home",
       "style": {
         "navigationStyle": "custom",
@@ -61,12 +61,13 @@
       }
     },
     {
-      "path": "pages/admin/admin",
-      "type": "home",
+      "path": "pages/diaryList/diaryList",
+      "type": "page",
       "style": {
         "navigationStyle": "custom",
-        "navigationBarTitleText": "我的旅程"
-      }
+        "navigationBarTitleText": "心情日记"
+      },
+      "needLogin": true
     },
     {
       "path": "pages/feeling/feeling",
@@ -91,6 +92,15 @@
       "style": {
         "navigationStyle": "custom",
         "navigationBarTitleText": "临时页面"
+      },
+      "needLogin": true
+    },
+    {
+      "path": "pages/home/home2",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "我的旅程"
       }
     },
     {
@@ -115,7 +125,8 @@
       "style": {
         "navigationStyle": "default",
         "navigationBarTitleText": "打卡"
-      }
+      },
+      "needLogin": true
     },
     {
       "path": "pages/login/login",

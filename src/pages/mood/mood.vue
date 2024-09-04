@@ -16,10 +16,9 @@
   >
     <wd-navbar title="心情日记" left-arrow @click-left="handleClickLeft"></wd-navbar>
     <view class="big-icon">
-      <wd-img
-        :width="200"
-        :height="200"
-        src="http://115.159.83.61:9000/mindease/aac1111a-bd1d-4b57-882c-02ad94febe99_diary-logo.png"
+      <img
+        style="width: 200px; height: 180px"
+        src="../../static/images/tool/moodDiary/diary-logo.png"
       />
     </view>
     <view class="font">觉察你的此时此刻，记录你的每日情绪</view>
@@ -31,7 +30,7 @@
         </view>
       </wd-card>
       <wd-card>
-        <view class="card-content">
+        <view class="card-content" @click="ToDiaryList">
           <view class="card-title">查看日记</view>
           <view><wd-icon name="copy" size="22px" /></view>
         </view>
@@ -57,6 +56,12 @@ const handleClickLeft = () => {
 const startRecord = () => {
   uni.navigateTo({
     url: '/pages/feeling/feeling',
+  })
+}
+
+const ToDiaryList = () => {
+  uni.navigateTo({
+    url: '/pages/diaryList/diaryList',
   })
 }
 </script>
