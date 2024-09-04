@@ -82,11 +82,6 @@
   border-radius: 50%;
 }
 
-.avatar img {
-  width: 50%;
-  height: 50%;
-}
-
 .username {
   margin: 0;
   font-size: 18px;

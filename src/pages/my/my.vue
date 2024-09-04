@@ -10,79 +10,70 @@
 <template>
   <tabbar selected="2"></tabbar>
   <view
-    class="bg-white overflow-hidden pt-2 px-4"
-    :style="{ marginTop: safeAreaInsets?.top + 'px' }"
+    class="bg-white overflow-hidden pt-10 px-4 box-border"
+    style="height: 100vh; background: linear-gradient(to bottom right, #e6f7ff, #e6ffe6)"
   >
-    <view class="container">
-      <view class="header">
-        <!-- <view class="avatar">🐧</view> -->
-        <wd-img
-          :width="100"
-          :height="100"
-          round
-          src="https://ss0.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3498215567,1247959937&fm=253&gp=0.jpg"
-        />
-        <view>{{ userInfo.username }}</view>
-        <!-- <button class="login-btn">登录</button>
-        <p>免费注册</p> -->
-      </view>
-      <!-- <view class="quick-actions">
-        <view class="quick-action">
-          ⭐
-          <br />
-          收藏
+    <div class="profile-container">
+      <div class="user-info">
+        <div class="avatar">
+          <!-- <img src="@/static/" alt="User avatar" /> -->
+          <img src="../../static/images/wenjuan.png" alt="" class="w-full h-full" />
+          <!-- <wd-img src="../../../../static/images/wenjuan.png"></wd-img> -->
+          <view class="ml-4">
+            <wd-icon name="jump" />
+          </view>
+        </div>
+        <view class="flex">
+          <h2 class="username">这是一个非常非常长的名字</h2>
+          <view class="ml-4 flex items-center">
+            <wd-icon name="jump" />
+          </view>
         </view>
-        <view class="quick-action">
-          👍
-          <br />
-          点赞
-        </view>
-        <view class="quick-action">
-          💬
-          <br />
-          评论
-        </view>
-        <view class="quick-action">
-          🕒
-          <br />
-          历史
-        </view>
-      </view> -->
-      <ul class="menu-list">
-        <li class="menu-item">
-          新手指南
-          <span>></span>
-        </li>
-        <li class="menu-item">
-          关于我们
-          <span>></span>
-        </li>
-        <li class="menu-item">
-          意见反馈
-          <span>></span>
-        </li>
-        <li class="menu-item" @click="logoutByToken()">
-          退出登录
-          <span>></span>
-        </li>
-        <li class="menu-item" @click="toLogin()">
-          进入登录页面
-          <span>></span>
-        </li>
-        <li class="menu-item" @click="checkLogin()">
-          检查登录
-          <span>></span>
-        </li>
-        <li class="menu-item" @click="testAPI()">
-          检测接口
-          <span>></span>
-        </li>
-      </ul>
-      <view class="flex flex-justify-center flex-items-center flex-col mt-1">
-        <view class="small-gray-text">咨询师信箱: example@qq.com</view>
-        <view class="small-gray-text">心理危机热线: 1234567890</view>
-      </view>
-    </view>
+      </div>
+
+      <div class="stats">
+        <div class="stat-item">
+          <span class="stat-value">2</span>
+          <span class="stat-label">已解锁单元</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">10</span>
+          <span class="stat-label">已获得金币</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">40</span>
+          <span class="stat-label">待解锁金币</span>
+        </div>
+      </div>
+
+      <div class="menu-items">
+        <div class="menu-item">
+          <span class="icon">🧭</span>
+          <span class="label">新手指南</span>
+          <span class="arrow">›</span>
+        </div>
+        <div class="menu-item">
+          <span class="icon">📞</span>
+          <span class="label">心理危机热线</span>
+          <span class="arrow">›</span>
+        </div>
+        <div class="menu-item">
+          <span class="icon">💌</span>
+          <span class="label">咨询师信箱</span>
+          <span class="arrow">›</span>
+        </div>
+        <div class="menu-item">
+          <span class="icon">📝</span>
+          <span class="label">意见反馈</span>
+          <span class="arrow">›</span>
+        </div>
+        <div class="menu-item">
+          <span class="icon">ℹ️</span>
+          <span class="label">关于我们</span>
+          <span class="arrow">›</span>
+        </div>
+      </div>
+    </div>
   </view>
 </template>
 
@@ -141,67 +132,89 @@ const testAPI = async () => {
 </script>
 
 <style>
-.main-title-color {
-  color: #d14328;
+.profile-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom right, #e6f7ff, #e6ffe6);
+  border-radius: 10px;
 }
 
-.container {
-  margin: 0 auto;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
-.header {
-  padding: 20px;
-  text-align: center;
-}
+
 .avatar {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 80px;
   height: 80px;
-  margin: 0 auto;
-  font-size: 40px;
-  background-color: #ffd700;
+  margin-bottom: 10px;
+  /* background-color: #d9d9d9; */
   border-radius: 50%;
 }
-.login-btn {
-  padding: 10px 20px;
-  margin-top: 10px;
-  font-size: 16px;
-  color: white;
-  background-color: #ff6347;
-  border: none;
-  border-radius: 20px;
+
+.username {
+  margin: 0;
+  font-size: 18px;
 }
-.quick-actions {
+
+.stats {
   display: flex;
   justify-content: space-around;
-  padding: 10px 0;
-  border-bottom: 1px solid #e0e0e0;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 10px;
 }
-.quick-action {
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4caf50;
+}
+
+.stat-label {
   font-size: 12px;
-  text-align: center;
+  color: #666;
 }
-.menu-list {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
+
+.menu-items {
+  overflow: hidden;
+  background-color: white;
+  border-radius: 10px;
 }
+
 .menu-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 15px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #f0f0f0;
 }
+
 .menu-item:last-child {
   border-bottom: none;
 }
 
-.small-gray-text {
-  font-size: 12px; /* 字体大小，根据需要调整 */
-  color: #808080; /* 灰色字体颜色 */
+.icon {
+  margin-right: 15px;
+  font-size: 20px;
+}
+
+.label {
+  flex-grow: 1;
+}
+
+.arrow {
+  color: #ccc;
 }
 </style>

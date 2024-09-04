@@ -150,9 +150,12 @@ const ToLogin = () => {
 }
 
 const ToInquiry = () => {
-  const position = '2-pre'
+  // const position = '2-pre'
+  // uni.navigateTo({
+  //   url: `/pages/inquiry/inquiry?position=${position}`,
+  // })
   uni.navigateTo({
-    url: `/pages/inquiry/inquiry?position=${position}`,
+    url: '/pages/inquiry/start',
   })
 }
 </script>

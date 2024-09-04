@@ -61,6 +61,10 @@
       }
     },
     {
+      "path": "pages/admin/admin",
+      "type": "page"
+    },
+    {
       "path": "pages/feeling/feeling",
       "type": "page",
       "style": {
@@ -83,6 +87,22 @@
       "style": {
         "navigationStyle": "custom",
         "navigationBarTitleText": "干预测试"
+      }
+    },
+    {
+      "path": "pages/inquiry/inquiry_new",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "干预测试"
+      }
+    },
+    {
+      "path": "pages/inquiry/start",
+      "type": "page",
+      "style": {
+        "navigationStyle": "default",
+        "navigationBarTitleText": "打卡"
       }
     },
     {
@@ -121,6 +141,14 @@
     {
       "path": "pages/my/my_new",
       "type": "page"
+    },
+    {
+      "path": "pages/my/my_origin",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "个人信息"
+      }
     },
     {
       "path": "pages/record/record",

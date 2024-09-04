@@ -6,14 +6,18 @@
 interface NavigateToOptions {
   url: "/pages/home/home" |
        "/pages/home/home origin" |
+       "/pages/admin/admin" |
        "/pages/feeling/feeling" |
        "/pages/ganyu/ganyu" |
        "/pages/inquiry/inquiry" |
+       "/pages/inquiry/inquiry_new" |
+       "/pages/inquiry/start" |
        "/pages/login/login" |
        "/pages/login/login_origin" |
        "/pages/mood/mood" |
        "/pages/my/my" |
        "/pages/my/my_new" |
+       "/pages/my/my_origin" |
        "/pages/record/record" |
        "/pages/tabbar/tabbar" |
        "/pages/test2/test2" |
