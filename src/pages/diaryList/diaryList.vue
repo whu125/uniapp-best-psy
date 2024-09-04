@@ -25,11 +25,11 @@
       <view class="card">
         <img class="emoji" :src="imageMap.get(diary.diaryMood)" />
         <view class="info">
-          <view class="date">8月25日</view>
+          <view class="date">{{ diary.dateDay }}</view>
           <view class="mood">{{ diary.diaryMood }}</view>
-          <view class="time">上午 10:57</view>
+          <view class="time">{{ diary.dateTime }}</view>
         </view>
-        <view class="icon">&#9776;</view>
+        <view class="icon" @click="ToFeeling">&#9776;</view>
       </view>
     </view>
   </view>
@@ -44,6 +44,7 @@ import {
   editMoodDiary,
   IAddFeelingItem,
   IEditFeelingItem,
+  IGetFeelingItem,
   getAllMoodDiary,
 } from '@/service/index/feeling'
 
@@ -54,7 +55,7 @@ defineOptions({
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const { showNotify, closeNotify } = useNotify()
-const diaryList = ref<IEditFeelingItem[]>()
+const diaryList = ref<IGetFeelingItem[]>()
 const imageMap = new Map([
   ['开心', '../../static/images/tool/moodDiary/mood-happy.png'],
   ['平静', '../../static/images/tool/moodDiary/mood-calm.png'],
@@ -76,6 +77,12 @@ onShow(async () => {
 
 const handleClickLeft = () => {
   uni.navigateBack()
+}
+
+const ToFeeling = () => {
+  uni.navigateTo({
+    url: '/pages/feeling/feeling',
+  })
 }
 </script>
 

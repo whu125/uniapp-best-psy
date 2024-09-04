@@ -15,6 +15,16 @@ export interface IEditFeelingItem {
   diaryMood: string
 }
 
+export interface IGetFeelingItem {
+  diaryId: number
+  userId: string
+  diaryContent: string
+  diaryDate: string
+  diaryMood: string
+  dateDay: string
+  dateTime: string
+}
+
 export const addMoodDiary = (feeling: IAddFeelingItem) => {
   return http.post('/moodDiary/addMoodDiary', feeling, {})
 }
@@ -28,5 +38,5 @@ export const removeMoodDiary = (diaryId: number) => {
 }
 
 export const getAllMoodDiary = () => {
-  return http.post<IEditFeelingItem[]>('/moodDiary/getAllMoodDiary', {}, {})
+  return http.post<IGetFeelingItem[]>('/moodDiary/getAllMoodDiary', {}, {})
 }
