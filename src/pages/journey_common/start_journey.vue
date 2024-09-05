@@ -19,13 +19,9 @@
     <view class="main-container">
       <view class="card">
         <image class="illustration" :src="imageMap.get(progress)" mode="aspectFit"></image>
-
-        <view class="title">第二站: 观察你的思维</view>
-
-        <view class="questions">
-          <view class="question">• 情绪反应的起点是什么?</view>
-          <view class="question">• 思维的 "默认选项" 如何影响生活?</view>
-          <view class="question">• 消极思维挥之不去,怎么办?</view>
+        <view class="title">{{ currContent.title }}</view>
+        <view class="questions" v-for="(question, index) in currContent.questions" :key="index">
+          <view class="question">{{ question }}</view>
         </view>
 
         <button class="start-button" @click="startJourney">开始旅程</button>
@@ -39,6 +35,7 @@ const progress = ref<number>()
 onLoad((options) => {
   const numberStr = options.progress
   progress.value = Number(decodeURIComponent(numberStr))
+  currContent.value = pageContent.value[progress.value]
 })
 
 const ToHome = () => {
@@ -47,13 +44,51 @@ const ToHome = () => {
 const navbarTitle = ref<string>('我的旅程: 第二站')
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const imageMap = new Map([
+  [0, '../../static/images/journey/journey2/start_journey_logo2.png'],
+  [1, '../../static/images/journey/journey2/start_journey_logo2.png'],
   [2, '../../static/images/journey/journey2/start_journey_logo2.png'],
   [3, '../../static/images/journey/journey2/start_journey_logo3.png'],
 ])
+const currContent = ref()
+
+const pageContent = ref([
+  {
+    title: '第零站: 观察你的思维',
+    questions: [
+      '• 情绪反应的起点是什么?',
+      '• 思维的 "默认选项" 如何影响生活?',
+      '• 消极思维挥之不去,怎么办?',
+    ],
+  },
+  {
+    title: '第一站: 观察你的思维',
+    questions: [
+      '• 情绪反应的起点是什么?',
+      '• 思维的 "默认选项" 如何影响生活?',
+      '• 消极思维挥之不去,怎么办?',
+    ],
+  },
+  {
+    title: '第二站: 观察你的思维',
+    questions: [
+      '• 情绪反应的起点是什么?',
+      '• 思维的 "默认选项" 如何影响生活?',
+      '• 消极思维挥之不去,怎么办?',
+    ],
+  },
+  {
+    title: '第三站: 观察你的思维',
+    questions: [
+      '• 情绪反应的起点是什么?',
+      '• 思维的 "默认选项" 如何影响生活?',
+      '• 消极思维挥之不去,怎么办?',
+    ],
+  },
+])
 const startJourney = () => {
-  // uni.navigateTo({
-  //   url: '',
-  // })
+  uni.navigateTo({
+    url: '/pages/journey_common/common',
+  })
 }
 </script>
 

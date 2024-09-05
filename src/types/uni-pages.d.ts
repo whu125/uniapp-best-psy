@@ -14,6 +14,7 @@ interface NavigateToOptions {
        "/pages/inquiry/inquiry" |
        "/pages/inquiry/inquiry_new" |
        "/pages/inquiry/start" |
+       "/pages/journey_common/common" |
        "/pages/journey_common/start_journey" |
        "/pages/login/login" |
        "/pages/login/login_origin" |
