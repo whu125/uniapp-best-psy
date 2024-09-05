@@ -129,6 +129,14 @@
       "needLogin": true
     },
     {
+      "path": "pages/journey_common/start_journey",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
       "path": "pages/login/login",
       "type": "page",
       "style": {

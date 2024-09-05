@@ -24,6 +24,7 @@
           class="card-lock"
           src="../../static/images/home/startJourney.png"
           v-show="currProgress >= journey.progress"
+          @click="enterJourney(journey.progress)"
         />
         <img
           class="card-lock"
@@ -68,6 +69,13 @@ const journeySteps = ref([
 ])
 // 测试 uni API 自动引入
 onLoad(() => {})
+
+const enterJourney = (progress: number) => {
+  const numberStr = progress.toString()
+  uni.navigateTo({
+    url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+  })
+}
 </script>
 
 <style>

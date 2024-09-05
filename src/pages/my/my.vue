@@ -24,7 +24,7 @@
           </view>
         </div>
         <view class="flex">
-          <h2 class="username">这是一个非常非常长的名字</h2>
+          <h2 class="username">{{ userInfo.username }}</h2>
           <view class="ml-4 flex items-center">
             <wd-icon name="jump" />
           </view>

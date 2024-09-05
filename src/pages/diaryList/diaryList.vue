@@ -21,7 +21,7 @@
       left-arrow
       @click-left="handleClickLeft"
     ></wd-navbar>
-    <view class="container" v-for="(diary, index) in diaryList" :key="index">
+    <view class="main-container" v-for="(diary, index) in diaryList" :key="index">
       <view class="card">
         <img class="emoji" :src="imageMap.get(diary.diaryMood)" />
         <view class="info">
@@ -29,7 +29,9 @@
           <view class="mood">{{ diary.diaryMood }}</view>
           <view class="time">{{ diary.dateTime }}</view>
         </view>
-        <view class="icon" @click="ToFeeling">&#9776;</view>
+        <wd-popover mode="menu" :content="operationMenu" @menuclick="doOperation" placement="right">
+          <wd-button type="icon" icon="view-list"></wd-button>
+        </wd-popover>
       </view>
     </view>
   </view>
@@ -64,6 +66,16 @@ const imageMap = new Map([
   ['焦虑', '../../static/images/tool/moodDiary/mood-anxious.png'],
   ['悲伤', '../../static/images/tool/moodDiary/mood-sad.png'],
 ])
+const operationMenu = ref<Array<Record<string, any>>>([
+  {
+    iconClass: 'edit',
+    content: '编辑',
+  },
+  {
+    iconClass: 'delete',
+    content: '删除',
+  },
+])
 
 onShow(async () => {
   const res = await getAllMoodDiary()
@@ -79,6 +91,14 @@ const handleClickLeft = () => {
   uni.navigateBack()
 }
 
+const doOperation = (e) => {
+  if (e.item.content === '编辑') {
+    console.log(e.item.content)
+  } else if (e.item.content === '删除') {
+    console.log(e.item.content)
+  }
+}
+
 const ToFeeling = () => {
   uni.navigateTo({
     url: '/pages/feeling/feeling',
@@ -91,7 +111,7 @@ const ToFeeling = () => {
   color: #d14328;
 }
 
-.container {
+.main-container {
   display: flex;
   flex-direction: column;
   width: 100%;
