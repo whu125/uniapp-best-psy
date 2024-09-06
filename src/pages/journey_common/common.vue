@@ -36,7 +36,11 @@ onLoad((options) => {})
 const testData = {
   pageId: 1,
   interId: 2,
+<<<<<<< HEAD
   imgUrl: 'http://115.159.83.61:9000/journey2/daoru1.png',
+=======
+  imgUrl: 'http://115.159.83.61:9000/journey2/daoru2.png',
+>>>>>>> 31cf17a6bf70eff36621abb0618da4b7b19aba3c
   textContent: '',
   navbarTitle: '第二站 : 导览',
   operationIcon: 'http://115.159.83.61:9000/common/next.png',
@@ -56,7 +60,7 @@ const navbarTitle = ref<string>('')
   align-items: center;
   justify-content: center;
   height: 100vh;
-  padding: 0 10px 0 10px;
+  /* padding: 0 10px 0 10px; */
   background: linear-gradient(to bottom right, #e6f7ff, #fffbe6);
 }
 

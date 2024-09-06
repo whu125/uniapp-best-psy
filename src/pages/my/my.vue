@@ -77,6 +77,11 @@
           <span class="label">进入登录页面</span>
           <span class="arrow">›</span>
         </div>
+        <div class="menu-item" @click="toInquiry()">
+          <span class="icon">ℹ️</span>
+          <span class="label">测试问卷入口</span>
+          <span class="arrow">›</span>
+        </div>
       </div>
     </div>
   </view>
@@ -133,6 +138,12 @@ const toLogin = () => {
   })
 }
 
+const toInquiry = () => {
+  uni.navigateTo({
+    url: '/pages/inquiry/inquiry_new',
+  })
+}
+
 const checkLogin = () => {
   uni.navigateTo({
     url: '/pages/test2/test2',
@@ -147,7 +158,8 @@ const testAPI = async () => {
 
 <style>
 .profile-container {
-  padding: 20px;
+  padding: 0.625rem;
+  margin-top: 2rem;
   font-family: Arial, sans-serif;
   background: linear-gradient(to bottom right, #e6f7ff, #e6ffe6);
   border-radius: 10px;
