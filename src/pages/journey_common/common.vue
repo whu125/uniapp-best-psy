@@ -56,7 +56,7 @@ const navbarTitle = ref<string>('')
   align-items: center;
   justify-content: center;
   height: 100vh;
-  padding: 0 10px 0 10px;
+  /* padding: 0 10px 0 10px; */
   background: linear-gradient(to bottom right, #e6f7ff, #fffbe6);
 }
 

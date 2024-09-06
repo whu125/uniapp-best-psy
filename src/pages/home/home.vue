@@ -85,7 +85,7 @@ const enterJourney = (progress: number) => {
 
 .header {
   position: fixed;
-  top: 60px;
+  top: 3.75rem;
   z-index: 100;
   display: flex;
   justify-content: center;
@@ -111,8 +111,10 @@ const enterJourney = (progress: number) => {
   flex-direction: column;
   gap: 15px;
   height: 90vh;
-  margin-top: 60px;
+  padding-top: 1.25rem;
+  margin-top: 3rem;
   overflow-y: scroll;
+  background: linear-gradient(to bottom right, #e6f7ff, #e6ffe6);
 }
 .card {
   display: flex;

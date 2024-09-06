@@ -18,7 +18,11 @@
     <view class="mt-4">
       <wd-progress :percentage="30" />
     </view>
-    <view></view>
+    <view>
+      <view>
+        <h2>这里是放问题</h2>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -57,7 +61,6 @@ onLoad(async (param) => {
 
 const ToHome = () => {
   uni.switchTab({ url: '/pages/home/home' })
-  submit()
 }
 const curGroup = ref(1)
 const islastFlag = ref(false)
