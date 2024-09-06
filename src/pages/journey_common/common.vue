@@ -36,7 +36,7 @@ onLoad((options) => {})
 const testData = {
   pageId: 1,
   interId: 2,
-  imgUrl: '../../static/images/journey/journey2/daolan1.png',
+  imgUrl: 'http://115.159.83.61:9000/journey2/daoru2.png',
   textContent: '',
   navbarTitle: '第二站 : 导览',
   operationIcon: '../../static/images/journey/common/next.png',
