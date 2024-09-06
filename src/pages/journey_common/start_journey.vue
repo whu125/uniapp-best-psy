@@ -44,10 +44,10 @@ const ToHome = () => {
 const navbarTitle = ref<string>('我的旅程: 第二站')
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const imageMap = new Map([
-  [0, '../../static/images/journey/journey2/start_journey_logo2.png'],
-  [1, '../../static/images/journey/journey2/start_journey_logo2.png'],
-  [2, '../../static/images/journey/journey2/start_journey_logo2.png'],
-  [3, '../../static/images/journey/journey2/start_journey_logo3.png'],
+  [0, 'http://115.159.83.61:9000/journey2/start_journey_logo2.png'],
+  [1, 'http://115.159.83.61:9000/journey2/start_journey_logo2.png'],
+  [2, 'http://115.159.83.61:9000/journey2/start_journey_logo2.png'],
+  [3, 'http://115.159.83.61:9000/journey2/start_journey_logo2.png'],
 ])
 const currContent = ref()
 
@@ -89,6 +89,9 @@ const startJourney = () => {
   uni.navigateTo({
     url: '/pages/journey_common/common',
   })
+  // uni.navigateTo({
+  //   url: '/pages/journey2/daoru2',
+  // })
 }
 </script>
 

@@ -59,12 +59,12 @@ const { safeAreaInsets } = uni.getSystemInfoSync()
 const { showNotify, closeNotify } = useNotify()
 const diaryList = ref<IGetFeelingItem[]>()
 const imageMap = new Map([
-  ['开心', '../../static/images/tool/moodDiary/mood-happy.png'],
-  ['平静', '../../static/images/tool/moodDiary/mood-calm.png'],
-  ['生气', '../../static/images/tool/moodDiary/mood-angry.png'],
-  ['沮丧', '../../static/images/tool/moodDiary/mood-upset.png'],
-  ['焦虑', '../../static/images/tool/moodDiary/mood-anxious.png'],
-  ['悲伤', '../../static/images/tool/moodDiary/mood-sad.png'],
+  ['开心', 'http://115.159.83.61:9000/tool/moodDiary/mood-happy.png'],
+  ['平静', 'http://115.159.83.61:9000/tool/moodDiary/mood-calm.png'],
+  ['生气', 'http://115.159.83.61:9000/tool/moodDiary/mood-angry.png'],
+  ['沮丧', 'http://115.159.83.61:9000/tool/moodDiary/mood-upset.png'],
+  ['焦虑', 'http://115.159.83.61:9000/tool/moodDiary/mood-anxious.png'],
+  ['悲伤', 'http://115.159.83.61:9000/tool/moodDiary/mood-sad.png'],
 ])
 const operationMenu = ref<Array<Record<string, any>>>([
   {

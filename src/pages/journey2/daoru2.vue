@@ -22,8 +22,8 @@
         <img :src="testData.imgUrl" style="width: 100%" />
       </view>
       <view class="operation-area">
-        <img :src="testData.operationIcon" style="width: 35px; height: 35px" />
-        <view>{{ testData.operationText }}</view>
+        <img src="http://115.159.83.61:9000/common/finish.png" style="width: 35px; height: 35px" />
+        <view>写好啦, 提交!</view>
       </view>
     </view>
   </view>

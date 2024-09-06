@@ -18,7 +18,7 @@
     <view class="big-icon">
       <img
         style="width: 200px; height: 180px"
-        src="../../static/images/tool/moodDiary/diary-logo.png"
+        src="http://115.159.83.61:9000/tool/moodDiary/diary-logo.png"
       />
     </view>
     <view class="font">觉察你的此时此刻，记录你的每日情绪</view>

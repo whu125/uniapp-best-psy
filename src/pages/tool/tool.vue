@@ -18,7 +18,10 @@
     <wd-navbar title="工具箱"></wd-navbar>
     <view class="main-container">
       <view>
-        <img src="../../static/images/tool/tool_logo.png" style="width: 200px; height: 200px" />
+        <img
+          src="http://115.159.83.61:9000/tool/tool_logo.png"
+          style="width: 200px; height: 200px"
+        />
       </view>
 
       <view class="card-container">
@@ -55,19 +58,19 @@ const { safeAreaInsets } = uni.getSystemInfoSync()
 const toolList = ref([
   {
     toolName: '心情日记',
-    iconUrl: '../../static/images/tool/xinqingriji.png',
+    iconUrl: 'http://115.159.83.61:9000/tool/xinqingriji.png',
   },
   {
     toolName: '能量日记',
-    iconUrl: '../../static/images/tool/nengliangriji.png',
+    iconUrl: 'http://115.159.83.61:9000/tool/nengliangriji.png',
   },
   {
     toolName: '自动思维',
-    iconUrl: '../../static/images/tool/zidongsiwei.png',
+    iconUrl: 'http://115.159.83.61:9000/tool/zidongsiwei.png',
   },
   {
     toolName: '认知解离',
-    iconUrl: '../../static/images/tool/renzhijieli.png',
+    iconUrl: 'http://115.159.83.61:9000/tool/renzhijieli.png',
   },
 ])
 

@@ -19,11 +19,10 @@
     <view class="main-container">
       <view style="height: 15%"></view>
       <view class="middle-img">
-        <img :src="testData.imgUrl" style="width: 100%" />
+        <img :src="testData.imgUrl" style="width: 100%; height: 100%; object-fit: cover" />
       </view>
       <view class="operation-area">
-        <img :src="testData.operationIcon" style="width: 35px; height: 35px" />
-        <view>{{ testData.operationText }}</view>
+        <wd-button type="success">出发</wd-button>
       </view>
     </view>
   </view>
@@ -36,9 +35,9 @@ onLoad((options) => {})
 const testData = {
   pageId: 1,
   interId: 2,
-  imgUrl: 'http://115.159.83.61:9000/journey2/daoru1.png',
+  imgUrl: 'http://115.159.83.61:9000/common/daolanStart.png',
   textContent: '',
-  navbarTitle: '第二站 : 导览',
+  navbarTitle: '第二站 : 导入',
   operationIcon: 'http://115.159.83.61:9000/common/next.png',
   operationText: '下一页',
 }
