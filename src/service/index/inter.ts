@@ -21,15 +21,32 @@ export interface ISubmitInter {
   answers: string
 }
 
+type IInterPageReturn = {
+  interId: number
+  recordId: number
+  interPages: Array<IInterPage>
+}
+
+type IInterPage = {
+  pageId: number
+  interId: number
+  imgUrl: string
+  textContent: string
+  navbarTitle: string
+  operationIcon: string
+  operationText: string
+  specialPage: string
+}
+
 /** POST 请求 */
 export const getQuestionByInterId = (interId: number) => {
   return http.post<IQuestionItem[]>(`/inter/getAllQuestions?interId=${interId}`, {}, {})
 }
 
 export const startInter = (startInter: IStartInter) => {
-  return http.post<null>(`/inter/startInter`, startInter, {})
+  return http.post<IInterPageReturn>(`/inter/startInter`, startInter, {})
 }
 
 export const submitInter = (submitInter: ISubmitInter) => {
-  return http.post<null>(`/inter/submitInter`, submitInter, {})
+  return http.post(`/inter/submitInter`, submitInter, {})
 }

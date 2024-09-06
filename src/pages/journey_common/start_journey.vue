@@ -31,7 +31,17 @@
 </template>
 
 <script lang="ts" setup>
+import { startInter, IStartInter } from '@/service/index/inter'
+import { getFormattedDate } from '@/utils/getTime'
+import { useUserStore } from '@/store/user'
+import { useInterStore } from '@/store/inter'
+import { useMessage, useToast } from 'wot-design-uni'
+
+const userStore = useUserStore()
+const interStore = useInterStore()
 const progress = ref<number>()
+const toast = useToast()
+
 onLoad((options) => {
   const numberStr = options.progress
   progress.value = Number(decodeURIComponent(numberStr))
@@ -85,13 +95,24 @@ const pageContent = ref([
     ],
   },
 ])
-const startJourney = () => {
-  uni.navigateTo({
-    url: '/pages/journey_common/common',
-  })
-  // uni.navigateTo({
-  //   url: '/pages/journey2/daoru2',
-  // })
+const startJourney = async () => {
+  const startObj: IStartInter = {
+    userId: userStore.userInfo.userId,
+    interId: progress.value,
+    startTime: getFormattedDate(),
+  }
+  toast.loading('马上开始...')
+  const res = await startInter(startObj)
+  console.log(res)
+  toast.close()
+  if (res.code === 200) {
+    interStore.setInterInfo(res.data)
+    uni.navigateTo({
+      url: '/pages/journey_common/common',
+    })
+  } else {
+    toast.error('出现了一些问题')
+  }
 }
 </script>
 

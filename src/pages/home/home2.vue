@@ -74,7 +74,7 @@
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
 import { getUserInfo, User } from '@/service/index/user'
-import { startInter, IStartInter } from '@/service/index/questions'
+import { startInter, IStartInter } from '@/service/index/inter'
 import { getFormattedDate } from '@/utils/getTime'
 import { useUserStore } from '@/store/user'
 import tabbar from '@/pages/tabbar/tabbar.vue'

@@ -19,7 +19,7 @@
     <view class="main-container">
       <view style="height: 15%"></view>
       <view class="middle-img">
-        <img :src="testData.imgUrl" style="width: 100%; height: 100%; object-fit: cover" />
+        <image :src="testData.imgUrl" mode="aspectFit" style="width: 100%" />
       </view>
       <view class="operation-area">
         <wd-button type="success">出发</wd-button>

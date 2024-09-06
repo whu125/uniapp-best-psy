@@ -11,7 +11,7 @@
     <wd-navbar
       fixed
       safeAreaInsetTop
-      :title="testData.navbarTitle"
+      :title="pageContent.navbarTitle"
       left-arrow
       @click-left="ToHome"
     ></wd-navbar>
@@ -19,37 +19,49 @@
     <view class="main-container">
       <view style="height: 15%"></view>
       <view class="middle-img">
-        <img :src="testData.imgUrl" style="width: 100%" />
+        <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
       </view>
       <view class="operation-area">
-        <img :src="testData.operationIcon" style="width: 35px; height: 35px" />
-        <view>{{ testData.operationText }}</view>
+        <view @click="doOperation">
+          <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
+          <view style="font-size: 18px">{{ pageContent.operationText }}</view>
+        </view>
       </view>
     </view>
   </view>
 </template>
 
 <script lang="ts" setup>
+import { IInterPage, useInterStore } from '@/store/inter'
 const progress = ref<number>()
-onLoad((options) => {})
+const interStore = useInterStore()
+const pageContent = ref<IInterPage>()
 
-const testData = {
-  pageId: 1,
-  interId: 2,
-<<<<<<< HEAD
-  imgUrl: 'http://115.159.83.61:9000/journey2/daoru1.png',
-=======
-  imgUrl: 'http://115.159.83.61:9000/journey2/daoru2.png',
->>>>>>> 31cf17a6bf70eff36621abb0618da4b7b19aba3c
-  textContent: '',
-  navbarTitle: '第二站 : 导览',
-  operationIcon: 'http://115.159.83.61:9000/common/next.png',
-  operationText: '下一页',
-}
+onLoad((options) => {
+  const index = interStore.pageIndex
+  pageContent.value = interStore.interInfo.interPages[index]
+})
+
 const ToHome = () => {
   uni.switchTab({ url: '/pages/home/home' })
 }
-const navbarTitle = ref<string>('')
+
+const doOperation = async () => {
+  const res = await interStore.addPageIndex()
+  if (res === 'pageEnd') {
+    return
+  }
+  if (pageContent.value.specialPage === 'none') {
+    uni.navigateTo({
+      url: '/pages/journey_common/common',
+    })
+  } else {
+    const specialPage = pageContent.value.specialPage
+    uni.navigateTo({
+      url: specialPage,
+    })
+  }
+}
 </script>
 
 <style>

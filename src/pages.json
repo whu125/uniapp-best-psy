@@ -226,22 +226,6 @@
         "navigationStyle": "custom",
         "navigationBarTitleText": "工具箱"
       }
-    },
-    {
-      "path": "pages/1/daoru/1",
-      "type": "page",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "导览"
-      }
-    },
-    {
-      "path": "pages/1/daoru/2",
-      "type": "page",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "导览"
-      }
     }
   ],
   "subPackages": []

@@ -76,7 +76,7 @@ import {
   IQuestionItem,
   submitInter,
   ISubmitInter,
-} from '@/service/index/questions'
+} from '@/service/index/inter'
 import { getFormattedDate } from '@/utils/getTime'
 import { useUserStore } from '@/store/user'
 import { useInterStore } from '@/store/inter'

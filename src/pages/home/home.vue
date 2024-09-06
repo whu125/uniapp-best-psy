@@ -20,15 +20,17 @@
       <view class="card" v-for="(journey, index) in journeySteps" :key="index">
         <img class="card-icon" :src="journey.icon" />
         <view class="card-text">{{ journey.text }}</view>
-        <img
-          class="card-lock"
+        <image
+          style="width: 30px"
+          mode="aspectFit"
           src="../../static/images/home/startJourney.png"
           v-show="currProgress >= journey.progress"
           @click="enterJourney(journey.progress)"
         />
-        <img
-          class="card-lock"
+        <image
+          style="width: 30px"
           src="../../static/images/home/lockJourney.png"
+          mode="aspectFit"
           v-show="currProgress < journey.progress"
         />
       </view>
@@ -40,9 +42,10 @@
 import PLATFORM from '@/utils/platform'
 import { getUserInfo, User } from '@/service/index/user'
 import tabbar from '@/pages/tabbar/tabbar.vue'
-import { startInter, IStartInter } from '@/service/index/questions'
+import { startInter, IStartInter } from '@/service/index/inter'
 import { getFormattedDate } from '@/utils/getTime'
 import { useUserStore } from '@/store/user'
+import { useInterStore } from '@/store/inter'
 
 defineOptions({
   name: 'Home',
@@ -53,9 +56,10 @@ uni.hideTabBar()
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const userStore = useUserStore()
-const userInfo = userStore.userInfo
+const interStore = useInterStore()
 
 const currProgress = ref<number>(2)
+// const currProgress = ref<number>(userInfo.currProgress)
 
 const journeySteps = ref([
   { icon: '../../static/images/home/journey0.png', text: '导入：开启你的旅程', progress: 0 },
@@ -70,8 +74,9 @@ const journeySteps = ref([
 // 测试 uni API 自动引入
 onLoad(() => {})
 
-const enterJourney = (progress: number) => {
+const enterJourney = async (progress: number) => {
   const numberStr = progress.toString()
+  await interStore.resetIndex()
   uni.navigateTo({
     url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
   })
@@ -132,10 +137,6 @@ const enterJourney = (progress: number) => {
 }
 .card-text {
   flex: 1;
-}
-.card-lock {
-  width: 30px;
-  height: 30px;
 }
 .intro-card {
   background-color: #e6f7ff;

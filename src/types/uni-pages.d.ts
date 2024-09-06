@@ -27,9 +27,7 @@ interface NavigateToOptions {
        "/pages/record/record" |
        "/pages/tabbar/tabbar" |
        "/pages/test2/test2" |
-       "/pages/tool/tool" |
-       "/pages/1/daoru/1" |
-       "/pages/1/daoru/2";
+       "/pages/tool/tool";
 }
 interface RedirectToOptions extends NavigateToOptions {}
 
