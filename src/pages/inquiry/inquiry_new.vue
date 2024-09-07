@@ -16,12 +16,32 @@
     <wd-navbar title="问卷" left-arrow @click-left="ToHome()"></wd-navbar>
 
     <view class="mt-4">
-      <wd-progress :percentage="30" />
+      <wd-progress :percentage="curPer" />
     </view>
-    <view>
-      <view>
-        <h2>这里是放问题</h2>
+
+    <!-- 问题 -->
+    <view class="question">
+      <text>{{ questions[curId - 1]?.question }}</text>
+    </view>
+
+    <!-- 选项列表 -->
+    <view class="options">
+      <wd-radio-group v-model="answers[curId - 1]" cell>
+        <view class="option" v-for="option in questions[curId - 1]?.options" :key="option.score">
+          <wd-radio :value="option.score">{{ option.text }}</wd-radio>
+        </view>
+      </wd-radio-group>
+    </view>
+
+    <!-- 底部按钮 -->
+    <view class="bottom-btn">
+      <!-- <view class="circle">
+        <text class="arrow"></text>
       </view>
+      <text>上一题</text> -->
+      <wd-button @click="changeLast" v-if="curId != 1">上一题</wd-button>
+      <wd-button @click="changeNext" v-if="curId != queLen">下一题</wd-button>
+      <wd-button @click="changeNext" v-if="(curId = queLen)">提交</wd-button>
     </view>
   </view>
 </template>
@@ -42,21 +62,29 @@ const userStore = useUserStore()
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const systemInfo = uni.getSystemInfoSync()
 const contentHeight = systemInfo.windowHeight - safeAreaInsets.top - 100
+
+const queLen = ref()
+const curId = ref(1)
+const curPer = ref(0)
+watch(curId, (newVal) => {
+  curPer.value = parseInt(((newVal / queLen.value) * 100).toFixed(0))
+})
+
 onLoad(async (param) => {
-  //   position.value = param.position
-  //   console.log(position.value)
-  //   console.log('请求getInquiryByPos')
-  //   const res = await getInquiryByPos('2-pre')
-  //   console.log(res)
-  //   questions.value = res.data
-  //   questions.value.forEach((item) => {
-  //     item.options = JSON.parse(item.options)
-  //     console.log(item)
-  //     if (item.groupIndex == curGroup.value) {
-  //       pageQuestions.value.push(item)
-  //     }
-  //   })
-  //   console.log(questions.value)
+  position.value = param.position
+  console.log(position.value)
+  console.log('请求getInquiryByPos')
+  const res = await getInquiryByPos('2-pre')
+  questions.value = res.data
+  questions.value.forEach((item) => {
+    item.options = JSON.parse(item.options)
+    if (item.groupIndex == curGroup.value) {
+      pageQuestions.value.push(item)
+    }
+  })
+  console.log(questions.value)
+  queLen.value = questions.value.length
+  curPer.value = parseInt(((curId.value / queLen.value) * 100).toFixed(0))
 })
 
 const ToHome = () => {
@@ -74,25 +102,12 @@ const questions = ref([])
 const pageQuestions = ref([])
 
 const changeNext = () => {
-  curGroup.value++
-  pageQuestions.value = []
-  questions.value.forEach((item) => {
-    if (item.groupIndex == curGroup.value) {
-      pageQuestions.value.push(item)
-    }
-  })
-  islastFlag.value = true
+  curId.value++
 }
 
 const changeLast = () => {
-  curGroup.value--
-  pageQuestions.value = []
-  questions.value.forEach((item) => {
-    if (item.groupIndex == curGroup.value) {
-      pageQuestions.value.push(item)
-    }
-  })
-  islastFlag.value = false
+  curId.value = curId.value - 1
+  console.log(curId.value)
 }
 // const formData = ref<InquiryResultArray>([
 //   { userId: '1', inquiryId: 1, position: '2-pre', score: 0 },
@@ -126,5 +141,72 @@ const submit = async () => {
 <style>
 .main-title-color {
   color: #d14328;
+}
+
+.back {
+  margin-right: 10px;
+  font-size: 24px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.progress-bar {
+  height: 10px;
+  margin-bottom: 5px;
+  overflow: hidden;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+}
+
+.progress {
+  height: 100%;
+  background-color: #007aff;
+}
+
+.progress-text {
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #888;
+  text-align: right;
+}
+
+.question {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.options {
+  margin-bottom: 30px;
+}
+
+.option {
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.bottom-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border: 2px solid #000;
+  border-radius: 50%;
+}
+
+.arrow {
+  font-size: 20px;
 }
 </style>
