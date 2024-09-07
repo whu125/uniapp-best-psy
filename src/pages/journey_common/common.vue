@@ -7,7 +7,7 @@
 }
 </route>
 <template>
-  <view class="" w-full h-full>
+  <view class="" w-full h-full v-if="pageContent">
     <wd-navbar
       fixed
       safeAreaInsetTop
@@ -16,7 +16,7 @@
       @click-left="ToHome"
     ></wd-navbar>
 
-    <view class="main-container">
+    <view class="main-container" v-if="pageContent">
       <view style="height: 15%"></view>
       <view class="middle-img">
         <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
@@ -40,6 +40,7 @@ const pageContent = ref<IInterPage>()
 onLoad((options) => {
   const index = interStore.pageIndex
   pageContent.value = interStore.interInfo.interPages[index]
+  console.log('pageContent.value', pageContent.value)
 })
 
 const ToHome = () => {

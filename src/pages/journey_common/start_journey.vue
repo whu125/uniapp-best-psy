@@ -16,10 +16,11 @@
       @click-left="ToHome"
     ></wd-navbar>
 
-    <view class="main-container">
+    <view class="main-container" v-if="currContent">
       <view class="card">
         <image class="illustration" :src="imageMap.get(progress)" mode="aspectFit"></image>
         <view class="title">{{ currContent.title }}</view>
+
         <view class="questions" v-for="(question, index) in currContent.questions" :key="index">
           <view class="question">{{ question }}</view>
         </view>
@@ -42,10 +43,17 @@ const interStore = useInterStore()
 const progress = ref<number>()
 const toast = useToast()
 
+// onMounted(() => {
+//   currContent.value = pageContent.value[progress.value]
+// })
+
 onLoad((options) => {
   const numberStr = options.progress
   progress.value = Number(decodeURIComponent(numberStr))
+
   currContent.value = pageContent.value[progress.value]
+
+  console.log('currContent', currContent.value)
 })
 
 const ToHome = () => {
