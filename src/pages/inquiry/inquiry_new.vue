@@ -8,40 +8,42 @@
 </route>
 <template>
   <view
-    class="bg-white overflow-hidden pt-2 px-4"
+    class="overflow-hidden pt-2 px-4"
     :style="{ marginTop: safeAreaInsets?.top + 'px' }"
     w-full
     h-full
   >
     <wd-navbar title="问卷" left-arrow @click-left="ToHome()"></wd-navbar>
 
-    <view class="mt-4">
-      <wd-progress :percentage="curPer" />
-    </view>
+    <view class="con">
+      <view class="mt-4">
+        <wd-progress :percentage="curPer" />
+      </view>
 
-    <!-- 问题 -->
-    <view class="question">
-      <text>{{ questions[curId - 1]?.question }}</text>
-    </view>
+      <!-- 问题 -->
+      <view class="question">
+        <text>{{ questions[curId - 1]?.question }}</text>
+      </view>
 
-    <!-- 选项列表 -->
-    <view class="options">
-      <wd-radio-group v-model="answers[curId - 1]" cell>
-        <view class="option" v-for="option in questions[curId - 1]?.options" :key="option.score">
-          <wd-radio :value="option.score">{{ option.text }}</wd-radio>
-        </view>
-      </wd-radio-group>
-    </view>
+      <!-- 选项列表 -->
+      <view class="options">
+        <wd-radio-group v-model="answers[curId - 1]" cell>
+          <view class="option" v-for="option in questions[curId - 1]?.options" :key="option.score">
+            <wd-radio :value="option.score">{{ option.text }}</wd-radio>
+          </view>
+        </wd-radio-group>
+      </view>
 
-    <!-- 底部按钮 -->
-    <view class="bottom-btn">
-      <!-- <view class="circle">
+      <!-- 底部按钮 -->
+      <view class="bottom-btn">
+        <!-- <view class="circle">
         <text class="arrow"></text>
       </view>
       <text>上一题</text> -->
-      <wd-button @click="changeLast" v-if="curId != 1">上一题</wd-button>
-      <wd-button @click="changeNext" v-if="curId != queLen">下一题</wd-button>
-      <wd-button @click="changeNext" v-if="(curId = queLen)">提交</wd-button>
+        <wd-button @click="changeLast" v-if="curId != 1">上一题</wd-button>
+        <wd-button @click="changeNext" v-if="curId != queLen">下一题</wd-button>
+        <wd-button @click="changeNext" v-if="(curId = queLen)">提交</wd-button>
+      </view>
     </view>
   </view>
 </template>
@@ -139,6 +141,10 @@ const submit = async () => {
 </script>
 
 <style>
+.con {
+  background: linear-gradient(to bottom right, #e6f7ff, #e6ffe6);
+}
+
 .main-title-color {
   color: #d14328;
 }

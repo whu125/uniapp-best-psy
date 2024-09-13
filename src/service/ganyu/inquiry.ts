@@ -14,7 +14,7 @@ export interface InquiryItem {
 }
 
 export interface InquiryResultItem {
-  userId: string
+  //   userId: string
   inquiryId: number
   position: string
   score: number
