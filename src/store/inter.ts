@@ -55,6 +55,7 @@ export const useInterStore = defineStore(
     const addPageIndex = () => {
       if (pageIndex.value < pageCount.value - 1) {
         pageIndex.value = pageIndex.value + 1
+        console.log(pageIndex.value)
       } else {
         return 'pageEnd'
       }

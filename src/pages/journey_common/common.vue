@@ -21,7 +21,7 @@
       <view class="middle-img">
         <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
       </view>
-      <view class="operation-area">
+      <view class="operation-area" v-if="haveBottom">
         <view @click="doOperation">
           <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
           <view style="font-size: 18px">{{ pageContent.operationText }}</view>
@@ -36,8 +36,11 @@ import { IInterPage, useInterStore } from '@/store/inter'
 const progress = ref<number>()
 const interStore = useInterStore()
 const pageContent = ref<IInterPage>()
+const haveBottom = computed(() => {
+  return pageContent.value.operationIcon !== null && pageContent.value.operationText !== null
+})
 
-onLoad((options) => {
+onShow((options) => {
   const index = interStore.pageIndex
   pageContent.value = interStore.interInfo.interPages[index]
   console.log('pageContent.value', pageContent.value)
@@ -48,10 +51,17 @@ const ToHome = () => {
 }
 
 const doOperation = async () => {
+  if (pageContent.value.operationIcon.endsWith('back.png')) {
+    uni.navigateBack()
+    return
+  }
+
   const res = await interStore.addPageIndex()
+  console.log(interStore.pageIndex)
   if (res === 'pageEnd') {
     return
   }
+
   if (pageContent.value.specialPage === 'none') {
     uni.navigateTo({
       url: '/pages/journey_common/common',

@@ -10,12 +10,13 @@ interface NavigateToOptions {
        "/pages/feeling/feeling" |
        "/pages/ganyu/ganyu" |
        "/pages/ganyu/ganyu_temp" |
-       "/pages/home/home2" |
        "/pages/inquiry/inquiry" |
        "/pages/inquiry/inquiry_new" |
        "/pages/inquiry/start" |
+       "/pages/journey2/daolan1" |
        "/pages/journey2/daoru2" |
        "/pages/journey_common/common" |
+       "/pages/journey_common/daolanHome" |
        "/pages/journey_common/daolanStart" |
        "/pages/journey_common/start_journey" |
        "/pages/login/login" |
