@@ -44,7 +44,12 @@
 
 <script lang="ts" setup>
 import { IInterPage, useInterStore } from '@/store/inter'
+import { useGlobalPageControlStore } from '@/store/globalPageControl'
+import { useToast } from 'wot-design-uni'
+
 const interStore = useInterStore()
+const globalPageControlStore = useGlobalPageControlStore()
+const toast = useToast()
 
 onShow((options) => {})
 
@@ -53,9 +58,9 @@ const ToHome = () => {
 }
 
 const toFirstStep = async () => {
-  const res = await interStore.addPageIndex()
-  if (res === 'pageEnd') {
-    return
+  if (globalPageControlStore.globalPageControlInfo.isFirstStepFinished === false) {
+    interStore.pageIndex = 7
+    globalPageControlStore.globalPageControlInfo.isFirstStepFinished = true
   }
   uni.navigateTo({
     url: '/pages/journey_common/common',
@@ -63,13 +68,16 @@ const toFirstStep = async () => {
 }
 
 const toSecondStep = async () => {
-  const res = await interStore.addPageIndex()
-  if (res === 'pageEnd') {
-    return
+  if (globalPageControlStore.globalPageControlInfo.isSecondStepFinished === false) {
+    interStore.pageIndex = 8
   }
-  uni.navigateTo({
-    url: '/pages/journey_common/common',
-  })
+  if (globalPageControlStore.globalPageControlInfo.isFirstStepFinished === true) {
+    uni.navigateTo({
+      url: '/pages/journey_common/common',
+    })
+  } else {
+    toast.warning('请先查看第一步')
+  }
 }
 </script>
 

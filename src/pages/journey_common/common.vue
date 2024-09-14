@@ -89,7 +89,7 @@ const doOperation = async () => {
 
 .middle-img {
   width: 100%;
-  height: 60%;
+  height: 55%;
   overflow-y: scroll;
 }
 
@@ -99,6 +99,6 @@ const doOperation = async () => {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 25%;
+  height: 30%;
 }
 </style>
