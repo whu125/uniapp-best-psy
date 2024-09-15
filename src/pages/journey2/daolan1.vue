@@ -59,20 +59,18 @@ const ToHome = () => {
 
 const toFirstStep = async () => {
   if (globalPageControlStore.globalPageControlInfo.isFirstStepFinished === false) {
-    interStore.pageIndex = 7
     globalPageControlStore.globalPageControlInfo.isFirstStepFinished = true
   }
+  await interStore.setPageIndex(7)
   uni.navigateTo({
     url: '/pages/journey_common/common',
   })
 }
 
 const toSecondStep = async () => {
-  if (globalPageControlStore.globalPageControlInfo.isSecondStepFinished === false) {
-    interStore.pageIndex = 8
-  }
   if (globalPageControlStore.globalPageControlInfo.isFirstStepFinished === true) {
-    uni.navigateTo({
+    await interStore.setPageIndex(8)
+    uni.redirectTo({
       url: '/pages/journey_common/common',
     })
   } else {

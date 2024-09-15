@@ -18,7 +18,13 @@ export type IInterPage = {
   navbarTitle: string
   operationIcon: string
   operationText: string
+  slideImages: Array<string>
+  inputQuestions: Array<string>
+  inputPlaceholders: Array<string>
+  buttonUrls: Array<string>
+  audioUrls: Array<string>
   specialPage: string
+  pageType: string
 }
 
 type IInterState = {
@@ -61,6 +67,11 @@ export const useInterStore = defineStore(
       }
     }
 
+    const setPageIndex = (index: number) => {
+      pageIndex.value = index
+      console.log(pageIndex.value)
+    }
+
     const resetIndex = () => {
       pageIndex.value = 0
     }
@@ -69,6 +80,7 @@ export const useInterStore = defineStore(
       interInfo,
       setInterInfo,
       clearInternfo,
+      setPageIndex,
       pageCount,
       reset,
       pageIndex,

@@ -80,7 +80,7 @@ const submitInput = async () => {
   if (res === 'pageEnd') {
     return
   }
-  uni.navigateTo({
+  uni.redirectTo({
     url: '/pages/journey_common/common',
   })
 }

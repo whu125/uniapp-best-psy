@@ -14,6 +14,7 @@ interface NavigateToOptions {
        "/pages/inquiry/inquiry_new" |
        "/pages/inquiry/start" |
        "/pages/journey2/daolan1" |
+       "/pages/journey2/daolan2" |
        "/pages/journey2/daoru2" |
        "/pages/journey_common/common" |
        "/pages/journey_common/daolanHome" |

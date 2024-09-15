@@ -115,7 +115,7 @@ const startJourney = async () => {
   toast.close()
   if (res.code === 200) {
     interStore.setInterInfo(res.data)
-    uni.navigateTo({
+    uni.redirectTo({
       url: '/pages/journey_common/common',
     })
   } else {

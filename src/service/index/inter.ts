@@ -35,7 +35,13 @@ type IInterPage = {
   navbarTitle: string
   operationIcon: string
   operationText: string
+  slideImages: Array<string>
+  inputQuestions: Array<string>
+  inputPlaceholders: Array<string>
+  buttonUrls: Array<string>
+  audioUrls: Array<string>
   specialPage: string
+  pageType: string
 }
 
 /** POST 请求 */
