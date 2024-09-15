@@ -67,6 +67,10 @@ export const useInterStore = defineStore(
       }
     }
 
+    const minusPageIndex = () => {
+      pageIndex.value = pageIndex.value - 1
+    }
+
     const setPageIndex = (index: number) => {
       pageIndex.value = index
       console.log(pageIndex.value)
@@ -85,6 +89,7 @@ export const useInterStore = defineStore(
       reset,
       pageIndex,
       addPageIndex,
+      minusPageIndex,
       resetIndex,
     }
   },

@@ -18,14 +18,15 @@
 
     <!-- 普通页面 -->
     <view class="main-container" v-if="pageType === 'normal'">
-      <view style="height: 15%"></view>
+      <view style="height: 10%"></view>
       <view class="middle-img-common">
         <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
       </view>
-      <view class="operation-area">
-        <view @click="doOperation">
-          <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
-          <view style="width: 100%; font-size: 18px">{{ pageContent.operationText }}</view>
+
+      <view @click="doOperation" class="operation-area">
+        <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
+        <view style="width: 100%; font-size: 18px; text-align: center">
+          {{ pageContent.operationText }}
         </view>
       </view>
     </view>
@@ -37,19 +38,34 @@
         <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
       </view>
       <view class="input-area">
-        <view
-          style="margin-top: 15px"
-          v-for="(placeholder, index) in pageContent.inputPlaceholders"
-          :key="index"
-        >
-          <view>{{ pageContent.inputQuestions[index] }}</view>
-          <wd-input type="text" :placeholder="placeholder" />
+        <view v-for="(placeholder, index) in pageContent.inputPlaceholders" :key="index">
+          <view>
+            {{ pageContent.inputQuestions[index] }}
+          </view>
+          <view style="margin-top: 15px">
+            <wd-input type="text" v-model="value1" :placeholder="placeholder" />
+          </view>
         </view>
       </view>
-      <view class="operation-area">
-        <view @click="doOperation">
-          <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
-          <view style="width: 100%; font-size: 18px">{{ pageContent.operationText }}</view>
+      <view @click="doOperation" class="operation-area">
+        <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
+        <view style="width: 100%; font-size: 18px; text-align: center">
+          {{ pageContent.operationText }}
+        </view>
+      </view>
+    </view>
+
+    <!-- 按钮选择页面 -->
+    <view class="main-container" v-if="pageType === 'button'">
+      <view style="height: 10%"></view>
+      <view class="middle-img-button">
+        <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%; margin: 0 auto" />
+      </view>
+      <view class="button-area">
+        <view v-for="(buttonUrl, index) in pageContent.buttonUrls" :key="index">
+          <view style="width: 90%; height: auto; margin: 15px 0 0 15px">
+            <image :src="buttonUrl" mode="widthFix" @click="toPage(buttonUrl)" />
+          </view>
         </view>
       </view>
     </view>
@@ -67,14 +83,15 @@
           v-model:current="currentSlideImage"
           :indicator="{ showControls: true }"
           :loop="false"
+          imageMode="aspectFit"
           @click="handleSlideClick"
           @change="onSlideChange"
         ></wd-swiper>
       </view>
-      <view class="operation-area">
-        <view @click="doOperation">
-          <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
-          <view style="width: 100%; font-size: 18px">{{ pageContent.operationText }}</view>
+      <view @click="doOperation" class="operation-area">
+        <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
+        <view style="width: 100%; font-size: 18px; text-align: center">
+          {{ pageContent.operationText }}
         </view>
       </view>
     </view>
@@ -83,11 +100,16 @@
 
 <script lang="ts" setup>
 import { IInterPage, useInterStore } from '@/store/inter'
+import { useGlobalPageControlStore } from '@/store/globalPageControl'
+import { useToast } from 'wot-design-uni'
 const interStore = useInterStore()
+const globalPageControlStore = useGlobalPageControlStore()
+const toast = useToast()
 
 const pageType = ref<string>('normal')
 const pageContent = ref<IInterPage>()
 const currentSlideImage = ref<number>(0)
+const value1 = ref<string>()
 
 onShow(() => {
   const index = interStore.pageIndex
@@ -103,14 +125,34 @@ const ToHome = () => {
 const handleSlideClick = (e) => {
   console.log(e)
 }
+
 const onSlideChange = (e) => {
   console.log(e)
 }
 
+const toPage = (buttonUrl: string) => {
+  if (buttonUrl === 'http://115.159.83.61:9000/journey2/daolan3.png') {
+    interStore.setPageIndex(7)
+    globalPageControlStore.globalPageControlInfo.isFirstStepFinished = true
+  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/daolan4.png') {
+    if (globalPageControlStore.globalPageControlInfo.isFirstStepFinished === false) {
+      toast.warning('请先查看第一步')
+    } else {
+      interStore.setPageIndex(8)
+    }
+  }
+  uni.redirectTo({
+    url: '/pages/journey_common/common',
+  })
+}
+
 const doOperation = async () => {
-  console.log(123)
   if (pageContent.value.operationIcon.endsWith('back.png')) {
-    uni.navigateBack()
+    await interStore.minusPageIndex()
+    uni.redirectTo({
+      url: '/pages/journey_common/common',
+    })
+    return
   }
 
   const res = await interStore.addPageIndex()
@@ -119,7 +161,7 @@ const doOperation = async () => {
     return
   }
 
-  if (pageContent.value.specialPage === 'none') {
+  if (pageContent.value.specialPage === null) {
     uni.redirectTo({
       url: '/pages/journey_common/common',
     })
@@ -146,18 +188,31 @@ const doOperation = async () => {
 .middle-img-common {
   width: 100%;
   height: 60%;
-  overflow-y: scroll;
 }
 
 .middle-img-input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 40%;
+  padding: 10px;
+}
+
+.middle-img-button {
+  box-sizing: border-box;
   width: 100%;
   height: 30%;
-  overflow-y: scroll;
+  padding: 10px;
 }
 
 .input-area {
   width: 100%;
   height: 30%;
+  overflow-y: scroll;
+}
+
+.button-area {
+  width: 100%;
+  height: 55%;
   overflow-y: scroll;
 }
 
@@ -167,6 +222,6 @@ const doOperation = async () => {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 25%;
+  height: 20%;
 }
 </style>

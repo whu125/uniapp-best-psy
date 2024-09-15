@@ -32,6 +32,7 @@
         :indicator="{ showControls: true }"
         :loop="false"
         @click="handleClick"
+        imageMode="aspectFit"
         @change="onChange"
       ></wd-swiper>
       <!-- <view @click="nextPage" class="bottom-area">
@@ -52,7 +53,7 @@ const ToHome = () => {
 const current = ref<number>(0)
 
 const swiperList = ref([
-  'http://115.159.83.61:9000/journey2/daolan12.png',
+  'http://115.159.83.61:9000/journey2/daolan2.png',
   'http://115.159.83.61:9000/journey2/daolan10.png',
   'http://115.159.83.61:9000/journey2/daolan11.png',
   'http://115.159.83.61:9000/journey2/daolan9.png',

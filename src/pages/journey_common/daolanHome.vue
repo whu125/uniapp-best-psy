@@ -97,7 +97,7 @@ const startJourney = async () => {
   }
   if (currContent.value.navbarTitle === '第二站: 导览') {
     uni.navigateTo({
-      url: '/pages/journey2/daolan1',
+      url: '/pages/journey_common/common',
     })
   }
 }
