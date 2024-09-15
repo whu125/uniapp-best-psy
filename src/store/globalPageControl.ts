@@ -2,13 +2,14 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 const initState = {
-  isFirstStepFinished: false,
-  isSecondStepFinished: false,
+  firstStepPage6_2: false,
+  firstStepPage15_2: false,
 }
 
+// 命名规则: xxxStepPage(page_id)_(inter_id)
 type IGlobalPageState = {
-  isFirstStepFinished: boolean
-  isSecondStepFinished: boolean
+  firstStepPage6_2: boolean
+  firstStepPage15_2: boolean
 }
 
 export const useGlobalPageControlStore = defineStore(

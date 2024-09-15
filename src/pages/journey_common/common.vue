@@ -33,17 +33,22 @@
 
     <!-- 输入页面 -->
     <view class="main-container" v-if="pageType === 'input'">
-      <view style="height: 15%"></view>
+      <view style="height: 10%"></view>
       <view class="middle-img-input">
         <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
       </view>
       <view class="input-area">
         <view v-for="(placeholder, index) in pageContent.inputPlaceholders" :key="index">
-          <view>
+          <view style="margin-top: 15px">
             {{ pageContent.inputQuestions[index] }}
           </view>
-          <view style="margin-top: 15px">
-            <wd-input type="text" v-model="value1" :placeholder="placeholder" />
+          <view style="margin-top: 5px">
+            <wd-input
+              type="text"
+              :placeholder="placeholder"
+              v-model="userInputList[index]"
+              @change="userInputChange({ index, userInput: userInputList[index] })"
+            />
           </view>
         </view>
       </view>
@@ -109,7 +114,7 @@ const toast = useToast()
 const pageType = ref<string>('normal')
 const pageContent = ref<IInterPage>()
 const currentSlideImage = ref<number>(0)
-const value1 = ref<string>()
+const userInputList = ref<Array<string>>([])
 
 onShow(() => {
   const index = interStore.pageIndex
@@ -130,15 +135,31 @@ const onSlideChange = (e) => {
   console.log(e)
 }
 
+const userInputChange = (event) => {
+  console.log(event)
+}
+
 const toPage = (buttonUrl: string) => {
+  // botton 页面的跳转逻辑 根据按钮的图片名称判断需要跳转到哪个页面
   if (buttonUrl === 'http://115.159.83.61:9000/journey2/daolan3.png') {
     interStore.setPageIndex(7)
-    globalPageControlStore.globalPageControlInfo.isFirstStepFinished = true
+    globalPageControlStore.globalPageControlInfo.firstStepPage6_2 = true
   } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/daolan4.png') {
-    if (globalPageControlStore.globalPageControlInfo.isFirstStepFinished === false) {
+    if (globalPageControlStore.globalPageControlInfo.firstStepPage6_2 === false) {
       toast.warning('请先查看第一步')
+      return
     } else {
       interStore.setPageIndex(8)
+    }
+  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/daolan15.png') {
+    interStore.setPageIndex(16)
+    globalPageControlStore.globalPageControlInfo.firstStepPage15_2 = true
+  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/daolan16.png') {
+    if (globalPageControlStore.globalPageControlInfo.firstStepPage15_2 === false) {
+      toast.warning('请先查看第一步')
+      return
+    } else {
+      interStore.setPageIndex(18)
     }
   }
   uni.redirectTo({
@@ -147,25 +168,58 @@ const toPage = (buttonUrl: string) => {
 }
 
 const doOperation = async () => {
+  // 如果用户点击的是返回按钮 需要判断当前是什么页面以跳转回原 button 页面
   if (pageContent.value.operationIcon.endsWith('back.png')) {
-    await interStore.minusPageIndex()
+    if (pageContent.value.pageId === 7 && pageContent.value.interId === 2) {
+      await interStore.setPageIndex(6)
+    } else if (pageContent.value.pageId === 17 && pageContent.value.interId === 2) {
+      await interStore.setPageIndex(15)
+    }
     uni.redirectTo({
       url: '/pages/journey_common/common',
     })
     return
   }
 
+  // 如果是 input 页面 保存用户输入到pinia
+  if (pageContent.value.pageType === 'input') {
+    let inputContent = ''
+    for (let i = 0; i < userInputList.value.length; i++) {
+      inputContent = inputContent + userInputList.value[i] + '%'
+    }
+    inputContent = inputContent.slice(0, -1) + '#'
+
+    const inputPage = pageContent.value.pageId + '#'
+
+    let inoutQuestion = ''
+    for (let i = 0; i < pageContent.value.inputPlaceholders.length; i++) {
+      inoutQuestion = inoutQuestion + pageContent.value.inputPlaceholders[i] + '%'
+    }
+    inoutQuestion = inoutQuestion.slice(0, -1) + '#'
+
+    interStore.interInfo.userInputContent = interStore.interInfo.userInputContent + inputContent
+    interStore.interInfo.userInputPages = interStore.interInfo.userInputContent + inputPage
+    interStore.interInfo.userInputQuestions = interStore.interInfo.userInputContent + inoutQuestion
+
+    console.log(inputContent)
+    console.log(inoutQuestion)
+  }
+
+  // pageIndex 自增
   const res = await interStore.addPageIndex()
   console.log(interStore.pageIndex)
+  // 如果是最后一页就不再进行跳转
   if (res === 'pageEnd') {
     return
   }
 
+  // 如果下一页不是跳转到特殊页面(journey通用页面) 就刷新当前页面
   if (pageContent.value.specialPage === null) {
     uni.redirectTo({
       url: '/pages/journey_common/common',
     })
   } else {
+    // 否则跳转到特殊页面
     const specialPage = pageContent.value.specialPage
     uni.redirectTo({
       url: specialPage,
@@ -193,26 +247,26 @@ const doOperation = async () => {
 .middle-img-input {
   box-sizing: border-box;
   width: 100%;
-  height: 40%;
+  height: 30%;
   padding: 10px;
 }
 
 .middle-img-button {
   box-sizing: border-box;
   width: 100%;
-  height: 30%;
+  height: 40%;
   padding: 10px;
 }
 
 .input-area {
   width: 100%;
-  height: 30%;
+  height: 35%;
   overflow-y: scroll;
 }
 
 .button-area {
   width: 100%;
-  height: 55%;
+  height: 50%;
   overflow-y: scroll;
 }
 
