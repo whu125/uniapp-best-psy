@@ -43,12 +43,14 @@
             {{ pageContent.inputQuestions[index] }}
           </view>
           <view style="margin-top: 5px">
-            <wd-input
+            <!-- <wd-input
               type="text"
               :placeholder="placeholder"
               v-model="userInputList[index]"
               @change="userInputChange({ index, userInput: userInputList[index] })"
-            />
+            /> -->
+
+            <wd-textarea v-model="userInputList[index]" :placeholder="placeholder" />
           </view>
         </view>
       </view>
@@ -247,8 +249,9 @@ const doOperation = async () => {
 .middle-img-input {
   box-sizing: border-box;
   width: 100%;
-  height: 30%;
-  padding: 10px;
+  height: 50%;
+  margin-top: 50rpx;
+  /* padding: 10px; */
 }
 
 .middle-img-button {
@@ -259,7 +262,7 @@ const doOperation = async () => {
 }
 
 .input-area {
-  width: 100%;
+  width: 90%;
   height: 35%;
   overflow-y: scroll;
 }
