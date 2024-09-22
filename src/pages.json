@@ -104,14 +104,6 @@
       }
     },
     {
-      "path": "pages/inquiry/inquiry_new",
-      "type": "page",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "干预测试"
-      }
-    },
-    {
       "path": "pages/inquiry/start",
       "type": "page",
       "style": {

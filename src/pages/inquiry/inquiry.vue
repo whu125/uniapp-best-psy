@@ -7,26 +7,23 @@
 }
 </route>
 <template>
-  <view
-    class="overflow-hidden pt-2 px-4"
-    :style="{ marginTop: safeAreaInsets?.top + 'px' }"
-    w-full
-    h-full
-  >
-    <wd-navbar title="问卷" left-arrow @click-left="ToHome()"></wd-navbar>
+  <view class="" w-full h-full>
+    <wd-navbar fixed safeAreaInsetTop title="问卷" left-arrow @click-left="ToHome"></wd-navbar>
 
-    <view class="con">
+    <view class="con px-2">
+      <view style="height: 10%"></view>
+
       <view class="mt-4">
         <wd-progress :percentage="curPer" />
       </view>
-
       <!-- 问题 -->
       <view class="question">
+        <p v-if="questions[curId - 1]?.subtitle != null">{{ questions[curId - 1]?.subtitle }}</p>
         <text>{{ questions[curId - 1]?.question }}</text>
       </view>
 
       <!-- 选项列表 -->
-      <view class="options" style="background: linear-gradient(to bottom right, #e6f7ff, #e6ffe6)">
+      <!-- <view class="options" style="background: linear-gradient(to bottom right, #e6f7ff, #e6ffe6)">
         <wd-radio-group v-model="answers[curId - 1]" cell>
           <view
             class="option"
@@ -37,6 +34,17 @@
             <wd-radio :value="option.score">{{ option.text }}</wd-radio>
           </view>
         </wd-radio-group>
+      </view> -->
+      <view class="options">
+        <view
+          class="option"
+          v-for="option in questions[curId - 1]?.options"
+          :key="option.score"
+          :class="{ selected: answers[curId - 1] === option.score }"
+          @click="selectOption(option.score)"
+        >
+          {{ option.text }}
+        </view>
       </view>
 
       <!-- 底部按钮 -->
@@ -88,7 +96,7 @@ onLoad(async (param) => {
   interId.value = 1
   console.log(position.value)
   console.log('请求getInquiryByPos')
-  const res = await getInquiryByPos('pre')
+  const res = await getInquiryByPos('1-post')
   toast.close()
   questions.value = res.data
   questions.value.forEach((item) => {
@@ -125,6 +133,11 @@ const changeLast = () => {
   curId.value = curId.value - 1
   console.log(curId.value)
 }
+
+const selectOption = (score: number) => {
+  console.log(score)
+  answers.value[curId.value - 1] = score
+}
 // const formData = ref<InquiryResultArray>([
 //   { userId: '1', inquiryId: 1, position: '2-pre', score: 0 },
 //   { userId: '1', inquiryId: 1, position: '', score: 0 },
@@ -136,25 +149,24 @@ const changeLast = () => {
 const submit = async () => {
   // const answersString = Array.from(answers.value.values()).join(';')
   // console.log(answersString)
+  console.log('anwser', answers.value)
   const formData = ref<InquiryResultArray>([])
-  for (const [inquiryId, score] of Object.entries(answers.value)) {
+
+  for (let i = 0; i < queLen.value; i++) {
     formData.value.push({
       // userId: userStore.userInfo.userId,
-      inquiryId: parseInt(inquiryId),
+      inquiryId: questions.value[i].inquiryId,
       interId: interId.value,
-      score: parseInt(score),
+      score: answers.value[i] || 0,
     })
   }
 
   if (formData.value.length < queLen.value) {
     toast.error('请完成所有题目')
-    // toast.
     return
   }
   console.log(formData.value)
   const res = await submitInquiry(formData.value)
-  console.log(res)
-
   if (res.code === 200) {
     uni.showToast({
       title: '提交成功',
@@ -165,6 +177,35 @@ const submit = async () => {
       },
     })
   }
+
+  // for (const [inquiryId, score] of Object.entries(answers.value)) {
+  //   formData.value.push({
+  //     // userId: userStore.userInfo.userId,
+  //     inquiryId: parseInt(inquiryId),
+  //     interId: interId.value,
+  //     score: parseInt(score),
+  //   })
+  // }
+
+  // if (formData.value.length < queLen.value) {
+  //   toast.error('请完成所有题目')
+  //   // toast.
+  //   return
+  // }
+  // console.log(formData.value)
+  // const res = await submitInquiry(formData.value)
+  // console.log(res)
+
+  // if (res.code === 200) {
+  //   uni.showToast({
+  //     title: '提交成功',
+  //     icon: 'success',
+  //     duration: 2000,
+  //     success: () => {
+  //       uni.switchTab({ url: '/pages/home/home' })
+  //     },
+  //   })
+  // }
   // 根据positon设置不同的跳转逻辑
 }
 </script>
@@ -172,6 +213,20 @@ const submit = async () => {
 <style>
 .con {
   /* background: linear-gradient(to bottom right, #e6f7ff, #e6ffe6); */
+  background: linear-gradient(90deg, rgba(171, 236, 214, 0.29) 0%, rgba(251, 237, 150, 0.29) 100%);
+}
+
+.con {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  /* gap: 15px; */
+  height: 100vh;
+  overflow: hidden;
+  /* padding-top: 1.25rem;
+  margin-top: 3rem; */
+  /* overflow-y: scroll; */
+  background: linear-gradient(90deg, rgba(171, 236, 214, 0.29) 0%, rgba(251, 237, 150, 0.29) 100%);
 }
 
 .main-title-color {
@@ -186,6 +241,10 @@ const submit = async () => {
 .title {
   font-size: 18px;
   font-weight: bold;
+}
+
+.selected {
+  background: linear-gradient(to bottom right, #e6f7ff, #e6ffe6);
 }
 
 .progress-bar {

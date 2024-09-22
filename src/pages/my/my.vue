@@ -11,7 +11,11 @@
   <tabbar selected="2"></tabbar>
   <view
     class="bg-white overflow-hidden pt-10 px-4 box-border"
-    style="height: 100vh; background: linear-gradient(to bottom right, #e6f7ff, #e6ffe6)"
+    style="
+      height: 100vh;
+      overflow: scroll;
+      background: linear-gradient(to bottom right, #e6f7ff, #e6ffe6);
+    "
   >
     <div class="profile-container">
       <div class="user-info">
@@ -160,6 +164,7 @@ const testAPI = async () => {
 .profile-container {
   padding: 0.625rem;
   margin-top: 2rem;
+
   font-family: Arial, sans-serif;
   background: linear-gradient(to bottom right, #e6f7ff, #e6ffe6);
   border-radius: 10px;

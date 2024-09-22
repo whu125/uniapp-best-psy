@@ -11,7 +11,6 @@ interface NavigateToOptions {
        "/pages/ganyu/ganyu" |
        "/pages/ganyu/ganyu_temp" |
        "/pages/inquiry/inquiry" |
-       "/pages/inquiry/inquiry_new" |
        "/pages/inquiry/start" |
        "/pages/journey2/daolan1" |
        "/pages/journey2/daolan2" |
