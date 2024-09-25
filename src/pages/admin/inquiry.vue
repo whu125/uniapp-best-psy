@@ -13,11 +13,11 @@
     w-full
     h-full
   >
-    <wd-navbar title="用户管理" left-arrow @click-left="ToHome"></wd-navbar>
+    <wd-navbar title="用户管理"></wd-navbar>
   </view>
 
   <view>
-    <button @click="toAdminInquiry()">查看问卷数据</button>
+    <button @click="exportExcel()">导出excel</button>
   </view>
   <view class="admin-container">
     <wd-table :data="dataList">
@@ -81,10 +81,8 @@ const edit = (row) => {
   show.value = true
 }
 
-const toAdminInquiry = () => {
-  uni.navigateTo({
-    url: '/pages/admin/inquiry',
-  })
+const exportExcel = () => {
+  console.log('导出excel')
 }
 </script>
 

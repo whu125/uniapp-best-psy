@@ -53,6 +53,14 @@
       }
     },
     {
+      "path": "pages/admin/inquiry",
+      "type": "home",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "我的旅程"
+      }
+    },
+    {
       "path": "pages/admin/admin",
       "type": "home",
       "style": {
@@ -94,6 +102,13 @@
         "navigationBarTitleText": "临时页面"
       },
       "needLogin": true
+    },
+    {
+      "path": "pages/inquiry/first",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom"
+      }
     },
     {
       "path": "pages/inquiry/inquiry",

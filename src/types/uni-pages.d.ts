@@ -5,11 +5,13 @@
 
 interface NavigateToOptions {
   url: "/pages/home/home" |
+       "/pages/admin/inquiry" |
        "/pages/admin/admin" |
        "/pages/diaryList/diaryList" |
        "/pages/feeling/feeling" |
        "/pages/ganyu/ganyu" |
        "/pages/ganyu/ganyu_temp" |
+       "/pages/inquiry/first" |
        "/pages/inquiry/inquiry" |
        "/pages/inquiry/start" |
        "/pages/journey2/daolan1" |

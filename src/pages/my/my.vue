@@ -71,9 +71,9 @@
           <span class="label">意见反馈</span>
           <span class="arrow">›</span>
         </div>
-        <div class="menu-item">
+        <div class="menu-item" @click="toadmin()">
           <span class="icon">ℹ️</span>
-          <span class="label">关于我们</span>
+          <span class="label">测试管理员页面</span>
           <span class="arrow">›</span>
         </div>
         <div class="menu-item" @click="toLogin()">
@@ -84,6 +84,16 @@
         <div class="menu-item" @click="toInquiry()">
           <span class="icon">ℹ️</span>
           <span class="label">测试问卷入口</span>
+          <span class="arrow">›</span>
+        </div>
+        <div class="menu-item" @click="toFirst()">
+          <span class="icon">ℹ️</span>
+          <span class="label">测试第一次进入调查入口</span>
+          <span class="arrow">›</span>
+        </div>
+        <div class="menu-item" @click="toadmin()">
+          <span class="icon">ℹ️</span>
+          <span class="label">测试管理员页面</span>
           <span class="arrow">›</span>
         </div>
       </div>
@@ -148,6 +158,12 @@ const toInquiry = () => {
   })
 }
 
+const toFirst = () => {
+  uni.navigateTo({
+    url: '/pages/inquiry/first',
+  })
+}
+
 const checkLogin = () => {
   uni.navigateTo({
     url: '/pages/test2/test2',
@@ -157,6 +173,12 @@ const checkLogin = () => {
 const testAPI = async () => {
   const res = await test()
   console.log(res)
+}
+
+const toadmin = () => {
+  uni.navigateTo({
+    url: '/pages/admin/admin',
+  })
 }
 </script>
 
