@@ -1,4 +1,4 @@
-<route lang="json5">
+<route lang="json5" type="home">
 {
   style: {
     navigationStyle: 'custom',
@@ -39,17 +39,10 @@
       </view>
       <view class="input-area">
         <view v-for="(placeholder, index) in pageContent.inputPlaceholders" :key="index">
-          <view style="margin-top: 15px">
+          <view style="margin-top: 15px" v-if="pageContent.inputQuestions != null">
             {{ pageContent.inputQuestions[index] }}
           </view>
           <view style="margin-top: 5px">
-            <!-- <wd-input
-              type="text"
-              :placeholder="placeholder"
-              v-model="userInputList[index]"
-              @change="userInputChange({ index, userInput: userInputList[index] })"
-            /> -->
-
             <wd-textarea v-model="userInputList[index]" :placeholder="placeholder" />
           </view>
         </view>
@@ -73,6 +66,27 @@
           <view style="width: 90%; height: auto; margin: 15px 0 0 15px">
             <image :src="buttonUrl" mode="widthFix" @click="toPage(buttonUrl)" />
           </view>
+        </view>
+      </view>
+      <view v-if="hasOperation" @click="doOperation" class="operation-area">
+        <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
+        <view style="width: 100%; font-size: 18px; text-align: center">
+          {{ pageContent.operationText }}
+        </view>
+      </view>
+    </view>
+
+    <!-- 单选页面 -->
+    <view class="main-container" v-if="pageType === 'select'">
+      <view style="height: 10%"></view>
+      <view class="middle-img-input">
+        <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
+      </view>
+      <view class="input-area"></view>
+      <view @click="doOperation" class="operation-area">
+        <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
+        <view style="width: 100%; font-size: 18px; text-align: center">
+          {{ pageContent.operationText }}
         </view>
       </view>
     </view>
@@ -102,12 +116,40 @@
         </view>
       </view>
     </view>
+
+    <!-- 音频页面 -->
+    <view class="main-container" v-if="pageType === 'audio'">
+      <view style="height: 15%"></view>
+      <view class="middle-img-input">
+        <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
+      </view>
+      <view class="input-area">
+        <view style="text-align: center">
+          <audio
+            style="text-align: left"
+            :src="pageContent.audioUrls[0]"
+            :poster="current.poster"
+            :name="current.name"
+            :author="current.author"
+            :action="audioAction"
+            controls
+          ></audio>
+        </view>
+      </view>
+      <view @click="doOperation" class="operation-area">
+        <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
+        <view style="width: 100%; font-size: 18px; text-align: center">
+          {{ pageContent.operationText }}
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 
 <script lang="ts" setup>
 import { IInterPage, useInterStore } from '@/store/inter'
 import { useGlobalPageControlStore } from '@/store/globalPageControl'
+import { getPageByInterId } from '@/service/index/inter'
 import { useToast } from 'wot-design-uni'
 const interStore = useInterStore()
 const globalPageControlStore = useGlobalPageControlStore()
@@ -115,12 +157,27 @@ const toast = useToast()
 
 const pageType = ref<string>('normal')
 const pageContent = ref<IInterPage>()
+const radioValue = ref<string>()
 const currentSlideImage = ref<number>(0)
 const userInputList = ref<Array<string>>([])
+const hasOperation = computed(() => {
+  return pageContent.value.operationIcon != null && pageContent.value.operationText != null
+})
 
-onShow(() => {
-  const index = interStore.pageIndex
-  pageContent.value = interStore.interInfo.interPages[index]
+const current = ref({
+  poster: 'https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/music-a.png',
+  name: '致爱丽丝',
+  author: '暂无',
+})
+const audioAction = ref({
+  method: 'pause',
+})
+
+onShow(async () => {
+  // const index = interStore.pageIndex
+  // pageContent.value = interStore.interInfo.interPages[index.value]
+  const res = await getPageByInterId(2, 31)
+  pageContent.value = res.data
   pageType.value = pageContent.value.pageType
   console.log('pageContent.value', pageContent.value)
 })
@@ -143,6 +200,7 @@ const userInputChange = (event) => {
 
 const toPage = (buttonUrl: string) => {
   // botton 页面的跳转逻辑 根据按钮的图片名称判断需要跳转到哪个页面
+  // 干预2页面6
   if (buttonUrl === 'http://115.159.83.61:9000/journey2/daolan3.png') {
     interStore.setPageIndex(7)
     globalPageControlStore.globalPageControlInfo.firstStepPage6_2 = true
@@ -153,6 +211,7 @@ const toPage = (buttonUrl: string) => {
     } else {
       interStore.setPageIndex(8)
     }
+    // 干预2页面15
   } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/daolan15.png') {
     interStore.setPageIndex(16)
     globalPageControlStore.globalPageControlInfo.firstStepPage15_2 = true
@@ -163,6 +222,13 @@ const toPage = (buttonUrl: string) => {
     } else {
       interStore.setPageIndex(18)
     }
+    // 干预2页面24
+  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/daoru3.png') {
+    console.log()
+  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/daoru4.png') {
+    console.log()
+  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/daoru5.png') {
+    console.log()
   }
   uni.redirectTo({
     url: '/pages/journey_common/common',
@@ -248,28 +314,30 @@ const doOperation = async () => {
 
 .middle-img-input {
   box-sizing: border-box;
+  flex: 1;
   width: 100%;
-  height: 50%;
+  max-height: 40%;
   margin-top: 50rpx;
   /* padding: 10px; */
 }
 
 .middle-img-button {
   box-sizing: border-box;
+  flex: 1;
   width: 100%;
-  height: 40%;
+  max-height: 40%;
   padding: 10px;
 }
 
 .input-area {
+  flex: 1;
   width: 90%;
-  height: 35%;
   overflow-y: scroll;
 }
 
 .button-area {
+  flex: 1;
   width: 100%;
-  height: 50%;
   overflow-y: scroll;
 }
 
@@ -279,6 +347,6 @@ const doOperation = async () => {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 20%;
+  height: 15%;
 }
 </style>

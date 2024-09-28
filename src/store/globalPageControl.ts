@@ -4,12 +4,16 @@ import { ref } from 'vue'
 const initState = {
   firstStepPage6_2: false,
   firstStepPage15_2: false,
+  firstStepPage24_2: false,
+  secondStepPage24_2: false,
 }
 
 // 命名规则: xxxStepPage(page_id)_(inter_id)
 type IGlobalPageState = {
   firstStepPage6_2: boolean
   firstStepPage15_2: boolean
+  firstStepPage24_2: boolean
+  secondStepPage24_2: boolean
 }
 
 export const useGlobalPageControlStore = defineStore(

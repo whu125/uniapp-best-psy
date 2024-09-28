@@ -45,6 +45,14 @@
   },
   "pages": [
     {
+      "path": "pages/journey_common/common",
+      "type": "home",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
       "path": "pages/home/home",
       "type": "home",
       "style": {
@@ -145,14 +153,6 @@
     },
     {
       "path": "pages/journey2/daoru2",
-      "type": "page",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "导览"
-      }
-    },
-    {
-      "path": "pages/journey_common/common",
       "type": "page",
       "style": {
         "navigationStyle": "custom",

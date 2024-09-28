@@ -71,12 +71,7 @@
 
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
-import {
-  getQuestionByInterId,
-  IQuestionItem,
-  submitInter,
-  ISubmitInter,
-} from '@/service/index/inter'
+import { getPagesByInterId, IQuestionItem, submitInter, ISubmitInter } from '@/service/index/inter'
 import { getFormattedDate } from '@/utils/getTime'
 import { useUserStore } from '@/store/user'
 import { useInterStore } from '@/store/inter'
@@ -125,7 +120,7 @@ onUnload(() => {
 })
 
 const getQuestion = async () => {
-  const res = await getQuestionByInterId(interId.value)
+  const res = await getPagesByInterId(interId.value)
   console.log(res)
   questions.value = res.data
   if (questions.value[currQuestion.value - 1].questionType === 'select') {

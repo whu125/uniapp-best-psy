@@ -101,7 +101,11 @@ const startJourney = async () => {
     })
   }
 }
-const toTask = () => {}
+const toTask = () => {
+  uni.navigateTo({
+    url: '/pages/journey_common/common',
+  })
+}
 const toPunch = () => {}
 </script>
 

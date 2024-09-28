@@ -40,13 +40,22 @@ type IInterPage = {
   inputPlaceholders: Array<string>
   buttonUrls: Array<string>
   audioUrls: Array<string>
+  selectUrls: Array<string>
   specialPage: string
   pageType: string
 }
 
 /** POST 请求 */
-export const getQuestionByInterId = (interId: number) => {
-  return http.post<IQuestionItem[]>(`/inter/getAllQuestions?interId=${interId}`, {}, {})
+export const getPagesByInterId = (interId: number) => {
+  return http.post<IQuestionItem[]>(`/inter/getAllInterPages?interId=${interId}`, {}, {})
+}
+
+export const getPageByInterId = (interId: number, pageId: number) => {
+  return http.post<IInterPage>(
+    `/inter/getInterPageById?interId=${interId}&pageId=${pageId}`,
+    {},
+    {},
+  )
 }
 
 export const startInter = (startInter: IStartInter) => {

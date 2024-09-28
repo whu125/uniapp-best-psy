@@ -23,6 +23,7 @@ export type IInterPage = {
   inputPlaceholders: Array<string>
   buttonUrls: Array<string>
   audioUrls: Array<string>
+  selectUrls: Array<string>
   specialPage: string
   pageType: string
 }
