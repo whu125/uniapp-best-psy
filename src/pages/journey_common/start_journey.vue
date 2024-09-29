@@ -36,9 +36,11 @@ import { startInter, IStartInter } from '@/service/index/inter'
 import { getFormattedDate } from '@/utils/getTime'
 import { useUserStore } from '@/store/user'
 import { useInterStore } from '@/store/inter'
+import { useGlobalPageControlStore } from '@/store/globalPageControl'
 import { useMessage, useToast } from 'wot-design-uni'
 
 const userStore = useUserStore()
+const globalPageControl = useGlobalPageControlStore()
 const interStore = useInterStore()
 const progress = ref<number>()
 const toast = useToast()
@@ -50,9 +52,7 @@ const toast = useToast()
 onLoad((options) => {
   const numberStr = options.progress
   progress.value = Number(decodeURIComponent(numberStr))
-
   currContent.value = pageContent.value[progress.value]
-
   console.log('currContent', currContent.value)
 })
 
@@ -104,6 +104,9 @@ const pageContent = ref([
   },
 ])
 const startJourney = async () => {
+  interStore.clearInternfo()
+  globalPageControl.clearInternfo()
+
   const startObj: IStartInter = {
     userId: userStore.userInfo.userId,
     interId: progress.value,

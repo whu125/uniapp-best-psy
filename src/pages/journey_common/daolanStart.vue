@@ -35,6 +35,7 @@
 
 <script lang="ts" setup>
 import { IInterPage, useInterStore } from '@/store/inter'
+
 const interStore = useInterStore()
 const navbarTitle = ref<string>('')
 onShow(() => {

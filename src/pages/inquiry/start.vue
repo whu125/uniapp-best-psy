@@ -41,7 +41,7 @@
 // 这里可以添加任何需要的逻辑
 const startInquiry = () => {
   uni.navigateTo({
-    url: '/pages/inquiry/inquiry_new',
+    url: '/pages/inquiry/inquiry',
   })
 }
 </script>

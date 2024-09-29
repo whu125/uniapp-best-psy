@@ -50,8 +50,10 @@
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
 import { useInterStore } from '@/store/inter'
+import { useToast } from 'wot-design-uni'
 
 const interStore = useInterStore()
+const toast = useToast()
 const interId = ref<number>()
 const currContent = ref<IContentType>()
 
@@ -96,17 +98,32 @@ const startJourney = async () => {
     return
   }
   if (currContent.value.navbarTitle === '第二站: 导览') {
+    interStore.isStartJourney = true
     uni.navigateTo({
       url: '/pages/journey_common/common',
     })
   }
 }
-const toTask = () => {
+const toTask = async () => {
+  if (interStore.isStartJourney !== true) {
+    toast.warning('请先完成站点导览！')
+    return
+  }
+  interStore.isTaskFinished = true
+  await interStore.setPageIndex(23)
   uni.navigateTo({
     url: '/pages/journey_common/common',
   })
 }
-const toPunch = () => {}
+const toPunch = () => {
+  if (interStore.isTaskFinished !== true || interStore.isStartJourney !== true) {
+    toast.warning('请先完成站点任务！')
+    return
+  }
+  uni.navigateTo({
+    url: '/pages/inquiry/start',
+  })
+}
 </script>
 
 <style>

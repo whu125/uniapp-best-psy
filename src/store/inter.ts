@@ -46,6 +46,10 @@ export const useInterStore = defineStore(
 
     const pageIndex = ref<number>(0)
 
+    const isStartJourney = ref<boolean>(false)
+
+    const isTaskFinished = ref<boolean>(false)
+
     const setInterInfo = (val: IInterState) => {
       interInfo.value = val
       pageCount.value = val.interPages.length
@@ -53,6 +57,10 @@ export const useInterStore = defineStore(
 
     const clearInternfo = () => {
       interInfo.value = { ...initState }
+      pageCount.value = 0
+      pageIndex.value = 0
+      isStartJourney.value = false
+      isTaskFinished.value = false
     }
     // 一般没有reset需求，不需要的可以删除
     const reset = () => {
@@ -92,6 +100,8 @@ export const useInterStore = defineStore(
       addPageIndex,
       minusPageIndex,
       resetIndex,
+      isStartJourney,
+      isTaskFinished,
     }
   },
   {

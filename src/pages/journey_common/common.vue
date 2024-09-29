@@ -1,4 +1,4 @@
-<route lang="json5" type="home">
+<route lang="json5">
 {
   style: {
     navigationStyle: 'custom',
@@ -68,12 +68,12 @@
           </view>
         </view>
       </view>
-      <view v-if="hasOperation" @click="doOperation" class="operation-area">
+      <!-- <view v-if="hasOperation" @click="doOperation" class="operation-area">
         <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">
           {{ pageContent.operationText }}
         </view>
-      </view>
+      </view> -->
     </view>
 
     <!-- 单选页面 -->
@@ -174,10 +174,10 @@ const audioAction = ref({
 })
 
 onShow(async () => {
-  // const index = interStore.pageIndex
-  // pageContent.value = interStore.interInfo.interPages[index.value]
-  const res = await getPageByInterId(2, 31)
-  pageContent.value = res.data
+  const index = interStore.pageIndex
+  pageContent.value = interStore.interInfo.interPages[index]
+  // const res = await getPageByInterId(2, 31)
+  // pageContent.value = res.data
   pageType.value = pageContent.value.pageType
   console.log('pageContent.value', pageContent.value)
 })
@@ -224,11 +224,27 @@ const toPage = (buttonUrl: string) => {
     }
     // 干预2页面24
   } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/daoru3.png') {
-    console.log()
+    interStore.setPageIndex(25)
+    globalPageControlStore.globalPageControlInfo.firstStepPage24_2 = true
   } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/daoru4.png') {
-    console.log()
+    if (globalPageControlStore.globalPageControlInfo.firstStepPage24_2 === false) {
+      toast.warning('请先查看第一步')
+      return
+    } else {
+      interStore.setPageIndex(30)
+      globalPageControlStore.globalPageControlInfo.secondStepPage24_2 = true
+    }
   } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/daoru5.png') {
-    console.log()
+    if (
+      globalPageControlStore.globalPageControlInfo.secondStepPage24_2 === false ||
+      globalPageControlStore.globalPageControlInfo.firstStepPage24_2 === false
+    ) {
+      toast.warning('请先查看第二步')
+      return
+    } else {
+      interStore.setPageIndex(31)
+      globalPageControlStore.globalPageControlInfo.secondStepPage24_2 = true
+    }
   }
   uni.redirectTo({
     url: '/pages/journey_common/common',
@@ -242,6 +258,10 @@ const doOperation = async () => {
       await interStore.setPageIndex(6)
     } else if (pageContent.value.pageId === 17 && pageContent.value.interId === 2) {
       await interStore.setPageIndex(15)
+    } else if (pageContent.value.pageId === 29 && pageContent.value.interId === 2) {
+      await interStore.setPageIndex(25)
+    } else if (pageContent.value.pageId === 30 && pageContent.value.interId === 2) {
+      await interStore.setPageIndex(25)
     }
     uni.redirectTo({
       url: '/pages/journey_common/common',
@@ -275,11 +295,10 @@ const doOperation = async () => {
 
   // pageIndex 自增
   const res = await interStore.addPageIndex()
-  console.log(interStore.pageIndex)
   // 如果是最后一页就不再进行跳转
-  if (res === 'pageEnd') {
-    return
-  }
+  // if (res === 'pageEnd') {
+  //   return
+  // }
 
   // 如果下一页不是跳转到特殊页面(journey通用页面) 就刷新当前页面
   if (pageContent.value.specialPage === null) {
@@ -325,7 +344,7 @@ const doOperation = async () => {
   box-sizing: border-box;
   flex: 1;
   width: 100%;
-  max-height: 40%;
+  max-height: 35%;
   padding: 10px;
 }
 
