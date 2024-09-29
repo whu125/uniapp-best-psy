@@ -82,7 +82,19 @@
       <view class="middle-img-input">
         <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
       </view>
-      <view class="input-area"></view>
+      <view class="input-area">
+        <view class="monsters">
+          <view
+            v-for="(monster, index) in pageContent.selectUrls"
+            :key="index"
+            class="monster"
+            :class="{ selected: selectedMonster === index }"
+            @click="selectMonster(index)"
+          >
+            <image :src="monster" mode="aspectFit" style="width: 100%" />
+          </view>
+        </view>
+      </view>
       <view @click="doOperation" class="operation-area">
         <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">
@@ -159,6 +171,7 @@ const pageType = ref<string>('normal')
 const pageContent = ref<IInterPage>()
 const radioValue = ref<string>()
 const currentSlideImage = ref<number>(0)
+const selectedMonster = ref()
 const userInputList = ref<Array<string>>([])
 const hasOperation = computed(() => {
   return pageContent.value.operationIcon != null && pageContent.value.operationText != null
@@ -176,8 +189,9 @@ const audioAction = ref({
 onShow(async () => {
   const index = interStore.pageIndex
   pageContent.value = interStore.interInfo.interPages[index]
-  // const res = await getPageByInterId(2, 31)
+  // const res = await getPageByInterId(2, 28)
   // pageContent.value = res.data
+
   pageType.value = pageContent.value.pageType
   console.log('pageContent.value', pageContent.value)
 })
@@ -194,8 +208,8 @@ const onSlideChange = (e) => {
   console.log(e)
 }
 
-const userInputChange = (event) => {
-  console.log(event)
+const selectMonster = (index) => {
+  selectedMonster.value = index
 }
 
 const toPage = (buttonUrl: string) => {
@@ -367,5 +381,32 @@ const doOperation = async () => {
   justify-content: center;
   width: 100%;
   height: 15%;
+}
+
+.monsters {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  width: 100%;
+  overflow-x: hidden;
+}
+.monster {
+  width: 100%;
+  aspect-ratio: 1;
+  cursor: pointer;
+  opacity: 0.6;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+}
+.monster:hover,
+.monster.selected {
+  opacity: 1;
+  transform: scale(1.1);
+}
+.monster img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 </style>
