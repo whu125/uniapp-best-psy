@@ -11,9 +11,11 @@ interface NavigateToOptions {
        "/pages/feeling/feeling" |
        "/pages/ganyu/ganyu" |
        "/pages/ganyu/ganyu_temp" |
+       "/pages/inquiry/end" |
        "/pages/inquiry/first" |
        "/pages/inquiry/inquiry" |
        "/pages/inquiry/start" |
+       "/pages/inquiry/success" |
        "/pages/journey2/daolan1" |
        "/pages/journey2/daolan2" |
        "/pages/journey2/daoru2" |

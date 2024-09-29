@@ -154,7 +154,7 @@ const toLogin = () => {
 
 const toInquiry = () => {
   uni.navigateTo({
-    url: '/pages/inquiry/inquiry',
+    url: '/pages/inquiry/start',
   })
 }
 

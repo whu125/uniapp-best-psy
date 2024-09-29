@@ -10,28 +10,27 @@
 
 <template>
   <!-- <view
-    class="bg-white overflow-hidden pt-2 px-4"
-    :style="{ marginTop: safeAreaInsets?.top + 100 + 'px' }"
-    w-full
-    h-full
-  >
-    <wd-navbar title="工具箱"></wd-navbar>
-  </view> -->
+        class="bg-white overflow-hidden pt-2 px-4"
+        :style="{ marginTop: safeAreaInsets?.top + 100 + 'px' }"
+        w-full
+        h-full
+      >
+        <wd-navbar title="工具箱"></wd-navbar>
+      </view> -->
   <view class="container">
     <view class="illustration">
       <view class="illustration-placeholder">
-        <img src="http://115.159.83.61:9000/inquiry/wenjuan.png" alt="" />
+        <img src="http://115.159.83.61:9000/inquiry/end.png" alt="" />
       </view>
     </view>
 
     <view class="instructions">
-      <p>填写问卷，完成打卡，记录你的改变！</p>
-      <p>中途请不要退出</p>
+      <p>恭喜你完成问卷！ 点击下方按钮，完成打卡</p>
+      <p>三天后，我们将共同开启下一站旅程，敬请期待！</p>
     </view>
 
-    <!-- <button class="start-button" @click="startInquiry">开始填写</button> -->
     <view class="flex justify-center">
-      <wd-button @click="startInquiry">开始填写</wd-button>
+      <wd-button @click="startInquiry">我要打卡</wd-button>
     </view>
   </view>
 </template>
@@ -39,11 +38,8 @@
 <script setup>
 // 这里可以添加任何需要的逻辑
 const startInquiry = () => {
-  // uni.navigateTo({
-  //   url: '/pages/inquiry/inquiry',
-  // })
   uni.redirectTo({
-    url: '/pages/inquiry/end',
+    url: '/pages/inquiry/success',
   })
 }
 </script>

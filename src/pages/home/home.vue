@@ -8,11 +8,18 @@
 </route>
 <template>
   <tabbar selected="0"></tabbar>
-  <view class="bg-white pt-2" :style="{ marginTop: safeAreaInsets?.top + 'px' }" h-full w-full>
-    <view class="header">
+  <view class="" h-full w-full>
+    <!-- <view class="header">
       <view class="title">我的旅程</view>
-    </view>
+    </view> -->
+
+    <wd-navbar fixed safeAreaInsetTop title="我的旅程"></wd-navbar>
+
     <view class="content px-4">
+      <view style="height: 100rpx"></view>
+      <view class="h-40 w-full">
+        <image src="http://115.159.83.61:9000/home/home.png" mode="scaleToFill" />
+      </view>
       <!-- <view class="card intro-card">
         <view class="card-icon">&#9654;</view>
         <view class="card-text">导入: 开启你的旅程</view>
@@ -21,19 +28,20 @@
         <img class="card-icon" :src="journey.icon" />
         <view class="card-text">{{ journey.text }}</view>
         <image
-          style="width: 30px"
+          style="width: 60rpx; height: 60rpx"
           mode="aspectFit"
           src="../../static/images/home/startJourney.png"
           v-show="currProgress >= journey.progress"
           @click="enterJourney(journey.progress)"
         />
         <image
-          style="width: 30px"
+          style="width: 60rpx; height: 60rpx"
           src="../../static/images/home/lockJourney.png"
           mode="aspectFit"
           v-show="currProgress < journey.progress"
         />
       </view>
+      <view style="height: 150rpx"></view>
     </view>
   </view>
 </template>
@@ -87,6 +95,11 @@ const enterJourney = async (progress: number) => {
 .main-title-color {
   color: #d14328;
 }
+/* .bg_image {
+  position: absolute;
+  top:0;
+  height: 200rpx;
+} */
 
 .header {
   position: fixed;
@@ -115,9 +128,9 @@ const enterJourney = async (progress: number) => {
   flex: 1;
   flex-direction: column;
   gap: 15px;
-  height: 90vh;
+
   padding-top: 1.25rem;
-  margin-top: 3rem;
+  /* margin-top: 3rem; */
   overflow-y: scroll;
   background: linear-gradient(to bottom right, #e6f7ff, #e6ffe6);
 }

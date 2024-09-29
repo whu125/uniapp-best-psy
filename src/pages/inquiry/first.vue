@@ -9,7 +9,7 @@
 <template>
   <view class="w-full h-full">
     <view>
-      <wd-navbar fixed safeAreaInsetTop title="问卷" left-arrow @click-left="ToHome"></wd-navbar>
+      <wd-navbar fixed safeAreaInsetTop title="问卷" left-arrow></wd-navbar>
     </view>
 
     <view class="con px-2">
@@ -110,11 +110,19 @@
 </template>
 
 <script lang="ts" setup>
+import { getInquiryByPos, submitInquiry, InquiryResultArray } from '@/service/ganyu/inquiry'
+
+import { useUserStore } from '@/store/user'
+import { useToast, useNotify } from 'wot-design-uni'
+
 const { safeAreaInsets } = uni.getSystemInfoSync()
 
+const toast = useToast()
+const customGoal = ref()
 const goal = ref(['1'])
 const curId = ref(1)
-const answers = ref({})
+const answers = ref([{}])
+// answers的理想：{'inquiryId':1,'content':数字或者填的内容}
 const age = ref(18)
 const questionItem = ref([
   {
@@ -182,13 +190,90 @@ const questionItem = ref([
 ])
 
 const selectOption = (score: number) => {
-  answers.value[curId.value - 1] = score
+  answers.value[curId.value - 1] = {
+    inquiryId: questionItem.value[curId.value - 1].inquiryId,
+    content: score,
+    isChoice: true,
+  }
+
   curId.value++
 }
 
 const handleAgeChange = () => {
-  answers.value[curId.value - 1] = age.value
+  answers.value[curId.value - 1] = {
+    inquiryId: questionItem.value[curId.value - 1].inquiryId,
+    content: age.value,
+    isChoice: false,
+  }
   curId.value++
+}
+
+const submit = async () => {
+  toast.loading('提交中...')
+  console.log('goal', goal.value)
+  answers.value[curId.value - 1] = {
+    inquiryId: questionItem.value[curId.value - 1].inquiryId,
+    content: '',
+    isChoice: false,
+  }
+
+  // 先处理一下第七题 做一个映射
+
+  const goalMapping = {
+    1: '缓解焦虑压力',
+    2: '减少沮丧低落',
+    3: '提高幸福感',
+    4: '寻找自我价值',
+    5: '学习情绪调节方式',
+    6: '提高行动力',
+  }
+
+  goal.value.forEach((goalId) => {
+    if (goalId !== '7') {
+      answers.value[curId.value - 1].content += goalMapping[goalId] + ', '
+    } else {
+      answers.value[curId.value - 1].content += customGoal.value + ', '
+    }
+  })
+
+  const formData = ref([])
+  console.log(answers.value)
+  for (let i = 0; i < answers.value.length; i++) {
+    if (answers.value[i].isChoice === false) {
+      formData.value.push({
+        // userId: userStore.userInfo.userId,
+        inquiryId: answers.value[i].inquiryId,
+        interId: 0,
+
+        text: String(answers.value[i].content),
+      })
+    } else {
+      formData.value.push({
+        // userId: userStore.userInfo.userId,
+        inquiryId: questionItem.value[i].inquiryId,
+        interId: 0,
+        score: answers.value[i].content,
+      })
+    }
+  }
+
+  if (formData.value.length < questionItem.value) {
+    toast.error('请完成所有题目')
+    return
+  }
+  console.log(formData.value)
+  const res = await submitInquiry(formData.value)
+  if (res.code === 200) {
+    toast.close()
+    uni.showToast({
+      title: '提交成功',
+      icon: 'success',
+      duration: 2000,
+      success: () => {
+        uni.switchTab({ url: '/pages/home/home' })
+      },
+    })
+  }
 }
 </script>
 

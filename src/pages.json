@@ -104,6 +104,15 @@
       "needLogin": true
     },
     {
+      "path": "pages/inquiry/end",
+      "type": "page",
+      "style": {
+        "navigationStyle": "default",
+        "navigationBarTitleText": "打卡"
+      },
+      "needLogin": true
+    },
+    {
       "path": "pages/inquiry/first",
       "type": "page",
       "style": {
@@ -120,6 +129,15 @@
     },
     {
       "path": "pages/inquiry/start",
+      "type": "page",
+      "style": {
+        "navigationStyle": "default",
+        "navigationBarTitleText": "打卡"
+      },
+      "needLogin": true
+    },
+    {
+      "path": "pages/inquiry/success",
       "type": "page",
       "style": {
         "navigationStyle": "default",
