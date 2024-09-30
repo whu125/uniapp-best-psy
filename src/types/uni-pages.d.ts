@@ -12,6 +12,7 @@ interface NavigateToOptions {
        "/pages/ganyu/ganyu" |
        "/pages/ganyu/ganyu_temp" |
        "/pages/inquiry/end" |
+       "/pages/inquiry/eval" |
        "/pages/inquiry/first" |
        "/pages/inquiry/inquiry" |
        "/pages/inquiry/start" |

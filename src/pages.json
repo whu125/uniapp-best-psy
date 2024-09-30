@@ -113,6 +113,14 @@
       "needLogin": true
     },
     {
+      "path": "pages/inquiry/eval",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "打卡"
+      }
+    },
+    {
       "path": "pages/inquiry/first",
       "type": "page",
       "style": {
