@@ -31,7 +31,7 @@
 
     <!-- <button class="start-button" @click="startInquiry">开始填写</button> -->
     <view class="flex justify-center">
-      <wd-button @click="startInquiry">开始填写</wd-button>
+      <wd-button @click="startInquiry" type="success">开始填写</wd-button>
     </view>
   </view>
 </template>

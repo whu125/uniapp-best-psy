@@ -57,7 +57,7 @@
 
     <!-- 按钮选择页面 -->
     <view class="main-container" v-if="pageType === 'button'">
-      <view style="height: 10%"></view>
+      <view style="height: 15%"></view>
       <view class="middle-img-button">
         <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%; margin: 0 auto" />
       </view>
