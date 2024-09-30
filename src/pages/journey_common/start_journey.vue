@@ -25,7 +25,10 @@
           <view class="question">{{ question }}</view>
         </view>
 
-        <button class="start-button" @click="startJourney">开始旅程</button>
+        <!-- <button class="start-button" @click="startJourney">开始旅程</button> -->
+        <view class="flex justify-center">
+          <wd-button type="success" size="large" @click="startJourney">开始旅程</wd-button>
+        </view>
       </view>
     </view>
   </view>
@@ -134,7 +137,7 @@ const startJourney = async () => {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  padding: 20px;
+  padding: 10px;
   background: linear-gradient(to bottom right, #e6f7ff, #fffbe6);
 }
 
@@ -142,16 +145,16 @@ const startJourney = async () => {
   width: 90%;
   max-width: 400px;
   padding: 30px;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .illustration {
   display: block;
-  width: 200px;
-  height: 200px;
-  margin: 0 auto 20px;
+  width: 600rpx;
+  height: 600rpx;
+  margin: 0 auto;
 }
 
 .title {
@@ -174,7 +177,7 @@ const startJourney = async () => {
 }
 
 .start-button {
-  padding: 12px 20px;
+  padding: 10px;
   font-size: 18px;
   color: white;
   background-color: #4caf50;
