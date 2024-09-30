@@ -237,10 +237,10 @@ const toPage = (buttonUrl: string) => {
       interStore.setPageIndex(18)
     }
     // 干预2页面24
-  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/daoru3.png') {
+  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/renwu3.png') {
     interStore.setPageIndex(25)
     globalPageControlStore.globalPageControlInfo.firstStepPage24_2 = true
-  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/daoru4.png') {
+  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/renwu4.png') {
     if (globalPageControlStore.globalPageControlInfo.firstStepPage24_2 === false) {
       toast.warning('请先查看第一步')
       return
@@ -248,7 +248,7 @@ const toPage = (buttonUrl: string) => {
       interStore.setPageIndex(30)
       globalPageControlStore.globalPageControlInfo.secondStepPage24_2 = true
     }
-  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/daoru5.png') {
+  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/renwu5.png') {
     if (
       globalPageControlStore.globalPageControlInfo.secondStepPage24_2 === false ||
       globalPageControlStore.globalPageControlInfo.firstStepPage24_2 === false
@@ -273,9 +273,9 @@ const doOperation = async () => {
     } else if (pageContent.value.pageId === 17 && pageContent.value.interId === 2) {
       await interStore.setPageIndex(15)
     } else if (pageContent.value.pageId === 29 && pageContent.value.interId === 2) {
-      await interStore.setPageIndex(25)
+      await interStore.setPageIndex(24)
     } else if (pageContent.value.pageId === 30 && pageContent.value.interId === 2) {
-      await interStore.setPageIndex(25)
+      await interStore.setPageIndex(24)
     }
     uni.redirectTo({
       url: '/pages/journey_common/common',

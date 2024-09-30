@@ -39,12 +39,12 @@
 <script setup>
 // 这里可以添加任何需要的逻辑
 const startInquiry = () => {
-  // uni.navigateTo({
-  //   url: '/pages/inquiry/inquiry',
-  // })
-  uni.redirectTo({
-    url: '/pages/inquiry/end',
+  uni.navigateTo({
+    url: '/pages/inquiry/inquiry',
   })
+  // uni.redirectTo({
+  //   url: '/pages/inquiry/end',
+  // })
 }
 </script>
 
