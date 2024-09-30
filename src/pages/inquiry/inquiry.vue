@@ -39,12 +39,20 @@
         <view
           class="option"
           v-for="option in questions[curId - 1]?.options"
-          :key="option.score"
+          :key="option.text"
           :class="{ selected: answers[curId - 1] === option.score }"
           @click="selectOption(option.score)"
         >
           {{ option.text }}
         </view>
+        <!-- <view
+          class="option"
+          v-for="option in questions[curId - 1]?.options"
+          :key="option.text"
+          @click="selectOption(option.score)"
+        >
+          {{ option.text }}
+        </view> -->
       </view>
 
       <!-- 底部按钮 -->
@@ -64,8 +72,8 @@
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
 import { getInquiryByPos, submitInquiry, InquiryResultArray } from '@/service/ganyu/inquiry'
+import { useInquiryStore } from '@/store/inquiry'
 
-import { useUserStore } from '@/store/user'
 import { useToast, useNotify } from 'wot-design-uni'
 
 defineOptions({
@@ -74,8 +82,8 @@ defineOptions({
 
 const toast = useToast()
 
-const position = ref('')
-const userStore = useUserStore()
+const position = ref('1-post')
+const inquiryStore = useInquiryStore()
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const systemInfo = uni.getSystemInfoSync()
@@ -84,35 +92,7 @@ const contentHeight = systemInfo.windowHeight - safeAreaInsets.top - 100
 const queLen = ref()
 const curId = ref(1)
 const curPer = ref(0)
-watch(curId, (newVal) => {
-  console.log('newVal', newVal)
-  curPer.value = parseInt(((newVal / queLen.value) * 100).toFixed(0))
-})
 
-onLoad(async (param) => {
-  toast.loading({ message: '加载中' })
-  position.value = param.position
-  // interId.value = parseInt(param.interId)
-  interId.value = 1
-  console.log(position.value)
-  console.log('请求getInquiryByPos')
-  const res = await getInquiryByPos('1-post')
-  toast.close()
-  questions.value = res.data
-  questions.value.forEach((item) => {
-    item.options = JSON.parse(item.options)
-    if (item.groupIndex == curGroup.value) {
-      pageQuestions.value.push(item)
-    }
-  })
-  console.log(questions.value)
-  queLen.value = questions.value.length
-  curPer.value = parseInt(((curId.value / queLen.value) * 100).toFixed(0))
-})
-
-const ToHome = () => {
-  uni.switchTab({ url: '/pages/home/home' })
-}
 const curGroup = ref(1)
 const islastFlag = ref(false)
 const currQuestion = ref<number>(1)
@@ -124,9 +104,60 @@ const answers = ref({})
 const questions = ref([])
 const pageQuestions = ref([])
 const interId = ref()
+const storageFlag = ref(false)
+
+watch(curId, (newVal) => {
+  console.log('newVal', newVal)
+  console.log('answers', answers.value)
+  curPer.value = parseInt(((newVal / queLen.value) * 100).toFixed(0))
+})
+
+onLoad(async (param) => {
+  toast.loading({ message: '加载中' })
+
+  // position.value = param.position
+
+  position.value = '1-post'
+  loadStorage()
+  // interId.value = parseInt(param.interId)
+  interId.value = 1
+  console.log(position.value)
+
+  console.log('请求getInquiryByPos')
+  const res = await getInquiryByPos(position.value)
+  toast.close()
+  questions.value = res.data
+  questions.value.forEach((item) => {
+    item.options = JSON.parse(item.options)
+    if (item.groupIndex == curGroup.value) {
+      pageQuestions.value.push(item)
+    }
+  })
+  console.log(questions.value)
+  queLen.value = questions.value.length
+
+  if (!storageFlag.value) {
+    questions.value.forEach((item, index) => {
+      answers.value[index] = -1
+    })
+  } else {
+    const firstUnanswered = Object.keys(answers.value).find((key) => answers.value[key] === -1)
+    if (firstUnanswered !== undefined) {
+      curId.value = parseInt(firstUnanswered) + 1
+    }
+  }
+  curPer.value = parseInt(((curId.value / queLen.value) * 100).toFixed(0))
+})
+
+const ToHome = () => {
+  uni.switchTab({ url: '/pages/home/home' })
+}
 
 const changeNext = () => {
   curId.value++
+  // Save the current answers to the store
+  inquiryStore.AnsInfo.positions[position.value] = answers.value
+  // inquiryStore.setInquiryInfo(inquiryStore.AnsInfo)
 }
 
 const changeLast = () => {
@@ -207,6 +238,21 @@ const submit = async () => {
   //   })
   // }
   // 根据positon设置不同的跳转逻辑
+}
+
+const loadStorage = () => {
+  const storedAnswers = inquiryStore.AnsInfo.positions[position.value]
+  console.log('storedAnswers', storedAnswers)
+  if (Object.keys(storedAnswers).length === 0 && storedAnswers.constructor === Object) {
+    console.log('No stored answers found')
+  } else {
+    console.log('加载缓存')
+
+    answers.value = storedAnswers
+    console.log('ans', answers.value)
+
+    storageFlag.value = true
+  }
 }
 </script>
 

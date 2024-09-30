@@ -30,7 +30,7 @@
     </view>
 
     <view class="flex justify-center">
-      <wd-button @click="startInquiry">我要打卡</wd-button>
+      <wd-button @click="startInquiry" type="success" size="large">我要打卡</wd-button>
     </view>
   </view>
 </template>
