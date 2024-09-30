@@ -8,7 +8,7 @@
 </route>
 <template>
   <view class="" w-full h-full>
-    <wd-navbar fixed safeAreaInsetTop title="问卷" left-arrow @click-left="ToHome"></wd-navbar>
+    <wd-navbar fixed safeAreaInsetTop title="问卷"></wd-navbar>
 
     <view class="con px-2">
       <view style="height: 10%"></view>
