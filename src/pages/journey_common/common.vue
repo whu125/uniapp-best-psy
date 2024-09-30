@@ -273,34 +273,12 @@ const doOperation = async () => {
     for (let i = 0; i < userInputList.value.length; i++) {
       inputContent = inputContent + userInputList.value[i] + '%'
     }
-    inputContent = inputContent.slice(0, -1) + '#'
-
-    const inputPage = pageContent.value.pageId + '#'
-
-    let inputQuestion = ''
-    for (let i = 0; i < pageContent.value.inputPlaceholders.length; i++) {
-      inputQuestion = inputQuestion + pageContent.value.inputPlaceholders[i] + '%'
-    }
-    inputQuestion = inputQuestion.slice(0, -1) + '#'
-
-    interStore.appendUserInputContent(inputContent)
-    interStore.appendUserInputPages(inputPage)
-    interStore.appendUserInputQuestions(inputQuestion)
-
-    console.log(interStore.interInfo.userInputContent)
-    console.log(interStore.interInfo.userInputQuestions)
+    interStore.setUserInputMap(pageContent.value.pageId, inputContent)
   }
   // 如果是 select 页面 保存用户输入到pinia
   if (pageContent.value.pageType === 'select') {
-    const inputContent = pageContent.value.selectUrls[selectedItem.value] + '#'
-    const inputPage = pageContent.value.pageId + '#'
-    const inputQuestion = '_' + '#'
-    interStore.appendUserInputContent(inputContent)
-    interStore.appendUserInputPages(inputPage)
-    interStore.appendUserInputQuestions(inputQuestion)
-
-    console.log(interStore.interInfo.userInputContent)
-    console.log(interStore.interInfo.userInputQuestions)
+    const inputContent = pageContent.value.selectUrls[selectedItem.value]
+    interStore.setUserInputMap(pageContent.value.pageId, inputContent)
   }
 
   // 如果用户点击的是返回按钮 需要判断当前是什么页面以跳转回原 button 页面

@@ -5,9 +5,6 @@ const initState = {
   interId: 0,
   recordId: 0,
   interPages: null,
-  userInputContent: '',
-  userInputQuestions: '',
-  userInputPages: '',
 }
 
 export type IInterPage = {
@@ -32,9 +29,6 @@ type IInterState = {
   interId: number
   recordId: number
   interPages: Array<IInterPage>
-  userInputContent: string
-  userInputQuestions: string
-  userInputPages: string
 }
 
 export const useInterStore = defineStore(
@@ -46,20 +40,15 @@ export const useInterStore = defineStore(
 
     const pageIndex = ref<number>(0)
 
+    const userInputMap = ref<Map<number, string>>(new Map<number, string>())
+
     const isStartJourney = ref<boolean>(false)
 
     const isTaskFinished = ref<boolean>(false)
 
-    const appendUserInputContent = (val: string) => {
-      interInfo.value.userInputContent = interInfo.value.userInputContent + val
-    }
-
-    const appendUserInputQuestions = (val: string) => {
-      interInfo.value.userInputQuestions = interInfo.value.userInputQuestions + val
-    }
-
-    const appendUserInputPages = (val: string) => {
-      interInfo.value.userInputPages = interInfo.value.userInputPages + val
+    const setUserInputMap = (key: number, value: string) => {
+      userInputMap.value.set(key, value)
+      console.log(userInputMap.value)
     }
 
     const setInterInfo = (val: IInterState) => {
@@ -71,6 +60,7 @@ export const useInterStore = defineStore(
       interInfo.value = { ...initState }
       pageCount.value = 0
       pageIndex.value = 0
+      userInputMap.value = new Map<number, string>()
       isStartJourney.value = false
       isTaskFinished.value = false
     }
@@ -114,9 +104,7 @@ export const useInterStore = defineStore(
       resetIndex,
       isStartJourney,
       isTaskFinished,
-      appendUserInputContent,
-      appendUserInputQuestions,
-      appendUserInputPages,
+      setUserInputMap,
     }
   },
   {
