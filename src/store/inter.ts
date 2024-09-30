@@ -2,12 +2,12 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 const initState = {
-  interId: null,
-  recordId: null,
+  interId: 0,
+  recordId: 0,
   interPages: null,
-  userInputContent: null,
-  userInputQuestions: null,
-  userInputPages: null,
+  userInputContent: '',
+  userInputQuestions: '',
+  userInputPages: '',
 }
 
 export type IInterPage = {
@@ -49,6 +49,18 @@ export const useInterStore = defineStore(
     const isStartJourney = ref<boolean>(false)
 
     const isTaskFinished = ref<boolean>(false)
+
+    const appendUserInputContent = (val: string) => {
+      interInfo.value.userInputContent = interInfo.value.userInputContent + val
+    }
+
+    const appendUserInputQuestions = (val: string) => {
+      interInfo.value.userInputQuestions = interInfo.value.userInputQuestions + val
+    }
+
+    const appendUserInputPages = (val: string) => {
+      interInfo.value.userInputPages = interInfo.value.userInputPages + val
+    }
 
     const setInterInfo = (val: IInterState) => {
       interInfo.value = val
@@ -102,6 +114,9 @@ export const useInterStore = defineStore(
       resetIndex,
       isStartJourney,
       isTaskFinished,
+      appendUserInputContent,
+      appendUserInputQuestions,
+      appendUserInputPages,
     }
   },
   {

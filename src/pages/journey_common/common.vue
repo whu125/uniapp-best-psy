@@ -83,13 +83,13 @@
         <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
       </view>
       <view class="input-area">
-        <view class="monsters">
+        <view class="select-btns">
           <view
             v-for="(monster, index) in pageContent.selectUrls"
             :key="index"
-            class="monster"
-            :class="{ selected: selectedMonster === index }"
-            @click="selectMonster(index)"
+            class="select-btn"
+            :class="{ selected: selectedItem === index }"
+            @click="selectItem(index)"
           >
             <image :src="monster" mode="aspectFit" style="width: 100%" />
           </view>
@@ -140,9 +140,9 @@
           <audio
             style="text-align: left"
             :src="pageContent.audioUrls[0]"
-            :poster="current.poster"
-            :name="current.name"
-            :author="current.author"
+            :poster="audioPlayer.poster"
+            :name="audioPlayer.name"
+            :author="audioPlayer.author"
             :action="audioAction"
             controls
           ></audio>
@@ -163,6 +163,7 @@ import { IInterPage, useInterStore } from '@/store/inter'
 import { useGlobalPageControlStore } from '@/store/globalPageControl'
 import { getPageByInterId } from '@/service/index/inter'
 import { useToast } from 'wot-design-uni'
+
 const interStore = useInterStore()
 const globalPageControlStore = useGlobalPageControlStore()
 const toast = useToast()
@@ -171,13 +172,13 @@ const pageType = ref<string>('normal')
 const pageContent = ref<IInterPage>()
 const radioValue = ref<string>()
 const currentSlideImage = ref<number>(0)
-const selectedMonster = ref()
+const selectedItem = ref()
 const userInputList = ref<Array<string>>([])
 const hasOperation = computed(() => {
   return pageContent.value.operationIcon != null && pageContent.value.operationText != null
 })
 
-const current = ref({
+const audioPlayer = ref({
   poster: 'https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/music-a.png',
   name: '致爱丽丝',
   author: '暂无',
@@ -208,8 +209,8 @@ const onSlideChange = (e) => {
   console.log(e)
 }
 
-const selectMonster = (index) => {
-  selectedMonster.value = index
+const selectItem = (index) => {
+  selectedItem.value = index
 }
 
 const toPage = (buttonUrl: string) => {
@@ -266,6 +267,42 @@ const toPage = (buttonUrl: string) => {
 }
 
 const doOperation = async () => {
+  // 如果是 input 页面 保存用户输入到pinia
+  if (pageContent.value.pageType === 'input') {
+    let inputContent = ''
+    for (let i = 0; i < userInputList.value.length; i++) {
+      inputContent = inputContent + userInputList.value[i] + '%'
+    }
+    inputContent = inputContent.slice(0, -1) + '#'
+
+    const inputPage = pageContent.value.pageId + '#'
+
+    let inputQuestion = ''
+    for (let i = 0; i < pageContent.value.inputPlaceholders.length; i++) {
+      inputQuestion = inputQuestion + pageContent.value.inputPlaceholders[i] + '%'
+    }
+    inputQuestion = inputQuestion.slice(0, -1) + '#'
+
+    interStore.appendUserInputContent(inputContent)
+    interStore.appendUserInputPages(inputPage)
+    interStore.appendUserInputQuestions(inputQuestion)
+
+    console.log(interStore.interInfo.userInputContent)
+    console.log(interStore.interInfo.userInputQuestions)
+  }
+  // 如果是 select 页面 保存用户输入到pinia
+  if (pageContent.value.pageType === 'select') {
+    const inputContent = pageContent.value.selectUrls[selectedItem.value] + '#'
+    const inputPage = pageContent.value.pageId + '#'
+    const inputQuestion = '_' + '#'
+    interStore.appendUserInputContent(inputContent)
+    interStore.appendUserInputPages(inputPage)
+    interStore.appendUserInputQuestions(inputQuestion)
+
+    console.log(interStore.interInfo.userInputContent)
+    console.log(interStore.interInfo.userInputQuestions)
+  }
+
   // 如果用户点击的是返回按钮 需要判断当前是什么页面以跳转回原 button 页面
   if (pageContent.value.operationIcon.endsWith('back.png')) {
     if (pageContent.value.pageId === 7 && pageContent.value.interId === 2) {
@@ -281,30 +318,6 @@ const doOperation = async () => {
       url: '/pages/journey_common/common',
     })
     return
-  }
-
-  // 如果是 input 页面 保存用户输入到pinia
-  if (pageContent.value.pageType === 'input') {
-    let inputContent = ''
-    for (let i = 0; i < userInputList.value.length; i++) {
-      inputContent = inputContent + userInputList.value[i] + '%'
-    }
-    inputContent = inputContent.slice(0, -1) + '#'
-
-    const inputPage = pageContent.value.pageId + '#'
-
-    let inoutQuestion = ''
-    for (let i = 0; i < pageContent.value.inputPlaceholders.length; i++) {
-      inoutQuestion = inoutQuestion + pageContent.value.inputPlaceholders[i] + '%'
-    }
-    inoutQuestion = inoutQuestion.slice(0, -1) + '#'
-
-    interStore.interInfo.userInputContent = interStore.interInfo.userInputContent + inputContent
-    interStore.interInfo.userInputPages = interStore.interInfo.userInputContent + inputPage
-    interStore.interInfo.userInputQuestions = interStore.interInfo.userInputContent + inoutQuestion
-
-    console.log(inputContent)
-    console.log(inoutQuestion)
   }
 
   // pageIndex 自增
@@ -383,14 +396,14 @@ const doOperation = async () => {
   height: 15%;
 }
 
-.monsters {
+.select-btns {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
   width: 100%;
   overflow-x: hidden;
 }
-.monster {
+.select-btn {
   width: 100%;
   aspect-ratio: 1;
   cursor: pointer;
@@ -399,12 +412,12 @@ const doOperation = async () => {
     opacity 0.3s,
     transform 0.3s;
 }
-.monster:hover,
-.monster.selected {
+.select-btn:hover,
+.select-btn.selected {
   opacity: 1;
   transform: scale(1.1);
 }
-.monster img {
+.select-btn img {
   width: 100%;
   height: 100%;
   object-fit: contain;
