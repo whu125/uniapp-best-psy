@@ -12,6 +12,7 @@
       fixed
       safeAreaInsetTop
       :title="pageContent.navbarTitle"
+      left-text="退出"
       left-arrow
       @click-left="ToHome"
     ></wd-navbar>
@@ -162,9 +163,10 @@
 import { IInterPage, useInterStore } from '@/store/inter'
 import { useGlobalPageControlStore } from '@/store/globalPageControl'
 import { getPageByInterId } from '@/service/index/inter'
-import { useToast } from 'wot-design-uni'
+import { useToast, useMessage } from 'wot-design-uni'
 
 const interStore = useInterStore()
+const message = useMessage()
 const globalPageControlStore = useGlobalPageControlStore()
 const toast = useToast()
 
@@ -194,11 +196,40 @@ onShow(async () => {
   // pageContent.value = res.data
 
   pageType.value = pageContent.value.pageType
+  // 如果是 input 页面 恢复状态
+  if (pageType.value === 'input') {
+    if (interStore.userInputMap.has(pageContent.value.pageId)) {
+      let inputString = interStore.userInputMap.get(pageContent.value.pageId)
+      inputString = inputString.slice(0, -1)
+      const inputList = inputString.split('%')
+      inputList.forEach((input, index) => {
+        userInputList.value[index] = input
+      })
+    }
+  }
   console.log('pageContent.value', pageContent.value)
 })
 
 const ToHome = () => {
-  uni.switchTab({ url: '/pages/home/home' })
+  message
+    .confirm({
+      msg: '确定退出干预吗？',
+      title: '提示',
+    })
+    .then(() => {
+      // 如果是 input 页面 保存用户输入到pinia
+      if (pageContent.value.pageType === 'input') {
+        let inputContent = ''
+        for (let i = 0; i < userInputList.value.length; i++) {
+          inputContent = inputContent + userInputList.value[i] + '%'
+        }
+        interStore.setUserInputMap(pageContent.value.pageId, inputContent)
+      }
+      uni.switchTab({ url: '/pages/home/home' })
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 const handleSlideClick = (e) => {

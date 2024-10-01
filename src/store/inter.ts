@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 const initState = {
-  interId: 0,
+  interId: -1,
   recordId: 0,
   interPages: null,
 }
@@ -87,10 +87,6 @@ export const useInterStore = defineStore(
       console.log(pageIndex.value)
     }
 
-    const resetIndex = () => {
-      pageIndex.value = 0
-    }
-
     return {
       interInfo,
       setInterInfo,
@@ -99,9 +95,9 @@ export const useInterStore = defineStore(
       pageCount,
       reset,
       pageIndex,
+      userInputMap,
       addPageIndex,
       minusPageIndex,
-      resetIndex,
       isStartJourney,
       isTaskFinished,
       setUserInputMap,

@@ -54,6 +54,8 @@ import { startInter, IStartInter } from '@/service/index/inter'
 import { getFormattedDate } from '@/utils/getTime'
 import { useUserStore } from '@/store/user'
 import { useInterStore } from '@/store/inter'
+import { useGlobalPageControlStore } from '@/store/globalPageControl'
+import { useMessage } from 'wot-design-uni'
 
 defineOptions({
   name: 'Home',
@@ -64,7 +66,9 @@ uni.hideTabBar()
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const userStore = useUserStore()
+const message = useMessage()
 const interStore = useInterStore()
+const globalPageControl = useGlobalPageControlStore()
 
 const currProgress = ref<number>(2)
 // const currProgress = ref<number>(userInfo.currProgress)
@@ -83,11 +87,28 @@ const journeySteps = ref([
 onLoad(() => {})
 
 const enterJourney = async (progress: number) => {
-  const numberStr = progress.toString()
-  await interStore.resetIndex()
-  uni.navigateTo({
-    url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
-  })
+  if (progress !== interStore.interInfo.interId) {
+    message
+      .confirm({
+        msg: '上一次干预记录会被清除',
+        title: '你的上一次干预还未完成！',
+      })
+      .then(() => {
+        const numberStr = progress.toString()
+        interStore.clearInternfo()
+        globalPageControl.clearInternfo()
+        uni.navigateTo({
+          url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  } else {
+    uni.navigateTo({
+      url: '/pages/journey_common/common',
+    })
+  }
 }
 </script>
 

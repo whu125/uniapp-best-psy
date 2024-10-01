@@ -107,9 +107,6 @@ const pageContent = ref([
   },
 ])
 const startJourney = async () => {
-  interStore.clearInternfo()
-  globalPageControl.clearInternfo()
-
   const startObj: IStartInter = {
     userId: userStore.userInfo.userId,
     interId: progress.value,
