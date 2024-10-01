@@ -1,4 +1,4 @@
-<route lang="json5">
+<route lang="json5" type="home">
 {
   style: {
     navigationStyle: 'custom',
@@ -59,9 +59,18 @@
 </template>
 
 <script lang="ts" setup>
+import { submitInter, ISubmitInter } from '@/service/index/inter'
+import { getFormattedDate } from '@/utils/getTime'
+import { useUserStore } from '@/store/user'
+import { useInterStore } from '@/store/inter'
+import { useMessage, useToast } from 'wot-design-uni'
+
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const tiyan = ref(9)
 const shouhuo = ref(9)
+const userStore = useUserStore()
+const interStore = useInterStore()
+const toast = useToast()
 const helpfulOptions = ref([
   '认识到想法影响情绪',
   '对自动思维的探索',
@@ -82,7 +91,7 @@ const toggleOption = (item: string) => {
   console.log(selectedOptions.value)
 }
 
-const submit = () => {
+const submit = async () => {
   if (helpText.value.trim() !== '') {
     const otherIndex = selectedOptions.value.indexOf('其他......')
     if (otherIndex !== -1) {
@@ -98,7 +107,23 @@ const submit = () => {
     shouhuo: shouhuo.value,
     help,
   })
-  uni.redirectTo({ url: '/pages/home/home' })
+
+  interStore.test()
+  // 生成用于提交后端的数据
+  // const submitObj: ISubmitInter = {
+  //   userId: userStore.userInfo.userId,
+  //   interId: interStore.interInfo.interId,
+  //   endTime: getFormattedDate(),
+  //   inputPages: interStore.inputPages,
+  //   inputContent: interStore.inputContent,
+  // }
+  // const res = await submitInter(submitObj)
+  // if (res.code === 200) {
+  //   toast.success('干预完成！')
+  //   uni.redirectTo({ url: '/pages/home/home' })
+  // } else {
+  //   toast.error('出现了一些问题')
+  // }
 }
 </script>
 

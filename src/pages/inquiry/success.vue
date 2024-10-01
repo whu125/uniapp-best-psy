@@ -39,7 +39,7 @@
 // 这里可以添加任何需要的逻辑
 const startInquiry = () => {
   uni.redirectTo({
-    url: '/pages/inquiry/success',
+    url: '/pages/inquiry/eval',
   })
 }
 </script>

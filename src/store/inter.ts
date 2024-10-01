@@ -46,6 +46,26 @@ export const useInterStore = defineStore(
 
     const isTaskFinished = ref<boolean>(false)
 
+    const inputPages = computed(() => {
+      let inputPages = ''
+      userInputMap.value.forEach((value, key) => {
+        inputPages = inputPages + key + '#'
+      })
+      return inputPages
+    })
+
+    const inputContent = computed(() => {
+      let inputContent = ''
+      userInputMap.value.forEach((value, key) => {
+        inputContent = inputContent + value + '#'
+      })
+      return inputContent
+    })
+
+    const test = () => {
+      console.log(typeof userInputMap.value)
+    }
+
     const setUserInputMap = (key: number, value: string) => {
       userInputMap.value.set(key, value)
       console.log(userInputMap.value)
@@ -88,6 +108,7 @@ export const useInterStore = defineStore(
     }
 
     return {
+      test,
       interInfo,
       setInterInfo,
       clearInternfo,
@@ -101,6 +122,8 @@ export const useInterStore = defineStore(
       isStartJourney,
       isTaskFinished,
       setUserInputMap,
+      inputPages,
+      inputContent,
     }
   },
   {

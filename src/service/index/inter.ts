@@ -18,7 +18,8 @@ export interface ISubmitInter {
   userId: string
   interId: number
   endTime: string
-  answers: string
+  inputPages: string
+  inputContent: string
 }
 
 type IInterPageReturn = {
@@ -64,4 +65,8 @@ export const startInter = (startInter: IStartInter) => {
 
 export const submitInter = (submitInter: ISubmitInter) => {
   return http.post(`/inter/submitInter`, submitInter, {})
+}
+
+export const checkInterAvailability = (interId: number) => {
+  return http.post(`/inter/checkInterAvailability?interId=${interId}`, {}, {})
 }
