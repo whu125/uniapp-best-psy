@@ -45,11 +45,11 @@
   },
   "pages": [
     {
-      "path": "pages/inquiry/eval",
+      "path": "pages/home/home",
       "type": "home",
       "style": {
         "navigationStyle": "custom",
-        "navigationBarTitleText": "打卡"
+        "navigationBarTitleText": "我的旅程"
       }
     },
     {
@@ -104,14 +104,6 @@
       "needLogin": true
     },
     {
-      "path": "pages/home/home",
-      "type": "page",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "我的旅程"
-      }
-    },
-    {
       "path": "pages/inquiry/end",
       "type": "page",
       "style": {
@@ -119,6 +111,14 @@
         "navigationBarTitleText": "打卡"
       },
       "needLogin": true
+    },
+    {
+      "path": "pages/inquiry/eval",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "打卡"
+      }
     },
     {
       "path": "pages/inquiry/first",

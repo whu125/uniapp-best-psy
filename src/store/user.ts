@@ -3,14 +3,14 @@ import { ref } from 'vue'
 
 // const initState = { nickname: '', avatar: '' }
 const initState = {
-  // userId: '1',
-  // username: 'yz',
-  // wechatId: '123456789wechat',
-  // wechatName: 'yz-wechat',
-  // phone: '1234567890',
-  // currProgress: 1,
-  // avatar: '',
-  // token: '',
+  userId: '1',
+  username: 'yz',
+  wechatId: '123456789wechat',
+  wechatName: 'yz-wechat',
+  phone: '1234567890',
+  currProgress: 1,
+  avatar: '',
+  token: '',
 }
 
 export const useUserStore = defineStore(
@@ -33,6 +33,10 @@ export const useUserStore = defineStore(
     const reset = () => {
       userInfo.value = { ...initState }
     }
+
+    const addProgress = () => {
+      userInfo.value.currProgress = userInfo.value.currProgress + 1
+    }
     // const isLogined = computed(() => !!userInfo.value.token)
     const isLogined = computed(() => userInfo.value.token !== '' && userInfo.value.token !== null)
 
@@ -43,6 +47,7 @@ export const useUserStore = defineStore(
       isLogined,
       reset,
       setUserToken,
+      addProgress,
     }
   },
   {

@@ -62,10 +62,6 @@ export const useInterStore = defineStore(
       return inputContent
     })
 
-    const test = () => {
-      console.log(typeof userInputMap.value)
-    }
-
     const setUserInputMap = (key: number, value: string) => {
       userInputMap.value.set(key, value)
       console.log(userInputMap.value)
@@ -108,7 +104,6 @@ export const useInterStore = defineStore(
     }
 
     return {
-      test,
       interInfo,
       setInterInfo,
       clearInternfo,

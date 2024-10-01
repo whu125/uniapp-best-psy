@@ -1,4 +1,4 @@
-<route lang="json5" type="home">
+<route lang="json5">
 {
   style: {
     navigationStyle: 'custom',
@@ -108,22 +108,22 @@ const submit = async () => {
     help,
   })
 
-  interStore.test()
   // 生成用于提交后端的数据
-  // const submitObj: ISubmitInter = {
-  //   userId: userStore.userInfo.userId,
-  //   interId: interStore.interInfo.interId,
-  //   endTime: getFormattedDate(),
-  //   inputPages: interStore.inputPages,
-  //   inputContent: interStore.inputContent,
-  // }
-  // const res = await submitInter(submitObj)
-  // if (res.code === 200) {
-  //   toast.success('干预完成！')
-  //   uni.redirectTo({ url: '/pages/home/home' })
-  // } else {
-  //   toast.error('出现了一些问题')
-  // }
+  const submitObj: ISubmitInter = {
+    userId: userStore.userInfo.userId,
+    interId: interStore.interInfo.interId,
+    endTime: getFormattedDate(),
+    inputPages: interStore.inputPages,
+    inputContent: interStore.inputContent,
+  }
+  const res = await submitInter(submitObj)
+  if (res.code === 200) {
+    toast.success('干预完成！')
+    userStore.addProgress()
+    uni.switchTab({ url: '/pages/home/home' })
+  } else {
+    toast.error('出现了一些问题')
+  }
 }
 </script>
 
