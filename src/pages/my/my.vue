@@ -96,6 +96,11 @@
           <span class="label">测试管理员页面</span>
           <span class="arrow">›</span>
         </div>
+        <div class="menu-item" @click="submitInter()">
+          <span class="icon">ℹ️</span>
+          <span class="label">模拟提交干预</span>
+          <span class="arrow">›</span>
+        </div>
       </div>
     </div>
   </view>
@@ -179,6 +184,10 @@ const toadmin = () => {
   uni.navigateTo({
     url: '/pages/admin/admin',
   })
+}
+
+const submitInter = () => {
+  console.log('模拟提交干预')
 }
 </script>
 

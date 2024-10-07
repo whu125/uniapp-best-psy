@@ -2,7 +2,7 @@
   <wd-config-provider :themeVars="themeVars">
     <slot />
     <wd-toast />
-    <wd-message-box />
+    <!-- <wd-message-box /> -->
   </wd-config-provider>
 </template>
 

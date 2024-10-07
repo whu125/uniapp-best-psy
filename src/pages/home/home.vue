@@ -1,4 +1,4 @@
-<route lang="json5">
+<route lang="json5" type="home">
 {
   style: {
     navigationStyle: 'custom',
@@ -22,11 +22,16 @@
       </view>
       <view class="card flex justify-center">
         <span class="font-800 text-2xl">正在完成</span>
-        <span class="font-800 text-2xl ml-4">第 1 站</span>
+        <span class="font-800 text-2xl ml-4" v-if="currProgress == 0">导入</span>
+        <span class="font-800 text-2xl ml-4" v-if="currProgress != 0">第 1 站</span>
       </view>
-      <view class="card flex justify-center">
-        <span class="font-800 text-xl">剩余 3 小时 10 分 解锁</span>
-        <span class="font-800 text-xl ml-4">第 2 站</span>
+      <view class="card flex justify-center" v-if="waitingTime > 0">
+        <span class="font-800 text-xl">剩余 {{ waitingTime }} 小时 解锁</span>
+        <span class="font-800 text-xl ml-4">下一站</span>
+      </view>
+      <view class="card flex justify-center" v-if="waitingTime <= 0">
+        <span class="font-800 text-xl">已解锁下一站</span>
+        <!-- <span class="font-800 text-xl ml-4">下一站</span> -->
       </view>
       <view class="card" v-for="(journey, index) in journeySteps" :key="index">
         <img class="card-icon" :src="journey.icon" />
@@ -35,8 +40,21 @@
           style="width: 60rpx; height: 60rpx"
           mode="aspectFit"
           src="../../static/images/home/startJourney.png"
-          v-show="currProgress >= journey.progress"
+          v-show="currProgress > journey.progress"
           @click="enterJourney(journey.progress)"
+        />
+        <image
+          style="width: 60rpx; height: 60rpx"
+          mode="aspectFit"
+          src="../../static/images/home/startJourney.png"
+          v-show="currProgress == journey.progress && checkTimeFlag"
+          @click="enterJourney(journey.progress)"
+        />
+        <image
+          style="width: 60rpx; height: 60rpx"
+          src="../../static/images/home/lockJourney.png"
+          mode="aspectFit"
+          v-show="currProgress == journey.progress && !checkTimeFlag"
         />
         <image
           style="width: 60rpx; height: 60rpx"
@@ -47,6 +65,7 @@
       </view>
       <view style="height: 150rpx"></view>
     </view>
+    <wd-message-box />
   </view>
 </template>
 
@@ -71,12 +90,18 @@ uni.hideTabBar()
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const userStore = useUserStore()
 const message = useMessage()
+
 const toast = useToast()
 const interStore = useInterStore()
 const globalPageControl = useGlobalPageControlStore()
 
+const userInfo = ref(userStore.userInfo)
 // const currProgress = ref<number>(2)
 const currProgress = ref<number>(userStore.userInfo.currProgress)
+
+const checkTimeFlag = ref(false)
+
+const waitingTime = ref(1)
 
 const journeySteps = ref([
   { icon: '../../static/images/home/journey0.png', text: '导入：开启你的旅程', progress: 0 },
@@ -88,22 +113,75 @@ const journeySteps = ref([
   { icon: '../../static/images/home/journey6.png', text: '第六站：开始你的行动', progress: 6 },
   { icon: '../../static/images/home/journey7.png', text: '第七站：发现你的价值', progress: 7 },
 ])
+
+onShow(() => {
+  console.log('请求后端更新时间')
+})
 // 测试 uni API 自动引入
-onLoad(() => {})
+onLoad(() => {
+  const currentTime = new Date().getTime()
+
+  // userInfo.value.lockTime = new Date().getTime() + 3 * 60 * 60 * 1000 // 设置锁定时间为当前时间加3小时
+  console.log('userInfo', userInfo.value)
+  const leftTime = calculateHour()
+  console.log('leftTime', leftTime)
+  if (leftTime > 0) {
+    waitingTime.value = Math.floor(leftTime) + 1
+  } else {
+    console.log('请求后端，更新下一站')
+    waitingTime.value = 0
+    checkTimeFlag.value = true
+  }
+})
+
+const calculateHour = () => {
+  const currentTime = new Date().getTime()
+  const lockTime = userInfo.value.lockTime
+  const remainingTime = (lockTime - currentTime) / (1000 * 60 * 60) // 转化为小时
+
+  return remainingTime
+}
 
 const enterJourney = async (progress: number) => {
-  const res = await checkInterAvailability(progress)
-  if (res.code === 200 && res.data !== 'none') {
-    toast.warning(res.data)
-    return
-  }
-  if (progress !== interStore.interInfo.interId) {
+  console.log(11)
+  console.log('interStore.value', interStore.interInfo)
+
+  // 检查是否有干预记录
+  if (interStore.interInfo.interId === -1) {
+    console.log('没有干预记录')
+
+    const numberStr = progress.toString()
+
+    uni.navigateTo({
+      url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+    })
+  } else if (interStore.interInfo.interId === progress) {
     message
       .confirm({
-        msg: '上一次干预记录会被清除',
-        title: '你的上一次干预还未完成！',
+        msg: '是否从上次干预继续',
+        title: '检测到上次干预未完成',
+        closeOnClickModal: false,
+        type: 'confirm',
       })
       .then(() => {
+        console.log('进入干预')
+        const numberStr = progress.toString()
+        // interStore.clearInternfo()
+        // globalPageControl.clearInternfo()
+        uni.navigateTo({
+          url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+        })
+      })
+  } else {
+    message
+      .confirm({
+        msg: '是否开始新的干预，这会清除上次干预缓存',
+        title: '检测到上次其他干预未完成',
+        closeOnClickModal: false,
+        type: 'confirm',
+      })
+      .then(() => {
+        console.log('进入干预')
         const numberStr = progress.toString()
         interStore.clearInternfo()
         globalPageControl.clearInternfo()
@@ -111,14 +189,38 @@ const enterJourney = async (progress: number) => {
           url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
         })
       })
-      .catch((error) => {
-        console.log(error)
+      .catch(() => {
+        console.log('取消')
       })
-  } else {
-    uni.navigateTo({
-      url: '/pages/journey_common/common',
-    })
   }
+
+  // const res = await checkInterAvailability(progress)
+  // if (res.code === 200 && res.data !== 'none') {
+  //   toast.warning(res.data)
+  //   return
+  // }
+  // if (progress !== interStore.interInfo.interId) {
+  //   message
+  //     .confirm({
+  //       msg: '上一次干预记录会被清除',
+  //       title: '你的上一次干预还未完成！',
+  //     })
+  //     .then(() => {
+  //       const numberStr = progress.toString()
+  //       interStore.clearInternfo()
+  //       globalPageControl.clearInternfo()
+  //       uni.navigateTo({
+  //         url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+  //       })
+  //     })
+  //     .catch((error) => {
+  //       console.log(error)
+  //     })
+  // } else {
+  //   uni.navigateTo({
+  //     url: '/pages/journey_common/common',
+  //   })
+  // }
 }
 </script>
 

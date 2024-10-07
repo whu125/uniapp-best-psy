@@ -8,14 +8,16 @@
 </route>
 <template>
   <view class="" w-full h-full v-if="pageContent">
-    <wd-navbar
+    <wd-navbar fixed safeAreaInsetTop :title="pageContent.navbarTitle"></wd-navbar>
+
+    <!-- <wd-navbar
       fixed
       safeAreaInsetTop
       :title="pageContent.navbarTitle"
       left-text="退出"
       left-arrow
       @click-left="ToHome"
-    ></wd-navbar>
+    ></wd-navbar> -->
 
     <!-- 普通页面 -->
     <view class="main-container" v-if="pageType === 'normal'">
@@ -156,6 +158,10 @@
           {{ pageContent.operationText }}
         </view>
       </view>
+    </view>
+
+    <view>
+      <wd-button @click="testsubmit">测试提交干预</wd-button>
     </view>
   </view>
 </template>
@@ -349,6 +355,12 @@ const doOperation = async () => {
       url: specialPage,
     })
   }
+}
+
+const testsubmit = () => {
+  uni.redirectTo({
+    url: '/pages/inquiry/eval',
+  })
 }
 </script>
 

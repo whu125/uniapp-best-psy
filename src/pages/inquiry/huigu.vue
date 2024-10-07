@@ -53,28 +53,6 @@ const interIdToUrlMap = new Map<number, string>([
 
 onShow(async () => {})
 
-const ToHome = () => {
-  message
-    .confirm({
-      msg: '确定退出干预吗？',
-      title: '提示',
-    })
-    .then(() => {
-      // 如果是 input 页面 保存用户输入到pinia
-      if (pageContent.value.pageType === 'input') {
-        let inputContent = ''
-        for (let i = 0; i < userInputList.value.length; i++) {
-          inputContent = inputContent + userInputList.value[i] + '%'
-        }
-        interStore.setUserInputMap(pageContent.value.pageId, inputContent)
-      }
-      uni.switchTab({ url: '/pages/home/home' })
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-}
-
 const handleSlideClick = (e) => {
   console.log(e)
 }

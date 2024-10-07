@@ -8,9 +8,11 @@ const initState = {
   wechatId: '123456789wechat',
   wechatName: 'yz-wechat',
   phone: '1234567890',
-  currProgress: 1,
+  currProgress: 0,
   avatar: '',
   token: '',
+  // 这个字段记录，下一次应该解锁的时间
+  lockTime: '',
 }
 
 export const useUserStore = defineStore(
@@ -34,6 +36,10 @@ export const useUserStore = defineStore(
       userInfo.value = { ...initState }
     }
 
+    const setLockTime = () => {
+      // 24小时后解锁
+      userInfo.value.lockTime = new Date().getTime() + 24 * 60 * 60 * 1000
+    }
     const addProgress = () => {
       userInfo.value.currProgress = userInfo.value.currProgress + 1
     }
@@ -48,6 +54,7 @@ export const useUserStore = defineStore(
       reset,
       setUserToken,
       addProgress,
+      setLockTime,
     }
   },
   {

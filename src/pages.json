@@ -45,11 +45,11 @@
   },
   "pages": [
     {
-      "path": "pages/home/home_old",
+      "path": "pages/home/home",
       "type": "home",
       "style": {
         "navigationStyle": "custom",
-        "navigationBarTitleText": "旧版-我的旅程"
+        "navigationBarTitleText": "我的旅程"
       }
     },
     {
@@ -104,11 +104,11 @@
       "needLogin": true
     },
     {
-      "path": "pages/home/home",
+      "path": "pages/home/home_old",
       "type": "page",
       "style": {
         "navigationStyle": "custom",
-        "navigationBarTitleText": "我的旅程"
+        "navigationBarTitleText": "旧版-我的旅程"
       }
     },
     {

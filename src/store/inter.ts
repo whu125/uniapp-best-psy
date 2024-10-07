@@ -48,17 +48,26 @@ export const useInterStore = defineStore(
 
     const inputPages = computed(() => {
       let inputPages = ''
-      userInputMap.value.forEach((value, key) => {
-        inputPages = inputPages + key + '#'
-      })
+      console.log('userInputMap.value', userInputMap.value)
+
+      if (userInputMap.value && userInputMap.value.size > 0) {
+        userInputMap.value.forEach((value, key) => {
+          inputPages = inputPages + key + '#'
+        })
+      }
+
       return inputPages
     })
 
     const inputContent = computed(() => {
       let inputContent = ''
-      userInputMap.value.forEach((value, key) => {
-        inputContent = inputContent + value + '#'
-      })
+      console.log('userInputMap.value', userInputMap.value)
+
+      if (userInputMap.value && userInputMap.value.size > 0) {
+        userInputMap.value.forEach((value, key) => {
+          inputContent = inputContent + value + '#'
+        })
+      }
       return inputContent
     })
 

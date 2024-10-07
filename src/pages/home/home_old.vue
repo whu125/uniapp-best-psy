@@ -1,4 +1,4 @@
-<route lang="json5" type="home">
+<route lang="json5">
 {
   style: {
     navigationStyle: 'custom',
@@ -26,7 +26,7 @@
         <span class="font-800 text-2xl ml-4">第 1 站</span>
       </view>
       <view class="card flex justify-center">
-        <span class="font-800 text-xl">剩余 3 小时 10 分 解锁</span>
+        <span class="font-800 text-xl">剩余 3 小时 解锁</span>
         <span class="font-800 text-xl ml-4">第 2 站</span>
       </view>
       <!-- <view class="card intro-card">

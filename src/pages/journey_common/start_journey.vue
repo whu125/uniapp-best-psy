@@ -57,12 +57,25 @@ onLoad((options) => {
   progress.value = Number(decodeURIComponent(numberStr))
   currContent.value = pageContent.value[progress.value]
   console.log('currContent', currContent.value)
+  navbarTitle.value = stationMap.get(progress.value)
 })
 
 const ToHome = () => {
   uni.switchTab({ url: '/pages/home/home' })
 }
-const navbarTitle = ref<string>('我的旅程: 第二站')
+const stationMap = new Map([
+  [0, '我的旅程: 导入'],
+  [1, '我的旅程: 第一站'],
+  [2, '我的旅程: 第二站'],
+  [3, '我的旅程: 第三站'],
+  [4, '我的旅程: 第四站'],
+  [5, '我的旅程: 第五站'],
+  [6, '我的旅程: 第六站'],
+  [7, '我的旅程: 第七站'],
+])
+
+const navbarTitle = ref<string>('')
+
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const imageMap = new Map([
   [0, 'http://115.159.83.61:9000/journey2/start_journey_logo2.png'],
@@ -74,7 +87,7 @@ const currContent = ref()
 
 const pageContent = ref([
   {
-    title: '第零站: 观察你的思维',
+    title: '导入: 观察你的思维',
     questions: [
       '• 情绪反应的起点是什么?',
       '• 思维的 "默认选项" 如何影响生活?',
@@ -110,6 +123,7 @@ const startJourney = async () => {
   const startObj: IStartInter = {
     userId: userStore.userInfo.userId,
     interId: progress.value,
+    // interId: 2,
     startTime: getFormattedDate(),
   }
   toast.loading('马上开始...')

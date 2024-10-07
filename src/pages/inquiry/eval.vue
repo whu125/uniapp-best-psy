@@ -97,40 +97,46 @@ const toggleOption = (item: string) => {
 const submit = async () => {
   // 测试用
 
-  uni.redirectTo({ url: '/pages/inquiry/success' })
+  if (helpText.value.trim() !== '') {
+    const otherIndex = selectedOptions.value.indexOf('其他......')
+    if (otherIndex !== -1) {
+      selectedOptions.value.splice(otherIndex, 1, helpText.value.trim())
+    } else {
+      selectedOptions.value.push(helpText.value.trim())
+    }
+  }
+  const help = selectedOptions.value.join('、')
+  console.log(help)
+  console.log('提交的数据:', {
+    tiyan: tiyan.value,
+    shouhuo: shouhuo.value,
+    help,
+  })
 
-  //   if (helpText.value.trim() !== '') {
-  //     const otherIndex = selectedOptions.value.indexOf('其他......')
-  //     if (otherIndex !== -1) {
-  //       selectedOptions.value.splice(otherIndex, 1, helpText.value.trim())
-  //     } else {
-  //       selectedOptions.value.push(helpText.value.trim())
-  //     }
-  //   }
-  //   const help = selectedOptions.value.join('、')
-  //   console.log(help)
-  //   console.log('提交的数据:', {
-  //     tiyan: tiyan.value,
-  //     shouhuo: shouhuo.value,
-  //     help,
-  //   })
+  // 生成用于提交后端的数据
+  const submitObj: ISubmitInter = {
+    userId: userStore.userInfo.userId,
+    interId: interStore.interInfo.interId,
+    endTime: getFormattedDate(),
+    inputPages: interStore.inputPages,
+    inputContent: interStore.inputContent,
+  }
+  const res = await submitInter(submitObj)
+  console.log(res)
+  if (res.code === 200) {
+    toast.success('干预完成！')
 
-  //   // 生成用于提交后端的数据
-  //   const submitObj: ISubmitInter = {
-  //     userId: userStore.userInfo.userId,
-  //     interId: interStore.interInfo.interId,
-  //     endTime: getFormattedDate(),
-  //     inputPages: interStore.inputPages,
-  //     inputContent: interStore.inputContent,
-  //   }
-  //   const res = await submitInter(submitObj)
-  //   if (res.code === 200) {
-  //     toast.success('干预完成！')
-  //     userStore.addProgress()
-  //     uni.redirectTo({ url: '/pages/inquiry/end' })
-  //   } else {
-  //     toast.error('出现了一些问题')
-  //   }
+    // 这里要判断是否是第一次提交最新一次干预
+    if (res.data == userStore.userInfo.currProgress + 1) {
+      // 说明此时是第一次提交最新一次干预
+      userStore.addProgress()
+      userStore.setLockTime()
+    }
+    // userStore.addProgress()
+    uni.redirectTo({ url: '/pages/inquiry/success' })
+  } else {
+    toast.error('出现了一些问题')
+  }
 }
 </script>
 
