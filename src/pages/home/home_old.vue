@@ -1,8 +1,8 @@
-<route lang="json5">
+<route lang="json5" type="home">
 {
   style: {
     navigationStyle: 'custom',
-    navigationBarTitleText: '我的旅程',
+    navigationBarTitleText: '旧版-我的旅程',
   },
 }
 </route>
@@ -13,13 +13,14 @@
       <view class="title">我的旅程</view>
     </view> -->
 
-    <wd-navbar fixed safeAreaInsetTop title="我的旅程"></wd-navbar>
+    <wd-navbar fixed safeAreaInsetTop title="旧版-我的旅程"></wd-navbar>
 
     <view class="content px-4">
       <view style="height: 100rpx"></view>
       <view class="h-40 w-full">
         <image src="http://115.159.83.61:9000/home/home.png" mode="scaleToFill" />
       </view>
+
       <view class="card flex justify-center">
         <span class="font-800 text-2xl">正在完成</span>
         <span class="font-800 text-2xl ml-4">第 1 站</span>
@@ -28,6 +29,10 @@
         <span class="font-800 text-xl">剩余 3 小时 10 分 解锁</span>
         <span class="font-800 text-xl ml-4">第 2 站</span>
       </view>
+      <!-- <view class="card intro-card">
+        <view class="card-icon">&#9654;</view>
+        <view class="card-text">导入: 开启你的旅程</view>
+      </view> -->
       <view class="card" v-for="(journey, index) in journeySteps" :key="index">
         <img class="card-icon" :src="journey.icon" />
         <view class="card-text">{{ journey.text }}</view>
@@ -65,7 +70,7 @@ defineOptions({
   name: 'Home',
 })
 
-uni.hideTabBar()
+// uni.hideTabBar()
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
@@ -75,8 +80,8 @@ const toast = useToast()
 const interStore = useInterStore()
 const globalPageControl = useGlobalPageControlStore()
 
-// const currProgress = ref<number>(2)
-const currProgress = ref<number>(userStore.userInfo.currProgress)
+const currProgress = ref<number>(3)
+// const currProgress = ref<number>(userStore.userInfo.currProgress)
 
 const journeySteps = ref([
   { icon: '../../static/images/home/journey0.png', text: '导入：开启你的旅程', progress: 0 },
@@ -92,33 +97,12 @@ const journeySteps = ref([
 onLoad(() => {})
 
 const enterJourney = async (progress: number) => {
-  const res = await checkInterAvailability(progress)
-  if (res.code === 200 && res.data !== 'none') {
-    toast.warning(res.data)
-    return
-  }
-  if (progress !== interStore.interInfo.interId) {
-    message
-      .confirm({
-        msg: '上一次干预记录会被清除',
-        title: '你的上一次干预还未完成！',
-      })
-      .then(() => {
-        const numberStr = progress.toString()
-        interStore.clearInternfo()
-        globalPageControl.clearInternfo()
-        uni.navigateTo({
-          url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
-        })
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  } else {
-    uni.navigateTo({
-      url: '/pages/journey_common/common',
-    })
-  }
+  const numberStr = progress.toString()
+  interStore.clearInternfo()
+  globalPageControl.clearInternfo()
+  uni.navigateTo({
+    url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+  })
 }
 </script>
 

@@ -45,11 +45,11 @@
   },
   "pages": [
     {
-      "path": "pages/home/home",
+      "path": "pages/home/home_old",
       "type": "home",
       "style": {
         "navigationStyle": "custom",
-        "navigationBarTitleText": "我的旅程"
+        "navigationBarTitleText": "旧版-我的旅程"
       }
     },
     {
@@ -104,10 +104,18 @@
       "needLogin": true
     },
     {
+      "path": "pages/home/home",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "我的旅程"
+      }
+    },
+    {
       "path": "pages/inquiry/end",
       "type": "page",
       "style": {
-        "navigationStyle": "default",
+        "navigationStyle": "custom",
         "navigationBarTitleText": "打卡"
       },
       "needLogin": true
@@ -128,6 +136,14 @@
       }
     },
     {
+      "path": "pages/inquiry/huigu",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
       "path": "pages/inquiry/inquiry",
       "type": "page",
       "style": {
@@ -139,7 +155,7 @@
       "path": "pages/inquiry/start",
       "type": "page",
       "style": {
-        "navigationStyle": "default",
+        "navigationStyle": "custom",
         "navigationBarTitleText": "打卡"
       },
       "needLogin": true
@@ -148,7 +164,7 @@
       "path": "pages/inquiry/success",
       "type": "page",
       "style": {
-        "navigationStyle": "default",
+        "navigationStyle": "custom",
         "navigationBarTitleText": "打卡"
       },
       "needLogin": true

@@ -19,7 +19,7 @@
 
     <!-- 普通页面 -->
     <view class="main-container" v-if="pageType === 'normal'">
-      <view style="height: 10%"></view>
+      <view style="height: 15%"></view>
       <view class="middle-img-common">
         <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
       </view>
@@ -34,7 +34,7 @@
 
     <!-- 输入页面 -->
     <view class="main-container" v-if="pageType === 'input'">
-      <view style="height: 10%"></view>
+      <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
       </view>
@@ -79,7 +79,7 @@
 
     <!-- 单选页面 -->
     <view class="main-container" v-if="pageType === 'select'">
-      <view style="height: 10%"></view>
+      <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
       </view>
@@ -110,7 +110,7 @@
       <view class="middle-img-input">
         <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
       </view>
-      <view class="input-area">
+      <view class="input-area" style="width: 100%">
         <wd-swiper
           :list="pageContent.slideImages"
           :autoplay="false"
@@ -120,6 +120,7 @@
           imageMode="aspectFit"
           @click="handleSlideClick"
           @change="onSlideChange"
+          customClass="swiper"
         ></wd-swiper>
       </view>
       <view @click="doOperation" class="operation-area">
@@ -364,7 +365,8 @@ const doOperation = async () => {
 
 .middle-img-common {
   width: 100%;
-  height: 60%;
+  /* 原来是60%，要讨论一下 */
+  height: 100%;
 }
 
 .middle-img-input {
@@ -372,7 +374,7 @@ const doOperation = async () => {
   flex: 1;
   width: 100%;
   max-height: 40%;
-  margin-top: 50rpx;
+  /* margin-top: 30rpx; */
   /* padding: 10px; */
 }
 
@@ -380,8 +382,8 @@ const doOperation = async () => {
   box-sizing: border-box;
   flex: 1;
   width: 100%;
-  max-height: 35%;
-  padding: 10px;
+  max-height: 50%;
+  /* padding: 10px; */
 }
 
 .input-area {
@@ -430,5 +432,9 @@ const doOperation = async () => {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.swiper {
+  /* height: 540rpx; */
 }
 </style>

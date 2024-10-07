@@ -22,7 +22,7 @@
       <view class="middle-img">
         <image
           src="http://115.159.83.61:9000/common/daolanStart.png"
-          mode="aspectFit"
+          mode="scaleToFill"
           style="width: 100%"
         />
       </view>

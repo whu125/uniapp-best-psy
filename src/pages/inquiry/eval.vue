@@ -8,7 +8,7 @@
 </route>
 <template>
   <view class="" w-full h-full>
-    <wd-navbar fixed safeAreaInsetTop title="打卡彩蛋"></wd-navbar>
+    <wd-navbar fixed safeAreaInsetTop title="打卡"></wd-navbar>
 
     <view class="con px-2">
       <view style="height: 15%"></view>
@@ -51,9 +51,12 @@
         </view>
       </view>
 
-      <text class="footer-text">3天后，我们将开启下一段旅程，敬请期待......</text>
+      <p class="text-s flex justify-center">恭喜你完成全部内容，点击下方按钮</p>
+      <p class="text-s flex justify-center">完成打卡</p>
 
-      <wd-button type="success" size="large" @click="submit">返回主地图</wd-button>
+      <view class="mt-4 flex justify-center">
+        <wd-button type="success" size="large" @click="submit" class="mt-4">我要打卡</wd-button>
+      </view>
     </view>
   </view>
 </template>
@@ -92,38 +95,42 @@ const toggleOption = (item: string) => {
 }
 
 const submit = async () => {
-  if (helpText.value.trim() !== '') {
-    const otherIndex = selectedOptions.value.indexOf('其他......')
-    if (otherIndex !== -1) {
-      selectedOptions.value.splice(otherIndex, 1, helpText.value.trim())
-    } else {
-      selectedOptions.value.push(helpText.value.trim())
-    }
-  }
-  const help = selectedOptions.value.join('、')
-  console.log(help)
-  console.log('提交的数据:', {
-    tiyan: tiyan.value,
-    shouhuo: shouhuo.value,
-    help,
-  })
+  // 测试用
 
-  // 生成用于提交后端的数据
-  const submitObj: ISubmitInter = {
-    userId: userStore.userInfo.userId,
-    interId: interStore.interInfo.interId,
-    endTime: getFormattedDate(),
-    inputPages: interStore.inputPages,
-    inputContent: interStore.inputContent,
-  }
-  const res = await submitInter(submitObj)
-  if (res.code === 200) {
-    toast.success('干预完成！')
-    userStore.addProgress()
-    uni.switchTab({ url: '/pages/home/home' })
-  } else {
-    toast.error('出现了一些问题')
-  }
+  uni.redirectTo({ url: '/pages/inquiry/success' })
+
+  //   if (helpText.value.trim() !== '') {
+  //     const otherIndex = selectedOptions.value.indexOf('其他......')
+  //     if (otherIndex !== -1) {
+  //       selectedOptions.value.splice(otherIndex, 1, helpText.value.trim())
+  //     } else {
+  //       selectedOptions.value.push(helpText.value.trim())
+  //     }
+  //   }
+  //   const help = selectedOptions.value.join('、')
+  //   console.log(help)
+  //   console.log('提交的数据:', {
+  //     tiyan: tiyan.value,
+  //     shouhuo: shouhuo.value,
+  //     help,
+  //   })
+
+  //   // 生成用于提交后端的数据
+  //   const submitObj: ISubmitInter = {
+  //     userId: userStore.userInfo.userId,
+  //     interId: interStore.interInfo.interId,
+  //     endTime: getFormattedDate(),
+  //     inputPages: interStore.inputPages,
+  //     inputContent: interStore.inputContent,
+  //   }
+  //   const res = await submitInter(submitObj)
+  //   if (res.code === 200) {
+  //     toast.success('干预完成！')
+  //     userStore.addProgress()
+  //     uni.redirectTo({ url: '/pages/inquiry/end' })
+  //   } else {
+  //     toast.error('出现了一些问题')
+  //   }
 }
 </script>
 
@@ -220,7 +227,7 @@ const submit = async () => {
 
 .footer-text {
   margin-bottom: 20px;
-  font-size: 14px;
+  font-size: 20px;
   color: #666;
   text-align: center;
 }

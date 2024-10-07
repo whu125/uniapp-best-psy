@@ -1,7 +1,7 @@
 <route lang="json5">
 {
   style: {
-    navigationStyle: 'default',
+    navigationStyle: 'custom',
     navigationBarTitleText: '打卡',
   },
   needLogin: true,
@@ -9,28 +9,23 @@
 </route>
 
 <template>
-  <!-- <view
-        class="bg-white overflow-hidden pt-2 px-4"
-        :style="{ marginTop: safeAreaInsets?.top + 100 + 'px' }"
-        w-full
-        h-full
-      >
-        <wd-navbar title="工具箱"></wd-navbar>
-      </view> -->
-  <view class="container">
-    <view class="illustration">
+  <view class="" w-full h-full>
+    <wd-navbar fixed safeAreaInsetTop title="打卡"></wd-navbar>
+
+    <view class="con px-2">
+      <view style="height: 15%"></view>
       <view class="illustration-placeholder">
         <img src="http://115.159.83.61:9000/inquiry/end.png" alt="" />
       </view>
-    </view>
 
-    <view class="instructions">
-      <p>恭喜你完成问卷！ 点击下方按钮，完成打卡</p>
-      <p>三天后，我们将共同开启下一站旅程，敬请期待！</p>
-    </view>
+      <view class="instructions">
+        <p class="text-xl">恭喜你完成问卷！ 点击下方按钮</p>
+        <p class="text-xl">查看站点回顾</p>
+      </view>
 
-    <view class="flex justify-center">
-      <wd-button @click="startInquiry" type="success" size="large">我要打卡</wd-button>
+      <view class="flex justify-center">
+        <wd-button @click="startInquiry" type="success" size="large">查看站点回顾</wd-button>
+      </view>
     </view>
   </view>
 </template>
@@ -39,12 +34,24 @@
 // 这里可以添加任何需要的逻辑
 const startInquiry = () => {
   uni.redirectTo({
-    url: '/pages/inquiry/success',
+    url: '/pages/inquiry/huigu',
   })
 }
 </script>
 
 <style scoped>
+.con {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  /* gap: 15px; */
+  height: 100vh;
+  overflow: hidden;
+  /* padding-top: 1.25rem;
+  margin-top: 3rem; */
+  /* overflow-y: scroll; */
+  background: linear-gradient(90deg, rgba(171, 236, 214, 0.29) 0%, rgba(251, 237, 150, 0.29) 100%);
+}
 .container {
   max-width: 400px;
   height: 100vh;

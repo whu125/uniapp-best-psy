@@ -1,7 +1,7 @@
 <route lang="json5">
 {
   style: {
-    navigationStyle: 'default',
+    navigationStyle: 'custom',
     navigationBarTitleText: '打卡',
   },
   needLogin: true,
@@ -9,29 +9,25 @@
 </route>
 
 <template>
-  <!-- <view
-    class="bg-white overflow-hidden pt-2 px-4"
-    :style="{ marginTop: safeAreaInsets?.top + 100 + 'px' }"
-    w-full
-    h-full
-  >
-    <wd-navbar title="工具箱"></wd-navbar>
-  </view> -->
-  <view class="container">
-    <view class="illustration">
+  <view class="" w-full h-full>
+    <wd-navbar fixed safeAreaInsetTop title="打卡"></wd-navbar>
+
+    <view class="con px-2">
+      <view style="height: 15%"></view>
+
       <view class="illustration-placeholder">
         <img src="http://115.159.83.61:9000/inquiry/wenjuan.png" alt="" />
       </view>
-    </view>
 
-    <view class="instructions">
-      <p>填写问卷，完成打卡，记录你的改变！</p>
-      <p>中途请不要退出</p>
-    </view>
+      <view class="instructions">
+        <p>填写问卷，完成打卡，记录你的改变！</p>
+        <p>中途请不要退出</p>
+      </view>
 
-    <!-- <button class="start-button" @click="startInquiry">开始填写</button> -->
-    <view class="flex justify-center">
-      <wd-button @click="startInquiry" type="success">开始填写</wd-button>
+      <!-- <button class="start-button" @click="startInquiry">开始填写</button> -->
+      <view class="flex justify-center">
+        <wd-button @click="startInquiry" type="success" size="large">开始填写</wd-button>
+      </view>
     </view>
   </view>
 </template>
@@ -49,6 +45,18 @@ const startInquiry = () => {
 </script>
 
 <style scoped>
+.con {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  /* gap: 15px; */
+  height: 100vh;
+  overflow: hidden;
+  /* padding-top: 1.25rem;
+  margin-top: 3rem; */
+  /* overflow-y: scroll; */
+  background: linear-gradient(90deg, rgba(171, 236, 214, 0.29) 0%, rgba(251, 237, 150, 0.29) 100%);
+}
 .container {
   max-width: 400px;
   height: 100vh;

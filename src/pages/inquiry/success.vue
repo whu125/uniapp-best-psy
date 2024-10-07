@@ -1,7 +1,7 @@
 <route lang="json5">
 {
   style: {
-    navigationStyle: 'default',
+    navigationStyle: 'custom',
     navigationBarTitleText: '打卡',
   },
   needLogin: true,
@@ -9,42 +9,49 @@
 </route>
 
 <template>
-  <!-- <view
-            class="bg-white overflow-hidden pt-2 px-4"
-            :style="{ marginTop: safeAreaInsets?.top + 100 + 'px' }"
-            w-full
-            h-full
-          >
-            <wd-navbar title="工具箱"></wd-navbar>
-          </view> -->
-  <view class="container">
-    <view class="illustration">
+  <view class="" w-full h-full>
+    <wd-navbar fixed safeAreaInsetTop title="打卡"></wd-navbar>
+
+    <view class="con px-2">
+      <view style="height: 15%"></view>
       <view class="illustration-placeholder">
         <img src="http://115.159.83.61:9000/inquiry/success.png" alt="" />
       </view>
-    </view>
 
-    <view class="instructions">
-      <p>第二站</p>
-      <p>打卡成功</p>
-    </view>
+      <view class="instructions">
+        <p class="text-xl">第二站</p>
+        <p class="text-xl">打卡成功</p>
+      </view>
 
-    <view class="flex justify-center">
-      <wd-button @click="startInquiry">查看站点回顾</wd-button>
+      <view class="flex justify-center">
+        <wd-button @click="toHome" type="success" size="large">返回主界面</wd-button>
+      </view>
     </view>
   </view>
 </template>
 
 <script setup>
 // 这里可以添加任何需要的逻辑
-const startInquiry = () => {
+const toHome = () => {
   uni.redirectTo({
-    url: '/pages/inquiry/eval',
+    url: '/pages/home/home',
   })
 }
 </script>
 
 <style scoped>
+.con {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  /* gap: 15px; */
+  height: 100vh;
+  overflow: hidden;
+  /* padding-top: 1.25rem;
+  margin-top: 3rem; */
+  /* overflow-y: scroll; */
+  background: linear-gradient(90deg, rgba(171, 236, 214, 0.29) 0%, rgba(251, 237, 150, 0.29) 100%);
+}
 .container {
   max-width: 400px;
   height: 100vh;
