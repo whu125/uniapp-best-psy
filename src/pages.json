@@ -112,6 +112,15 @@
       }
     },
     {
+      "path": "pages/inquiry/before",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "打卡"
+      },
+      "needLogin": true
+    },
+    {
       "path": "pages/inquiry/end",
       "type": "page",
       "style": {

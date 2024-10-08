@@ -13,13 +13,17 @@
     <view class="con px-2">
       <view style="height: 10%"></view>
 
-      <view class="mt-4">
+      <view class="mt-8">
         <wd-progress :percentage="curPer" />
       </view>
       <!-- 问题 -->
-      <view class="question">
-        <p v-if="questions[curId - 1]?.subtitle != null">{{ questions[curId - 1]?.subtitle }}</p>
-        <text>{{ questions[curId - 1]?.question }}</text>
+      <view class="question mt-4">
+        <p v-if="questions[curId - 1]?.subtitle != null" class="font-800 text-xl">
+          {{ questions[curId - 1]?.subtitle }}
+        </p>
+        <view class="mt-4">
+          <text class="">{{ questions[curId - 1]?.question }}</text>
+        </view>
       </view>
 
       <!-- 选项列表 -->
@@ -35,7 +39,9 @@
           </view>
         </wd-radio-group>
       </view> -->
-      <view class="options">
+
+      <!-- 选择题 -->
+      <view class="options" v-if="questions[curId - 1]?.type === 0">
         <view
           class="option"
           v-for="option in questions[curId - 1]?.options"
@@ -45,14 +51,11 @@
         >
           {{ option.text }}
         </view>
-        <!-- <view
-          class="option"
-          v-for="option in questions[curId - 1]?.options"
-          :key="option.text"
-          @click="selectOption(option.score)"
-        >
-          {{ option.text }}
-        </view> -->
+      </view>
+
+      <!-- 填空题 -->
+      <view class="options" v-if="questions[curId - 1]?.type === 1">
+        <wd-textarea v-model="answers[curId - 1]" placeholder="请在这里输入..." />
       </view>
 
       <!-- 底部按钮 -->
@@ -73,7 +76,7 @@
 import PLATFORM from '@/utils/platform'
 import { getInquiryByPos, submitInquiry, InquiryResultArray } from '@/service/ganyu/inquiry'
 import { useInquiryStore } from '@/store/inquiry'
-
+import { useInterStore } from '@/store/inter'
 import { useToast, useNotify } from 'wot-design-uni'
 
 defineOptions({
@@ -81,7 +84,7 @@ defineOptions({
 })
 
 const toast = useToast()
-
+const interStore = useInterStore()
 const position = ref('1-post')
 const inquiryStore = useInquiryStore()
 // 获取屏幕边界到安全区域距离
@@ -113,15 +116,21 @@ watch(curId, (newVal) => {
 })
 
 onLoad(async (param) => {
+  // 修改，从缓存拿到当前第几站
+
   toast.loading({ message: '加载中' })
 
-  // position.value = param.position
+  position.value = param.position
 
-  position.value = '1-post'
+  console.log('position', position.value)
+
+  interId.value = parseInt(param.position.split('-')[0])
+
+  console.log('interId.value', interId.value)
+
+  // position.value = '1-post'
   loadStorage()
   // interId.value = parseInt(param.interId)
-  interId.value = 1
-  console.log(position.value)
 
   console.log('请求getInquiryByPos')
   const res = await getInquiryByPos(position.value)
@@ -138,10 +147,21 @@ onLoad(async (param) => {
 
   if (!storageFlag.value) {
     questions.value.forEach((item, index) => {
-      answers.value[index] = -1
+      if (item.type === 0) {
+        answers.value[index] = -1
+      } else {
+        answers.value[index] = ''
+      }
     })
   } else {
-    const firstUnanswered = Object.keys(answers.value).find((key) => answers.value[key] === -1)
+    // 找到上次没有回答的题目
+    const firstUnanswered = Object.keys(answers.value).find((key) => {
+      const question = questions.value[key]
+      return (
+        (question.type === 0 && answers.value[key] === -1) ||
+        (question.type === 1 && answers.value[key] === '')
+      )
+    })
     if (firstUnanswered !== undefined) {
       curId.value = parseInt(firstUnanswered) + 1
     }
@@ -184,12 +204,21 @@ const submit = async () => {
   const formData = ref<InquiryResultArray>([])
 
   for (let i = 0; i < queLen.value; i++) {
-    formData.value.push({
-      // userId: userStore.userInfo.userId,
-      inquiryId: questions.value[i].inquiryId,
-      interId: interId.value,
-      score: answers.value[i] || 0,
-    })
+    const answer = answers.value[i]
+    if (typeof answer === 'number') {
+      formData.value.push({
+        inquiryId: questions.value[i].inquiryId,
+        interId: interId.value,
+        score: answer,
+      })
+    } else if (typeof answer === 'string') {
+      formData.value.push({
+        inquiryId: questions.value[i].inquiryId,
+        interId: interId.value,
+        score: -1,
+        text: answer,
+      })
+    }
   }
 
   if (formData.value.length < queLen.value) {
@@ -199,48 +228,25 @@ const submit = async () => {
   console.log(formData.value)
   const res = await submitInquiry(formData.value)
   if (res.code === 200) {
-    uni.showToast({
-      title: '提交成功',
-      icon: 'success',
-      duration: 2000,
-      success: () => {
-        uni.switchTab({ url: '/pages/home/home' })
-      },
-    })
+    // 如果是pre 提交后跳转到正页
+    if (position.value.includes('pre')) {
+      uni.showToast({
+        title: '提交成功',
+        icon: 'success',
+        duration: 2000,
+        success: () => {
+          uni.redirectTo({
+            url:
+              '/pages/journey_common/start_journey?progress=' + encodeURIComponent(interId.value),
+          })
+        },
+      })
+    }
   }
-
-  // for (const [inquiryId, score] of Object.entries(answers.value)) {
-  //   formData.value.push({
-  //     // userId: userStore.userInfo.userId,
-  //     inquiryId: parseInt(inquiryId),
-  //     interId: interId.value,
-  //     score: parseInt(score),
-  //   })
-  // }
-
-  // if (formData.value.length < queLen.value) {
-  //   toast.error('请完成所有题目')
-  //   // toast.
-  //   return
-  // }
-  // console.log(formData.value)
-  // const res = await submitInquiry(formData.value)
-  // console.log(res)
-
-  // if (res.code === 200) {
-  //   uni.showToast({
-  //     title: '提交成功',
-  //     icon: 'success',
-  //     duration: 2000,
-  //     success: () => {
-  //       uni.switchTab({ url: '/pages/home/home' })
-  //     },
-  //   })
-  // }
-  // 根据positon设置不同的跳转逻辑
 }
 
 const loadStorage = () => {
+  console.log('inquiryStore.AnsInfo', inquiryStore.AnsInfo)
   const storedAnswers = inquiryStore.AnsInfo.positions[position.value]
   console.log('storedAnswers', storedAnswers)
   if (Object.keys(storedAnswers).length === 0 && storedAnswers.constructor === Object) {
