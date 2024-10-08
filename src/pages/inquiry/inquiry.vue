@@ -138,7 +138,7 @@ onLoad(async (param) => {
   questions.value = res.data
   questions.value.forEach((item) => {
     item.options = JSON.parse(item.options)
-    if (item.groupIndex == curGroup.value) {
+    if (item.groupIndex === curGroup.value) {
       pageQuestions.value.push(item)
     }
   })
@@ -201,7 +201,7 @@ const submit = async () => {
   // const answersString = Array.from(answers.value.values()).join(';')
   // console.log(answersString)
   console.log('anwser', answers.value)
-  const formData = ref<InquiryResultArray>([])
+  const formData = ref([])
 
   for (let i = 0; i < queLen.value; i++) {
     const answer = answers.value[i]
@@ -238,6 +238,18 @@ const submit = async () => {
           uni.redirectTo({
             url:
               '/pages/journey_common/start_journey?progress=' + encodeURIComponent(interId.value),
+          })
+        },
+      })
+    }
+    if (position.value.includes('post')) {
+      uni.showToast({
+        title: '提交成功',
+        icon: 'success',
+        duration: 2000,
+        success: () => {
+          uni.redirectTo({
+            url: '/pages/inquiry/end',
           })
         },
       })

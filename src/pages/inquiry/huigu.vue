@@ -14,7 +14,7 @@
     <view class="main-container">
       <view style="height: 15%"></view>
       <view class="middle-img-common">
-        <image :src="interIdToUrlMap.get(2)" mode="aspectFit" style="width: 100%" />
+        <image :src="interIdToUrlMap.get(currInterId)" mode="aspectFit" style="width: 100%" />
       </view>
 
       <view @click="doOperation" class="operation-area">
@@ -38,6 +38,7 @@ const message = useMessage()
 const globalPageControlStore = useGlobalPageControlStore()
 const toast = useToast()
 
+const currInterId = ref<number>(interStore.interInfo.interId)
 const pageType = ref<string>('normal')
 const pageContent = ref<IInterPage>()
 const radioValue = ref<string>()
@@ -45,9 +46,13 @@ const currentSlideImage = ref<number>(0)
 const selectedItem = ref()
 const userInputList = ref<Array<string>>([])
 const interIdToUrlMap = new Map<number, string>([
+  [1, 'http://115.159.83.61:9000/journey2/daka6.png'],
   [2, 'http://115.159.83.61:9000/journey2/daka6.png'],
-  [1, '/pages/somepage2'],
-  [3, '/pages/somepage3'],
+  [3, 'http://115.159.83.61:9000/journey2/daka6.png'],
+  [4, 'http://115.159.83.61:9000/journey2/daka6.png'],
+  [5, 'http://115.159.83.61:9000/journey2/daka6.png'],
+  [6, 'http://115.159.83.61:9000/journey2/daka6.png'],
+  [7, 'http://115.159.83.61:9000/journey2/daka6.png'],
   // Add more mappings as needed
 ])
 

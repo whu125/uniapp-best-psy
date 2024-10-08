@@ -99,13 +99,13 @@ const interStore = useInterStore()
 const globalPageControl = useGlobalPageControlStore()
 
 const userInfo = ref<IUserInfo>(userStore.userInfo)
-const currProgress = ref<number>(2)
-// const currProgress = ref<number>(userStore.userInfo.currProgress)
+// const currProgress = ref<number>(2)
+const currProgress = ref<number>(userStore.userInfo.currProgress)
 
 const curInter = ref<number>(interStore.interInfo.interId)
 
-// const checkTimeFlag = ref(false)
-const checkTimeFlag = ref(true)
+const checkTimeFlag = ref(false)
+// const checkTimeFlag = ref(true)
 
 const waitingTime = ref(1)
 
@@ -122,6 +122,7 @@ const journeySteps = ref([
 
 onShow(() => {
   console.log('请求后端更新时间')
+  currProgress.value = userStore.userInfo.currProgress
 })
 // 测试 uni API 自动引入
 onLoad(() => {
@@ -170,22 +171,6 @@ const enterJourney = async (progress: number) => {
       })
     }
   } else if (interStore.interInfo.interId === progress) {
-    // message
-    //   .confirm({
-    //     msg: '是否从上次干预继续',
-    //     title: '检测到上次干预未完成',
-    //     closeOnClickModal: false,
-    //     type: 'confirm',
-    //   })
-    //   .then(() => {
-    //     console.log('进入干预')
-    //     const numberStr = progress.toString()
-    //     // interStore.clearInternfo()
-    //     // globalPageControl.clearInternfo()
-    //     uni.navigateTo({
-    //       url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
-    //     })
-    //   })
     uni.navigateTo({
       url: '/pages/journey_common/common',
     })

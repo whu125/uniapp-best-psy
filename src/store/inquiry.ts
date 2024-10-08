@@ -5,9 +5,21 @@ import { ref } from 'vue'
 
 const initState = {
   positions: {
-    '1-pre': {},
+    '0-pre': {},
+    '0-post': {},
     '1-post': {},
     '2-pre': {},
+    '2-post': {},
+    '3-pre': {},
+    '3-post': {},
+    '4-pre': {},
+    '4-post': {},
+    '5-pre': {},
+    '5-post': {},
+    '6-pre': {},
+    '6-post': {},
+    '7-pre': {},
+    '7-post': {},
     // Add more positions as needed
   },
 }

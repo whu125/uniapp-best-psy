@@ -132,7 +132,6 @@ const submit = async () => {
       userStore.addProgress()
       userStore.setLockTime()
     }
-    // userStore.addProgress()
     uni.redirectTo({ url: '/pages/inquiry/success' })
   } else {
     toast.error('出现了一些问题')

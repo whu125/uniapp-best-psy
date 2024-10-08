@@ -18,6 +18,7 @@ export interface InquiryResultItem {
   inquiryId: number
   position: string
   score: number
+  interId: number
 }
 
 export type InquiryResultArray = InquiryResultItem[]
