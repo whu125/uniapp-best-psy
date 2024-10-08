@@ -15,7 +15,7 @@ const initState = {
 export const useInquiryStore = defineStore(
   'inquiry',
   () => {
-    const AnsInfo = ref()
+    const AnsInfo = ref({ ...initState })
 
     const setInquiryInfo = (val) => {
       console.log('val', val)

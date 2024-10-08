@@ -2,38 +2,32 @@
 {
   style: {
     navigationStyle: 'custom',
-    navigationBarTitleText: '导览',
+    navigationBarTitleText: '打卡',
   },
+  needLogin: true,
 }
 </route>
 <template>
   <view class="" w-full h-full>
-    <wd-navbar
-      fixed
-      safeAreaInsetTop
-      :title="navbarTitle"
-      left-arrow
-      @click-left="ToHome"
-    ></wd-navbar>
+    <wd-navbar fixed safeAreaInsetTop title="站前测量" left-arrow @click-left="ToHome"></wd-navbar>
 
-    <view class="main-container" v-if="currContent">
+    <view class="main-container">
       <view class="card">
         <image class="illustration" :src="imageMap.get(progress)" mode="aspectFit"></image>
-        <view class="title">{{ currContent.title }}</view>
+        <view class="title">上一站旅程反馈</view>
 
-        <view class="questions" v-for="(question, index) in currContent.questions" :key="index">
+        <view class="questions flex justify-center" v-for="(question, index) in qs" :key="index">
           <view class="question">{{ question }}</view>
         </view>
 
         <!-- <button class="start-button" @click="startJourney">开始旅程</button> -->
         <view class="flex justify-center">
-          <wd-button type="success" size="large" @click="startJourney">开始旅程</wd-button>
+          <wd-button type="success" size="large" @click="startBefore">开始反馈</wd-button>
         </view>
       </view>
     </view>
   </view>
 </template>
-
 <script lang="ts" setup>
 import { startInter, IStartInter } from '@/service/index/inter'
 import { getFormattedDate } from '@/utils/getTime'
@@ -54,10 +48,8 @@ const toast = useToast()
 
 onLoad((options) => {
   const numberStr = options.progress
+  console.log('当前进入第几站：', numberStr)
   progress.value = Number(decodeURIComponent(numberStr))
-  currContent.value = pageContent.value[progress.value]
-  console.log('progress.value', progress.value)
-  navbarTitle.value = stationMap.get(progress.value)
 })
 
 const ToHome = () => {
@@ -78,66 +70,25 @@ const navbarTitle = ref<string>('')
 
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const imageMap = new Map([
-  [0, 'http://115.159.83.61:9000/journey2/start_journey_logo2.png'],
-  [1, 'http://115.159.83.61:9000/journey2/start_journey_logo2.png'],
-  [2, 'http://115.159.83.61:9000/journey2/start_journey_logo2.png'],
-  [3, 'http://115.159.83.61:9000/journey2/start_journey_logo2.png'],
+  [0, 'http://115.159.83.61:9000/common/before.png'],
+  [1, 'http://115.159.83.61:9000/common/before.png'],
+  [2, 'http://115.159.83.61:9000/common/before.png'],
+  [3, 'http://115.159.83.61:9000/common/before.png'],
 ])
 const currContent = ref()
 
-const pageContent = ref([
-  {
-    title: '导入: 观察你的思维',
-    questions: [
-      '• 情绪反应的起点是什么?',
-      '• 思维的 "默认选项" 如何影响生活?',
-      '• 消极思维挥之不去,怎么办?',
-    ],
-  },
-  {
-    title: '第一站: 观察你的思维',
-    questions: [
-      '• 情绪反应的起点是什么?',
-      '• 思维的 "默认选项" 如何影响生活?',
-      '• 消极思维挥之不去,怎么办?',
-    ],
-  },
-  {
-    title: '第二站: 观察你的思维',
-    questions: [
-      '• 情绪反应的起点是什么?',
-      '• 思维的 "默认选项" 如何影响生活?',
-      '• 消极思维挥之不去,怎么办?',
-    ],
-  },
-  {
-    title: '第三站: 观察你的思维',
-    questions: [
-      '• 情绪反应的起点是什么?',
-      '• 思维的 "默认选项" 如何影响生活?',
-      '• 消极思维挥之不去,怎么办?',
-    ],
-  },
-])
-const startJourney = async () => {
-  const startObj: IStartInter = {
-    userId: userStore.userInfo.userId,
-    interId: progress.value,
-    // interId: 2,
-    startTime: getFormattedDate(),
-  }
-  toast.loading('马上开始...')
-  const res = await startInter(startObj)
-  console.log(res)
-  toast.close()
-  if (res.code === 200) {
-    interStore.setInterInfo(res.data)
-    uni.redirectTo({
-      url: '/pages/journey_common/common',
-    })
-  } else {
-    toast.error('出现了一些问题')
-  }
+const qs = ref(['上一站旅程对你是否有帮助？', '为了帮助我们做的更好，', '期待您的反馈！'])
+
+// const pageContent = ref([
+//   {
+//     questions: ['上一站旅程对你是否有帮助？', '为了帮助我们做的更好，', '期待您的反馈！'],
+//   },
+// ])
+const startBefore = async () => {
+  uni.redirectTo({
+    url:
+      '/pages/inquiry/inquiry?position=' + encodeURIComponent(progress.value.toString()) + '-pre',
+  })
 }
 </script>
 

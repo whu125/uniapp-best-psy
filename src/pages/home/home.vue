@@ -20,7 +20,7 @@
       <view class="h-40 w-full">
         <image src="http://115.159.83.61:9000/home/home.png" mode="scaleToFill" />
       </view>
-      <view class="card flex justify-center">
+      <view class="card flex justify-center" v-if="curInter != -1">
         <span class="font-800 text-2xl">正在完成</span>
         <span class="font-800 text-2xl ml-4" v-if="curInter == 0">导入</span>
         <span class="font-800 text-2xl ml-4" v-if="curInter != 0">第 {{ curInter }} 站</span>
@@ -30,7 +30,10 @@
         <span class="font-800 text-xl ml-4">第 {{ currProgress }} 站</span>
       </view>
       <view class="card flex justify-center" v-if="waitingTime <= 0">
-        <span class="font-800 text-xl">已解锁 第 {{ currProgress }} 站</span>
+        <span class="font-800 text-xl" v-if="currProgress != 0">
+          已解锁 第 {{ currProgress }} 站
+        </span>
+        <span class="font-800 text-xl" v-if="currProgress == 0">已解锁 导入</span>
         <!-- <span class="font-800 text-xl ml-4">下一站</span> -->
       </view>
       <view class="card" v-for="(journey, index) in journeySteps" :key="index">
@@ -137,7 +140,7 @@ onLoad(() => {
 })
 
 const calculateHour = () => {
-  const currentTime = new Date().getTime()
+  const currentTime = new Date().getTime() + 24 * 1000 * 60 * 60
   const lockTime = userInfo.value.lockTime
   const remainingTime = (lockTime - currentTime) / (1000 * 60 * 60) // 转化为小时
 
@@ -154,9 +157,17 @@ const enterJourney = async (progress: number) => {
 
     const numberStr = progress.toString()
 
-    uni.navigateTo({
-      url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
-    })
+    // 如果不是导入，跳转到站前测量
+    if (numberStr === '0') {
+      uni.redirectTo({
+        url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+      })
+    }
+    if (numberStr !== '0') {
+      uni.redirectTo({
+        url: '/pages/journey_common/before?progress=' + encodeURIComponent(numberStr),
+      })
+    }
   } else if (interStore.interInfo.interId === progress) {
     message
       .confirm({
@@ -170,9 +181,17 @@ const enterJourney = async (progress: number) => {
         const numberStr = progress.toString()
         // interStore.clearInternfo()
         // globalPageControl.clearInternfo()
-        uni.navigateTo({
-          url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
-        })
+        // 如果不是导入，跳转到站前测量
+        if (numberStr === '0') {
+          uni.redirectTo({
+            url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+          })
+        }
+        if (numberStr !== '0') {
+          uni.redirectTo({
+            url: '/pages/inquiry/before?progress=' + encodeURIComponent(numberStr),
+          })
+        }
       })
   } else {
     message
@@ -187,9 +206,16 @@ const enterJourney = async (progress: number) => {
         const numberStr = progress.toString()
         interStore.clearInternfo()
         globalPageControl.clearInternfo()
-        uni.navigateTo({
-          url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
-        })
+        if (numberStr === '0') {
+          uni.redirectTo({
+            url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+          })
+        }
+        if (numberStr !== '0') {
+          uni.redirectTo({
+            url: '/pages/inquiry/before?progress=' + encodeURIComponent(numberStr),
+          })
+        }
       })
       .catch(() => {
         console.log('取消')
