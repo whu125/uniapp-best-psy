@@ -101,6 +101,11 @@
           <span class="label">模拟提交干预</span>
           <span class="arrow">›</span>
         </div>
+        <div class="menu-item" @click="clear()">
+          <span class="icon">ℹ️</span>
+          <span class="label">测试清除干预缓存</span>
+          <span class="arrow">›</span>
+        </div>
         <view style="height: 150rpx"></view>
       </div>
     </div>
@@ -112,6 +117,9 @@ import PLATFORM from '@/utils/platform'
 import { useUserStore } from '@/store/user'
 import { logout, test } from '@/service/index/user'
 import tabbar from '@/pages/tabbar/tabbar.vue'
+import { IInterPage, useInterStore } from '@/store/inter'
+
+const interStore = useInterStore()
 
 const userStore = useUserStore()
 const userInfo = ref(userStore.userInfo)
@@ -189,6 +197,11 @@ const toadmin = () => {
 
 const submitInter = () => {
   console.log('模拟提交干预')
+}
+
+const clear = () => {
+  console.log('测试清楚干预缓存')
+  interStore.clearInternfo()
 }
 </script>
 

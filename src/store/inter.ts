@@ -72,7 +72,13 @@ export const useInterStore = defineStore(
     })
 
     const setUserInputMap = (key: number, value: string) => {
-      userInputMap.value.set(key, value)
+      console.log('setUserInputMap', userInputMap.value)
+      if (userInputMap.value instanceof Map) {
+        console.log(111)
+        // userInputMap.value = new Map<number, string>()
+        userInputMap.value.set(key, value)
+      }
+
       console.log(userInputMap.value)
     }
 

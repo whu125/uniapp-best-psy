@@ -133,7 +133,16 @@ onLoad(async (param) => {
   // interId.value = parseInt(param.interId)
 
   console.log('请求getInquiryByPos')
-  const res = await getInquiryByPos(position.value)
+  let res
+  try {
+    res = await getInquiryByPos(position.value)
+  } catch {
+    toast.error('获取问卷失败')
+    uni.switchTab({
+      url: '/pages/home/home',
+    })
+  }
+
   toast.close()
   questions.value = res.data
   questions.value.forEach((item) => {

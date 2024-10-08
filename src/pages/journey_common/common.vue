@@ -210,13 +210,16 @@ onShow(async () => {
   pageType.value = pageContent.value.pageType
   // 如果是 input 页面 恢复状态
   if (pageType.value === 'input') {
-    if (interStore.userInputMap.has(pageContent.value.pageId)) {
-      let inputString = interStore.userInputMap.get(pageContent.value.pageId)
-      inputString = inputString.slice(0, -1)
-      const inputList = inputString.split('%')
-      inputList.forEach((input, index) => {
-        userInputList.value[index] = input
-      })
+    console.log('interStore.userInputMap', interStore.userInputMap)
+    if (interStore.userInputMap && interStore.userInputMap.size > 0) {
+      if (interStore.userInputMap.has(pageContent.value.pageId)) {
+        let inputString = interStore.userInputMap.get(pageContent.value.pageId)
+        inputString = inputString.slice(0, -1)
+        const inputList = inputString.split('%')
+        inputList.forEach((input, index) => {
+          userInputList.value[index] = input
+        })
+      }
     }
   }
   console.log('pageContent.value', pageContent.value)

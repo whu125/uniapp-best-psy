@@ -7,6 +7,7 @@ export const http = <T>(options: CustomRequestOptions) => {
     uni.request({
       ...options,
       dataType: 'json',
+      timeout: 10000,
       // #ifndef MP-WEIXIN
       responseType: 'json',
       // #endif
@@ -34,10 +35,13 @@ export const http = <T>(options: CustomRequestOptions) => {
       },
       // 响应失败
       fail(err) {
+        console.log('err', err)
+
         uni.showToast({
           icon: 'none',
           title: '网络错误，换个网络试试',
         })
+
         reject(err)
       },
     })
