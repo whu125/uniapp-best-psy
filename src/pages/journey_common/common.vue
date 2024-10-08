@@ -66,8 +66,13 @@
       </view>
       <view class="button-area">
         <view v-for="(buttonUrl, index) in pageContent.buttonUrls" :key="index">
-          <view style="width: 90%; height: auto; margin: 15px 0 0 15px">
-            <image :src="buttonUrl" mode="widthFix" @click="toPage(buttonUrl)" />
+          <view style="width: 80%; height: auto; margin: 0 auto">
+            <image
+              :src="buttonUrl"
+              mode="widthFix"
+              @click="toPage(buttonUrl)"
+              style="width: 100%"
+            />
           </view>
         </view>
       </view>
