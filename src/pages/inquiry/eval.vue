@@ -127,7 +127,7 @@ const submit = async () => {
     toast.success('干预完成！')
 
     // 这里要判断是否是第一次提交最新一次干预
-    if (res.data == userStore.userInfo.currProgress + 1) {
+    if (res.data === userStore.userInfo.currProgress + 1) {
       // 说明此时是第一次提交最新一次干预
       userStore.addProgress()
       userStore.setLockTime()

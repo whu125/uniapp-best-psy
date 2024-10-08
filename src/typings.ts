@@ -32,6 +32,7 @@ type IUserInfo = {
   currProgress: number
   avatar: string
   token: string
+  lockTime: number
 }
 
 // export interface User {

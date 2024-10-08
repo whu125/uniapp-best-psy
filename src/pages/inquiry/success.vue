@@ -33,7 +33,7 @@
 <script setup>
 // 这里可以添加任何需要的逻辑
 const toHome = () => {
-  uni.redirectTo({
+  uni.switchTab({
     url: '/pages/home/home',
   })
 }

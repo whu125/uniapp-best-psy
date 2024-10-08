@@ -12,7 +12,7 @@ const initState = {
   avatar: '',
   token: '',
   // 这个字段记录，下一次应该解锁的时间
-  lockTime: '',
+  lockTime: -1,
 }
 
 export const useUserStore = defineStore(

@@ -10,20 +10,20 @@
   <view class="" w-full h-full v-if="pageContent">
     <wd-navbar fixed safeAreaInsetTop :title="pageContent.navbarTitle"></wd-navbar>
 
-    <!-- <wd-navbar
+    <wd-navbar
       fixed
       safeAreaInsetTop
       :title="pageContent.navbarTitle"
       left-text="退出"
       left-arrow
       @click-left="ToHome"
-    ></wd-navbar> -->
+    ></wd-navbar>
 
     <!-- 普通页面 -->
     <view class="main-container" v-if="pageType === 'normal'">
       <view style="height: 15%"></view>
       <view class="middle-img-common">
-        <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
+        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
       </view>
 
       <view @click="doOperation" class="operation-area">
@@ -38,7 +38,7 @@
     <view class="main-container" v-if="pageType === 'input'">
       <view style="height: 15%"></view>
       <view class="middle-img-input">
-        <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
+        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
       </view>
       <view class="input-area">
         <view v-for="(placeholder, index) in pageContent.inputPlaceholders" :key="index">
@@ -62,7 +62,7 @@
     <view class="main-container" v-if="pageType === 'button'">
       <view style="height: 15%"></view>
       <view class="middle-img-button">
-        <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%; margin: 0 auto" />
+        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%; margin: 0 auto" />
       </view>
       <view class="button-area">
         <view v-for="(buttonUrl, index) in pageContent.buttonUrls" :key="index">
@@ -83,7 +83,7 @@
     <view class="main-container" v-if="pageType === 'select'">
       <view style="height: 15%"></view>
       <view class="middle-img-input">
-        <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
+        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
       </view>
       <view class="input-area">
         <view class="select-btns">
@@ -110,7 +110,7 @@
     <view class="main-container" v-if="pageType === 'slide'">
       <view style="height: 15%"></view>
       <view class="middle-img-input">
-        <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
+        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
       </view>
       <view class="input-area" style="width: 100%">
         <wd-swiper
@@ -137,7 +137,7 @@
     <view class="main-container" v-if="pageType === 'audio'">
       <view style="height: 15%"></view>
       <view class="middle-img-input">
-        <image :src="pageContent.imgUrl" mode="aspectFit" style="width: 100%" />
+        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
       </view>
       <view class="input-area">
         <view style="text-align: center">
@@ -367,47 +367,41 @@ const testsubmit = () => {
 <style>
 .main-container {
   box-sizing: content-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
   height: 100vh;
+  overflow-y: scroll;
   background: linear-gradient(to bottom right, #e6f7ff, #fffbe6);
 }
 
 .middle-img-common {
   width: 100%;
-  /* 原来是60%，要讨论一下 */
-  height: 100%;
+  height: auto;
 }
 
 .middle-img-input {
   box-sizing: border-box;
-  flex: 1;
   width: 100%;
-  max-height: 40%;
+  height: auto;
   /* margin-top: 30rpx; */
   /* padding: 10px; */
 }
 
 .middle-img-button {
   box-sizing: border-box;
-  flex: 1;
   width: 100%;
-  max-height: 50%;
+  height: auto;
   /* padding: 10px; */
 }
 
 .input-area {
-  flex: 1;
-  width: 90%;
-  overflow-y: scroll;
+  width: 100%;
+  height: auto;
 }
 
 .button-area {
-  flex: 1;
   width: 100%;
-  overflow-y: scroll;
+  height: auto;
+  margin-top: 20px;
 }
 
 .operation-area {
@@ -416,7 +410,8 @@ const testsubmit = () => {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 15%;
+  height: auto;
+  margin: 15px 0 20px 0;
 }
 
 .select-btns {
