@@ -22,15 +22,15 @@
       </view>
       <view class="card flex justify-center">
         <span class="font-800 text-2xl">正在完成</span>
-        <span class="font-800 text-2xl ml-4" v-if="currProgress == 0">导入</span>
-        <span class="font-800 text-2xl ml-4" v-if="currProgress != 0">第 1 站</span>
+        <span class="font-800 text-2xl ml-4" v-if="curInter == 0">导入</span>
+        <span class="font-800 text-2xl ml-4" v-if="curInter != 0">第 {{ curInter }} 站</span>
       </view>
       <view class="card flex justify-center" v-if="waitingTime > 0">
         <span class="font-800 text-xl">剩余 {{ waitingTime }} 小时 解锁</span>
-        <span class="font-800 text-xl ml-4">下一站</span>
+        <span class="font-800 text-xl ml-4">第 {{ currProgress }} 站</span>
       </view>
       <view class="card flex justify-center" v-if="waitingTime <= 0">
-        <span class="font-800 text-xl">已解锁下一站</span>
+        <span class="font-800 text-xl">已解锁 第 {{ currProgress }} 站</span>
         <!-- <span class="font-800 text-xl ml-4">下一站</span> -->
       </view>
       <view class="card" v-for="(journey, index) in journeySteps" :key="index">
@@ -98,6 +98,8 @@ const globalPageControl = useGlobalPageControlStore()
 const userInfo = ref(userStore.userInfo)
 // const currProgress = ref<number>(2)
 const currProgress = ref<number>(userStore.userInfo.currProgress)
+
+const curInter = ref<number>(interStore.interInfo.interId)
 
 const checkTimeFlag = ref(false)
 
