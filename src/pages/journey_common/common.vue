@@ -20,7 +20,20 @@
     ></wd-navbar>
 
     <!-- 普通页面 -->
-    <view class="main-container" v-if="pageType === 'normal'">
+    <view
+      class="main-container"
+      :class="{
+        'main-container-bg-0': currInterId == 0,
+        'main-container-bg-1': currInterId == 1,
+        'main-container-bg-2': currInterId == 2,
+        'main-container-bg-3': currInterId == 3,
+        'main-container-bg-4': currInterId == 4,
+        'main-container-bg-5': currInterId == 5,
+        'main-container-bg-6': currInterId == 6,
+        'main-container-bg-7': currInterId == 7,
+      }"
+      v-if="pageType === 'normal'"
+    >
       <view style="height: 15%"></view>
       <view class="middle-img-common">
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
@@ -35,7 +48,20 @@
     </view>
 
     <!-- 输入页面 -->
-    <view class="main-container" v-if="pageType === 'input'">
+    <view
+      class="main-container"
+      :class="{
+        'main-container-bg-0': currInterId == 0,
+        'main-container-bg-1': currInterId == 1,
+        'main-container-bg-2': currInterId == 2,
+        'main-container-bg-3': currInterId == 3,
+        'main-container-bg-4': currInterId == 4,
+        'main-container-bg-5': currInterId == 5,
+        'main-container-bg-6': currInterId == 6,
+        'main-container-bg-7': currInterId == 7,
+      }"
+      v-if="pageType === 'input'"
+    >
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
@@ -59,7 +85,20 @@
     </view>
 
     <!-- 按钮选择页面 -->
-    <view class="main-container" v-if="pageType === 'button'">
+    <view
+      class="main-container"
+      :class="{
+        'main-container-bg-0': currInterId == 0,
+        'main-container-bg-1': currInterId == 1,
+        'main-container-bg-2': currInterId == 2,
+        'main-container-bg-3': currInterId == 3,
+        'main-container-bg-4': currInterId == 4,
+        'main-container-bg-5': currInterId == 5,
+        'main-container-bg-6': currInterId == 6,
+        'main-container-bg-7': currInterId == 7,
+      }"
+      v-if="pageType === 'button'"
+    >
       <view style="height: 15%"></view>
       <view class="middle-img-button">
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%; margin: 0 auto" />
@@ -85,7 +124,20 @@
     </view>
 
     <!-- 单选页面 -->
-    <view class="main-container" v-if="pageType === 'select'">
+    <view
+      class="main-container"
+      :class="{
+        'main-container-bg-0': currInterId == 0,
+        'main-container-bg-1': currInterId == 1,
+        'main-container-bg-2': currInterId == 2,
+        'main-container-bg-3': currInterId == 3,
+        'main-container-bg-4': currInterId == 4,
+        'main-container-bg-5': currInterId == 5,
+        'main-container-bg-6': currInterId == 6,
+        'main-container-bg-7': currInterId == 7,
+      }"
+      v-if="pageType === 'select'"
+    >
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
@@ -112,7 +164,20 @@
     </view>
 
     <!-- 轮播图页面 -->
-    <view class="main-container" v-if="pageType === 'slide'">
+    <view
+      class="main-container"
+      :class="{
+        'main-container-bg-0': currInterId == 0,
+        'main-container-bg-1': currInterId == 1,
+        'main-container-bg-2': currInterId == 2,
+        'main-container-bg-3': currInterId == 3,
+        'main-container-bg-4': currInterId == 4,
+        'main-container-bg-5': currInterId == 5,
+        'main-container-bg-6': currInterId == 6,
+        'main-container-bg-7': currInterId == 7,
+      }"
+      v-if="pageType === 'slide'"
+    >
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
@@ -139,7 +204,20 @@
     </view>
 
     <!-- 音频页面 -->
-    <view class="main-container" v-if="pageType === 'audio'">
+    <view
+      class="main-container"
+      :class="{
+        'main-container-bg-0': currInterId == 0,
+        'main-container-bg-1': currInterId == 1,
+        'main-container-bg-2': currInterId == 2,
+        'main-container-bg-3': currInterId == 3,
+        'main-container-bg-4': currInterId == 4,
+        'main-container-bg-5': currInterId == 5,
+        'main-container-bg-6': currInterId == 6,
+        'main-container-bg-7': currInterId == 7,
+      }"
+      v-if="pageType === 'audio'"
+    >
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
@@ -187,6 +265,7 @@ const pageContent = ref<IInterPage>()
 const radioValue = ref<string>()
 const currentSlideImage = ref<number>(0)
 const selectedItem = ref()
+const currInterId = ref<number>(interStore.interInfo.interId)
 const userInputList = ref<Array<string>>([])
 const hasOperation = computed(() => {
   return pageContent.value.operationIcon != null && pageContent.value.operationText != null
@@ -226,25 +305,34 @@ onShow(async () => {
 })
 
 const ToHome = () => {
-  message
-    .confirm({
-      msg: '确定退出干预吗？',
-      title: '提示',
-    })
-    .then(() => {
-      // 如果是 input 页面 保存用户输入到pinia
-      if (pageContent.value.pageType === 'input') {
-        let inputContent = ''
-        for (let i = 0; i < userInputList.value.length; i++) {
-          inputContent = inputContent + userInputList.value[i] + '%'
-        }
-        interStore.setUserInputMap(pageContent.value.pageId, inputContent)
-      }
-      uni.switchTab({ url: '/pages/home/home' })
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+  // message
+  //   .confirm({
+  //     msg: '确定退出干预吗？',
+  //     title: '提示',
+  //   })
+  //   .then(() => {
+  //     // 如果是 input 页面 保存用户输入到pinia
+  //     if (pageContent.value.pageType === 'input') {
+  //       let inputContent = ''
+  //       for (let i = 0; i < userInputList.value.length; i++) {
+  //         inputContent = inputContent + userInputList.value[i] + '%'
+  //       }
+  //       interStore.setUserInputMap(pageContent.value.pageId, inputContent)
+  //     }
+  //     uni.switchTab({ url: '/pages/home/home' })
+  //   })
+  //   .catch((error) => {
+  //     console.log(error)
+  //   })
+  // 如果是 input 页面 保存用户输入到pinia
+  if (pageContent.value.pageType === 'input') {
+    let inputContent = ''
+    for (let i = 0; i < userInputList.value.length; i++) {
+      inputContent = inputContent + userInputList.value[i] + '%'
+    }
+    interStore.setUserInputMap(pageContent.value.pageId, inputContent)
+  }
+  uni.switchTab({ url: '/pages/home/home' })
 }
 
 const handleSlideClick = (e) => {
@@ -378,7 +466,14 @@ const testsubmit = () => {
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
+}
+
+.main-container-bg-2 {
   background: linear-gradient(to bottom right, #e6f7ff, #fffbe6);
+}
+
+.main-container-bg-3 {
+  background: linear-gradient(to bottom, #ffe6eb 0%, #e6f0ff 100%);
 }
 
 .middle-img-common {

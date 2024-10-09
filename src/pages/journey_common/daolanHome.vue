@@ -63,8 +63,7 @@ defineOptions({
 
 // 获取屏幕边界到安全区域距离
 onShow(() => {
-  // interId.value = interStore.interInfo.interId - 1
-  interId.value = 1
+  interId.value = interStore.interInfo.interId
   currContent.value = contentList[interId.value]
 })
 
@@ -74,6 +73,10 @@ type IContentType = {
 }
 
 const contentList = [
+  {
+    navbarTitle: '第零站: 导览',
+    logoUrl: 'http://115.159.83.61:9000/journey0/journeyHome0.png',
+  },
   {
     navbarTitle: '第一站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey1/journeyHome1.png',
@@ -86,6 +89,22 @@ const contentList = [
     navbarTitle: '第三站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey3/journeyHome3.png',
   },
+  {
+    navbarTitle: '第四站: 导览',
+    logoUrl: 'http://115.159.83.61:9000/journey4/journeyHome4.png',
+  },
+  {
+    navbarTitle: '第五站: 导览',
+    logoUrl: 'http://115.159.83.61:9000/journey5/journeyHome5.png',
+  },
+  {
+    navbarTitle: '第六站: 导览',
+    logoUrl: 'http://115.159.83.61:9000/journey6/journeyHome6.png',
+  },
+  {
+    navbarTitle: '第七站: 导览',
+    logoUrl: 'http://115.159.83.61:9000/journey7/journeyHome7.png',
+  },
 ]
 
 const ToHome = () => {
@@ -97,12 +116,10 @@ const startJourney = async () => {
   if (res === 'pageEnd') {
     return
   }
-  if (currContent.value.navbarTitle === '第二站: 导览') {
-    interStore.isStartJourney = true
-    uni.navigateTo({
-      url: '/pages/journey_common/common',
-    })
-  }
+  interStore.isStartJourney = true
+  uni.navigateTo({
+    url: '/pages/journey_common/common',
+  })
 }
 const toTask = async () => {
   if (interStore.isStartJourney !== true) {
@@ -110,7 +127,23 @@ const toTask = async () => {
     return
   }
   interStore.isTaskFinished = true
-  await interStore.setPageIndex(23)
+  if (interStore.interInfo.interId === 0) {
+    await interStore.setPageIndex(-1)
+  } else if (interStore.interInfo.interId === 1) {
+    await interStore.setPageIndex(-1)
+  } else if (interStore.interInfo.interId === 2) {
+    await interStore.setPageIndex(23)
+  } else if (interStore.interInfo.interId === 3) {
+    await interStore.setPageIndex(-1)
+  } else if (interStore.interInfo.interId === 4) {
+    await interStore.setPageIndex(-1)
+  } else if (interStore.interInfo.interId === 5) {
+    await interStore.setPageIndex(-1)
+  } else if (interStore.interInfo.interId === 6) {
+    await interStore.setPageIndex(-1)
+  } else if (interStore.interInfo.interId === 7) {
+    await interStore.setPageIndex(-1)
+  }
   uni.navigateTo({
     url: '/pages/journey_common/common',
   })

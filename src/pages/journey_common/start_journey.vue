@@ -78,29 +78,25 @@ const navbarTitle = ref<string>('')
 
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const imageMap = new Map([
-  [0, 'http://115.159.83.61:9000/journey2/start_journey_logo2.png'],
-  [1, 'http://115.159.83.61:9000/journey2/start_journey_logo2.png'],
+  [0, 'http://115.159.83.61:9000/journey0/start_journey_logo0.png'],
+  [1, 'http://115.159.83.61:9000/journey1/start_journey_logo1.png'],
   [2, 'http://115.159.83.61:9000/journey2/start_journey_logo2.png'],
-  [3, 'http://115.159.83.61:9000/journey2/start_journey_logo2.png'],
+  [3, 'http://115.159.83.61:9000/journey3/start_journey_logo3.png'],
+  [4, 'http://115.159.83.61:9000/journey4/start_journey_logo4.png'],
+  [5, 'http://115.159.83.61:9000/journey5/start_journey_logo5.png'],
+  [6, 'http://115.159.83.61:9000/journey6/start_journey_logo6.png'],
+  [7, 'http://115.159.83.61:9000/journey7/start_journey_logo7.png'],
 ])
 const currContent = ref()
 
 const pageContent = ref([
   {
-    title: '导入: 观察你的思维',
-    questions: [
-      '• 情绪反应的起点是什么?',
-      '• 思维的 "默认选项" 如何影响生活?',
-      '• 消极思维挥之不去,怎么办?',
-    ],
+    title: '导入: ',
+    questions: [],
   },
   {
-    title: '第一站: 观察你的思维',
-    questions: [
-      '• 情绪反应的起点是什么?',
-      '• 思维的 "默认选项" 如何影响生活?',
-      '• 消极思维挥之不去,怎么办?',
-    ],
+    title: '第一站: ',
+    questions: [],
   },
   {
     title: '第二站: 观察你的思维',
@@ -111,12 +107,28 @@ const pageContent = ref([
     ],
   },
   {
-    title: '第三站: 观察你的思维',
+    title: '第三站: 回到此时此刻',
+    questions: ['• 什么是回避?', '• 回避将带给我们怎样的影响?', '• 除了回避，我们还能做点什么?'],
+  },
+  {
+    title: '第四站: 放下控制的绳子',
     questions: [
-      '• 情绪反应的起点是什么?',
-      '• 思维的 "默认选项" 如何影响生活?',
-      '• 消极思维挥之不去,怎么办?',
+      '• 什么回避和控制不会起作用?',
+      '• 除了与痛苦战斗，我们还能怎么做?',
+      '• 以正念的方式应对痛苦是可行的吗?',
     ],
+  },
+  {
+    title: '第五站: 接纳当下的你',
+    questions: ['• 什么是接纳，接纳为何有帮助?', '• 如何做到接纳?', '• 接纳的背后：自我关怀'],
+  },
+  {
+    title: '第六站: ',
+    questions: [],
+  },
+  {
+    title: '第七站: ',
+    questions: [],
   },
 ])
 const startJourney = async () => {
