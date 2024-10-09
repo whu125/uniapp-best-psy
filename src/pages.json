@@ -179,30 +179,6 @@
       "needLogin": true
     },
     {
-      "path": "pages/journey2/daolan1",
-      "type": "page",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "导览"
-      }
-    },
-    {
-      "path": "pages/journey2/daolan2",
-      "type": "page",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "导览"
-      }
-    },
-    {
-      "path": "pages/journey2/daoru2",
-      "type": "page",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "导览"
-      }
-    },
-    {
       "path": "pages/journey_common/common",
       "type": "page",
       "style": {
