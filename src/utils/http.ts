@@ -7,7 +7,7 @@ export const http = <T>(options: CustomRequestOptions) => {
     uni.request({
       ...options,
       dataType: 'json',
-      timeout: 10000,
+      timeout: 20000,
       // #ifndef MP-WEIXIN
       responseType: 'json',
       // #endif

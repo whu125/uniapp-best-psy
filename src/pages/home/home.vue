@@ -42,7 +42,7 @@
         <image
           style="width: 60rpx; height: 60rpx"
           mode="aspectFit"
-          src="../../static/images/home/startJourney.png"
+          src="../../static/images/home/finish.png"
           v-show="currProgress > journey.progress"
           @click="enterJourney(journey.progress)"
         />

@@ -67,7 +67,9 @@ import { getFormattedDate } from '@/utils/getTime'
 import { useUserStore } from '@/store/user'
 import { useInterStore } from '@/store/inter'
 import { useMessage, useToast } from 'wot-design-uni'
+import { useGlobalPageControlStore } from '@/store/globalPageControl'
 
+const globalPageControl = useGlobalPageControlStore()
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const tiyan = ref(9)
 const shouhuo = ref(9)
@@ -132,6 +134,9 @@ const submit = async () => {
       userStore.addProgress()
       userStore.setLockTime()
     }
+    // 清除缓存
+    interStore.clearInternfo()
+    globalPageControl.clearInternfo()
     uni.redirectTo({ url: '/pages/inquiry/success' })
   } else {
     toast.error('出现了一些问题')

@@ -68,7 +68,7 @@
       <view class="options" v-if="questions[curId - 1]?.type === 4">
         <view class="">
           <wd-slider v-model="answers[curId - 1]" min="0" max="100" />
-          <p>（注：单位为百分比）</p>
+          <!-- <p>（注：单位为百分比）</p> -->
         </view>
       </view>
 
@@ -132,7 +132,7 @@ watch(curId, (newVal) => {
 onLoad(async (param) => {
   // 修改，从缓存拿到当前第几站
 
-  toast.loading({ message: '加载中' })
+  toast.loading('加载中')
 
   position.value = param.position
 
@@ -221,6 +221,7 @@ const selectOption = (score: number) => {
 // ])
 
 const submit = async () => {
+  toast.loading('正在提交...')
   // const answersString = Array.from(answers.value.values()).join(';')
   // console.log(answersString)
   console.log('anwser', answers.value)
@@ -249,34 +250,43 @@ const submit = async () => {
     return
   }
   console.log(formData.value)
-  const res = await submitInquiry(formData.value)
-  if (res.code === 200) {
-    // 如果是pre 提交后跳转到正页
-    if (position.value.includes('pre')) {
-      uni.showToast({
-        title: '提交成功',
-        icon: 'success',
-        duration: 2000,
-        success: () => {
-          uni.redirectTo({
-            url:
-              '/pages/journey_common/start_journey?progress=' + encodeURIComponent(interId.value),
-          })
-        },
-      })
+  try {
+    const res = await submitInquiry(formData.value)
+    if (res.code === 200) {
+      toast.close()
+      // 清除缓存
+
+      inquiryStore.AnsInfo.positions[position.value] = {}
+
+      // 如果是pre 提交后跳转到正页
+      if (position.value.includes('pre')) {
+        uni.showToast({
+          title: '提交成功',
+          icon: 'success',
+          duration: 2000,
+          success: () => {
+            uni.redirectTo({
+              url:
+                '/pages/journey_common/start_journey?progress=' + encodeURIComponent(interId.value),
+            })
+          },
+        })
+      }
+      if (position.value.includes('post')) {
+        uni.showToast({
+          title: '提交成功',
+          icon: 'success',
+          duration: 2000,
+          success: () => {
+            uni.redirectTo({
+              url: '/pages/inquiry/end',
+            })
+          },
+        })
+      }
     }
-    if (position.value.includes('post')) {
-      uni.showToast({
-        title: '提交成功',
-        icon: 'success',
-        duration: 2000,
-        success: () => {
-          uni.redirectTo({
-            url: '/pages/inquiry/end',
-          })
-        },
-      })
-    }
+  } catch (e) {
+    toast.close()
   }
 }
 
