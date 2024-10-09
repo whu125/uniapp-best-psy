@@ -86,6 +86,12 @@ const toAdminInquiry = () => {
     url: '/pages/admin/inquiry',
   })
 }
+
+const ToHome = () => {
+  uni.switchTab({
+    url: '/pages/my/my',
+  })
+}
 </script>
 
 <style>
