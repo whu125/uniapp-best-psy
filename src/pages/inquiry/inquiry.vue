@@ -58,6 +58,20 @@
         <wd-textarea v-model="answers[curId - 1]" placeholder="请在这里输入..." />
       </view>
 
+      <!-- 选择1-9题 -->
+      <view class="options" v-if="questions[curId - 1]?.type === 3">
+        <view class="">
+          <wd-slider v-model="answers[curId - 1]" min="1" max="9" />
+        </view>
+      </view>
+
+      <view class="options" v-if="questions[curId - 1]?.type === 4">
+        <view class="">
+          <wd-slider v-model="answers[curId - 1]" min="0" max="100" />
+          <p>（注：单位为百分比）</p>
+        </view>
+      </view>
+
       <!-- 底部按钮 -->
       <view class="bottom-btn">
         <!-- <view class="circle">

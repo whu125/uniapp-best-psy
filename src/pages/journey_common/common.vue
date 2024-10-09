@@ -40,7 +40,7 @@
       <view class="middle-img-input">
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
       </view>
-      <view class="input-area">
+      <view class="input-area px-2">
         <view v-for="(placeholder, index) in pageContent.inputPlaceholders" :key="index">
           <view style="margin-top: 15px" v-if="pageContent.inputQuestions != null">
             {{ pageContent.inputQuestions[index] }}
@@ -65,7 +65,7 @@
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%; margin: 0 auto" />
       </view>
       <view class="button-area">
-        <view v-for="(buttonUrl, index) in pageContent.buttonUrls" :key="index">
+        <view v-for="(buttonUrl, index) in pageContent.buttonUrls" :key="index" class="mb-4">
           <view style="width: 80%; height: auto; margin: 0 auto">
             <image
               :src="buttonUrl"

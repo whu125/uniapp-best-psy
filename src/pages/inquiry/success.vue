@@ -18,9 +18,9 @@
         <img src="http://115.159.83.61:9000/inquiry/success.png" alt="" />
       </view>
 
-      <view class="instructions">
-        <p class="text-xl">第二站</p>
-        <p class="text-xl">打卡成功</p>
+      <view class="instructions mt-4">
+        <p class="text-xl font-800">第二站</p>
+        <p class="text-xl font-800">打卡成功</p>
       </view>
 
       <view class="flex justify-center">

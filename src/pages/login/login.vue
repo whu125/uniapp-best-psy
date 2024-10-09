@@ -104,7 +104,6 @@ const getPhoneNumber = async (e) => {
 
   await new Promise((resolve) => setTimeout(resolve, 2000))
   // todo:如果点了拒绝
-  toast.close()
 
   console.log('获取手机号的动态令牌:', e) // 动态令牌
   const openid = userStore.userInfo.userId
@@ -112,9 +111,23 @@ const getPhoneNumber = async (e) => {
 
   getPhoneNumberApi(openid, code).then((res2) => {
     // 服务端获取手机号
+    console.log('res2', res2)
+    toast.close()
     if (res2.code == 200) {
       uni.showToast({
         title: '登录成功',
+      })
+      // 判断是否是第一次登录
+      if (res2.data == true) {
+        uni.navigateTo({
+          url: '/pages/inquiry/first',
+        })
+      } else {
+        ToHome()
+      }
+    } else {
+      uni.showToast({
+        title: '登录失败,请重试',
       })
     }
   })
@@ -160,7 +173,6 @@ const weixinLogin = async () => {
           console.log('-----------------userinfo------------------')
           console.log(userStore.userInfo)
           console.log(userStore.userInfo.token)
-          ToHome()
         },
       })
     },

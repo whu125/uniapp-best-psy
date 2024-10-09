@@ -116,10 +116,10 @@ import { useUserStore } from '@/store/user'
 import { useToast, useNotify } from 'wot-design-uni'
 
 const { safeAreaInsets } = uni.getSystemInfoSync()
-
+const userStore = useUserStore()
 const toast = useToast()
 const customGoal = ref()
-const goal = ref(['1'])
+const goal = ref([])
 const curId = ref(1)
 const answers = ref([{}])
 // answers的理想：{'inquiryId':1,'content':数字或者填的内容}
@@ -189,11 +189,15 @@ const questionItem = ref([
   },
 ])
 
+onLoad(() => {
+  console.log(userStore.userInfo)
+})
+
 const selectOption = (score: number) => {
   answers.value[curId.value - 1] = {
     inquiryId: questionItem.value[curId.value - 1].inquiryId,
-    content: score,
-    isChoice: true,
+    score,
+    text: '',
   }
 
   curId.value++
@@ -202,8 +206,8 @@ const selectOption = (score: number) => {
 const handleAgeChange = () => {
   answers.value[curId.value - 1] = {
     inquiryId: questionItem.value[curId.value - 1].inquiryId,
-    content: age.value,
-    isChoice: false,
+    score: -1,
+    text: String(age.value),
   }
   curId.value++
 }
@@ -213,8 +217,8 @@ const submit = async () => {
   console.log('goal', goal.value)
   answers.value[curId.value - 1] = {
     inquiryId: questionItem.value[curId.value - 1].inquiryId,
-    content: '',
-    isChoice: false,
+    score: -1,
+    text: '',
   }
 
   // 先处理一下第七题 做一个映射
@@ -230,29 +234,29 @@ const submit = async () => {
 
   goal.value.forEach((goalId) => {
     if (goalId !== '7') {
-      answers.value[curId.value - 1].content += goalMapping[goalId] + ', '
+      answers.value[curId.value - 1].text += goalMapping[goalId] + ', '
     } else {
-      answers.value[curId.value - 1].content += customGoal.value + ', '
+      answers.value[curId.value - 1].text += customGoal.value + ', '
     }
   })
 
   const formData = ref([])
   console.log(answers.value)
   for (let i = 0; i < answers.value.length; i++) {
-    if (answers.value[i].isChoice === false) {
+    if (answers.value[i].score === -1) {
       formData.value.push({
         // userId: userStore.userInfo.userId,
         inquiryId: answers.value[i].inquiryId,
         interId: 0,
-
-        text: String(answers.value[i].content),
+        score: -1,
+        text: String(answers.value[i].text),
       })
     } else {
       formData.value.push({
         // userId: userStore.userInfo.userId,
         inquiryId: questionItem.value[i].inquiryId,
         interId: 0,
-        score: answers.value[i].content,
+        score: answers.value[i].score,
       })
     }
   }

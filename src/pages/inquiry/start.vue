@@ -20,8 +20,8 @@
       </view>
 
       <view class="instructions">
-        <p>填写问卷，完成打卡，记录你的改变！</p>
-        <p>中途请不要退出</p>
+        <p class="text-xl font-800">填写问卷，完成打卡，记录你的改变！</p>
+        <p class="text-xl font-800">中途请不要退出</p>
       </view>
 
       <!-- <button class="start-button" @click="startInquiry">开始填写</button> -->

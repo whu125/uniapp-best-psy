@@ -174,7 +174,7 @@ const toInquiry = () => {
 
 const toFirst = () => {
   uni.navigateTo({
-    url: '/pages/inquiry/eval',
+    url: '/pages/inquiry/first',
   })
 }
 

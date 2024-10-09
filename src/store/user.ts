@@ -4,7 +4,7 @@ import { ref } from 'vue'
 // const initState = { nickname: '', avatar: '' }
 const initState = {
   userId: '1',
-  username: 'yz',
+  username: '未登录用户',
   wechatId: '123456789wechat',
   wechatName: 'yz-wechat',
   phone: '1234567890',

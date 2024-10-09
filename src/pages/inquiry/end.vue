@@ -19,8 +19,8 @@
       </view>
 
       <view class="instructions">
-        <p class="text-xl">恭喜你完成问卷！ 点击下方按钮</p>
-        <p class="text-xl">查看站点回顾</p>
+        <p class="text-xl font-800">恭喜你完成问卷！ 点击下方按钮</p>
+        <p class="text-xl font-800">查看站点回顾</p>
       </view>
 
       <view class="flex justify-center">

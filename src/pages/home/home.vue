@@ -187,12 +187,12 @@ const enterJourney = async (progress: number) => {
         const numberStr = progress.toString()
         interStore.clearInternfo()
         globalPageControl.clearInternfo()
-        if (numberStr === '0') {
+        if (numberStr === '0' || numberStr === '1') {
           uni.redirectTo({
             url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
           })
         }
-        if (numberStr !== '0') {
+        if (numberStr !== '0' && numberStr !== '0') {
           uni.redirectTo({
             url: '/pages/inquiry/before?progress=' + encodeURIComponent(numberStr),
           })
@@ -202,34 +202,6 @@ const enterJourney = async (progress: number) => {
         console.log('取消')
       })
   }
-
-  // const res = await checkInterAvailability(progress)
-  // if (res.code === 200 && res.data !== 'none') {
-  //   toast.warning(res.data)
-  //   return
-  // }
-  // if (progress !== interStore.interInfo.interId) {
-  //   message
-  //     .confirm({
-  //       msg: '上一次干预记录会被清除',
-  //       title: '你的上一次干预还未完成！',
-  //     })
-  //     .then(() => {
-  //       const numberStr = progress.toString()
-  //       interStore.clearInternfo()
-  //       globalPageControl.clearInternfo()
-  //       uni.navigateTo({
-  //         url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
-  //       })
-  //     })
-  //     .catch((error) => {
-  //       console.log(error)
-  //     })
-  // } else {
-  //   uni.navigateTo({
-  //     url: '/pages/journey_common/common',
-  //   })
-  // }
 }
 </script>
 
