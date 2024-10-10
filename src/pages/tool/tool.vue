@@ -35,6 +35,7 @@
           <view class="grid-font">{{ tool.toolName }}</view>
         </view>
       </view>
+      <view style="height: 150rpx"></view>
     </view>
   </view>
 
@@ -61,7 +62,7 @@ const toolList = ref([
     iconUrl: 'http://115.159.83.61:9000/tool/xinqingriji.png',
   },
   {
-    toolName: '能量日记',
+    toolName: '三件小事',
     iconUrl: 'http://115.159.83.61:9000/tool/nengliangriji.png',
   },
   {
@@ -72,10 +73,62 @@ const toolList = ref([
     toolName: '认知解离',
     iconUrl: 'http://115.159.83.61:9000/tool/renzhijieli.png',
   },
+  {
+    toolName: '回避档案',
+    iconUrl: 'http://115.159.83.61:9000/tool/huibidangan.png',
+  },
+  {
+    toolName: '专注当下',
+    iconUrl: 'http://115.159.83.61:9000/tool/zhuanzhudangxia.png',
+  },
+  {
+    toolName: '正念练习',
+    iconUrl: 'http://115.159.83.61:9000/tool/zhengnianlianxi.png',
+  },
+  {
+    toolName: '接纳练习',
+    iconUrl: 'http://115.159.83.61:9000/tool/jienalianxi.png',
+  },
+  {
+    toolName: '价值手册',
+    iconUrl: 'http://115.159.83.61:9000/tool/jiazhishouce.png',
+  },
 ])
 
 const ToTool = (toolNmae: string) => {
   if (toolNmae === '心情日记') {
+    uni.navigateTo({
+      url: '/pages/mood/mood',
+    })
+  } else if (toolNmae === '三件小事') {
+    uni.navigateTo({
+      url: '/pages/mood/mood',
+    })
+  } else if (toolNmae === '自动思维') {
+    uni.navigateTo({
+      url: '/pages/tool-zidongsiwei/zidongsiwei',
+    })
+  } else if (toolNmae === '认知解离') {
+    uni.navigateTo({
+      url: '/pages/mood/mood',
+    })
+  } else if (toolNmae === '回避档案') {
+    uni.navigateTo({
+      url: '/pages/mood/mood',
+    })
+  } else if (toolNmae === '专注当下') {
+    uni.navigateTo({
+      url: '/pages/mood/mood',
+    })
+  } else if (toolNmae === '正念练习') {
+    uni.navigateTo({
+      url: '/pages/mood/mood',
+    })
+  } else if (toolNmae === '接纳练习') {
+    uni.navigateTo({
+      url: '/pages/mood/mood',
+    })
+  } else if (toolNmae === '价值手册') {
     uni.navigateTo({
       url: '/pages/mood/mood',
     })

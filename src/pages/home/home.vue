@@ -1,4 +1,4 @@
-<route lang="json5" type="home">
+<route lang="json5">
 {
   style: {
     navigationStyle: 'custom',
@@ -9,10 +9,6 @@
 <template>
   <tabbar selected="0"></tabbar>
   <view class="" h-full w-full>
-    <!-- <view class="header">
-      <view class="title">我的旅程</view>
-    </view> -->
-
     <wd-navbar fixed safeAreaInsetTop title="我的旅程"></wd-navbar>
 
     <view class="content px-4">

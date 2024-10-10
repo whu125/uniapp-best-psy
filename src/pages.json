@@ -45,11 +45,11 @@
   },
   "pages": [
     {
-      "path": "pages/home/home",
+      "path": "pages/tool-zidongsiwei/list",
       "type": "home",
       "style": {
         "navigationStyle": "custom",
-        "navigationBarTitleText": "我的旅程"
+        "navigationBarTitleText": "导览"
       }
     },
     {
@@ -102,6 +102,14 @@
         "navigationBarTitleText": "临时页面"
       },
       "needLogin": true
+    },
+    {
+      "path": "pages/home/home",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "我的旅程"
+      }
     },
     {
       "path": "pages/home/home_old",
@@ -276,6 +284,39 @@
         "navigationStyle": "custom",
         "navigationBarTitleText": "工具箱"
       }
+    },
+    {
+      "path": "pages/tool-zidongsiwei/catching",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
+      "path": "pages/tool-zidongsiwei/siweiDetail",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
+      "path": "pages/tool-zidongsiwei/startCatching",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
+      "path": "pages/tool-zidongsiwei/zidongsiwei",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "心情日记"
+      },
+      "needLogin": true
     }
   ],
   "subPackages": []
