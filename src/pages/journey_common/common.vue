@@ -451,6 +451,10 @@ const doOperation = async () => {
     }
   }
 
+  if (pageContent.value.operationText === '完成，存入封印册！') {
+    console.log(interStore.inputContent)
+  }
+
   // 如果用户点击的是返回按钮 需要判断当前是什么页面以跳转回原 button 页面
   if (pageContent.value.operationIcon.endsWith('back.png')) {
     if (pageContent.value.pageId === 7 && pageContent.value.interId === 2) {

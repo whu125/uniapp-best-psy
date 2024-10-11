@@ -72,14 +72,15 @@ export const useInterStore = defineStore(
     })
 
     const setUserInputMap = (key: number, value: string) => {
-      console.log('setUserInputMap', userInputMap.value)
+      // console.log('setUserInputMap', userInputMap.value)
       if (userInputMap.value instanceof Map) {
-        console.log(111)
-        // userInputMap.value = new Map<number, string>()
+        userInputMap.value.set(key, value)
+      } else {
+        userInputMap.value = new Map<number, string>()
         userInputMap.value.set(key, value)
       }
-
       console.log(userInputMap.value)
+      console.log(inputContent.value)
     }
 
     const setInterInfo = (val: IInterState) => {
@@ -91,7 +92,7 @@ export const useInterStore = defineStore(
       interInfo.value = { ...initState }
       pageCount.value = 0
       pageIndex.value = 0
-      userInputMap.value = new Map<number, string>()
+      userInputMap.value.clear()
       isStartJourney.value = false
       isTaskFinished.value = false
     }

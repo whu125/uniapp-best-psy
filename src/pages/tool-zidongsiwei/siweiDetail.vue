@@ -20,7 +20,31 @@
       <view class="box">
         <view class="text-area">
           <view>情境：</view>
-          <view></view>
+          <view>{{ content.qingjing }}</view>
+        </view>
+      </view>
+      <view class="box">
+        <view class="text-area">
+          <view>感受：</view>
+          <view>{{ content.ganshou }}</view>
+        </view>
+      </view>
+      <view class="box">
+        <view class="text-area">
+          <view>自动思维：</view>
+          <view>{{ content.zidongsiwei }}</view>
+        </view>
+      </view>
+      <view class="box">
+        <view class="text-area">
+          <view>后续影响：</view>
+          <view>{{ content.houxuyingxiang }}</view>
+        </view>
+      </view>
+      <view class="box">
+        <view class="text-area">
+          <view>如何识别：</view>
+          <view>{{ content.ruheshibie }}</view>
         </view>
       </view>
     </view>
@@ -29,7 +53,9 @@
 </template>
 
 <script lang="ts" setup>
-const content = ref()
+import { IZidongsiweiReturn } from '@/service/index/zidongsiwei'
+
+const content = ref<IZidongsiweiReturn>()
 onLoad((options) => {
   content.value = JSON.parse(decodeURIComponent(options.detail))
   console.log(content.value)

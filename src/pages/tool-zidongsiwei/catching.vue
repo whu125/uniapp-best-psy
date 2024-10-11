@@ -130,7 +130,15 @@
 </template>
 
 <script lang="ts" setup>
+import { submitZidongsiwei, IZidongsiwei } from '@/service/index/zidongsiwei'
+import { getFormattedDate } from '@/utils/getTime'
+import { useUserStore } from '@/store/user'
+import { useMessage, useToast } from 'wot-design-uni'
+
 const currIndex = ref<number>(0)
+const submitObj = ref<IZidongsiwei>()
+const userStore = useUserStore()
+const message = useMessage()
 const selectUrls = ref([
   'http://115.159.83.61:9000/journey2/renwu10.png',
   'http://115.159.83.61:9000/journey2/renwu11.png',
@@ -160,26 +168,25 @@ const toNext = () => {
 const goBack = () => {
   uni.navigateBack()
 }
-const submit = () => {
-  const res =
-    content1.value +
-    '%' +
-    content2.value +
-    '%' +
-    content3.value +
-    '%' +
-    content4.value +
-    '%' +
-    content5.value +
-    '%' +
-    selectUrls.value[selectedItem.value] +
-    '%' +
-    content6.value
+const submit = async () => {
+  submitObj.value.qingjing = content1.value
+  submitObj.value.ganshou = content2.value
+  submitObj.value.zidongsiwei = content3.value
+  submitObj.value.houxuyingxiang = content4.value
+  submitObj.value.ruheshibie = content6.value
+  submitObj.value.monsterUrl = selectUrls.value[selectedItem.value]
+  submitObj.value.siweiName = content5.value
+  submitObj.value.userId = userStore.userInfo.userId
+  submitObj.value.date = getFormattedDate().split(' ')[0]
 
-  console.log(res)
-  uni.redirectTo({
-    url: '/pages/tool-zidongsiwei/zidongsiwei',
-  })
+  const res = await submitZidongsiwei(submitObj.value)
+  if (res.code === 200) {
+    uni.redirectTo({
+      url: '/pages/tool-zidongsiwei/zidongsiwei',
+    })
+  } else {
+    message.alert('网络错误！')
+  }
 }
 </script>
 

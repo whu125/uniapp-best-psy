@@ -1,4 +1,4 @@
-<route lang="json5" type="home">
+<route lang="json5">
 {
   style: {
     navigationStyle: 'custom',
@@ -19,10 +19,10 @@
     <view class="main-container">
       <view v-for="(siwei, index) in siweiList" :key="index">
         <view class="box" @click="selectSiWei(index)">
-          <image :src="siwei.icon" style="width: 45px; height: 45px" />
+          <image :src="siwei.monsterUrl" style="width: 45px; height: 45px" />
           <view class="text-area">
             <view style="font-size: 16px; color: gray">{{ siwei.date }}</view>
-            <view style="font-size: 20px; font-weight: bold">{{ siwei.title }}</view>
+            <view style="font-size: 20px; font-weight: bold">{{ siwei.siweiName }}</view>
           </view>
           <image
             src="http://115.159.83.61:9000/tool/tool-list.png"
@@ -37,7 +37,30 @@
 </template>
 
 <script lang="ts" setup>
-const siweiList = ref([
+import {
+  getAllUserZidongsiwei,
+  submitZidongsiwei,
+  IZidongsiwei,
+  IZidongsiweiReturn,
+} from '@/service/index/zidongsiwei'
+import { useUserStore } from '@/store/user'
+import { useMessage, useToast } from 'wot-design-uni'
+
+const userStore = useUserStore()
+const toast = useToast()
+const message = useMessage()
+const siweiList = ref<IZidongsiweiReturn[]>()
+onShow(async () => {
+  toast.loading('加载中...')
+  const res = await getAllUserZidongsiwei()
+  toast.close()
+  if (res.code === 200) {
+    siweiList.value = res.data
+  } else {
+    message.alert('网络错误！')
+  }
+})
+const siweiList2 = ref([
   {
     icon: 'http://115.159.83.61:9000/journey2/renwu22.png',
     date: '8月15日',

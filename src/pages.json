@@ -45,11 +45,11 @@
   },
   "pages": [
     {
-      "path": "pages/tool-zidongsiwei/list",
+      "path": "pages/home/home",
       "type": "home",
       "style": {
         "navigationStyle": "custom",
-        "navigationBarTitleText": "导览"
+        "navigationBarTitleText": "我的旅程"
       }
     },
     {
@@ -102,14 +102,6 @@
         "navigationBarTitleText": "临时页面"
       },
       "needLogin": true
-    },
-    {
-      "path": "pages/home/home",
-      "type": "page",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "我的旅程"
-      }
     },
     {
       "path": "pages/home/home_old",
@@ -287,6 +279,14 @@
     },
     {
       "path": "pages/tool-zidongsiwei/catching",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
+      "path": "pages/tool-zidongsiwei/list",
       "type": "page",
       "style": {
         "navigationStyle": "custom",

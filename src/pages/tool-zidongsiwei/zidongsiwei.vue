@@ -59,7 +59,7 @@ const startRecord = () => {
 
 const ToDiaryList = () => {
   uni.navigateTo({
-    url: '/pages/',
+    url: '/pages/tool-zidongsiwei/list',
   })
 }
 </script>
