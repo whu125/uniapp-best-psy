@@ -151,13 +151,9 @@ const weixinLogin = async () => {
     provider: 'weixin',
     onlyAuthorize: true, // 微信登录仅请求授权认证
     success: function (event) {
-      console.log(event)
-      const { code } = event
-      console.log(code)
-
       // 客户端成功获取授权临时票据（code）,向业务服务器发起登录请求。
       uni.request({
-        url: 'http://localhost:8081/loginByWechat',
+        url: 'https://localhost:443/loginByWechat',
         method: 'POST',
         data: {
           code: event.code,

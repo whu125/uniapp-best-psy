@@ -55,7 +55,19 @@
 <script lang="ts" setup>
 import { IZidongsiweiReturn } from '@/service/index/zidongsiwei'
 
-const content = ref<IZidongsiweiReturn>()
+const content = ref<IZidongsiweiReturn>({
+  siweiId: '',
+  userId: '',
+  date: '',
+  qingjing: '',
+  ganshou: '',
+  zidongsiwei: '',
+  houxuyingxiang: '',
+  siweiName: '',
+  monsterUrl: '',
+  ruheshibie: '',
+  recordId: -1,
+})
 onLoad((options) => {
   content.value = JSON.parse(decodeURIComponent(options.detail))
   console.log(content.value)
