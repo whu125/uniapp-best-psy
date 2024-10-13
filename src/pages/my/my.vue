@@ -10,7 +10,7 @@
 <template>
   <tabbar selected="2"></tabbar>
   <view
-    class="bg-white overflow-hidden pt-10 px-4 box-border"
+    class="bg-white overflow-hidden pt-10 px-2 box-border"
     style="
       height: 100vh;
       overflow: scroll;
@@ -21,7 +21,7 @@
       <div class="user-info">
         <div class="avatar">
           <!-- <img src="@/static/" alt="User avatar" /> -->
-          <img src="../../static/images/wenjuan.png" alt="" class="w-full h-full" />
+          <img src="../../static/images/wenjuan.png" alt="" class="w-20 h-20" mode="widthFix" />
           <!-- <wd-img src="../../../../static/images/wenjuan.png"></wd-img> -->
           <view class="ml-4">
             <wd-icon name="jump" />
@@ -52,60 +52,106 @@
 
       <div class="menu-items">
         <div class="menu-item">
-          <span class="icon">🧭</span>
-          <span class="label">新手指南</span>
+          <view>
+            <image
+              style="width: 60rpx; height: 60rpx"
+              mode="aspectFit"
+              src="../../static/images/my/xinshouzhinan.png"
+            />
+          </view>
+          <span class="label ml-4">新手指南</span>
           <span class="arrow">›</span>
         </div>
         <div class="menu-item">
-          <span class="icon">📞</span>
-          <span class="label">心理危机热线</span>
+          <view>
+            <image
+              style="width: 60rpx; height: 60rpx"
+              mode="aspectFit"
+              src="../../static/images/my/rexiandianhua.png"
+            />
+          </view>
+
+          <span class="label ml-4">心理危机热线</span>
           <span class="arrow">›</span>
         </div>
         <div class="menu-item">
-          <span class="icon">💌</span>
-          <span class="label">咨询师信箱</span>
+          <view>
+            <image
+              style="width: 60rpx; height: 60rpx"
+              mode="aspectFit"
+              src="../../static/images/my/zixun.png"
+            />
+          </view>
+          <span class="label ml-4">咨询师信箱</span>
           <span class="arrow">›</span>
         </div>
         <div class="menu-item">
-          <span class="icon">📝</span>
-          <span class="label">意见反馈</span>
+          <view>
+            <image
+              style="width: 60rpx; height: 60rpx"
+              mode="aspectFit"
+              src="../../static/images/my/yijian.png"
+            />
+          </view>
+          <span class="label ml-4">意见反馈</span>
           <span class="arrow">›</span>
         </div>
         <div class="menu-item" @click="toadmin()">
-          <span class="icon">ℹ️</span>
-          <span class="label">测试管理员页面</span>
+          <view>
+            <image
+              style="width: 60rpx; height: 60rpx"
+              mode="aspectFit"
+              src="../../static/images/my/xinshouzhinan.png"
+            />
+          </view>
+          <span class="label ml-4">测试管理员页面</span>
           <span class="arrow">›</span>
         </div>
         <div class="menu-item" @click="toLogin()">
-          <span class="icon">ℹ️</span>
-          <span class="label">进入登录页面</span>
+          <view>
+            <image
+              style="width: 60rpx; height: 60rpx"
+              mode="aspectFit"
+              src="../../static/images/my/xinshouzhinan.png"
+            />
+          </view>
+          <span class="label ml-4">进入登录页面</span>
           <span class="arrow">›</span>
         </div>
         <div class="menu-item" @click="toInquiry()">
-          <span class="icon">ℹ️</span>
-          <span class="label">测试问卷入口</span>
+          <view>
+            <image
+              style="width: 60rpx; height: 60rpx"
+              mode="aspectFit"
+              src="../../static/images/my/xinshouzhinan.png"
+            />
+          </view>
+          <span class="label ml-4">测试问卷入口</span>
           <span class="arrow">›</span>
         </div>
         <div class="menu-item" @click="toFirst()">
-          <span class="icon">ℹ️</span>
-          <span class="label">测试第一次进入调查入口</span>
+          <view>
+            <image
+              style="width: 60rpx; height: 60rpx"
+              mode="aspectFit"
+              src="../../static/images/my/xinshouzhinan.png"
+            />
+          </view>
+          <span class="label ml-4">测试第一次进入调查入口</span>
           <span class="arrow">›</span>
         </div>
         <div class="menu-item" @click="toadmin()">
-          <span class="icon">ℹ️</span>
-          <span class="label">测试管理员页面</span>
+          <view>
+            <image
+              style="width: 60rpx; height: 60rpx"
+              mode="aspectFit"
+              src="../../static/images/my/xinshouzhinan.png"
+            />
+          </view>
+          <span class="label ml-4">测试管理员页面</span>
           <span class="arrow">›</span>
         </div>
-        <div class="menu-item" @click="submitInter()">
-          <span class="icon">ℹ️</span>
-          <span class="label">模拟提交干预</span>
-          <span class="arrow">›</span>
-        </div>
-        <div class="menu-item" @click="clear()">
-          <span class="icon">ℹ️</span>
-          <span class="label">测试清除干预缓存</span>
-          <span class="arrow">›</span>
-        </div>
+
         <view style="height: 150rpx"></view>
       </div>
     </div>
@@ -288,6 +334,7 @@ const clear = () => {
 
 .label {
   flex-grow: 1;
+  font-size: 18px;
 }
 
 .arrow {
