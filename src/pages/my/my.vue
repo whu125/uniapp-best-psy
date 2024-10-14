@@ -21,7 +21,8 @@
       <div class="user-info">
         <div class="avatar">
           <!-- <img src="@/static/" alt="User avatar" /> -->
-          <img src="../../static/images/wenjuan.png" alt="" class="w-20 h-20" mode="widthFix" />
+
+          <img :src="avator" alt="" class="w-20 h-20" mode="widthFix" />
           <!-- <wd-img src="../../../../static/images/wenjuan.png"></wd-img> -->
           <view class="ml-4">
             <wd-icon name="jump" />
@@ -166,7 +167,7 @@ import tabbar from '@/pages/tabbar/tabbar.vue'
 import { IInterPage, useInterStore } from '@/store/inter'
 
 const interStore = useInterStore()
-
+const avator = ref('http://115.159.83.61:9000/common/avatar.png')
 const userStore = useUserStore()
 const userInfo = ref(userStore.userInfo)
 
@@ -186,6 +187,8 @@ onShow(() => {
   if (Object.keys(userInfo.value).length === 0 && userInfo.value.constructor === Object) {
     // 如果 userInfo.value 是一个空对象，则执行以下代码
     getUserInfo()
+  } else {
+    avator.value = userInfo.value.avatar
   }
 })
 

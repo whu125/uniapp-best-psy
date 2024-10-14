@@ -9,7 +9,7 @@ const initState = {
   wechatName: 'yz-wechat',
   phone: '1234567890',
   currProgress: 0,
-  avatar: '',
+  avatar: 'http://115.159.83.61:9000/common/avatar.png',
   token: '',
   // 这个字段记录，下一次应该解锁的时间
   lockTime: -1,
