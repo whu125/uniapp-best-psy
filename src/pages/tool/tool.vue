@@ -93,6 +93,14 @@ const toolList = ref([
     toolName: '价值手册',
     iconUrl: 'http://115.159.83.61:9000/tool/jiazhishouce.png',
   },
+  {
+    toolName: '行动计划',
+    iconUrl: 'http://115.159.83.61:9000/tool/xingdongjihua.png',
+  },
+  {
+    toolName: '应对复发',
+    iconUrl: 'http://115.159.83.61:9000/tool/yingduifufa.png',
+  },
 ])
 
 const ToTool = (toolNmae: string) => {
@@ -122,7 +130,7 @@ const ToTool = (toolNmae: string) => {
     })
   } else if (toolNmae === '正念练习') {
     uni.navigateTo({
-      url: '/pages/mood/mood',
+      url: '/pages/tool-zhengnianlianxi/zhengnianlianxi',
     })
   } else if (toolNmae === '接纳练习') {
     uni.navigateTo({

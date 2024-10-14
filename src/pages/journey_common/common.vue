@@ -136,7 +136,7 @@
         'main-container-bg-6': currInterId == 6,
         'main-container-bg-7': currInterId == 7,
       }"
-      v-if="pageType === 'select'"
+      v-if="pageType === 'radio'"
     >
       <view style="height: 15%"></view>
       <view class="middle-img-input">
@@ -155,6 +155,34 @@
           </view>
         </view>
       </view>
+      <view @click="doOperation" class="operation-area">
+        <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
+        <view style="width: 100%; font-size: 18px; text-align: center">
+          {{ pageContent.operationText }}
+        </view>
+      </view>
+    </view>
+
+    <!-- 单选页面 -->
+    <view
+      class="main-container"
+      :class="{
+        'main-container-bg-0': currInterId == 0,
+        'main-container-bg-1': currInterId == 1,
+        'main-container-bg-2': currInterId == 2,
+        'main-container-bg-3': currInterId == 3,
+        'main-container-bg-4': currInterId == 4,
+        'main-container-bg-5': currInterId == 5,
+        'main-container-bg-6': currInterId == 6,
+        'main-container-bg-7': currInterId == 7,
+      }"
+      v-if="pageType === 'checkBox'"
+    >
+      <view style="height: 15%"></view>
+      <view class="middle-img-input">
+        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
+      </view>
+      <view class="input-area"></view>
       <view @click="doOperation" class="operation-area">
         <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">
@@ -262,9 +290,8 @@ const toast = useToast()
 
 const pageType = ref<string>('normal')
 const pageContent = ref<IInterPage>()
-const radioValue = ref<string>()
 const currentSlideImage = ref<number>(0)
-const selectedItem = ref()
+const selectedItem = ref<number>(-1)
 const currInterId = ref<number>(interStore.interInfo.interId)
 const userInputList = ref<Array<string>>([])
 const hasOperation = computed(() => {
@@ -420,6 +447,30 @@ const toPage = (buttonUrl: string) => {
       globalPageControlStore.globalPageControlInfo.toDaolanHome = true
     }
   }
+  // 干预4页面37
+  if (buttonUrl === 'http://115.159.83.61:9000/journey4/renwu2(1).png') {
+    interStore.setPageIndex(38)
+    globalPageControlStore.globalPageControlInfo.firstStepPage37_4 = true
+  } else if (buttonUrl === 'http://115.159.83.61:9000/journey4/renwu2(2).png') {
+    if (globalPageControlStore.globalPageControlInfo.firstStepPage37_4 === false) {
+      toast.warning('请先查看第一步')
+      return
+    } else {
+      interStore.setPageIndex(39)
+      globalPageControlStore.globalPageControlInfo.secondStepPage37_4 = true
+    }
+  } else if (buttonUrl === 'http://115.159.83.61:9000/journey4/renwu2(3).png') {
+    if (
+      globalPageControlStore.globalPageControlInfo.secondStepPage37_4 === false ||
+      globalPageControlStore.globalPageControlInfo.firstStepPage37_4 === false
+    ) {
+      toast.warning('请先查看第二步')
+      return
+    } else {
+      interStore.setPageIndex(40)
+      globalPageControlStore.globalPageControlInfo.toDaolanHome = true
+    }
+  }
   uni.redirectTo({
     url: '/pages/journey_common/common',
   })
@@ -434,8 +485,8 @@ const doOperation = async () => {
     }
     interStore.setUserInputMap(pageContent.value.pageId, inputContent)
   }
-  // 如果是 select 页面 保存用户输入到pinia
-  if (pageContent.value.pageType === 'select') {
+  // 如果是 radio 页面 保存用户输入到pinia
+  if (pageContent.value.pageType === 'radio' && selectedItem.value !== -1) {
     const inputContent = pageContent.value.selectUrls[selectedItem.value]
     interStore.setUserInputMap(pageContent.value.pageId, inputContent)
   }
@@ -473,6 +524,12 @@ const doOperation = async () => {
       await interStore.setPageIndex(27)
     } else if (pageContent.value.pageId === 30 && pageContent.value.interId === 3) {
       await interStore.setPageIndex(27)
+    } else if (pageContent.value.pageId === 38 && pageContent.value.interId === 4) {
+      await interStore.setPageIndex(37)
+    } else if (pageContent.value.pageId === 39 && pageContent.value.interId === 4) {
+      await interStore.setPageIndex(37)
+    } else if (pageContent.value.pageId === 40 && pageContent.value.interId === 4) {
+      await interStore.setPageIndex(37)
     }
     uni.redirectTo({
       url: '/pages/journey_common/common',

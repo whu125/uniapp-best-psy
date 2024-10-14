@@ -278,6 +278,47 @@
       }
     },
     {
+      "path": "pages/tool-zhengnianlianxi/input",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
+      "path": "pages/tool-zhengnianlianxi/list",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
+      "path": "pages/tool-zhengnianlianxi/startPractise",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
+      "path": "pages/tool-zhengnianlianxi/zhengnianDetail",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
+      "path": "pages/tool-zhengnianlianxi/zhengnianlianxi",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "心情日记"
+      },
+      "needLogin": true
+    },
+    {
       "path": "pages/tool-zidongsiwei/catching",
       "type": "page",
       "style": {

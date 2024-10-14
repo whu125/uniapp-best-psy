@@ -34,6 +34,11 @@ interface NavigateToOptions {
        "/pages/tabbar/tabbar" |
        "/pages/test2/test2" |
        "/pages/tool/tool" |
+       "/pages/tool-zhengnianlianxi/input" |
+       "/pages/tool-zhengnianlianxi/list" |
+       "/pages/tool-zhengnianlianxi/startPractise" |
+       "/pages/tool-zhengnianlianxi/zhengnianDetail" |
+       "/pages/tool-zhengnianlianxi/zhengnianlianxi" |
        "/pages/tool-zidongsiwei/catching" |
        "/pages/tool-zidongsiwei/list" |
        "/pages/tool-zidongsiwei/siweiDetail" |

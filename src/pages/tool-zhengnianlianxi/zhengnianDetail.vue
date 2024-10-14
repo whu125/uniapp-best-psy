@@ -7,11 +7,11 @@
 }
 </route>
 <template>
-  <view class="" w-full h-full>
+  <view w-full h-full>
     <wd-navbar
       fixed
       safeAreaInsetTop
-      title="自动思维"
+      title="正念练习：旅行手记"
       left-text="返回"
       left-arrow
       @click-left="goBack"
@@ -20,32 +20,32 @@
       <view style="height: 15%"></view>
       <view class="box">
         <view class="text-area">
-          <view>情境：</view>
+          <view>1.引发消极情绪的情境是什么?</view>
           <view>{{ content.qingjing }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>感受：</view>
+          <view>2.一开始的情绪是什么样子的?</view>
+          <view>{{ content.qingxu }}</view>
+        </view>
+      </view>
+      <view class="box">
+        <view class="text-area">
+          <view>3.尝试正念接纳后， 情绪是否有变化?</view>
+          <view>{{ content.bianhua }}</view>
+        </view>
+      </view>
+      <view class="box">
+        <view class="text-area">
+          <view>4.情绪发生了怎样的变化?</view>
+          <view>{{ content.zenyang }}</view>
+        </view>
+      </view>
+      <view class="box">
+        <view class="text-area">
+          <view>5.对于整个过程，你的感受是什么?</view>
           <view>{{ content.ganshou }}</view>
-        </view>
-      </view>
-      <view class="box">
-        <view class="text-area">
-          <view>自动思维：</view>
-          <view>{{ content.zidongsiwei }}</view>
-        </view>
-      </view>
-      <view class="box">
-        <view class="text-area">
-          <view>后续影响：</view>
-          <view>{{ content.houxuyingxiang }}</view>
-        </view>
-      </view>
-      <view class="box">
-        <view class="text-area">
-          <view>如何识别：</view>
-          <view>{{ content.ruheshibie }}</view>
         </view>
       </view>
     </view>
@@ -54,19 +54,17 @@
 </template>
 
 <script lang="ts" setup>
-import { IZidongsiweiReturn } from '@/service/index/zidongsiwei'
+import { IZhengnianlianxiReturn } from '@/service/index/zhengnianlianxi'
 
-const content = ref<IZidongsiweiReturn>({
-  siweiId: '',
+const content = ref<IZhengnianlianxiReturn>({
+  zhengnianId: '',
   userId: '',
   date: '',
   qingjing: '',
+  qingxu: '',
+  bianhua: '',
+  zenyang: '',
   ganshou: '',
-  zidongsiwei: '',
-  houxuyingxiang: '',
-  siweiName: '',
-  monsterUrl: '',
-  ruheshibie: '',
   recordId: -1,
 })
 onLoad((options) => {

@@ -14,25 +14,27 @@
     w-full
     h-full
   >
-    <wd-navbar title="自动思维" left-arrow @click-left="handleClickLeft"></wd-navbar>
+    <wd-navbar title="正念练习" left-arrow @click-left="handleClickLeft"></wd-navbar>
     <view style="height: 15%"></view>
     <view class="big-icon">
       <img
         style="width: 200px; height: 180px"
-        src="http://115.159.83.61:9000/tool/zidongsiwei/zidongsiwei-logo.png"
+        src="http://115.159.83.61:9000/tool/zhengnianlianxi/zhengnianlianxi-logo.png"
       />
     </view>
-    <view class="font">识别你的自动思维，让想法只是想法</view>
+    <view class="font">正念，用另一种方式与情绪相处</view>
+    <view class="font">正念练习将引导你观察情绪的浪潮，</view>
+    <view class="font">旅行手记可以帮助你记录自己的成长和进步</view>
     <view>
       <wd-card>
         <view class="card-content" @click="start">
-          <view class="card-title">捉拿自动思维</view>
+          <view class="card-title">正念练习</view>
           <view><wd-icon name="edit-1" size="23px" /></view>
         </view>
       </wd-card>
       <wd-card>
         <view class="card-content" @click="ToList">
-          <view class="card-title">查看封印库</view>
+          <view class="card-title">旅行手记</view>
           <view><wd-icon name="copy" size="22px" /></view>
         </view>
       </wd-card>
@@ -49,13 +51,13 @@ const handleClickLeft = () => {
 
 const start = () => {
   uni.navigateTo({
-    url: '/pages/tool-zidongsiwei/startCatching',
+    url: '/pages/tool-zhengnianlianxi/startPractise',
   })
 }
 
 const ToList = () => {
   uni.navigateTo({
-    url: '/pages/tool-zidongsiwei/list',
+    url: '/pages/tool-zhengnianlianxi/list',
   })
 }
 </script>
