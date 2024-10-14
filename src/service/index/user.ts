@@ -19,6 +19,10 @@ export const getUserInfo = (token: string) => {
   return http.post<User>('/user/getUserInfo', { token }, {})
 }
 
+export const getAllUserInfo = () => {
+  return http.post<User>('/user/getAllUser', {}, {})
+}
+
 export const logout = () => {
   return http.post<null>('/logout', {}, {})
 }

@@ -19,8 +19,8 @@
   <view>
     <button @click="toAdminInquiry()">查看问卷数据</button>
   </view>
-  <view class="admin-container">
-    <wd-table :data="dataList">
+  <view class="admin-container" v-if="flag">
+    <wd-table :data="userInfo">
       <wd-table-col label="操作" fixed>
         <template #value="{ row }">
           <view class="custom-class">
@@ -28,9 +28,9 @@
           </view>
         </template>
       </wd-table-col>
-      <wd-table-col prop="name" label="姓名"></wd-table-col>
-      <wd-table-col prop="school" label="求学之所"></wd-table-col>
-      <wd-table-col prop="major" label="组别"></wd-table-col>
+      <wd-table-col prop="username" label="微信名"></wd-table-col>
+      <wd-table-col prop="phone" label="手机号" width="150"></wd-table-col>
+      <wd-table-col prop="currProgress" label="已解锁单元"></wd-table-col>
     </wd-table>
   </view>
 
@@ -57,25 +57,33 @@
 </template>
 
 <script lang="ts" setup>
+import { getAllUserInfo, User } from '@/service/index/user'
+
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const show = ref(false)
+const userInfo = ref([])
+const flag = ref(false)
 const dataList = reactive([
   {
-    name: '赵云',
-    school: '武汉市阳逻妇幼保健学院',
-    major: '计算机科学与技术专业',
-  },
-  {
-    name: '孔明',
-    school: '武汉市阳逻卧龙学院',
-    major: '计算机科学与技术专业',
-  },
-  {
-    name: '刘备',
-    school: '武汉市阳逻编织学院',
-    major: '计算机科学与技术专业',
+    avatar: '',
+    currProgress: 3,
+    groupId: 0,
+    phone: '1234567890',
+    role: 'user',
+    userId: 'osz0n7fy5OCWb79AiihERzPCrUC8',
+    username: '杨宗',
+    wechatId: '微信id',
+    wechatName: '微信name',
   },
 ])
+
+onLoad(async () => {
+  const res = await getAllUserInfo()
+  console.log(res)
+  userInfo.value = res.data
+  console.log(userInfo.value)
+  flag.value = true
+})
 const edit = (row) => {
   console.log(row)
   show.value = true
