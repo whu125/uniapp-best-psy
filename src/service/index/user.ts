@@ -30,3 +30,7 @@ export const logout = () => {
 export const test = () => {
   return http.post('/question/test', {}, {})
 }
+
+export const setUserAvatar = (avatar: string) => {
+  return http.post<User>('/user/setAvatar', { url: avatar }, {})
+}

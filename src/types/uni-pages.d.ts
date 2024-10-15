@@ -34,8 +34,8 @@ interface NavigateToOptions {
        "/pages/tabbar/tabbar" |
        "/pages/test2/test2" |
        "/pages/tool/tool" |
-       "/pages/tool-huibidangan/huibidangan" |
        "/pages/tool-huibidangan/huibiDetail" |
+       "/pages/tool-huibidangan/huibidangan" |
        "/pages/tool-huibidangan/input" |
        "/pages/tool-huibidangan/list" |
        "/pages/tool-zhengnianlianxi/input" |

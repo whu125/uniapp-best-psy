@@ -21,18 +21,34 @@
       <div class="user-info">
         <div class="avatar">
           <!-- <img src="@/static/" alt="User avatar" /> -->
+          <button
+            open-type="chooseAvatar"
+            @chooseavatar="onChooseavatar"
+            class="avatar-wrapper"
+            hover-class="none"
+          >
+            <image :src="avator" alt="" class="w-20 h-20" mode="widthFix" />
+          </button>
 
-          <img :src="avator" alt="" class="w-20 h-20" mode="widthFix" />
+          <!-- <img :src="avator" alt="" class="w-20 h-20" mode="widthFix" /> -->
           <!-- <wd-img src="../../../../static/images/wenjuan.png"></wd-img> -->
-          <view class="ml-4">
+          <!-- <view class="ml-4">
             <wd-icon name="jump" />
-          </view>
+          </view> -->
         </div>
         <view class="flex">
-          <h2 class="username">{{ userInfo.username }}</h2>
-          <view class="ml-4 flex items-center">
+          <button
+            open-type="choose"
+            @chooseavatar="onChooseavatar"
+            class="avatar-wrapper"
+            hover-class="none"
+          >
+            <h2 class="username">{{ userInfo.username }}</h2>
+          </button>
+
+          <!-- <view class="ml-4 flex items-center">
             <wd-icon name="jump" />
-          </view>
+          </view> -->
         </view>
       </div>
 
@@ -162,7 +178,8 @@
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
 import { useUserStore } from '@/store/user'
-import { logout, test } from '@/service/index/user'
+import { logout, test, setUserAvatar } from '@/service/index/user'
+import { uploadImg } from '@/service/common/upload'
 import tabbar from '@/pages/tabbar/tabbar.vue'
 import { IInterPage, useInterStore } from '@/store/inter'
 
@@ -170,6 +187,7 @@ const interStore = useInterStore()
 const avator = ref('http://115.159.83.61:9000/common/avatar.png')
 const userStore = useUserStore()
 const userInfo = ref(userStore.userInfo)
+const baseURL = ref('http://115.159.83.61:9000/mindease/')
 
 uni.hideTabBar()
 defineOptions({
@@ -252,6 +270,52 @@ const clear = () => {
   console.log('测试清楚干预缓存')
   interStore.clearInternfo()
 }
+
+const onChooseavatar = async (e) => {
+  console.log('选择头像')
+  console.log('e:', e)
+  const { avatarUrl } = e.detail
+  console.log('avatarUrl:', avatarUrl)
+
+  const randomName = generateRandomString(10) + '.png'
+
+  // 通过 fetch 从 URL 下载图片文件
+  await uni.uploadFile({
+    url: 'https://localhost:443/upload/img', // 仅为示例，非真实的接口地址
+    filePath: avatarUrl,
+    name: 'img',
+    formData: {
+      name: randomName,
+    },
+    success: async (uploadFileRes) => {
+      console.log('success')
+
+      userInfo.value.avatar = baseURL.value + randomName
+      avator.value = userInfo.value.avatar
+      console.log(avator.value)
+
+      const res = await setUserAvatar(avator.value)
+      console.log(res)
+    },
+    fail: (fail) => {
+      console.log('fail')
+      console.log(fail)
+    },
+  })
+
+  // const res = await uploadImg(formData)
+  // console.log(res)
+}
+
+const generateRandomString = (length) => {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  let result = ''
+  const charactersLength = characters.length
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength))
+  }
+  return result
+}
 </script>
 
 <style>
@@ -268,7 +332,6 @@ const clear = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .avatar {
@@ -342,5 +405,18 @@ const clear = () => {
 
 .arrow {
   color: #ccc;
+}
+
+.avatar-wrapper {
+  height: 80px;
+  padding-right: 0;
+  padding-left: 0;
+  line-height: 50px;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.avatar-wrapper::after {
+  border: none;
 }
 </style>
