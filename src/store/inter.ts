@@ -61,7 +61,6 @@ export const useInterStore = defineStore(
 
     const inputContent = computed(() => {
       let inputContent = ''
-      console.log('userInputMap.value', userInputMap.value)
 
       if (userInputMap.value && userInputMap.value.size > 0) {
         userInputMap.value.forEach((value, key) => {

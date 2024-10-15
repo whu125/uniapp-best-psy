@@ -163,7 +163,7 @@
       </view>
     </view>
 
-    <!-- 单选页面 -->
+    <!-- 多选页面 -->
     <view
       class="main-container"
       :class="{
@@ -182,7 +182,13 @@
       <view class="middle-img-input">
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
       </view>
-      <view class="input-area"></view>
+      <view class="input-area">
+        <wd-checkbox-group v-model="checkBoxItem" cell shape="button" size="large">
+          <template v-for="(item, index) in pageContent.selectUrls" :key="index">
+            <wd-checkbox :modelValue="index">{{ item }}</wd-checkbox>
+          </template>
+        </wd-checkbox-group>
+      </view>
       <view @click="doOperation" class="operation-area">
         <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">
@@ -292,6 +298,7 @@ const pageType = ref<string>('normal')
 const pageContent = ref<IInterPage>()
 const currentSlideImage = ref<number>(0)
 const selectedItem = ref<number>(-1)
+const checkBoxItem = ref<number[]>([])
 const currInterId = ref<number>(interStore.interInfo.interId)
 const userInputList = ref<Array<string>>([])
 const hasOperation = computed(() => {
@@ -488,6 +495,14 @@ const doOperation = async () => {
   // 如果是 radio 页面 保存用户输入到pinia
   if (pageContent.value.pageType === 'radio' && selectedItem.value !== -1) {
     const inputContent = pageContent.value.selectUrls[selectedItem.value]
+    interStore.setUserInputMap(pageContent.value.pageId, inputContent)
+  }
+  // 如果是 checkBox 页面 保存用户输入到pinia
+  if (pageContent.value.pageType === 'checkBox') {
+    let inputContent = ''
+    for (let i = 0; i < checkBoxItem.value.length; i++) {
+      inputContent = inputContent + pageContent.value.selectUrls[checkBoxItem.value[i]] + '_'
+    }
     interStore.setUserInputMap(pageContent.value.pageId, inputContent)
   }
   // 如果是 button 页面 判断一下是否前往 daolanHome

@@ -103,40 +103,40 @@ const toolList = ref([
   },
 ])
 
-const ToTool = (toolNmae: string) => {
-  if (toolNmae === '心情日记') {
+const ToTool = (toolName: string) => {
+  if (toolName === '心情日记') {
     uni.navigateTo({
       url: '/pages/mood/mood',
     })
-  } else if (toolNmae === '三件小事') {
+  } else if (toolName === '三件小事') {
     uni.navigateTo({
       url: '/pages/mood/mood',
     })
-  } else if (toolNmae === '自动思维') {
+  } else if (toolName === '自动思维') {
     uni.navigateTo({
       url: '/pages/tool-zidongsiwei/zidongsiwei',
     })
-  } else if (toolNmae === '认知解离') {
+  } else if (toolName === '认知解离') {
     uni.navigateTo({
       url: '/pages/mood/mood',
     })
-  } else if (toolNmae === '回避档案') {
+  } else if (toolName === '回避档案') {
+    uni.navigateTo({
+      url: '/pages/tool-huibidangan/huibidangan',
+    })
+  } else if (toolName === '专注当下') {
     uni.navigateTo({
       url: '/pages/mood/mood',
     })
-  } else if (toolNmae === '专注当下') {
-    uni.navigateTo({
-      url: '/pages/mood/mood',
-    })
-  } else if (toolNmae === '正念练习') {
+  } else if (toolName === '正念练习') {
     uni.navigateTo({
       url: '/pages/tool-zhengnianlianxi/zhengnianlianxi',
     })
-  } else if (toolNmae === '接纳练习') {
+  } else if (toolName === '接纳练习') {
     uni.navigateTo({
       url: '/pages/mood/mood',
     })
-  } else if (toolNmae === '价值手册') {
+  } else if (toolName === '价值手册') {
     uni.navigateTo({
       url: '/pages/mood/mood',
     })

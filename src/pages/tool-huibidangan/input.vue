@@ -19,60 +19,64 @@
     <view class="main-container">
       <view style="height: 15%"></view>
       <view class="input-area px-2">
-        <view style="margin-top: 15px">1.引发消极情绪的情境是什么?</view>
+        <view style="margin-top: 15px">1.首先，为这种应对方式取个名字</view>
         <view style="margin-top: 5px">
-          <wd-textarea v-model="submitObj.qingjing" placeholder="发生了什么?" />
+          <wd-textarea v-model="submitObj.huibiName" placeholder="名字是最短的咒语" />
         </view>
       </view>
       <view class="input-area px-2">
-        <view style="margin-top: 15px">2.一开始的情绪是什么样子的?</view>
+        <view style="margin-top: 15px">2.引发情绪的情境或事件：</view>
         <view style="margin-top: 5px">
-          <wd-textarea v-model="submitObj.qingxu" placeholder="最初的情绪是……" />
+          <wd-textarea v-model="submitObj.qingjing" placeholder="当时发生了什么……" />
         </view>
       </view>
       <view class="input-area px-2">
-        <view style="margin-top: 15px">3.尝试正念接纳后， 情绪是否有变化?</view>
+        <view style="margin-top: 15px">3.产生了什么感受：</view>
         <view style="margin-top: 5px">
-          <wd-textarea v-model="submitObj.bianhua" placeholder="正念接纳带来了什么改变?" />
+          <wd-textarea v-model="submitObj.ganshou" placeholder="焦虑，沮丧，恐惧，或者别的什么?" />
         </view>
       </view>
       <view class="input-area px-2">
-        <view style="margin-top: 15px">4.情绪发生了怎样的变化?</view>
+        <view style="margin-top: 15px">4.为了对抗这种感觉，你做了什么尝试?</view>
         <view style="margin-top: 5px">
-          <wd-textarea
-            v-model="submitObj.zenyang"
-            placeholder="或许情绪软化了一些? 或许变成了另外的情绪?"
-          />
+          <wd-textarea v-model="submitObj.changshi" placeholder="你是怎么做的?" />
         </view>
       </view>
       <view class="input-area px-2">
-        <view style="margin-top: 15px">5.对于整个过程，你的感受是什么?</view>
+        <view style="margin-top: 15px">5.这种尝试给你带来了什么长期影响?</view>
         <view style="margin-top: 5px">
-          <wd-textarea v-model="submitObj.ganshou" placeholder="有什么样的感悟和体验?" />
+          <wd-textarea v-model="submitObj.yingxiang" placeholder="达到自己的目标了吗?" />
+        </view>
+      </view>
+      <view class="input-area px-2">
+        <view style="margin-top: 15px">6.下一次，你希望自己怎么做?</view>
+        <view style="margin-top: 5px">
+          <wd-textarea v-model="submitObj.zenme" placeholder="你期待自己怎么做?" />
         </view>
       </view>
       <view @click="doSubmit" class="operation-area">
         <img src="http://115.159.83.61:9000/common/finish.png" style="width: 50px; height: 50px" />
-        <view style="width: 100%; font-size: 18px; text-align: center">保存手记</view>
+        <view style="width: 100%; font-size: 18px; text-align: center">存入档案</view>
       </view>
     </view>
   </view>
 </template>
 
 <script lang="ts" setup>
-import { submitZhengnianlianxi, IZhengnianlianxi } from '@/service/index/zhengnianlianxi'
+import { submitHuibidangan, IHuibidangan } from '@/service/index/huibidangan'
 import { getFormattedDate } from '@/utils/getTime'
 import { useUserStore } from '@/store/user'
 import { useMessage, useToast } from 'wot-design-uni'
 
-const submitObj = ref<IZhengnianlianxi>({
+const submitObj = ref<IHuibidangan>({
   userId: '',
   date: '',
+  huibiName: '',
   qingjing: '',
-  qingxu: '',
-  bianhua: '',
-  zenyang: '',
   ganshou: '',
+  changshi: '',
+  yingxiang: '',
+  zenme: '',
 })
 
 const message = useMessage()
@@ -83,10 +87,10 @@ const goBack = () => {
 const doSubmit = async () => {
   submitObj.value.userId = userStore.userInfo.userId
   submitObj.value.date = getFormattedDate().split(' ')[0]
-  const res = await submitZhengnianlianxi(submitObj.value)
+  const res = await submitHuibidangan(submitObj.value)
   if (res.code === 200) {
     uni.redirectTo({
-      url: '/pages/tool-zhengnianlianxi/zhengnianlianxi',
+      url: '/pages/tool-huibidangan/huibidangan',
     })
   } else {
     message.alert('网络错误！')
