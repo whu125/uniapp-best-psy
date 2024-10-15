@@ -18,7 +18,7 @@
     "
   >
     <div class="profile-container">
-      <div class="user-info">
+      <div class="user-info mb-4">
         <div class="avatar">
           <!-- <img src="@/static/" alt="User avatar" /> -->
           <button
@@ -37,16 +37,14 @@
           </view> -->
         </div>
         <view class="flex">
-          <button
-            open-type="choose"
-            @chooseavatar="onChooseavatar"
-            class="avatar-wrapper"
-            hover-class="none"
-          >
-            <h2 class="username">{{ userInfo.username }}</h2>
-          </button>
+          <view class="name-container">
+            <span class="mr-2">{{ userInfo.username }}</span>
+            <view class="name-icon" @click="setName">
+              <wd-icon name="jump" />
+            </view>
+          </view>
 
-          <!-- <view class="ml-4 flex items-center">
+          <!-- <view class="flex items-center absolute name-icon" @click="setName">
             <wd-icon name="jump" />
           </view> -->
         </view>
@@ -172,6 +170,7 @@
         <view style="height: 150rpx"></view>
       </div>
     </div>
+    <wd-message-box />
   </view>
 </template>
 
@@ -182,6 +181,9 @@ import { logout, test, setUserAvatar } from '@/service/index/user'
 import { uploadImg } from '@/service/common/upload'
 import tabbar from '@/pages/tabbar/tabbar.vue'
 import { IInterPage, useInterStore } from '@/store/inter'
+import { useMessage } from 'wot-design-uni'
+
+const message = useMessage()
 
 const interStore = useInterStore()
 const avator = ref('http://115.159.83.61:9000/common/avatar.png')
@@ -189,6 +191,7 @@ const userStore = useUserStore()
 const userInfo = ref(userStore.userInfo)
 const baseURL = ref('http://115.159.83.61:9000/mindease/')
 
+const name = ref('')
 uni.hideTabBar()
 defineOptions({
   name: 'my',
@@ -316,6 +319,21 @@ const generateRandomString = (length) => {
   }
   return result
 }
+
+const setName = () => {
+  console.log('修改用户名')
+  message
+    .prompt({
+      title: '请输入要修改的用户名',
+      inputValue: name.value,
+    })
+    .then((resp) => {
+      console.log(resp)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
 </script>
 
 <style>
@@ -357,6 +375,7 @@ const generateRandomString = (length) => {
   margin-bottom: 20px;
   background-color: white;
   border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .stat-item {
@@ -380,6 +399,7 @@ const generateRandomString = (length) => {
   overflow: hidden;
   background-color: white;
   border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .menu-item {
@@ -405,6 +425,18 @@ const generateRandomString = (length) => {
 
 .arrow {
   color: #ccc;
+}
+
+.name-icon {
+  transform: translateY(2rpx);
+}
+.name-container {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .avatar-wrapper {
