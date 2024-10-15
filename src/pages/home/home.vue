@@ -178,17 +178,17 @@ const enterJourney = async (progress: number) => {
         closeOnClickModal: false,
         type: 'confirm',
       })
-      .then(() => {
+      .then(async () => {
         console.log('进入干预')
         const numberStr = progress.toString()
-        interStore.clearInternfo()
-        globalPageControl.clearInternfo()
+        await interStore.clearInternfo()
+        await globalPageControl.clearInternfo()
         if (numberStr === '0' || numberStr === '1') {
           uni.redirectTo({
             url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
           })
         }
-        if (numberStr !== '0' && numberStr !== '0') {
+        if (numberStr !== '0' && numberStr !== '1') {
           uni.redirectTo({
             url: '/pages/inquiry/before?progress=' + encodeURIComponent(numberStr),
           })

@@ -488,17 +488,39 @@ const doOperation = async () => {
   if (pageContent.value.pageType === 'input') {
     let inputContent = ''
     for (let i = 0; i < userInputList.value.length; i++) {
+      // 判断用户有无未填写
+      if (userInputList.value[i] === '') {
+        toast.error('请不要留下空白！')
+        return
+      } else if (
+        userInputList.value[i].indexOf('%') !== -1 ||
+        userInputList.value[i].indexOf('#') !== -1 ||
+        userInputList.value[i].indexOf('_') !== -1
+      ) {
+        toast.error('请不要输入 % # _ 字符！')
+        return
+      }
       inputContent = inputContent + userInputList.value[i] + '%'
     }
     interStore.setUserInputMap(pageContent.value.pageId, inputContent)
   }
   // 如果是 radio 页面 保存用户输入到pinia
-  if (pageContent.value.pageType === 'radio' && selectedItem.value !== -1) {
+  if (pageContent.value.pageType === 'radio') {
+    // 判断用户有无未填写
+    if (selectedItem.value !== -1) {
+      toast.error('选择一项！')
+      return
+    }
     const inputContent = pageContent.value.selectUrls[selectedItem.value]
     interStore.setUserInputMap(pageContent.value.pageId, inputContent)
   }
   // 如果是 checkBox 页面 保存用户输入到pinia
   if (pageContent.value.pageType === 'checkBox') {
+    // 判断用户有无未填写
+    if (checkBoxItem.value.length < 1) {
+      toast.error('选择至少一项！')
+      return
+    }
     let inputContent = ''
     for (let i = 0; i < checkBoxItem.value.length; i++) {
       inputContent = inputContent + pageContent.value.selectUrls[checkBoxItem.value[i]] + '_'
@@ -515,10 +537,6 @@ const doOperation = async () => {
       toast.warning('请先完成任务')
       return
     }
-  }
-
-  if (pageContent.value.operationText === '完成，存入封印册！') {
-    console.log(interStore.inputContent)
   }
 
   // 如果用户点击的是返回按钮 需要判断当前是什么页面以跳转回原 button 页面
@@ -617,8 +635,9 @@ const testsubmit = () => {
 }
 
 .input-area {
-  width: 100%;
+  width: 90%;
   height: auto;
+  margin: 0 auto;
 }
 
 .button-area {
