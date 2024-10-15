@@ -34,8 +34,8 @@ interface NavigateToOptions {
        "/pages/tabbar/tabbar" |
        "/pages/test2/test2" |
        "/pages/tool/tool" |
-       "/pages/tool-huibidangan/huibiDetail" |
        "/pages/tool-huibidangan/huibidangan" |
+       "/pages/tool-huibidangan/huibiDetail" |
        "/pages/tool-huibidangan/input" |
        "/pages/tool-huibidangan/list" |
        "/pages/tool-zhengnianlianxi/input" |
@@ -47,7 +47,11 @@ interface NavigateToOptions {
        "/pages/tool-zidongsiwei/list" |
        "/pages/tool-zidongsiwei/siweiDetail" |
        "/pages/tool-zidongsiwei/startCatching" |
-       "/pages/tool-zidongsiwei/zidongsiwei";
+       "/pages/tool-zidongsiwei/zidongsiwei" |
+       "/pages/tool-价值、/huibidangan" |
+       "/pages/tool-价值、/huibiDetail" |
+       "/pages/tool-价值、/input" |
+       "/pages/tool-价值、/list";
 }
 interface RedirectToOptions extends NavigateToOptions {}
 

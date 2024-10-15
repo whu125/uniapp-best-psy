@@ -91,7 +91,12 @@ export const useInterStore = defineStore(
       interInfo.value = { ...initState }
       pageCount.value = 0
       pageIndex.value = 0
-      userInputMap.value.clear()
+      if (userInputMap.value instanceof Map) {
+        userInputMap.value.clear()
+      } else {
+        userInputMap.value = new Map<number, string>()
+      }
+
       isStartJourney.value = false
       isTaskFinished.value = false
     }

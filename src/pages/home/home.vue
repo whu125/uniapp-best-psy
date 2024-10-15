@@ -152,6 +152,8 @@ const enterJourney = async (progress: number) => {
   // 检查是否有干预记录
   if (interStore.interInfo.interId === -1) {
     console.log('没有干预记录')
+    interStore.clearInternfo()
+    globalPageControl.clearInternfo()
 
     const numberStr = progress.toString()
 
@@ -178,11 +180,14 @@ const enterJourney = async (progress: number) => {
         closeOnClickModal: false,
         type: 'confirm',
       })
-      .then(async () => {
+      .then(() => {
         console.log('进入干预')
         const numberStr = progress.toString()
-        await interStore.clearInternfo()
-        await globalPageControl.clearInternfo()
+        interStore.clearInternfo()
+        globalPageControl.clearInternfo()
+        uni.redirectTo({
+          url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+        })
         if (numberStr === '0' || numberStr === '1') {
           uni.redirectTo({
             url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),

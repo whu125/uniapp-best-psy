@@ -478,6 +478,24 @@ const toPage = (buttonUrl: string) => {
       globalPageControlStore.globalPageControlInfo.toDaolanHome = true
     }
   }
+  // 干预5页面19
+  if (buttonUrl === 'http://115.159.83.61:9000/journey5/renwu2(1).png') {
+    interStore.setPageIndex(19)
+    globalPageControlStore.globalPageControlInfo.firstStepPage19_5 = true
+  } else if (buttonUrl === 'http://115.159.83.61:9000/journey5/renwu2(2).png') {
+    if (globalPageControlStore.globalPageControlInfo.firstStepPage19_5 === false) {
+      toast.warning('请先查看第一步')
+      return
+    } else {
+      interStore.setPageIndex(21)
+      globalPageControlStore.globalPageControlInfo.toDaolanHome = true
+    }
+  }
+  // 干预6页面18
+  if (buttonUrl === 'http://115.159.83.61:9000/journey6/renwu2(1).png') {
+    interStore.setPageIndex(19)
+    globalPageControlStore.globalPageControlInfo.toDaolanHome = true
+  }
   uni.redirectTo({
     url: '/pages/journey_common/common',
   })
@@ -530,9 +548,17 @@ const doOperation = async () => {
   // 如果是 button 页面 判断一下是否前往 daolanHome
   if (pageContent.value.pageType === 'button') {
     if (hasOperation.value && globalPageControlStore.globalPageControlInfo.toDaolanHome) {
-      uni.redirectTo({
-        url: '/pages/journey_common/daolanHome',
-      })
+      if (interStore.interInfo.interId !== 5) {
+        uni.redirectTo({
+          url: '/pages/journey_common/daolanHome',
+        })
+      } else {
+        interStore.setPageIndex(23)
+        uni.redirectTo({
+          url: '/pages/journey_common/common',
+        })
+      }
+      return
     } else {
       toast.warning('请先完成任务')
       return
@@ -563,6 +589,12 @@ const doOperation = async () => {
       await interStore.setPageIndex(37)
     } else if (pageContent.value.pageId === 40 && pageContent.value.interId === 4) {
       await interStore.setPageIndex(37)
+    } else if (pageContent.value.pageId === 20 && pageContent.value.interId === 5) {
+      await interStore.setPageIndex(18)
+    } else if (pageContent.value.pageId === 22 && pageContent.value.interId === 5) {
+      await interStore.setPageIndex(18)
+    } else if (pageContent.value.pageId === 25 && pageContent.value.interId === 6) {
+      await interStore.setPageIndex(18)
     }
     uni.redirectTo({
       url: '/pages/journey_common/common',

@@ -138,7 +138,7 @@ const ToTool = (toolName: string) => {
     })
   } else if (toolName === '价值手册') {
     uni.navigateTo({
-      url: '/pages/mood/mood',
+      url: '/pages/tool-jiazhishouce/jiazhishouce',
     })
   }
 }
