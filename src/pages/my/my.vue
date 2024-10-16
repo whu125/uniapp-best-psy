@@ -133,7 +133,7 @@
           <span class="label ml-4">进入登录页面</span>
           <span class="arrow">›</span>
         </div>
-        <div class="menu-item" @click="toInquiry()">
+        <!-- <div class="menu-item" @click="toInquiry()">
           <view>
             <image
               style="width: 60rpx; height: 60rpx"
@@ -165,25 +165,27 @@
           </view>
           <span class="label ml-4">测试管理员页面</span>
           <span class="arrow">›</span>
-        </div>
+        </div> -->
 
         <view style="height: 150rpx"></view>
       </div>
     </div>
     <wd-message-box />
+    <wd-toast />
   </view>
 </template>
 
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
 import { useUserStore } from '@/store/user'
-import { logout, test, setUserAvatar } from '@/service/index/user'
+import { logout, test, setUserAvatar, setUserName } from '@/service/index/user'
 import { uploadImg } from '@/service/common/upload'
 import tabbar from '@/pages/tabbar/tabbar.vue'
 import { IInterPage, useInterStore } from '@/store/inter'
-import { useMessage } from 'wot-design-uni'
+import { useMessage, useToast } from 'wot-design-uni'
 
 const message = useMessage()
+const toast = useToast()
 
 const interStore = useInterStore()
 const avator = ref('http://115.159.83.61:9000/common/avatar.png')
@@ -191,7 +193,7 @@ const userStore = useUserStore()
 const userInfo = ref(userStore.userInfo)
 const baseURL = ref('http://115.159.83.61:9000/mindease/')
 
-const name = ref('')
+const username = ref('')
 uni.hideTabBar()
 defineOptions({
   name: 'my',
@@ -284,7 +286,7 @@ const onChooseavatar = async (e) => {
 
   // 通过 fetch 从 URL 下载图片文件
   await uni.uploadFile({
-    url: 'https://localhost:443/upload/img', // 仅为示例，非真实的接口地址
+    url: 'https://mindease.online:28081/upload/img', // 仅为示例，非真实的接口地址
     filePath: avatarUrl,
     name: 'img',
     formData: {
@@ -325,10 +327,17 @@ const setName = () => {
   message
     .prompt({
       title: '请输入要修改的用户名',
-      inputValue: name.value,
+      inputValue: username.value,
     })
-    .then((resp) => {
+    .then(async (resp) => {
       console.log(resp)
+      console.log(username.value)
+      username.value = resp.value
+      const res = await setUserName(resp.value)
+      if (res.code === 200) {
+        toast.success('修改成功')
+        userInfo.value.username = username.value
+      }
     })
     .catch((error) => {
       console.log(error)
