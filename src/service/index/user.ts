@@ -34,3 +34,7 @@ export const test = () => {
 export const setUserAvatar = (avatar: string) => {
   return http.post<User>('/user/setAvatar', { url: avatar }, {})
 }
+
+export const setUserName = (name: string) => {
+  return http.post<User>(`/user/setName?name=${name}`, {}, {})
+}
