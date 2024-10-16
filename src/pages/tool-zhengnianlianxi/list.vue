@@ -18,6 +18,7 @@
     ></wd-navbar>
     <view class="main-container">
       <view style="height: 15%"></view>
+      <view class="font">我的旅行手记</view>
       <view v-for="(zhengnian, index) in zhengnianList" :key="index">
         <view class="box" @click="selectZhengNian(index)">
           <view style="font-size: 16px; color: gray">{{ zhengnian.date }}</view>
@@ -71,9 +72,17 @@ const selectZhengNian = (index: number) => {
   overflow-y: scroll;
 }
 
+.font {
+  margin-top: 8px;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+
 .box {
   box-sizing: border-box;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 90%;
   height: auto;

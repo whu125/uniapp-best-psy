@@ -210,8 +210,9 @@ const doSubmit = async () => {
 }
 
 .input-area {
-  width: 100%;
+  width: 90%;
   height: auto;
+  margin: 0 auto;
 }
 
 .operation-area {

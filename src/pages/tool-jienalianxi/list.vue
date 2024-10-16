@@ -11,18 +11,18 @@
     <wd-navbar
       fixed
       safeAreaInsetTop
-      title="我的回避档案"
+      title="接纳练习"
       left-text="返回"
       left-arrow
       @click-left="goBack"
     ></wd-navbar>
     <view class="main-container">
       <view style="height: 15%"></view>
-      <view class="font">我的回避档案</view>
-      <view v-for="(huibi, index) in huibiList" :key="index">
-        <view class="box" @click="selectHuibi(index)">
-          <view style="font-size: 18px; color: gray">{{ index }}</view>
-          <view style="font-size: 20px; font-weight: bold">{{ huibi.huibiName }}</view>
+      <view class="title">我的收件箱</view>
+      <view v-for="(jiena, index) in jienaList" :key="index">
+        <view class="box" @click="selectJiena(index)">
+          <view style="font-size: 18px; color: gray">{{ jiena.date }}</view>
+          <view style="font-size: 20px; font-weight: bold">给我的信</view>
           <image
             src="http://115.159.83.61:9000/tool/tool-list.png"
             style="width: 45px; height: 45px"
@@ -36,19 +36,19 @@
 </template>
 
 <script lang="ts" setup>
-import { getAllUserHuibidangan, IHuibidanganReturn } from '@/service/index/huibidangan'
+import { getAllUserJienalianxi, IJienalianxiReturn } from '@/service/index/jienalianxi'
 import { useMessage, useToast } from 'wot-design-uni'
 
 const toast = useToast()
 const message = useMessage()
-const huibiList = ref<IHuibidanganReturn[]>([])
+const jienaList = ref<IJienalianxiReturn[]>([])
 onShow(async () => {
   toast.loading('加载中...')
-  const res = await getAllUserHuibidangan()
+  const res = await getAllUserJienalianxi()
   toast.close()
   if (res.code === 200) {
     console.log(res)
-    huibiList.value = res.data
+    jienaList.value = res.data
   } else {
     message.alert('网络错误！')
   }
@@ -57,10 +57,10 @@ onShow(async () => {
 const goBack = () => {
   uni.navigateBack()
 }
-const selectHuibi = (index: number) => {
-  const detailObject = encodeURIComponent(JSON.stringify(huibiList.value[index]))
+const selectJiena = (index: number) => {
+  const detailObject = encodeURIComponent(JSON.stringify(jienaList.value[index]))
   uni.navigateTo({
-    url: `/pages/tool-huibidangan/huibiDetail?detail=${detailObject}`,
+    url: `/pages/tool-jienalianxi/jienaDetail?detail=${detailObject}`,
   })
 }
 </script>
@@ -72,8 +72,7 @@ const selectHuibi = (index: number) => {
   overflow-y: scroll;
 }
 
-.font {
-  margin-top: 8px;
+.title {
   font-size: 25px;
   font-weight: bold;
   text-align: center;

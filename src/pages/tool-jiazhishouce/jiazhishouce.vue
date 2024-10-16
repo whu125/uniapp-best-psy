@@ -22,6 +22,7 @@
         src="http://115.159.83.61:9000/tool/jiazhishouce/jiazhishouce-logo.png"
       />
     </view>
+    <view class="title">价值手册</view>
     <view class="font">朝着价值出发，是满足感和意义感的源头活水</view>
     <view>
       <wd-card>
@@ -62,7 +63,15 @@ const ToList = () => {
 
 <style>
 .font {
+  margin-top: 8px;
   font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.title {
+  margin-top: 12px;
+  font-size: 25px;
   font-weight: bold;
   text-align: center;
 }

@@ -11,13 +11,14 @@
     <wd-navbar
       fixed
       safeAreaInsetTop
-      title="我的价值手册"
+      title="价值手册"
       left-text="返回"
       left-arrow
       @click-left="goBack"
     ></wd-navbar>
     <view class="main-container">
       <view style="height: 15%"></view>
+      <view class="font">我的价值手册</view>
       <view class="box">
         <view class="text-area">
           <view>我的生活领域：</view>
@@ -45,7 +46,7 @@
       <view class="box">
         <view class="text-area">
           <view>是什么鼓励了我，又是什么阻碍了我？</view>
-          <view>{{ content.recordId }}</view>
+          <view>{{ content.shiqing }}</view>
         </view>
       </view>
     </view>
@@ -82,6 +83,13 @@ const goBack = () => {
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
+}
+
+.font {
+  margin-top: 8px;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .box {

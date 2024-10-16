@@ -31,7 +31,7 @@
 
 <script lang="ts" setup>
 const toNext = () => {
-  uni.navigateTo({
+  uni.redirectTo({
     url: '/pages/tool-zidongsiwei/catching',
   })
 }

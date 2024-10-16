@@ -30,7 +30,11 @@
 
       <view class="mood-container">
         <view class="mood-font" v-for="(mood, index) in moodList" :key="index">
-          <img :src="mood.iconUrl" style="width: 50px" @click="selectMood(mood.desc)" />
+          <img
+            :src="mood.iconUrl"
+            style="width: 50px; height: 50px"
+            @click="selectMood(mood.desc)"
+          />
           <view>{{ mood.desc }}</view>
         </view>
       </view>

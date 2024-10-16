@@ -14,26 +14,28 @@
     w-full
     h-full
   >
-    <wd-navbar title="回避档案" left-arrow @click-left="handleClickLeft"></wd-navbar>
+    <wd-navbar title="接纳练习" left-arrow @click-left="handleClickLeft"></wd-navbar>
     <view style="height: 15%"></view>
     <view class="big-icon">
       <img
         style="width: 200px; height: 180px"
-        src="http://115.159.83.61:9000/tool/huibidangan/huibidangan-logo.png"
+        src="http://115.159.83.61:9000/tool/jienalianxi/jienalianxi-logo.png"
       />
     </view>
-    <view class="title">回避档案</view>
-    <view class="font">识别回避应对方式，是解放自己的第一步</view>
+    <view class="title">接纳练习</view>
+    <view class="font">接纳，回避之外的一种选择</view>
+    <view class="small-font">接纳练习将帮助你用另一种方式应对消极情绪，</view>
+    <view class="small-font">自我关怀书写将帮助你用温暖、慈悲的态度理解自己</view>
     <view>
       <wd-card>
         <view class="card-content" @click="start">
-          <view class="card-title">开始记录</view>
+          <view class="card-title">接纳练习</view>
           <view><wd-icon name="edit-1" size="23px" /></view>
         </view>
       </wd-card>
       <wd-card>
         <view class="card-content" @click="ToList">
-          <view class="card-title">查看档案</view>
+          <view class="card-title">自我关怀书写</view>
           <view><wd-icon name="copy" size="22px" /></view>
         </view>
       </wd-card>
@@ -50,13 +52,13 @@ const handleClickLeft = () => {
 
 const start = () => {
   uni.navigateTo({
-    url: '/pages/tool-huibidangan/input',
+    url: '/pages/tool-jienalianxi/input',
   })
 }
 
 const ToList = () => {
   uni.navigateTo({
-    url: '/pages/tool-huibidangan/list',
+    url: '/pages/tool-jienalianxi/list',
   })
 }
 </script>
@@ -65,6 +67,13 @@ const ToList = () => {
 .font {
   margin-top: 8px;
   font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.small-font {
+  margin-top: 12px;
+  font-size: 14px;
   font-weight: bold;
   text-align: center;
 }

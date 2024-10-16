@@ -8,16 +8,11 @@
 </route>
 <template>
   <view w-full h-full>
-    <wd-navbar
-      fixed
-      safeAreaInsetTop
-      title="正念练习：旅行手记"
-      left-arrow
-      @click-left="goBack"
-    ></wd-navbar>
+    <wd-navbar fixed safeAreaInsetTop title="正念练习" left-arrow @click-left="goBack"></wd-navbar>
 
     <view class="main-container">
       <view style="height: 15%"></view>
+      <view class="font">正念练习：旅行手记</view>
       <view class="input-area px-2">
         <view style="margin-top: 15px">1.引发消极情绪的情境是什么?</view>
         <view style="margin-top: 5px">
@@ -110,8 +105,16 @@ const doSubmit = async () => {
 }
 
 .input-area {
-  width: 100%;
+  width: 90%;
   height: auto;
+  margin: 0 auto;
+}
+
+.font {
+  margin-top: 8px;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .operation-area {

@@ -7,6 +7,7 @@ interface NavigateToOptions {
   url: "/pages/home/home" |
        "/pages/admin/inquiry" |
        "/pages/admin/admin" |
+       "/pages/diaryList/diaryDetail" |
        "/pages/diaryList/diaryList" |
        "/pages/feeling/feeling" |
        "/pages/ganyu/ganyu" |
@@ -38,6 +39,15 @@ interface NavigateToOptions {
        "/pages/tool-huibidangan/huibiDetail" |
        "/pages/tool-huibidangan/input" |
        "/pages/tool-huibidangan/list" |
+       "/pages/tool-jiazhishouce/catching" |
+       "/pages/tool-jiazhishouce/jiazhiDetail" |
+       "/pages/tool-jiazhishouce/jiazhishouce" |
+       "/pages/tool-jiazhishouce/list" |
+       "/pages/tool-jiazhishouce/startCatching" |
+       "/pages/tool-jienalianxi/input" |
+       "/pages/tool-jienalianxi/jienaDetail" |
+       "/pages/tool-jienalianxi/jienalianxi" |
+       "/pages/tool-jienalianxi/list" |
        "/pages/tool-zhengnianlianxi/input" |
        "/pages/tool-zhengnianlianxi/list" |
        "/pages/tool-zhengnianlianxi/startPractise" |
@@ -47,11 +57,7 @@ interface NavigateToOptions {
        "/pages/tool-zidongsiwei/list" |
        "/pages/tool-zidongsiwei/siweiDetail" |
        "/pages/tool-zidongsiwei/startCatching" |
-       "/pages/tool-zidongsiwei/zidongsiwei" |
-       "/pages/tool-价值、/huibidangan" |
-       "/pages/tool-价值、/huibiDetail" |
-       "/pages/tool-价值、/input" |
-       "/pages/tool-价值、/list";
+       "/pages/tool-zidongsiwei/zidongsiwei";
 }
 interface RedirectToOptions extends NavigateToOptions {}
 

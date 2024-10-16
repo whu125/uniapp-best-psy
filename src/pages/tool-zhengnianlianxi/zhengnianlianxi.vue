@@ -22,9 +22,10 @@
         src="http://115.159.83.61:9000/tool/zhengnianlianxi/zhengnianlianxi-logo.png"
       />
     </view>
+    <view class="title">正念练习</view>
     <view class="font">正念，用另一种方式与情绪相处</view>
-    <view class="font">正念练习将引导你观察情绪的浪潮，</view>
-    <view class="font">旅行手记可以帮助你记录自己的成长和进步</view>
+    <view class="small-font">正念练习将引导你观察情绪的浪潮，</view>
+    <view class="small-font">旅行手记可以帮助你记录自己的成长和进步</view>
     <view>
       <wd-card>
         <view class="card-content" @click="start">
@@ -64,7 +65,22 @@ const ToList = () => {
 
 <style>
 .font {
+  margin-top: 8px;
   font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.small-font {
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.title {
+  margin-top: 12px;
+  font-size: 25px;
   font-weight: bold;
   text-align: center;
 }

@@ -134,7 +134,7 @@ const ToTool = (toolName: string) => {
     })
   } else if (toolName === '接纳练习') {
     uni.navigateTo({
-      url: '/pages/mood/mood',
+      url: '/pages/tool-jienalianxi/jienalianxi',
     })
   } else if (toolName === '价值手册') {
     uni.navigateTo({

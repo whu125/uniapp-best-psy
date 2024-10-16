@@ -18,6 +18,8 @@
 
     <view class="main-container">
       <view style="height: 15%"></view>
+      <view class="title">识别回避应对方式</view>
+      <view class="font">我的回避档案</view>
       <view class="input-area px-2">
         <view style="margin-top: 15px">1.首先，为这种应对方式取个名字</view>
         <view style="margin-top: 5px">
@@ -113,9 +115,24 @@ const doSubmit = async () => {
   height: auto;
 }
 
+.font {
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.title {
+  margin-top: 12px;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+
 .input-area {
-  width: 100%;
+  width: 90%;
   height: auto;
+  margin: 0 auto;
 }
 
 .operation-area {

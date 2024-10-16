@@ -11,13 +11,14 @@
     <wd-navbar
       fixed
       safeAreaInsetTop
-      title="正念练习：旅行手记"
+      title="正念练习"
       left-text="返回"
       left-arrow
       @click-left="goBack"
     ></wd-navbar>
     <view class="main-container">
       <view style="height: 15%"></view>
+      <view class="font">正念练习：旅行手记</view>
       <view class="box">
         <view class="text-area">
           <view>1.引发消极情绪的情境是什么?</view>
@@ -82,6 +83,13 @@ const goBack = () => {
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
+}
+
+.font {
+  margin-top: 8px;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .box {

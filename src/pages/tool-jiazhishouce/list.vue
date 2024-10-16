@@ -11,16 +11,17 @@
     <wd-navbar
       fixed
       safeAreaInsetTop
-      title="我的价值手册"
+      title="价值手册"
       left-text="返回"
       left-arrow
       @click-left="goBack"
     ></wd-navbar>
     <view class="main-container">
       <view style="height: 15%"></view>
-      <view v-for="(huibi, index) in jiazhiList" :key="index">
+      <view class="font">我的价值手册</view>
+      <view v-for="(jiazhi, index) in jiazhiList" :key="index">
         <view class="box" @click="selectJiazhi(index)">
-          <view style="font-size: 18px; color: gray">{{ index }}</view>
+          <view style="font-size: 20px; font-weight: bold">{{ jiazhi.date }}</view>
           <view style="font-size: 20px; font-weight: bold">人际关系</view>
           <image
             src="http://115.159.83.61:9000/tool/tool-list.png"
@@ -75,12 +76,21 @@ const selectJiazhi = (index: number) => {
 .box {
   box-sizing: border-box;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 90%;
   height: auto;
   padding: 12px 25px 12px 25px;
   margin: 15px auto;
   border-radius: 20px;
   box-shadow: 0px 0px 8px gray;
+}
+
+.font {
+  margin-top: 8px;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .left_box {

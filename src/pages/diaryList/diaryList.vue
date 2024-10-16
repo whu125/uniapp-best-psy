@@ -22,16 +22,21 @@
       @click-left="handleClickLeft"
     ></wd-navbar>
     <view class="main-container" v-for="(diary, index) in diaryList" :key="index">
-      <view class="card">
+      <view class="card" @click="toDiaryDetail(index)">
         <img class="emoji" :src="imageMap.get(diary.diaryMood)" />
         <view class="info">
-          <view class="date">{{ diary.dateDay }}</view>
+          <view class="left-box">
+            <view class="date">{{ diary.dateDay }}</view>
+            <view class="time">{{ diary.dateTime }}</view>
+          </view>
           <view class="mood">{{ diary.diaryMood }}</view>
-          <view class="time">{{ diary.dateTime }}</view>
         </view>
-        <wd-popover mode="menu" :content="operationMenu" @menuclick="doOperation" placement="right">
-          <wd-button type="icon" icon="view-list"></wd-button>
-        </wd-popover>
+        <view class="right_box">
+          <image
+            src="http://115.159.83.61:9000/tool/tool-list.png"
+            style="width: 45px; height: 45px"
+          />
+        </view>
       </view>
     </view>
   </view>
@@ -66,16 +71,6 @@ const imageMap = new Map([
   ['焦虑', 'http://115.159.83.61:9000/tool/moodDiary/mood-anxious.png'],
   ['悲伤', 'http://115.159.83.61:9000/tool/moodDiary/mood-sad.png'],
 ])
-const operationMenu = ref<Array<Record<string, any>>>([
-  {
-    iconClass: 'edit',
-    content: '编辑',
-  },
-  {
-    iconClass: 'delete',
-    content: '删除',
-  },
-])
 
 onShow(async () => {
   const res = await getAllMoodDiary()
@@ -89,6 +84,13 @@ onShow(async () => {
 
 const handleClickLeft = () => {
   uni.navigateBack()
+}
+
+const toDiaryDetail = (index: number) => {
+  const detailObject = encodeURIComponent(JSON.stringify(diaryList.value[index]))
+  uni.navigateTo({
+    url: `/pages/diaryList/diaryDetail?detail=${detailObject}`,
+  })
 }
 
 const doOperation = (e) => {
@@ -115,23 +117,32 @@ const ToFeeling = () => {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: 45px 0 20px 0;
+  margin: 55px 0 20px 0;
 }
 .card {
+  box-sizing: border-box;
   display: flex;
-  align-items: center;
-  padding: 15px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+  width: 90%;
+  height: auto;
+  padding: 12px 25px 12px 25px;
+  margin: -12px auto;
+  border-radius: 20px;
+  box-shadow: 0px 0px 8px gray;
 }
 .emoji {
   width: 40px;
   height: 40px;
   margin-right: 12px;
 }
-.info {
-  flex: 1;
+.left-box {
+  display: flex;
+  align-items: center;
+}
+.right_box {
+  display: flex;
+  justify-content: center;
+  width: auto;
 }
 .date {
   font-size: 14px;
@@ -142,6 +153,7 @@ const ToFeeling = () => {
   font-weight: bold;
 }
 .time {
+  margin-left: 10px;
   font-size: 12px;
   color: #999;
 }

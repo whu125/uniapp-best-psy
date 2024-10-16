@@ -21,6 +21,7 @@
         src="http://115.159.83.61:9000/tool/moodDiary/diary-logo.png"
       />
     </view>
+    <view class="title">心情日记</view>
     <view class="font">觉察你的此时此刻，记录你的每日情绪</view>
     <view>
       <wd-card>
@@ -72,7 +73,15 @@ const ToDiaryList = () => {
 }
 
 .font {
+  margin-top: 8px;
   font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.title {
+  margin-top: 12px;
+  font-size: 25px;
   font-weight: bold;
   text-align: center;
 }

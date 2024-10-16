@@ -27,7 +27,6 @@
               <view class="siwei-name">{{ siwei.siweiName }}</view>
             </view>
           </view>
-
           <view class="right_box">
             <image
               src="http://115.159.83.61:9000/tool/tool-list.png"

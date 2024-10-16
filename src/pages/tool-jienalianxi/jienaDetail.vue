@@ -11,49 +11,48 @@
     <wd-navbar
       fixed
       safeAreaInsetTop
-      title="正念练习：旅行手记"
+      title="接纳练习"
       left-text="返回"
       left-arrow
       @click-left="goBack"
     ></wd-navbar>
     <view class="main-container">
       <view style="height: 15%"></view>
-      <view class="title">识别回避应对方式</view>
-      <view class="font">我的回避档案</view>
+      <view class="title">一封给你的信</view>
       <view class="box">
         <view class="text-area">
-          <view>1.首先，为这种应对方式取个名字</view>
-          <view>{{ content.huibiName }}</view>
+          <view>给：</view>
+          <view>{{ content.name }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>2.引发情绪的情境或事件：</view>
+          <view>我知道，当：</view>
           <view>{{ content.qingjing }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>3.产生了什么感受：</view>
+          <view>你会感觉：</view>
           <view>{{ content.ganshou }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>4.为了对抗这种感觉，你做了什么尝试?</view>
-          <view>{{ content.changshi }}</view>
+          <view>你会：</view>
+          <view>{{ content.xingdong }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>5.这种尝试给你带来了什么长期影响?</view>
-          <view>{{ content.yingxiang }}</view>
+          <view>然而，我知道：</view>
+          <view>{{ content.zhidao }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>6.下一次，你希望自己怎么做?</view>
-          <view>{{ content.zenme }}</view>
+          <view>我想告诉你：</view>
+          <view>{{ content.gaosu }}</view>
         </view>
       </view>
     </view>
@@ -62,18 +61,18 @@
 </template>
 
 <script lang="ts" setup>
-import { IHuibidanganReturn } from '@/service/index/huibidangan'
+import { IJienalianxiReturn } from '@/service/index/jienalianxi'
 
-const content = ref<IHuibidanganReturn>({
-  huibiId: '',
+const content = ref<IJienalianxiReturn>({
+  jienaId: '',
   userId: '',
+  name: '',
   date: '',
-  huibiName: '',
   qingjing: '',
   ganshou: '',
-  changshi: '',
-  yingxiang: '',
-  zenme: '',
+  xingdong: '',
+  zhidao: '',
+  gaosu: '',
   recordId: -1,
 })
 onLoad((options) => {
@@ -93,15 +92,7 @@ const goBack = () => {
   overflow-y: scroll;
 }
 
-.font {
-  margin-top: 8px;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-}
-
 .title {
-  margin-top: 12px;
   font-size: 25px;
   font-weight: bold;
   text-align: center;

@@ -8,13 +8,7 @@
 </route>
 <template>
   <view w-full h-full>
-    <wd-navbar
-      fixed
-      safeAreaInsetTop
-      title="正念练习：应对消极情绪"
-      left-arrow
-      @click-left="goBack"
-    ></wd-navbar>
+    <wd-navbar fixed safeAreaInsetTop title="正念练习" left-arrow @click-left="goBack"></wd-navbar>
     <view class="main-container">
       <view style="height: 15%"></view>
       <view class="middle-img-input">
@@ -82,6 +76,13 @@ const goBack = () => {
   width: 100%;
   height: auto;
   margin: 15px 0 20px 0;
+}
+
+.font {
+  margin-top: 8px;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .middle-img-input {

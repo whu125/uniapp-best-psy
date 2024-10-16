@@ -22,6 +22,7 @@
         src="http://115.159.83.61:9000/tool/zidongsiwei/zidongsiwei-logo.png"
       />
     </view>
+    <view class="title">自动思维</view>
     <view class="font">识别你的自动思维，让想法只是想法</view>
     <view>
       <wd-card>
@@ -62,7 +63,15 @@ const ToList = () => {
 
 <style>
 .font {
+  margin-top: 8px;
   font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.title {
+  margin-top: 12px;
+  font-size: 25px;
   font-weight: bold;
   text-align: center;
 }

@@ -132,7 +132,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-common">
         <image
-          src="http://115.159.83.61:9000/tool/jiazhishouce/jiazhishouce1.png"
+          src="http://115.159.83.61:9000/journey6/renwu9.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -209,8 +209,9 @@ const doSubmit = async () => {
 }
 
 .input-area {
-  width: 100%;
+  width: 90%;
   height: auto;
+  margin: 0 auto;
 }
 
 .operation-area {
