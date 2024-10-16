@@ -35,7 +35,15 @@
       <view class="card" v-for="(journey, index) in journeySteps" :key="index">
         <img class="card-icon" :src="journey.icon" />
         <view class="card-text">{{ journey.text }}</view>
+        <!-- 体验版 -->
         <image
+          style="width: 60rpx; height: 60rpx"
+          mode="aspectFit"
+          src="../../static/images/home/finish.png"
+          @click="enterJourney(journey.progress)"
+        />
+
+        <!-- <image
           style="width: 60rpx; height: 60rpx"
           mode="aspectFit"
           src="../../static/images/home/finish.png"
@@ -60,7 +68,7 @@
           src="../../static/images/home/lockJourney.png"
           mode="aspectFit"
           v-show="currProgress < journey.progress"
-        />
+        /> -->
       </view>
       <view style="height: 150rpx"></view>
     </view>

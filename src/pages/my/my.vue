@@ -133,7 +133,7 @@
           <span class="label ml-4">进入登录页面</span>
           <span class="arrow">›</span>
         </div>
-        <div class="menu-item" @click="toInquiry()">
+        <!-- <div class="menu-item" @click="toInquiry()">
           <view>
             <image
               style="width: 60rpx; height: 60rpx"
@@ -165,7 +165,7 @@
           </view>
           <span class="label ml-4">测试管理员页面</span>
           <span class="arrow">›</span>
-        </div>
+        </div> -->
 
         <view style="height: 150rpx"></view>
       </div>
@@ -286,7 +286,7 @@ const onChooseavatar = async (e) => {
 
   // 通过 fetch 从 URL 下载图片文件
   await uni.uploadFile({
-    url: 'https://localhost:443/upload/img', // 仅为示例，非真实的接口地址
+    url: 'https://mindease.online:28081/upload/img', // 仅为示例，非真实的接口地址
     filePath: avatarUrl,
     name: 'img',
     formData: {
