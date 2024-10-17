@@ -23,7 +23,7 @@
 
       <view class="start-inter">
         <view class="title">1.站点导览</view>
-        <view v-for="(item, index) in contentList[interId].text" :key="index">
+        <view v-for="(item, index) in currContent.text" :key="index">
           <view class="text" style="margin-top: 15px">{{ item }}</view>
         </view>
         <view>
@@ -71,18 +71,19 @@ onShow(() => {
 type IContentType = {
   navbarTitle: string
   logoUrl: string
+  text: string[]
 }
 
 const contentList = [
   {
-    navbarTitle: '第零站: 导览',
-    logoUrl: 'http://115.159.83.61:9000/journey0/journeyHome0.png',
-    text: ['从想法开始, 了解你的情绪,', '还有你自己。'],
+    navbarTitle: '',
+    logoUrl: '',
+    text: [],
   },
   {
     navbarTitle: '第一站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey1/journeyHome1.png',
-    text: ['从想法开始, 了解你的情绪,', '还有你自己。'],
+    text: ['情绪是一切的起点,', '是我们的一部分'],
   },
   {
     navbarTitle: '第二站: 导览',
@@ -92,7 +93,7 @@ const contentList = [
   {
     navbarTitle: '第三站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey3/journeyHome3.png',
-    text: ['从想法开始, 了解你的情绪,', '还有你自己。'],
+    text: ['回到我们真正拥有的此时此刻,', '是获得内心平静的第一步'],
   },
   {
     navbarTitle: '第四站: 导览',
@@ -102,17 +103,17 @@ const contentList = [
   {
     navbarTitle: '第五站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey5/journeyHome5.png',
-    text: ['用接纳的态度,', '拥抱独一无二的你和你的感受'],
+    text: ['用接纳的态度,', '拥抱独一无二的你'],
   },
   {
     navbarTitle: '第六站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey6/journeyHome6.png',
-    text: ['人生最重要的不是所在的位置, 而是你所', '朝的方向, 对你来说, 什么是最重要的？'],
+    text: ['人生最重要的不是所在的位置, 而是你所', '朝的方向, 对你来说, 什么是最重要的?'],
   },
   {
     navbarTitle: '第七站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey7/journeyHome7.png',
-    text: ['从想法开始, 了解你的情绪,', '还有你自己。'],
+    text: ['行动是生活的魔法'],
   },
 ]
 
