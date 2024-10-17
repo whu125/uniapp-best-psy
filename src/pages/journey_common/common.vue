@@ -525,7 +525,7 @@ const doOperation = async () => {
   // 如果是 radio 页面 保存用户输入到pinia
   if (pageContent.value.pageType === 'radio') {
     // 判断用户有无未填写
-    if (selectedItem.value !== -1) {
+    if (selectedItem.value === -1) {
       toast.error('选择一项！')
       return
     }

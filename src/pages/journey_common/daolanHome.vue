@@ -23,8 +23,9 @@
 
       <view class="start-inter">
         <view class="title">1.站点导览</view>
-        <view class="text" style="margin-top: 15px">从想法开始, 了解你的情绪,</view>
-        <view class="text" style="margin-bottom: 15px">还有你自己。</view>
+        <view v-for="(item, index) in contentList[interId].text" :key="index">
+          <view class="text" style="margin-top: 15px">{{ item }}</view>
+        </view>
         <view>
           <wd-button type="info" @click="startJourney()">开始旅程</wd-button>
         </view>
@@ -76,34 +77,42 @@ const contentList = [
   {
     navbarTitle: '第零站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey0/journeyHome0.png',
+    text: ['从想法开始, 了解你的情绪,', '还有你自己。'],
   },
   {
     navbarTitle: '第一站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey1/journeyHome1.png',
+    text: ['从想法开始, 了解你的情绪,', '还有你自己。'],
   },
   {
     navbarTitle: '第二站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey2/journeyHome2.png',
+    text: ['从想法开始, 了解你的情绪,', '还有你自己。'],
   },
   {
     navbarTitle: '第三站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey3/journeyHome3.png',
+    text: ['从想法开始, 了解你的情绪,', '还有你自己。'],
   },
   {
     navbarTitle: '第四站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey4/journeyHome4.png',
+    text: ['放下控制的绳子,', '尝试用另一种方式与情绪和感受相处'],
   },
   {
     navbarTitle: '第五站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey5/journeyHome5.png',
+    text: ['用接纳的态度,', '拥抱独一无二的你和你的感受'],
   },
   {
     navbarTitle: '第六站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey6/journeyHome6.png',
+    text: ['人生最重要的不是所在的位置, 而是你所', '朝的方向, 对你来说, 什么是最重要的？'],
   },
   {
     navbarTitle: '第七站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey7/journeyHome7.png',
+    text: ['从想法开始, 了解你的情绪,', '还有你自己。'],
   },
 ]
 

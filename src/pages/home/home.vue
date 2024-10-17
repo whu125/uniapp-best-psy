@@ -183,7 +183,7 @@ const enterJourney = async (progress: number) => {
   } else {
     message
       .confirm({
-        msg: '是否开始新的干预，这会清除上次干预缓存',
+        msg: '是否开始新的干预，这会清除上次干预缓存，建议先完成上次干预',
         title: '检测到上次其他干预未完成',
         closeOnClickModal: false,
         type: 'confirm',
