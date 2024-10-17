@@ -12,7 +12,7 @@
     <wd-navbar fixed safeAreaInsetTop title="我的旅程"></wd-navbar>
 
     <view class="content px-4">
-      <view style="height: 100rpx"></view>
+      <view style="height: 150rpx"></view>
       <view class="h-40 w-full">
         <image src="http://115.159.83.61:9000/home/home.png" mode="scaleToFill" />
       </view>

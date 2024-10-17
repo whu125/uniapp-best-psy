@@ -9,14 +9,11 @@
 </route>
 <template>
   <tabbar selected="1"></tabbar>
-  <view
-    class="bg-white overflow-hidden pt-2 px-4"
-    :style="{ marginTop: safeAreaInsets?.top + 'px' }"
-    w-full
-    h-full
-  >
-    <wd-navbar title="工具箱"></wd-navbar>
+  <view class="" h-full w-full>
+    <wd-navbar fixed safeAreaInsetTop title="工具箱"></wd-navbar>
+
     <view class="main-container">
+      <view style="height: 150rpx"></view>
       <view>
         <img
           src="http://115.159.83.61:9000/tool/tool_logo.png"
