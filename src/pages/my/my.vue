@@ -143,8 +143,8 @@
           </view>
           <span class="label ml-4">测试问卷入口</span>
           <span class="arrow">›</span>
-        </div>
-        <div class="menu-item" @click="toFirst()">
+        </div> -->
+        <!-- <div class="menu-item" @click="toFirst()">
           <view>
             <image
               style="width: 60rpx; height: 60rpx"
@@ -240,8 +240,11 @@ const toLogin = () => {
 
 const toInquiry = () => {
   uni.navigateTo({
-    url: '/pages/inquiry/start',
+    url: '/pages/inquiry/inquiry?position=' + '1-post',
   })
+  // uni.redirectTo({
+  //   url: '/pages/inquiry/end',
+  // })
 }
 
 const toFirst = () => {

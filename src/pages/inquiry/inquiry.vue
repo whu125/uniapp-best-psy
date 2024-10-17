@@ -21,7 +21,7 @@
         <p v-if="questions[curId - 1]?.subtitle != null" class="font-800 text-xl">
           {{ questions[curId - 1]?.subtitle }}
         </p>
-        <view class="mt-4">
+        <view class="mt-4" style="font-size: 18px">
           <text class="">{{ questions[curId - 1]?.question }}</text>
         </view>
       </view>
@@ -79,8 +79,10 @@
         </view>
         <text>上一题</text> -->
         <wd-button @click="changeLast" v-if="curId != 1">上一题</wd-button>
-        <wd-button @click="changeNext" v-if="curId != queLen">下一题</wd-button>
-        <wd-button @click="submit" v-if="curId == queLen">提交</wd-button>
+        <wd-button @click="changeNext" v-if="curId != queLen" :disabled="!optionFlag">
+          下一题
+        </wd-button>
+        <wd-button @click="submit" v-if="curId == queLen" :disabled="!optionFlag">提交</wd-button>
       </view>
     </view>
   </view>
@@ -122,6 +124,9 @@ const questions = ref([])
 const pageQuestions = ref([])
 const interId = ref()
 const storageFlag = ref(false)
+
+// 选了才能解锁下一题
+const optionFlag = ref(false)
 
 watch(curId, (newVal) => {
   console.log('newVal', newVal)
@@ -200,17 +205,27 @@ const changeNext = () => {
   curId.value++
   // Save the current answers to the store
   inquiryStore.AnsInfo.positions[position.value] = answers.value
+
+  // todo:后面完善不同的题型
+
+  if (answers.value[curId.value - 1] === -1) {
+    optionFlag.value = false
+  }
   // inquiryStore.setInquiryInfo(inquiryStore.AnsInfo)
 }
 
 const changeLast = () => {
   curId.value = curId.value - 1
   console.log(curId.value)
+
+  optionFlag.value = true
 }
 
 const selectOption = (score: number) => {
   console.log(score)
   answers.value[curId.value - 1] = score
+
+  optionFlag.value = true
 }
 // const formData = ref<InquiryResultArray>([
 //   { userId: '1', inquiryId: 1, position: '2-pre', score: 0 },
