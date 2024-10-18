@@ -59,16 +59,36 @@
       </view>
 
       <!-- 选择1-9题 -->
-      <view class="options" v-if="questions[curId - 1]?.type === 3">
-        <view class="">
-          <wd-slider v-model="answers[curId - 1]" min="1" max="9" />
+      <view class="flex justify-center">
+        <view class="options" v-if="questions[curId - 1]?.type === 3" style="width: 75%">
+          <view class="">
+            <wd-slider v-model="answers[curId - 1]" min="1" max="9" />
+          </view>
         </view>
       </view>
 
-      <view class="options" v-if="questions[curId - 1]?.type === 4">
-        <view class="">
-          <wd-slider v-model="answers[curId - 1]" min="0" max="100" />
-          <!-- <p>（注：单位为百分比）</p> -->
+      <view class="flex justify-center">
+        <view class="options" v-if="questions[curId - 1]?.type === 4" style="width: 75%">
+          <view class="">
+            <wd-slider v-model="answers[curId - 1]" min="0" max="100" />
+            <!-- <p>（注：单位为百分比）</p> -->
+          </view>
+        </view>
+      </view>
+
+      <view class="flex justify-center">
+        <view class="options" v-if="questions[curId - 1]?.type === 5" style="width: 75%">
+          <view class="">
+            <wd-slider v-model="answers[curId - 1]" min="0" max="10" @dragstart="dragSilder" />
+          </view>
+        </view>
+      </view>
+
+      <view class="flex justify-center">
+        <view class="options" v-if="questions[curId - 1]?.type === 6" style="width: 75%">
+          <view class="">
+            <wd-slider v-model="answers[curId - 1]" min="0" max="8" />
+          </view>
         </view>
       </view>
 
@@ -131,6 +151,7 @@ const optionFlag = ref(false)
 watch(curId, (newVal) => {
   console.log('newVal', newVal)
   console.log('answers', answers.value)
+
   curPer.value = parseInt(((newVal / queLen.value) * 100).toFixed(0))
 })
 
@@ -148,7 +169,9 @@ onLoad(async (param) => {
   console.log('interId.value', interId.value)
 
   // position.value = '1-post'
+
   loadStorage()
+
   // interId.value = parseInt(param.interId)
 
   console.log('请求getInquiryByPos')
@@ -166,9 +189,6 @@ onLoad(async (param) => {
   questions.value = res.data
   questions.value.forEach((item) => {
     item.options = JSON.parse(item.options)
-    if (item.groupIndex === curGroup.value) {
-      pageQuestions.value.push(item)
-    }
   })
   console.log(questions.value)
   queLen.value = questions.value.length
@@ -195,7 +215,14 @@ onLoad(async (param) => {
     }
   }
   curPer.value = parseInt(((curId.value / queLen.value) * 100).toFixed(0))
+
+  console.log(curId.value)
+  console.log(queLen.value)
 })
+
+const dragSilder = (e) => {
+  optionFlag.value = true
+}
 
 const ToHome = () => {
   uni.switchTab({ url: '/pages/home/home' })
