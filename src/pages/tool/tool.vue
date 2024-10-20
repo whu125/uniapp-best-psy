@@ -95,7 +95,7 @@ const toolList = ref([
     iconUrl: 'http://115.159.83.61:9000/tool/xingdongjihua.png',
   },
   {
-    toolName: '应对复发',
+    toolName: '应对计划',
     iconUrl: 'http://115.159.83.61:9000/tool/yingduifufa.png',
   },
 ])
@@ -136,6 +136,14 @@ const ToTool = (toolName: string) => {
   } else if (toolName === '价值手册') {
     uni.navigateTo({
       url: '/pages/tool-jiazhishouce/jiazhishouce',
+    })
+  } else if (toolName === '行动计划') {
+    uni.navigateTo({
+      url: '/pages/tool-xingdongjihua/xingdongjihua',
+    })
+  } else if (toolName === '应对计划') {
+    uni.navigateTo({
+      url: '/pages/tool-yingduijihua/yingduijihua',
     })
   }
 }

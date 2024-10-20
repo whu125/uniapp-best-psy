@@ -48,6 +48,14 @@ interface NavigateToOptions {
        "/pages/tool-jienalianxi/jienaDetail" |
        "/pages/tool-jienalianxi/jienalianxi" |
        "/pages/tool-jienalianxi/list" |
+       "/pages/tool-xingdongjihua/catching" |
+       "/pages/tool-xingdongjihua/list" |
+       "/pages/tool-xingdongjihua/xingdongDetail" |
+       "/pages/tool-xingdongjihua/xingdongjihua" |
+       "/pages/tool-yingduijihua/catching" |
+       "/pages/tool-yingduijihua/list" |
+       "/pages/tool-yingduijihua/yingduiDetail" |
+       "/pages/tool-yingduijihua/yingduijihua" |
        "/pages/tool-zhengnianlianxi/input" |
        "/pages/tool-zhengnianlianxi/list" |
        "/pages/tool-zhengnianlianxi/startPractise" |

@@ -24,9 +24,9 @@
       <view class="start-inter">
         <view class="title">1.站点导览</view>
         <view v-for="(item, index) in currContent.text" :key="index">
-          <view class="text" style="margin-top: 15px">{{ item }}</view>
+          <view class="text" style="margin-top: 10px">{{ item }}</view>
         </view>
-        <view>
+        <view style="margin-top: 12px">
           <wd-button type="info" @click="startJourney()">开始旅程</wd-button>
         </view>
       </view>
@@ -152,7 +152,7 @@ const toTask = async () => {
   } else if (interStore.interInfo.interId === 6) {
     await interStore.setPageIndex(17)
   } else if (interStore.interInfo.interId === 7) {
-    await interStore.setPageIndex(-1)
+    await interStore.setPageIndex(13)
   }
   uni.navigateTo({
     url: '/pages/journey_common/common',

@@ -131,8 +131,12 @@ const pageContent = ref([
     ],
   },
   {
-    title: '第七站: ',
-    questions: [],
+    title: '第七站: 为所当为',
+    questions: [
+      '• 实现价值的魔法是什么？',
+      '• ·如何以价值为导向指定目标和行动方案？',
+      '• 旅程的第八站是什么？',
+    ],
   },
 ])
 const startJourney = async () => {

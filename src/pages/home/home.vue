@@ -154,7 +154,6 @@ const calculateHour = () => {
 }
 
 const enterJourney = async (progress: number) => {
-  console.log(11)
   console.log('interStore.value', interStore.interInfo)
 
   // 检查是否有干预记录

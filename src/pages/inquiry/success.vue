@@ -23,19 +23,52 @@
         <p class="text-xl font-800">打卡成功</p>
       </view>
 
-      <view class="flex justify-center">
+      <view class="flex justify-center" v-if="isLast === false">
         <wd-button @click="toHome" type="success" size="large">返回主界面</wd-button>
+      </view>
+      <view class="flex justify-center" v-if="isLast === true">
+        <wd-button @click="toReport" type="success" size="large">查看你的旅程报告</wd-button>
       </view>
     </view>
   </view>
 </template>
 
-<script setup>
+<script lang="ts" setup>
+import { useInterStore } from '@/store/inter'
+import { useUserStore } from '@/store/user'
+import { startInter, IStartInter } from '@/service/index/inter'
+import { getFormattedDate } from '@/utils/getTime'
+import { useMessage, useToast } from 'wot-design-uni'
+
+const interStore = useInterStore()
+const userStore = useUserStore()
+const toast = useToast()
+const isLast = computed(() => {
+  return interStore.interInfo.interId === 7
+})
 // 这里可以添加任何需要的逻辑
 const toHome = () => {
   uni.switchTab({
     url: '/pages/home/home',
   })
+}
+
+const toReport = async () => {
+  interStore.clearInternfo()
+  const startObj: IStartInter = {
+    userId: userStore.userInfo.userId,
+    interId: 99,
+    startTime: getFormattedDate(),
+  }
+  const res = await startInter(startObj)
+  if (res.code === 200) {
+    interStore.setInterInfo(res.data)
+    uni.redirectTo({
+      url: '/pages/journey_common/common',
+    })
+  } else {
+    toast.error('出现了一些问题')
+  }
 }
 </script>
 

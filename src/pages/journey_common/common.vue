@@ -286,7 +286,7 @@
 <script lang="ts" setup>
 import { IInterPage, useInterStore } from '@/store/inter'
 import { useGlobalPageControlStore } from '@/store/globalPageControl'
-import { getPageByInterId } from '@/service/index/inter'
+import { getPageByInterId, submitInter, ISubmitInter } from '@/service/index/inter'
 import { useToast, useMessage } from 'wot-design-uni'
 
 const interStore = useInterStore()
@@ -496,6 +496,11 @@ const toPage = (buttonUrl: string) => {
     interStore.setPageIndex(19)
     globalPageControlStore.globalPageControlInfo.toDaolanHome = true
   }
+  // 干预7页面14
+  if (buttonUrl === 'http://115.159.83.61:9000/journey7/renwu2(1).png') {
+    interStore.setPageIndex(15)
+    globalPageControlStore.globalPageControlInfo.toDaolanHome = true
+  }
   uni.redirectTo({
     url: '/pages/journey_common/common',
   })
@@ -557,7 +562,6 @@ const doOperation = async () => {
       return
     }
   }
-
   // 如果用户点击的是返回按钮 需要判断当前是什么页面以跳转回原 button 页面
   if (pageContent.value.operationIcon.endsWith('back.png')) {
     if (pageContent.value.pageId === 7 && pageContent.value.interId === 2) {
@@ -588,10 +592,34 @@ const doOperation = async () => {
       await interStore.setPageIndex(18)
     } else if (pageContent.value.pageId === 25 && pageContent.value.interId === 6) {
       await interStore.setPageIndex(18)
+    } else if (pageContent.value.pageId === 19 && pageContent.value.interId === 7) {
+      await interStore.setPageIndex(14)
     }
     uni.redirectTo({
       url: '/pages/journey_common/common',
     })
+    return
+  }
+  // 如果是结束部分最后一页,提交内容
+  if (pageContent.value.interId === 99 && pageContent.value.operationIcon.endsWith('finish.png')) {
+    const submitObj: ISubmitInter = {
+      userId: userStore.userInfo.userId,
+      interId: interStore.interInfo.interId,
+      endTime: getFormattedDate(),
+      inputPages: interStore.inputPages,
+      inputContent: interStore.inputContent,
+    }
+    const res = await submitInter(submitObj)
+    console.log(res)
+    if (res.code === 200) {
+      toast.success('感谢！')
+      // 清除缓存
+      interStore.clearInternfo()
+      globalPageControl.clearInternfo()
+      uni.redirectTo({ url: '/pages/home/home' })
+    } else {
+      toast.error('出现了一些问题')
+    }
     return
   }
 
