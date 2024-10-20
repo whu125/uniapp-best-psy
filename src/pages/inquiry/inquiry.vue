@@ -21,7 +21,7 @@
         <p v-if="questions[curId - 1]?.subtitle != null" class="font-800 text-xl">
           {{ questions[curId - 1]?.subtitle }}
         </p>
-        <view class="mt-4">
+        <view class="mt-4" style="font-size: 18px">
           <text class="">{{ questions[curId - 1]?.question }}</text>
         </view>
       </view>
@@ -59,16 +59,36 @@
       </view>
 
       <!-- 选择1-9题 -->
-      <view class="options" v-if="questions[curId - 1]?.type === 3">
-        <view class="">
-          <wd-slider v-model="answers[curId - 1]" min="1" max="9" />
+      <view class="flex justify-center">
+        <view class="options" v-if="questions[curId - 1]?.type === 3" style="width: 75%">
+          <view class="">
+            <wd-slider v-model="answers[curId - 1]" min="1" max="9" />
+          </view>
         </view>
       </view>
 
-      <view class="options" v-if="questions[curId - 1]?.type === 4">
-        <view class="">
-          <wd-slider v-model="answers[curId - 1]" min="0" max="100" />
-          <!-- <p>（注：单位为百分比）</p> -->
+      <view class="flex justify-center">
+        <view class="options" v-if="questions[curId - 1]?.type === 4" style="width: 75%">
+          <view class="">
+            <wd-slider v-model="answers[curId - 1]" min="0" max="100" />
+            <!-- <p>（注：单位为百分比）</p> -->
+          </view>
+        </view>
+      </view>
+
+      <view class="flex justify-center">
+        <view class="options" v-if="questions[curId - 1]?.type === 5" style="width: 75%">
+          <view class="">
+            <wd-slider v-model="answers[curId - 1]" min="0" max="10" @dragstart="dragSilder" />
+          </view>
+        </view>
+      </view>
+
+      <view class="flex justify-center">
+        <view class="options" v-if="questions[curId - 1]?.type === 6" style="width: 75%">
+          <view class="">
+            <wd-slider v-model="answers[curId - 1]" min="0" max="8" />
+          </view>
         </view>
       </view>
 
@@ -79,8 +99,10 @@
         </view>
         <text>上一题</text> -->
         <wd-button @click="changeLast" v-if="curId != 1">上一题</wd-button>
-        <wd-button @click="changeNext" v-if="curId != queLen">下一题</wd-button>
-        <wd-button @click="submit" v-if="curId == queLen">提交</wd-button>
+        <wd-button @click="changeNext" v-if="curId != queLen" :disabled="!optionFlag">
+          下一题
+        </wd-button>
+        <wd-button @click="submit" v-if="curId == queLen" :disabled="!optionFlag">提交</wd-button>
       </view>
     </view>
   </view>
@@ -123,9 +145,13 @@ const pageQuestions = ref([])
 const interId = ref()
 const storageFlag = ref(false)
 
+// 选了才能解锁下一题
+const optionFlag = ref(false)
+
 watch(curId, (newVal) => {
   console.log('newVal', newVal)
   console.log('answers', answers.value)
+
   curPer.value = parseInt(((newVal / queLen.value) * 100).toFixed(0))
 })
 
@@ -143,7 +169,9 @@ onLoad(async (param) => {
   console.log('interId.value', interId.value)
 
   // position.value = '1-post'
+
   loadStorage()
+
   // interId.value = parseInt(param.interId)
 
   console.log('请求getInquiryByPos')
@@ -161,9 +189,6 @@ onLoad(async (param) => {
   questions.value = res.data
   questions.value.forEach((item) => {
     item.options = JSON.parse(item.options)
-    if (item.groupIndex === curGroup.value) {
-      pageQuestions.value.push(item)
-    }
   })
   console.log(questions.value)
   queLen.value = questions.value.length
@@ -190,7 +215,14 @@ onLoad(async (param) => {
     }
   }
   curPer.value = parseInt(((curId.value / queLen.value) * 100).toFixed(0))
+
+  console.log(curId.value)
+  console.log(queLen.value)
 })
+
+const dragSilder = (e) => {
+  optionFlag.value = true
+}
 
 const ToHome = () => {
   uni.switchTab({ url: '/pages/home/home' })
@@ -200,17 +232,27 @@ const changeNext = () => {
   curId.value++
   // Save the current answers to the store
   inquiryStore.AnsInfo.positions[position.value] = answers.value
+
+  // todo:后面完善不同的题型
+
+  if (answers.value[curId.value - 1] === -1) {
+    optionFlag.value = false
+  }
   // inquiryStore.setInquiryInfo(inquiryStore.AnsInfo)
 }
 
 const changeLast = () => {
   curId.value = curId.value - 1
   console.log(curId.value)
+
+  optionFlag.value = true
 }
 
 const selectOption = (score: number) => {
   console.log(score)
   answers.value[curId.value - 1] = score
+
+  optionFlag.value = true
 }
 // const formData = ref<InquiryResultArray>([
 //   { userId: '1', inquiryId: 1, position: '2-pre', score: 0 },
