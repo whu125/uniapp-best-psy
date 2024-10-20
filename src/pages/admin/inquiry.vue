@@ -57,6 +57,10 @@
 </template>
 
 <script lang="ts" setup>
+import { exportExcelApi } from '@/service/admin/admin'
+import { useMessage, useToast } from 'wot-design-uni'
+
+const toast = useToast()
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const show = ref(false)
 const dataList = reactive([
@@ -81,8 +85,66 @@ const edit = (row) => {
   show.value = true
 }
 
-const exportExcel = () => {
+const exportExcel = async () => {
+  toast.loading('导出中...')
   console.log('导出excel')
+  console.log('22')
+
+  // uni.downloadFile({
+  //   url: 'https://localhost:443/upload/excel', // 仅为示例，并非真实的资源
+  //   success: (res) => {
+  //     if (res.statusCode === 200) {
+  //       const filePath = res.tempFilePath
+  //       console.log('下载成功')
+  //       uni.openDocument({
+  //         filePath,
+  //         success: function (res) {
+  //           console.log('打开文档成功')
+  //         },
+  //         fail: function (err) {
+  //           console.log('打开文档失败', err)
+  //         },
+  //       })
+  //     }
+  //   },
+  // })
+
+  // uni.request({
+  //   url: 'https://localhost:443/upload/excel',
+  //   success: (res) => {
+  //     console.log(res)
+  //   },
+  // })
+
+  const res = await exportExcelApi()
+  console.log(res)
+
+  const dataUrl = res.data
+
+  toast.close()
+
+  console.log(dataUrl)
+  console.log(222)
+  uni.downloadFile({
+    url: dataUrl, // 仅为示例，并非真实的资源
+    success: (res) => {
+      console.log(res)
+      if (res.statusCode === 200) {
+        const filePath = res.tempFilePath
+        console.log('下载成功')
+        uni.openDocument({
+          filePath,
+          success: function (res) {
+            console.log('打开文档成功')
+          },
+          fail: function (err) {
+            console.log('打开文档失败', err)
+          },
+        })
+      }
+    },
+  })
+  console.log(333)
 }
 </script>
 

@@ -19,7 +19,7 @@
       </view>
 
       <view class="instructions mt-4">
-        <p class="text-xl font-800">第二站</p>
+        <p class="text-xl font-800">第{{ interText[interId] }}站</p>
         <p class="text-xl font-800">打卡成功</p>
       </view>
 
@@ -46,6 +46,12 @@ const toast = useToast()
 const isLast = computed(() => {
   return interStore.interInfo.interId === 7
 })
+
+const interStore = useInterStore()
+const interId = interStore.interInfo.interId
+
+const interText = ref(['零', '一', '二', '三', '四', '五', '六', '七'])
+
 // 这里可以添加任何需要的逻辑
 const toHome = () => {
   uni.switchTab({
@@ -70,6 +76,11 @@ const toReport = async () => {
     toast.error('出现了一些问题')
   }
 }
+
+onLoad(() => {
+  console.log(interStore.interInfo)
+  console.log('interId', interId)
+})
 </script>
 
 <style scoped>
