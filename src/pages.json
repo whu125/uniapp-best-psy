@@ -53,16 +53,16 @@
       }
     },
     {
-      "path": "pages/admin/inquiry",
-      "type": "home",
+      "path": "pages/admin/admin",
+      "type": "page",
       "style": {
         "navigationStyle": "custom",
         "navigationBarTitleText": "我的旅程"
       }
     },
     {
-      "path": "pages/admin/admin",
-      "type": "home",
+      "path": "pages/admin/inquiry",
+      "type": "page",
       "style": {
         "navigationStyle": "custom",
         "navigationBarTitleText": "我的旅程"

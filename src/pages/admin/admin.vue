@@ -1,4 +1,4 @@
-<route lang="json5" type="home">
+<route lang="json5">
 {
   style: {
     navigationStyle: 'custom',
@@ -34,6 +34,11 @@
     </wd-table>
   </view>
 
+  <view>
+    <wd-toast />
+    <wd-button @click="exportExcel()">导出用户做题数据</wd-button>
+  </view>
+
   <wd-popup v-model="show" custom-style="padding: 0;" :close-on-click-modal="false">
     <view class="popup-container">
       <view class="arrow"></view>
@@ -57,8 +62,11 @@
 </template>
 
 <script lang="ts" setup>
+import { exportExcelApi } from '@/service/admin/admin'
 import { getAllUserInfo, User } from '@/service/index/user'
+import { useMessage, useToast } from 'wot-design-uni'
 
+const toast = useToast()
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const show = ref(false)
 const userInfo = ref([])
@@ -90,7 +98,7 @@ const edit = (row) => {
 }
 
 const toAdminInquiry = () => {
-  uni.navigateTo({
+  uni.redirectTo({
     url: '/pages/admin/inquiry',
   })
 }
@@ -99,6 +107,69 @@ const ToHome = () => {
   uni.switchTab({
     url: '/pages/my/my',
   })
+}
+
+const exportExcel = async () => {
+  console.log('导出excel')
+  toast.loading('导出中...')
+  console.log('导出excel')
+  console.log('22')
+
+  // uni.downloadFile({
+  //   url: 'https://localhost:443/upload/excel', // 仅为示例，并非真实的资源
+  //   success: (res) => {
+  //     if (res.statusCode === 200) {
+  //       const filePath = res.tempFilePath
+  //       console.log('下载成功')
+  //       uni.openDocument({
+  //         filePath,
+  //         success: function (res) {
+  //           console.log('打开文档成功')
+  //         },
+  //         fail: function (err) {
+  //           console.log('打开文档失败', err)
+  //         },
+  //       })
+  //     }
+  //   },
+  // })
+
+  // uni.request({
+  //   url: 'https://localhost:443/upload/excel',
+  //   success: (res) => {
+  //     console.log(res)
+  //   },
+  // })
+
+  const res = await exportExcelApi()
+  console.log(res)
+
+  const dataUrl = res.data
+
+  toast.close()
+
+  console.log(dataUrl)
+  console.log(222)
+  uni.downloadFile({
+    url: dataUrl, // 仅为示例，并非真实的资源
+    success: (res) => {
+      console.log(res)
+      if (res.statusCode === 200) {
+        const filePath = res.tempFilePath
+        console.log('下载成功')
+        uni.openDocument({
+          filePath,
+          success: function (res) {
+            console.log('打开文档成功')
+          },
+          fail: function (err) {
+            console.log('打开文档失败', err)
+          },
+        })
+      }
+    },
+  })
+  console.log(333)
 }
 </script>
 

@@ -133,7 +133,7 @@
           <span class="label ml-4">进入登录页面</span>
           <span class="arrow">›</span>
         </div>
-        <div class="menu-item" @click="toInquiry()">
+        <!-- <div class="menu-item" @click="exportExcel()">
           <view>
             <image
               style="width: 60rpx; height: 60rpx"
@@ -141,9 +141,9 @@
               src="../../static/images/my/xinshouzhinan.png"
             />
           </view>
-          <span class="label ml-4">测试问卷入口</span>
+          <span class="label ml-4">导出文档</span>
           <span class="arrow">›</span>
-        </div>
+        </div> -->
         <!-- <div class="menu-item" @click="toFirst()">
           <view>
             <image
@@ -183,6 +183,7 @@ import { uploadImg } from '@/service/common/upload'
 import tabbar from '@/pages/tabbar/tabbar.vue'
 import { IInterPage, useInterStore } from '@/store/inter'
 import { useMessage, useToast } from 'wot-design-uni'
+import { exportExcelApi } from '@/service/admin/admin'
 
 const message = useMessage()
 const toast = useToast()
@@ -345,6 +346,69 @@ const setName = () => {
     .catch((error) => {
       console.log(error)
     })
+}
+
+const exportExcel = async () => {
+  console.log('导出excel')
+  // toast.loading('导出中...')
+  console.log('导出excel')
+  console.log('22')
+
+  // uni.downloadFile({
+  //   url: 'https://localhost:443/upload/excel', // 仅为示例，并非真实的资源
+  //   success: (res) => {
+  //     if (res.statusCode === 200) {
+  //       const filePath = res.tempFilePath
+  //       console.log('下载成功')
+  //       uni.openDocument({
+  //         filePath,
+  //         success: function (res) {
+  //           console.log('打开文档成功')
+  //         },
+  //         fail: function (err) {
+  //           console.log('打开文档失败', err)
+  //         },
+  //       })
+  //     }
+  //   },
+  // })
+
+  // uni.request({
+  //   url: 'https://localhost:443/upload/excel',
+  //   success: (res) => {
+  //     console.log(res)
+  //   },
+  // })
+
+  const res = await exportExcelApi()
+  console.log(res)
+
+  const dataUrl = res.data
+
+  // toast.close()
+
+  console.log(dataUrl)
+  console.log(222)
+  uni.downloadFile({
+    url: dataUrl, // 仅为示例，并非真实的资源
+    success: (res) => {
+      console.log(res)
+      if (res.statusCode === 200) {
+        const filePath = res.tempFilePath
+        console.log('下载成功')
+        uni.openDocument({
+          filePath,
+          success: function (res) {
+            console.log('打开文档成功')
+          },
+          fail: function (err) {
+            console.log('打开文档失败', err)
+          },
+        })
+      }
+    },
+  })
+  console.log(333)
 }
 </script>
 

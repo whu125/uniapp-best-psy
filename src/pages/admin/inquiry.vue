@@ -1,4 +1,4 @@
-<route lang="json5" type="home">
+<route lang="json5">
 {
   style: {
     navigationStyle: 'custom',
@@ -17,7 +17,7 @@
   </view>
 
   <view>
-    <button @click="exportExcel()">导出excel</button>
+    <wd-toast />
   </view>
   <view class="admin-container">
     <wd-table :data="dataList">
@@ -32,6 +32,10 @@
       <wd-table-col prop="school" label="求学之所"></wd-table-col>
       <wd-table-col prop="major" label="组别"></wd-table-col>
     </wd-table>
+  </view>
+
+  <view>
+    <wd-button @click="exportExcel()">导出excel</wd-button>
   </view>
 
   <wd-popup v-model="show" custom-style="padding: 0;" :close-on-click-modal="false">
@@ -59,6 +63,7 @@
 <script lang="ts" setup>
 import { exportExcelApi } from '@/service/admin/admin'
 import { useMessage, useToast } from 'wot-design-uni'
+import { getAllUserInfo, User } from '@/service/index/user'
 
 const toast = useToast()
 const { safeAreaInsets } = uni.getSystemInfoSync()
@@ -86,6 +91,7 @@ const edit = (row) => {
 }
 
 const exportExcel = async () => {
+  console.log('导出excel')
   toast.loading('导出中...')
   console.log('导出excel')
   console.log('22')

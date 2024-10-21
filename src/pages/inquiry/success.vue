@@ -47,7 +47,6 @@ const isLast = computed(() => {
   return interStore.interInfo.interId === 7
 })
 
-const interStore = useInterStore()
 const interId = interStore.interInfo.interId
 
 const interText = ref(['零', '一', '二', '三', '四', '五', '六', '七'])
