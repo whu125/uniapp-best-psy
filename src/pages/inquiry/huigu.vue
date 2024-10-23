@@ -48,15 +48,17 @@ const userInputList = ref<Array<string>>([])
 const interIdToUrlMap = new Map<number, string>([
   [1, 'http://115.159.83.61:9000/journey2/daka6.png'],
   [2, 'http://115.159.83.61:9000/journey2/daka6.png'],
-  [3, 'http://115.159.83.61:9000/journey2/daka6.png'],
-  [4, 'http://115.159.83.61:9000/journey2/daka6.png'],
-  [5, 'http://115.159.83.61:9000/journey2/daka6.png'],
-  [6, 'http://115.159.83.61:9000/journey2/daka6.png'],
-  [7, 'http://115.159.83.61:9000/journey2/daka6.png'],
+  [3, 'http://115.159.83.61:9000/journey3/daka5.png'],
+  [4, 'http://115.159.83.61:9000/journey4/daka5.png'],
+  [5, 'http://115.159.83.61:9000/journey5/daka5.png'],
+  [6, 'http://115.159.83.61:9000/journey6/daka5.png'],
+  [7, 'http://115.159.83.61:9000/journey7/daka5.png'],
   // Add more mappings as needed
 ])
 
-onShow(async () => {})
+onShow(async () => {
+  console.log('currInterId', currInterId.value)
+})
 
 const handleSlideClick = (e) => {
   console.log(e)

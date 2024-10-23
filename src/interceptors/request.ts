@@ -11,8 +11,8 @@ export type CustomRequestOptions = UniApp.RequestOptions & {
 
 // 请求基准地址
 // const baseUrl = import.meta.env.VITE_SERVER_BASEURL
-// const baseUrl = 'https://mindease.online:28081'
-const baseUrl = 'https://localhost:443'
+const baseUrl = 'https://mindease.online:28081'
+// const baseUrl = 'https://localhost:443'
 
 // 拦截器配置
 const httpInterceptor = {
@@ -44,7 +44,7 @@ const httpInterceptor = {
       // TIPS: 如果需要对接多个后端服务，也可以在这里处理，拼接成所需要的地址
     }
     // 1. 请求超时
-    options.timeout = 10000 // 10s
+    options.timeout = 20000 // 20s
     // 2. （可选）添加小程序端请求头标识
     options.header = {
       platform, // 可选，与 uniapp 定义的平台一致，告诉后台来源
