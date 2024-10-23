@@ -646,7 +646,23 @@ const doOperation = async () => {
       url: '/pages/journey_common/common',
     })
   } else if (pageContent.value.specialPage === '/pages/home/home') {
-    interStore.clearInternfo()
+    // 如果是干预0，提交内容
+    const submitObj: ISubmitInter = {
+      userId: userStore.userInfo.userId,
+      interId: interStore.interInfo.interId,
+      endTime: getFormattedDate(),
+      inputPages: interStore.inputPages,
+      inputContent: interStore.inputContent,
+    }
+    const res = await submitInter(submitObj)
+    if (res.code === 200) {
+      // 清除缓存
+      interStore.clearInternfo()
+      globalPageControlStore.clearInternfo()
+      uni.redirectTo({ url: '/pages/home/home' })
+    } else {
+      toast.error('出现了一些问题')
+    }
     uni.switchTab({
       url: pageContent.value.specialPage,
     })
