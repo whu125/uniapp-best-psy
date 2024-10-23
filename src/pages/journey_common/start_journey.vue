@@ -91,12 +91,16 @@ const currContent = ref()
 
 const pageContent = ref([
   {
-    title: '导入: ',
-    questions: [],
+    title: '始发站: 悦心一刻',
+    questions: ['• 这是一段怎样的旅程?', '• 我们将如何度过?', '• 你将收获什么?'],
   },
   {
-    title: '第一站: ',
-    questions: [],
+    title: '第一站: 认识你的情绪',
+    questions: [
+      '• 情绪是什么，又由什么构成?',
+      '• 我们和情绪之间的关系是什么?',
+      '• 消极情绪真的是痛苦的来源吗?',
+    ],
   },
   {
     title: '第二站: 观察你的思维',

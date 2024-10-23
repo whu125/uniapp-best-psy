@@ -26,11 +26,11 @@ type IUniUploadFileOptions = {
 type IUserInfo = {
   userId: string
   username: string
-  wechatId: string
-  wechatName: string
   phone: string
   currProgress: number
   avatar: string
+  role: string
+  groupId: number
   token: string
   lockTime: number
 }

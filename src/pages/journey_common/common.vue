@@ -182,8 +182,8 @@
       <view class="middle-img-input">
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
       </view>
-      <view class="input-area">
-        <wd-checkbox-group v-model="checkBoxItem" cell shape="button" size="large">
+      <view class="checkBox-area">
+        <wd-checkbox-group v-model="checkBoxItem" cell shape="button">
           <template v-for="(item, index) in pageContent.selectUrls" :key="index">
             <wd-checkbox :modelValue="index">{{ item }}</wd-checkbox>
           </template>
@@ -288,8 +288,11 @@ import { IInterPage, useInterStore } from '@/store/inter'
 import { useGlobalPageControlStore } from '@/store/globalPageControl'
 import { getPageByInterId, submitInter, ISubmitInter } from '@/service/index/inter'
 import { useToast, useMessage } from 'wot-design-uni'
+import { getFormattedDate } from '@/utils/getTime'
+import { useUserStore } from '@/store/user'
 
 const interStore = useInterStore()
+const userStore = useUserStore()
 const message = useMessage()
 const globalPageControlStore = useGlobalPageControlStore()
 const toast = useToast()
@@ -383,6 +386,11 @@ const selectItem = (index) => {
 
 const toPage = (buttonUrl: string) => {
   // botton 页面的跳转逻辑 根据按钮的图片名称判断需要跳转到哪个页面
+  // 干预1页面14
+  if (buttonUrl === 'http://115.159.83.61:9000/journey1/renwu1(1).png') {
+    interStore.setPageIndex(15)
+    globalPageControlStore.globalPageControlInfo.toDaolanHome = true
+  }
   // 干预2页面6
   if (buttonUrl === 'http://115.159.83.61:9000/journey2/daolan3.png') {
     interStore.setPageIndex(7)
@@ -564,7 +572,9 @@ const doOperation = async () => {
   }
   // 如果用户点击的是返回按钮 需要判断当前是什么页面以跳转回原 button 页面
   if (pageContent.value.operationIcon.endsWith('back.png')) {
-    if (pageContent.value.pageId === 7 && pageContent.value.interId === 2) {
+    if (pageContent.value.pageId === 19 && pageContent.value.interId === 1) {
+      await interStore.setPageIndex(14)
+    } else if (pageContent.value.pageId === 7 && pageContent.value.interId === 2) {
       await interStore.setPageIndex(6)
     } else if (pageContent.value.pageId === 17 && pageContent.value.interId === 2) {
       await interStore.setPageIndex(15)
@@ -615,7 +625,7 @@ const doOperation = async () => {
       toast.success('感谢！')
       // 清除缓存
       interStore.clearInternfo()
-      globalPageControl.clearInternfo()
+      globalPageControlStore.clearInternfo()
       uni.redirectTo({ url: '/pages/home/home' })
     } else {
       toast.error('出现了一些问题')
@@ -635,11 +645,15 @@ const doOperation = async () => {
     uni.redirectTo({
       url: '/pages/journey_common/common',
     })
+  } else if (pageContent.value.specialPage === '/pages/home/home') {
+    interStore.clearInternfo()
+    uni.switchTab({
+      url: pageContent.value.specialPage,
+    })
   } else {
     // 否则跳转到特殊页面
-    const specialPage = pageContent.value.specialPage
     uni.redirectTo({
-      url: specialPage,
+      url: pageContent.value.specialPage,
     })
   }
 }
@@ -691,6 +705,12 @@ const testsubmit = () => {
   width: 90%;
   height: auto;
   margin: 0 auto;
+}
+
+.checkBox-area {
+  width: auto;
+  height: auto;
+  overflow-x: scroll;
 }
 
 .button-area {

@@ -5,11 +5,11 @@ import { ref } from 'vue'
 const initState = {
   userId: '1',
   username: '未登录用户',
-  wechatId: '123456789wechat',
-  wechatName: 'yz-wechat',
   phone: '1234567890',
   currProgress: 0,
   avatar: 'http://115.159.83.61:9000/common/avatar.png',
+  role: 'user',
+  groupId: 0,
   token: '',
   // 这个字段记录，下一次应该解锁的时间
   lockTime: -1,

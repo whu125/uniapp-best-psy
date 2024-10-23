@@ -3,12 +3,11 @@ import { http } from '@/utils/http'
 export interface User {
   userId: string
   username: string
-  wechatId: string
-  wechatName: string
   phone: string
   currProgress: number
   avatar: string
-  token: string
+  role: string
+  groupId: number
 }
 
 export const getPhoneNumberApi = (openid: string, code: string) => {

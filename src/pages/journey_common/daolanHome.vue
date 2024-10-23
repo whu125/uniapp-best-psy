@@ -137,10 +137,8 @@ const toTask = async () => {
     return
   }
   interStore.isTaskFinished = true
-  if (interStore.interInfo.interId === 0) {
-    await interStore.setPageIndex(-1)
-  } else if (interStore.interInfo.interId === 1) {
-    await interStore.setPageIndex(-1)
+  if (interStore.interInfo.interId === 1) {
+    await interStore.setPageIndex(13)
   } else if (interStore.interInfo.interId === 2) {
     await interStore.setPageIndex(23)
   } else if (interStore.interInfo.interId === 3) {
