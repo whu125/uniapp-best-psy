@@ -8,6 +8,7 @@
 }
 </route>
 <template>
+  <tabbar selected="1"></tabbar>
   <view class="" h-full w-full>
     <wd-navbar fixed safeAreaInsetTop title="工具箱"></wd-navbar>
 

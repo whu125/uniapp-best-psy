@@ -9,16 +9,16 @@
 <template>
   <div class="app-container">
     <div class="content">
-      <h1 class="title">
+      <!-- <h1 class="title">
         <span>每一刻</span>
         <span>悦心相伴</span>
       </h1>
-      <h2 class="subtitle">MindEase</h2>
+      <h2 class="subtitle">MindEase</h2> -->
 
       <div class="buttons">
         <!-- <wd-button type="info" class="login-btn counselor">咨询师登录</wd-button>
         <wd-button type="info" class="login-btn user">用户登录</wd-button> -->
-        <wd-button type="info" size="large" @click="adminLogin()">咨询师登录</wd-button>
+
         <view v-show="agreed" class="flex">
           <wd-button
             type="info"
@@ -34,18 +34,22 @@
             用户登录
           </wd-button>
         </view>
+
+        <wd-button type="info" size="large" open-type="getPhoneNumber" @getphonenumber="adminLogin">
+          咨询师登录
+        </wd-button>
       </div>
 
       <div class="agreement">
         <wd-checkbox v-model="agreed" @change="handleAgreementChange">
-          同意用户协议、隐私协议
+          <p class="c-white">同意用户协议、隐私协议</p>
         </wd-checkbox>
       </div>
 
-      <p class="note">注：该小程序非商业应用，仅为科学研究使用，用户为参与研究人员，请勿转载</p>
+      <!-- <p class="note">注：该小程序非商业应用，仅为科学研究使用，用户为参与研究人员，请勿转载</p> -->
     </div>
   </div>
-  <!-- <wd-message-box></wd-message-box> -->
+  <wd-message-box></wd-message-box>
   <!-- <wd-button @click="alert">alert</wd-button> -->
 </template>
 
@@ -53,7 +57,7 @@
 import PLATFORM from '@/utils/platform'
 import { useMessage, useToast } from 'wot-design-uni'
 import { useUserStore } from '@/store'
-import { getUserInfo, getPhoneNumberApi } from '@/service/index/user'
+import { getUserInfo, getPhoneNumberApi, evalRole } from '@/service/index/user'
 
 const toast = useToast()
 
@@ -88,11 +92,30 @@ const login = () => {
 const check = () => {
   message.alert('请先同意用户协议、隐私协议')
 }
-const adminLogin = () => {
-  message.prompt({
-    title: '请输入密钥',
-    inputValue: passwd.value,
-  })
+
+const loginApi = () => {}
+
+const adminLogin = (e) => {
+  message
+    .prompt({
+      title: '请输入密钥',
+      inputValue: passwd.value,
+    })
+    .then(async (resp) => {
+      // 向后端发送验证
+      const res = await evalRole(resp.value)
+      console.log(res)
+      if (res.code === 200) {
+        if (res.data === 1) {
+          console.log('咨询师登录')
+        } else {
+          message.alert('密钥错误')
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 const getPhoneNumber = async (e) => {
   if (e.errMsg === 'getPhoneNumber:fail user deny') {
@@ -189,7 +212,7 @@ const handleAgreementChange = () => {
   flex-direction: column;
   height: 100vh;
   font-family: Arial, sans-serif;
-  background-image: url('http://115.159.83.61:9000/mindease/login.jpg');
+  background-image: url('http://115.159.83.61:9000/common/login-bg.png');
   background-position: center;
   background-size: cover;
 }
@@ -214,7 +237,7 @@ const handleAgreementChange = () => {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.3);
+  /* background: rgba(255, 255, 255, 0.3); */
 }
 
 .title {
@@ -233,7 +256,7 @@ const handleAgreementChange = () => {
 .buttons {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
   width: 80%;
   max-width: 300px;
 }
@@ -260,5 +283,9 @@ const handleAgreementChange = () => {
   font-size: 12px;
   color: #666;
   text-align: center;
+}
+
+.login-btn {
+  width: 150rpx;
 }
 </style>
