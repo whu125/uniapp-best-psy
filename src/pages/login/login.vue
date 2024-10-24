@@ -9,6 +9,7 @@
 <template>
   <div class="app-container">
     <div class="content">
+      <wd-toast />
       <!-- <h1 class="title">
         <span>每一刻</span>
         <span>悦心相伴</span>
@@ -57,10 +58,10 @@
 import PLATFORM from '@/utils/platform'
 import { useMessage, useToast } from 'wot-design-uni'
 import { useUserStore } from '@/store'
-import { getUserInfo, getPhoneNumberApi, evalRole } from '@/service/index/user'
+import { getUserInfo, getPhoneNumberApi, evalRole, setRole } from '@/service/index/user'
 
 const toast = useToast()
-
+const phonecode = ref('')
 const message = useMessage()
 
 const agreed = ref(false)
@@ -93,9 +94,46 @@ const check = () => {
   message.alert('请先同意用户协议、隐私协议')
 }
 
-const loginApi = () => {}
+const loginApi = async () => {
+  toast.loading('登录中...')
+  const res = await weixinLogin()
+
+  await new Promise((resolve) => setTimeout(resolve, 2000))
+  // todo:如果点了拒绝
+
+  const openid = userStore.userInfo.userId
+  const code = phonecode.value
+
+  getPhoneNumberApi(openid, code).then(async (res2) => {
+    // 服务端获取手机号
+    console.log('res2', res2)
+    toast.close()
+    if (res2.code == 200) {
+      // 更改role
+
+      await setRole('admin')
+      userStore.setRole('admin')
+
+      toast.success('登录成功')
+      // 判断是否是第一次登录
+      if (res2.data == true) {
+        uni.navigateTo({
+          url: '/pages/inquiry/first',
+        })
+      } else {
+        ToHome()
+      }
+    } else {
+      uni.showToast({
+        title: '登录失败,请重试',
+      })
+    }
+  })
+}
 
 const adminLogin = (e) => {
+  phonecode.value = e.code
+  console.log('phonecode', phonecode.value)
   message
     .prompt({
       title: '请输入密钥',
@@ -107,7 +145,7 @@ const adminLogin = (e) => {
       console.log(res)
       if (res.code === 200) {
         if (res.data === 1) {
-          console.log('咨询师登录')
+          loginApi()
         } else {
           message.alert('密钥错误')
         }
@@ -154,18 +192,6 @@ const getPhoneNumber = async (e) => {
       })
     }
   })
-  //   // console.log(res, '接口换取的openid')
-  //   console.log('获取手机号的动态令牌:', e.detail.code) // 动态令牌
-  //   getPhoneNumberFn(e.detail.code, res.openid).then((res2) => {
-  //     // 服务端获取手机号
-  //     if (res2.code == 0) {
-  //       uni.setStorageSync('phoneNumber', res.content.phone_info.phoneNumber)
-  //       uni.showToast({
-  //         title: '登录成功',
-  //       })
-  //     }
-  //   })
-  // })
 }
 
 const weixinLogin = async () => {
@@ -259,6 +285,7 @@ const handleAgreementChange = () => {
   gap: 20px;
   width: 80%;
   max-width: 300px;
+  transform: translateY(150rpx);
 }
 
 .login-btn {
@@ -274,6 +301,7 @@ const handleAgreementChange = () => {
 .agreement {
   margin-top: 20px;
   font-size: 14px;
+  transform: translateY(150rpx);
 }
 
 .note {

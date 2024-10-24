@@ -41,3 +41,7 @@ export const setUserName = (name: string) => {
 export const evalRole = (key: string) => {
   return http.post(`/user/evalRole?key=${key}`, {}, {})
 }
+
+export const setRole = (role: string) => {
+  return http.post(`/user/setRole?role=${role}`, {}, {})
+}

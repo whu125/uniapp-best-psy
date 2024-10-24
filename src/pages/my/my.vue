@@ -111,7 +111,7 @@
           <span class="label ml-4">意见反馈</span>
           <span class="arrow">›</span>
         </div>
-        <div class="menu-item" @click="toadmin()">
+        <div class="menu-item" @click="toadmin()" v-if="userInfo.role == 'admin'">
           <view>
             <image
               style="width: 60rpx; height: 60rpx"
@@ -119,10 +119,10 @@
               src="../../static/images/my/xinshouzhinan.png"
             />
           </view>
-          <span class="label ml-4">测试管理员页面</span>
+          <span class="label ml-4">进入管理员页面</span>
           <span class="arrow">›</span>
         </div>
-        <div class="menu-item" @click="toLogin()">
+        <!-- <div class="menu-item" @click="toLogin()">
           <view>
             <image
               style="width: 60rpx; height: 60rpx"
@@ -132,43 +132,12 @@
           </view>
           <span class="label ml-4">进入登录页面</span>
           <span class="arrow">›</span>
-        </div>
-        <!-- <div class="menu-item" @click="exportExcel()">
-          <view>
-            <image
-              style="width: 60rpx; height: 60rpx"
-              mode="aspectFit"
-              src="../../static/images/my/xinshouzhinan.png"
-            />
-          </view>
-          <span class="label ml-4">导出文档</span>
-          <span class="arrow">›</span>
         </div> -->
-        <!-- <div class="menu-item" @click="toFirst()">
-          <view>
-            <image
-              style="width: 60rpx; height: 60rpx"
-              mode="aspectFit"
-              src="../../static/images/my/xinshouzhinan.png"
-            />
-          </view>
-          <span class="label ml-4">测试第一次进入调查入口</span>
-          <span class="arrow">›</span>
-        </div>
-        <div class="menu-item" @click="toadmin()">
-          <view>
-            <image
-              style="width: 60rpx; height: 60rpx"
-              mode="aspectFit"
-              src="../../static/images/my/xinshouzhinan.png"
-            />
-          </view>
-          <span class="label ml-4">测试管理员页面</span>
-          <span class="arrow">›</span>
-        </div> -->
-
-        <view style="height: 150rpx"></view>
       </div>
+      <view class="flex justify-center mt-4" v-if="userInfo.username == '未登录用户'">
+        <wd-button type="success" @click="toLogin">登录</wd-button>
+      </view>
+      <view style="height: 150rpx"></view>
     </div>
     <wd-message-box />
     <wd-toast />
