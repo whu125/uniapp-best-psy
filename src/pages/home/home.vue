@@ -104,9 +104,9 @@ const globalPageControl = useGlobalPageControlStore()
 
 const userInfo = ref<IUserInfo>(userStore.userInfo)
 // const currProgress = ref<number>(2)
-const currProgress = ref<number>(userStore.userInfo.currProgress)
+const currProgress = ref<number>(userStore.userInfo.currProgress % 8)
 
-const curInter = ref<number>(interStore.interInfo.interId)
+const curInter = ref<number>(interStore.interInfo.interId % 8)
 
 const checkTimeFlag = ref(false)
 // const checkTimeFlag = ref(true)
@@ -125,8 +125,8 @@ const journeySteps = ref([
 ])
 
 onShow(() => {
-  console.log('请求后端更新时间')
-  currProgress.value = userStore.userInfo.currProgress
+  currProgress.value = userStore.userInfo.currProgress % 8
+  curInter.value = interStore.interInfo.interId % 8
 })
 // 测试 uni API 自动引入
 onLoad(() => {
@@ -155,6 +155,9 @@ const calculateHour = () => {
 
 const enterJourney = async (progress: number) => {
   console.log('interStore.value', interStore.interInfo)
+  if (userInfo.value.groupId === 1) {
+    progress += 8
+  }
 
   // 检查是否有干预记录
   if (interStore.interInfo.interId === -1) {
@@ -164,17 +167,20 @@ const enterJourney = async (progress: number) => {
 
     const numberStr = progress.toString()
 
-    // 如果不是导入，跳转到站前测量
-    if (numberStr === '0' || numberStr === '1') {
-      uni.redirectTo({
-        url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
-      })
-    }
-    if (numberStr !== '0' && numberStr !== '1') {
-      uni.redirectTo({
-        url: '/pages/inquiry/before?progress=' + encodeURIComponent(numberStr),
-      })
-    }
+    uni.redirectTo({
+      url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+    })
+    // // 如果不是导入，跳转到站前测量
+    // if (numberStr === '0' || numberStr === '1') {
+    //   uni.redirectTo({
+    //     url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+    //   })
+    // }
+    // if (numberStr !== '0' && numberStr !== '1') {
+    //   uni.redirectTo({
+    //     url: '/pages/inquiry/before?progress=' + encodeURIComponent(numberStr),
+    //   })
+    // }
   } else if (interStore.interInfo.interId === progress) {
     uni.navigateTo({
       url: '/pages/journey_common/common',
@@ -195,16 +201,16 @@ const enterJourney = async (progress: number) => {
         uni.redirectTo({
           url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
         })
-        if (numberStr === '0' || numberStr === '1') {
-          uni.redirectTo({
-            url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
-          })
-        }
-        if (numberStr !== '0' && numberStr !== '1') {
-          uni.redirectTo({
-            url: '/pages/inquiry/before?progress=' + encodeURIComponent(numberStr),
-          })
-        }
+        // if (numberStr === '0' || numberStr === '1') {
+        //   uni.redirectTo({
+        //     url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+        //   })
+        // }
+        // if (numberStr !== '0' && numberStr !== '1') {
+        //   uni.redirectTo({
+        //     url: '/pages/inquiry/before?progress=' + encodeURIComponent(numberStr),
+        //   })
+        // }
       })
       .catch(() => {
         console.log('取消')

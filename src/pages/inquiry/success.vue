@@ -44,7 +44,7 @@ const interStore = useInterStore()
 const userStore = useUserStore()
 const toast = useToast()
 const isLast = computed(() => {
-  return interStore.interInfo.interId === 7
+  return interStore.interInfo.interId === 7 || interStore.interInfo.interId === 15
 })
 
 const interId = interStore.interInfo.interId

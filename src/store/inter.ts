@@ -42,9 +42,13 @@ export const useInterStore = defineStore(
 
     const userInputMap = ref<Map<number, string>>(new Map<number, string>())
 
-    const isStartJourney = ref<boolean>(false)
+    const isStartJourney0 = ref<boolean>(false)
 
-    const isTaskFinished = ref<boolean>(false)
+    const isTaskFinished0 = ref<boolean>(false)
+
+    const isStartJourney1 = ref<boolean>(false)
+
+    const isPunchFinished1 = ref<boolean>(false)
 
     const inputPages = computed(() => {
       let inputPages = ''
@@ -97,8 +101,10 @@ export const useInterStore = defineStore(
         userInputMap.value = new Map<number, string>()
       }
 
-      isStartJourney.value = false
-      isTaskFinished.value = false
+      isStartJourney0.value = false
+      isTaskFinished0.value = false
+      isStartJourney1.value = false
+      isPunchFinished1.value = false
     }
     // 一般没有reset需求，不需要的可以删除
     const reset = () => {
@@ -134,8 +140,10 @@ export const useInterStore = defineStore(
       userInputMap,
       addPageIndex,
       minusPageIndex,
-      isStartJourney,
-      isTaskFinished,
+      isStartJourney0,
+      isTaskFinished0,
+      isStartJourney1,
+      isPunchFinished1,
       setUserInputMap,
       inputPages,
       inputContent,

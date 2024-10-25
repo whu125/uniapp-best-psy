@@ -86,6 +86,8 @@ const imageMap = new Map([
   [5, 'http://115.159.83.61:9000/journey5/start_journey_logo5.png'],
   [6, 'http://115.159.83.61:9000/journey6/start_journey_logo6.png'],
   [7, 'http://115.159.83.61:9000/journey7/start_journey_logo7.png'],
+  [8, 'http://115.159.83.61:9000/journey8/start_journey_logo8.png'],
+  [9, 'http://115.159.83.61:9000/journey9/start_journey_logo9.png'],
 ])
 const currContent = ref()
 
@@ -138,8 +140,20 @@ const pageContent = ref([
     title: '第七站: 为所当为',
     questions: [
       '• 实现价值的魔法是什么？',
-      '• ·如何以价值为导向指定目标和行动方案？',
+      '• 如何以价值为导向指定目标和行动方案？',
       '• 旅程的第八站是什么？',
+    ],
+  },
+  {
+    title: '始发站: 悦心一刻',
+    questions: ['• 这是一段怎样的旅程?', '• 我们将如何度过?', '• 你将收获什么?'],
+  },
+  {
+    title: '第一站: 认识情绪困扰',
+    questions: [
+      '• 情绪困扰是什么，又表现为什么？',
+      '• 多个情绪困扰会同时出现吗？',
+      '• 与情绪困扰有关的常见误解有哪些？',
     ],
   },
 ])
@@ -156,9 +170,15 @@ const startJourney = async () => {
   toast.close()
   if (res.code === 200) {
     interStore.setInterInfo(res.data)
-    uni.redirectTo({
-      url: '/pages/journey_common/common',
-    })
+    if (userStore.userInfo.groupId === 0) {
+      uni.redirectTo({
+        url: '/pages/journey_common/common',
+      })
+    } else {
+      uni.redirectTo({
+        url: '/pages/journey_common/daolanHome',
+      })
+    }
   } else {
     toast.error('出现了一些问题')
   }

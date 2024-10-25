@@ -40,19 +40,19 @@ const interStore = useInterStore()
 const navbarTitle = ref<string>('')
 onShow(() => {
   const interId = interStore.interInfo.interId
-  if (interId % 7 === 1) {
+  if (interId % 8 === 1) {
     navbarTitle.value = '第一站: 导入'
-  } else if (interId % 7 === 2) {
+  } else if (interId % 8 === 2) {
     navbarTitle.value = '第二站: 导入'
-  } else if (interId % 7 === 3) {
+  } else if (interId % 8 === 3) {
     navbarTitle.value = '第三站: 导入'
-  } else if (interId % 7 === 4) {
+  } else if (interId % 8 === 4) {
     navbarTitle.value = '第四站: 导入'
-  } else if (interId % 7 === 5) {
+  } else if (interId % 8 === 5) {
     navbarTitle.value = '第五站: 导入'
-  } else if (interId % 7 === 6) {
+  } else if (interId % 8 === 6) {
     navbarTitle.value = '第六站: 导入'
-  } else if (interId % 7 === 0) {
+  } else if (interId % 8 === 7) {
     navbarTitle.value = '第七站: 导入'
   }
 })

@@ -30,15 +30,29 @@
           <wd-button type="info" @click="startJourney()">开始旅程</wd-button>
         </view>
       </view>
-      <view class="sub-container">
+      <view class="sub-container" v-if="currGroupId === 0">
         <view class="inter-task" @click="toTask()">
           <view class="title">2.站点任务</view>
           <view class="icon">
             <wd-icon name="list" color="#ffffff" size="24px" />
           </view>
         </view>
-        <view class="inter-next" @click="toPunch()">
+        <view class="inter-next" @click="toPunch0()">
           <view class="title">3.站点打卡</view>
+          <view class="icon">
+            <wd-icon name="add-circle" color="#ffffff" size="24px" />
+          </view>
+        </view>
+      </view>
+      <view class="sub-container" v-if="currGroupId === 1">
+        <view class="inter-task" @click="toPunch1()">
+          <view class="title">2.站点打卡</view>
+          <view class="icon">
+            <wd-icon name="list" color="#ffffff" size="24px" />
+          </view>
+        </view>
+        <view class="inter-next" @click="toExpand()">
+          <view class="title">3.站点拓展</view>
           <view class="icon">
             <wd-icon name="add-circle" color="#ffffff" size="24px" />
           </view>
@@ -51,12 +65,15 @@
 <script lang="ts" setup>
 import PLATFORM from '@/utils/platform'
 import { useInterStore } from '@/store/inter'
+import { useUserStore } from '@/store/user'
 import { useToast } from 'wot-design-uni'
 
 const interStore = useInterStore()
+const userStore = useUserStore()
 const toast = useToast()
 const interId = ref<number>()
 const currContent = ref<IContentType>()
+const currGroupId = ref<number>(0)
 
 defineOptions({
   name: 'Home',
@@ -66,6 +83,7 @@ defineOptions({
 onShow(() => {
   interId.value = interStore.interInfo.interId
   currContent.value = contentList[interId.value]
+  currGroupId.value = userStore.userInfo.groupId
 })
 
 type IContentType = {
@@ -115,28 +133,69 @@ const contentList = [
     logoUrl: 'http://115.159.83.61:9000/journey7/journeyHome7.png',
     text: ['行动是生活的魔法'],
   },
+  {
+    navbarTitle: '',
+    logoUrl: '',
+    text: [],
+  },
+  {
+    navbarTitle: '第一站: 导览',
+    logoUrl: 'http://115.159.83.61:9000/journey9/journeyHome9.png',
+    text: ['情绪是一切的起点,是我们的一部分'],
+  },
+  {
+    navbarTitle: '第二站: 导览',
+    logoUrl: 'http://115.159.83.61:9000/journey10/journeyHome10.png',
+    text: [],
+  },
+  {
+    navbarTitle: '第三站: 导览',
+    logoUrl: 'http://115.159.83.61:9000/journey11/journeyHome11.png',
+    text: [],
+  },
+  {
+    navbarTitle: '第四站: 导览',
+    logoUrl: 'http://115.159.83.61:9000/journey12/journeyHome12.png',
+    text: [],
+  },
+  {
+    navbarTitle: '第五站: 导览',
+    logoUrl: 'http://115.159.83.61:9000/journey13/journeyHome13.png',
+    text: [],
+  },
+  {
+    navbarTitle: '第六站: 导览',
+    logoUrl: 'http://115.159.83.61:9000/journey14/journeyHome14.png',
+    text: [],
+  },
+  {
+    navbarTitle: '第七站: 导览',
+    logoUrl: 'http://115.159.83.61:9000/journey15/journeyHome15.png',
+    text: [],
+  },
 ]
 
 const ToHome = () => {
   uni.switchTab({ url: '/pages/home/home' })
 }
 
-const startJourney = async () => {
-  const res = await interStore.addPageIndex()
-  if (res === 'pageEnd') {
-    return
+const startJourney = () => {
+  if (userStore.userInfo.groupId === 0) {
+    interStore.addPageIndex()
+    interStore.isStartJourney0 = true
+  } else {
+    interStore.isStartJourney1 = true
   }
-  interStore.isStartJourney = true
   uni.navigateTo({
     url: '/pages/journey_common/common',
   })
 }
 const toTask = async () => {
-  if (interStore.isStartJourney !== true) {
+  if (interStore.isStartJourney0 !== true) {
     toast.warning('请先完成站点导览！')
     return
   }
-  interStore.isTaskFinished = true
+  interStore.isTaskFinished0 = true
   if (interStore.interInfo.interId === 1) {
     await interStore.setPageIndex(13)
   } else if (interStore.interInfo.interId === 2) {
@@ -156,13 +215,49 @@ const toTask = async () => {
     url: '/pages/journey_common/common',
   })
 }
-const toPunch = () => {
-  if (interStore.isTaskFinished !== true || interStore.isStartJourney !== true) {
+const toPunch0 = () => {
+  if (interStore.isTaskFinished0 !== true || interStore.isStartJourney0 !== true) {
     toast.warning('请先完成站点任务！')
     return
   }
   uni.navigateTo({
     url: '/pages/inquiry/start',
+  })
+}
+const toPunch1 = () => {
+  if (interStore.isStartJourney1 !== true) {
+    console.log('请先完成站点导览！')
+    toast.warning('请先完成站点导览！')
+    return
+  }
+  interStore.isPunchFinished1 = true
+  // uni.navigateTo({
+  //   url: '/pages/inquiry/start',
+  // })
+}
+const toExpand = async () => {
+  if (interStore.isStartJourney1 !== true || interStore.isPunchFinished1 !== true) {
+    console.log('请先完成站点打卡！')
+    toast.warning('请先完成站点打卡！')
+    return
+  }
+  if (interStore.interInfo.interId === 8) {
+    await interStore.setPageIndex(-1)
+  } else if (interStore.interInfo.interId === 9) {
+    await interStore.setPageIndex(9)
+  } else if (interStore.interInfo.interId === 10) {
+    await interStore.setPageIndex(-1)
+  } else if (interStore.interInfo.interId === 11) {
+    await interStore.setPageIndex(-1)
+  } else if (interStore.interInfo.interId === 12) {
+    await interStore.setPageIndex(-1)
+  } else if (interStore.interInfo.interId === 13) {
+    await interStore.setPageIndex(-1)
+  } else if (interStore.interInfo.interId === 14) {
+    await interStore.setPageIndex(-1)
+  }
+  uni.navigateTo({
+    url: '/pages/journey_common/common',
   })
 }
 </script>
