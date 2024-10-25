@@ -40,6 +40,11 @@ export const useUserStore = defineStore(
       // 24小时后解锁
       userInfo.value.lockTime = new Date().getTime() + 24 * 60 * 60 * 1000
     }
+
+    const setRole = (role) => {
+      // 24小时后解锁
+      userInfo.value.role = role
+    }
     const addProgress = () => {
       userInfo.value.currProgress = userInfo.value.currProgress + 1
     }
@@ -55,6 +60,7 @@ export const useUserStore = defineStore(
       setUserToken,
       addProgress,
       setLockTime,
+      setRole,
     }
   },
   {

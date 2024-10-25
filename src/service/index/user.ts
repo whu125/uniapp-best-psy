@@ -37,3 +37,11 @@ export const setUserAvatar = (avatar: string) => {
 export const setUserName = (name: string) => {
   return http.post<User>(`/user/setName?name=${name}`, {}, {})
 }
+
+export const evalRole = (key: string) => {
+  return http.post(`/user/evalRole?key=${key}`, {}, {})
+}
+
+export const setRole = (role: string) => {
+  return http.post(`/user/setRole?role=${role}`, {}, {})
+}
