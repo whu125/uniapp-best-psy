@@ -122,7 +122,7 @@
           <span class="label ml-4">进入管理员页面</span>
           <span class="arrow">›</span>
         </div>
-        <!-- <div class="menu-item" @click="toLogin()">
+        <div class="menu-item" @click="toLogin()">
           <view>
             <image
               style="width: 60rpx; height: 60rpx"
@@ -132,7 +132,7 @@
           </view>
           <span class="label ml-4">进入登录页面</span>
           <span class="arrow">›</span>
-        </div> -->
+        </div>
       </div>
       <view class="flex justify-center mt-4" v-if="userInfo.username == '未登录用户'">
         <wd-button type="success" @click="toLogin">登录</wd-button>

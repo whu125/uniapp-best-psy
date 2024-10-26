@@ -174,7 +174,7 @@ const startJourney = async () => {
       uni.redirectTo({
         url: '/pages/journey_common/common',
       })
-    } else {
+    } else if (userStore.userInfo.groupId === 1) {
       uni.redirectTo({
         url: '/pages/journey_common/daolanHome',
       })

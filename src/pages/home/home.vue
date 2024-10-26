@@ -164,21 +164,21 @@ const enterJourney = async (progress: number) => {
     console.log('没有干预记录')
     interStore.clearInternfo()
     globalPageControl.clearInternfo()
-
     const numberStr = progress.toString()
 
     uni.redirectTo({
       url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
     })
-    // // 如果不是导入，跳转到站前测量
+    // 如果不是导入，跳转到站前测量
     // if (numberStr === '0' || numberStr === '1') {
     //   uni.redirectTo({
-    //     url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+    //     url:
+    //       '/pages/journey_common/start_journey?progress=' + encodeURIComponent(progress.toString()),
     //   })
     // }
     // if (numberStr !== '0' && numberStr !== '1') {
     //   uni.redirectTo({
-    //     url: '/pages/inquiry/before?progress=' + encodeURIComponent(numberStr),
+    //     url: '/pages/inquiry/before?progress=' + encodeURIComponent(progress.toString()),
     //   })
     // }
   } else if (interStore.interInfo.interId === progress) {

@@ -50,6 +50,8 @@ onLoad((options) => {
   const numberStr = options.progress
   console.log('当前进入第几站：', numberStr)
   progress.value = Number(decodeURIComponent(numberStr))
+  progress.value %= 8
+  console.log(progress.value)
 })
 
 const ToHome = () => {

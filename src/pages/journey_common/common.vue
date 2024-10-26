@@ -39,10 +39,16 @@
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
       </view>
 
-      <view @click="doOperation" class="operation-area">
-        <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
-        <view style="width: 100%; font-size: 18px; text-align: center">
-          {{ pageContent.operationText }}
+      <view class="operation-area">
+        <view class="operation-btn" @click="toPrev">
+          <img :src="prevIconUrl" style="width: 50px; height: 50px" />
+          <view style="width: 100%; font-size: 18px; text-align: center">上一页</view>
+        </view>
+        <view class="operation-btn" @click="doOperation">
+          <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
+          <view style="width: 100%; font-size: 18px; text-align: center">
+            {{ pageContent.operationText }}
+          </view>
         </view>
       </view>
     </view>
@@ -76,10 +82,16 @@
           </view>
         </view>
       </view>
-      <view @click="doOperation" class="operation-area">
-        <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
-        <view style="width: 100%; font-size: 18px; text-align: center">
-          {{ pageContent.operationText }}
+      <view class="operation-area">
+        <view class="operation-btn" @click="toPrev">
+          <img :src="prevIconUrl" style="width: 50px; height: 50px" />
+          <view style="width: 100%; font-size: 18px; text-align: center">上一页</view>
+        </view>
+        <view class="operation-btn" @click="doOperation">
+          <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
+          <view style="width: 100%; font-size: 18px; text-align: center">
+            {{ pageContent.operationText }}
+          </view>
         </view>
       </view>
     </view>
@@ -115,10 +127,16 @@
           </view>
         </view>
       </view>
-      <view v-if="hasOperation" @click="doOperation" class="operation-area">
-        <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
-        <view style="width: 100%; font-size: 18px; text-align: center">
-          {{ pageContent.operationText }}
+      <view class="operation-area">
+        <view class="operation-btn" @click="toPrev">
+          <img :src="prevIconUrl" style="width: 50px; height: 50px" />
+          <view style="width: 100%; font-size: 18px; text-align: center">上一页</view>
+        </view>
+        <view class="operation-btn" @click="doOperation">
+          <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
+          <view style="width: 100%; font-size: 18px; text-align: center">
+            {{ pageContent.operationText }}
+          </view>
         </view>
       </view>
     </view>
@@ -155,10 +173,16 @@
           </view>
         </view>
       </view>
-      <view @click="doOperation" class="operation-area">
-        <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
-        <view style="width: 100%; font-size: 18px; text-align: center">
-          {{ pageContent.operationText }}
+      <view class="operation-area">
+        <view class="operation-btn" @click="toPrev">
+          <img :src="prevIconUrl" style="width: 50px; height: 50px" />
+          <view style="width: 100%; font-size: 18px; text-align: center">上一页</view>
+        </view>
+        <view class="operation-btn" @click="doOperation">
+          <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
+          <view style="width: 100%; font-size: 18px; text-align: center">
+            {{ pageContent.operationText }}
+          </view>
         </view>
       </view>
     </view>
@@ -189,10 +213,16 @@
           </template>
         </wd-checkbox-group>
       </view>
-      <view @click="doOperation" class="operation-area">
-        <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
-        <view style="width: 100%; font-size: 18px; text-align: center">
-          {{ pageContent.operationText }}
+      <view class="operation-area">
+        <view class="operation-btn" @click="toPrev">
+          <img :src="prevIconUrl" style="width: 50px; height: 50px" />
+          <view style="width: 100%; font-size: 18px; text-align: center">上一页</view>
+        </view>
+        <view class="operation-btn" @click="doOperation">
+          <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
+          <view style="width: 100%; font-size: 18px; text-align: center">
+            {{ pageContent.operationText }}
+          </view>
         </view>
       </view>
     </view>
@@ -229,10 +259,16 @@
           customClass="swiper"
         ></wd-swiper>
       </view>
-      <view @click="doOperation" class="operation-area">
-        <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
-        <view style="width: 100%; font-size: 18px; text-align: center">
-          {{ pageContent.operationText }}
+      <view class="operation-area">
+        <view class="operation-btn" @click="toPrev">
+          <img :src="prevIconUrl" style="width: 50px; height: 50px" />
+          <view style="width: 100%; font-size: 18px; text-align: center">上一页</view>
+        </view>
+        <view class="operation-btn" @click="doOperation">
+          <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
+          <view style="width: 100%; font-size: 18px; text-align: center">
+            {{ pageContent.operationText }}
+          </view>
         </view>
       </view>
     </view>
@@ -269,10 +305,16 @@
           ></audio>
         </view>
       </view>
-      <view @click="doOperation" class="operation-area">
-        <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
-        <view style="width: 100%; font-size: 18px; text-align: center">
-          {{ pageContent.operationText }}
+      <view class="operation-area">
+        <view class="operation-btn" @click="toPrev">
+          <img :src="prevIconUrl" style="width: 50px; height: 50px" />
+          <view style="width: 100%; font-size: 18px; text-align: center">上一页</view>
+        </view>
+        <view class="operation-btn" @click="doOperation">
+          <img :src="pageContent.operationIcon" style="width: 50px; height: 50px" />
+          <view style="width: 100%; font-size: 18px; text-align: center">
+            {{ pageContent.operationText }}
+          </view>
         </view>
       </view>
     </view>
@@ -299,6 +341,7 @@ const globalPageControlStore = useGlobalPageControlStore()
 const toast = useToast()
 
 const pageType = ref<string>('normal')
+const prevIconUrl = ref<string>('http://115.159.83.61:9000/common/prev.png')
 const pageContent = ref<IInterPage>()
 const currentSlideImage = ref<number>(0)
 const selectedItem = ref<number>(-1)
@@ -383,6 +426,28 @@ const onSlideChange = (e) => {
 
 const selectItem = (index) => {
   selectedItem.value = index
+}
+
+const toPrev = () => {
+  const currIndex = interStore.pageIndex
+  if (interStore.pageIndex > 0) {
+    if (interStore.interInfo.interPages[currIndex - 1].pageType !== 'common') {
+      if (interStore.interInfo.interPages[currIndex].operationText === '开始任务') {
+        uni.redirectTo({
+          url: '/pages/journey_common/daolanHome',
+        })
+      }
+      interStore.minusPageIndex()
+      uni.redirectTo({
+        url: '/pages/journey_common/common',
+      })
+    } else {
+      interStore.minusPageIndex()
+      uni.redirectTo({
+        url: '/pages/journey_common/daolanHome',
+      })
+    }
+  }
 }
 
 const toPage = (buttonUrl: string) => {
@@ -738,12 +803,19 @@ const testsubmit = () => {
 
 .operation-area {
   display: flex;
+  justify-content: space-between;
+  width: 85%;
+  height: auto;
+  margin: 20px auto;
+}
+
+.operation-btn {
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 75px;
   height: auto;
-  margin: 15px 0 20px 0;
 }
 
 .select-btns {

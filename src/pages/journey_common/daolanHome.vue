@@ -59,6 +59,7 @@
         </view>
       </view>
     </view>
+    <wd-toast />
   </view>
 </template>
 
@@ -183,7 +184,7 @@ const startJourney = () => {
   if (userStore.userInfo.groupId === 0) {
     interStore.addPageIndex()
     interStore.isStartJourney0 = true
-  } else {
+  } else if (userStore.userInfo.groupId === 1) {
     interStore.isStartJourney1 = true
   }
   uni.navigateTo({

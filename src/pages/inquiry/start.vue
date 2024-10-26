@@ -40,12 +40,13 @@ const interStore = useInterStore()
 const interId = interStore.interInfo.interId
 // 这里可以添加任何需要的逻辑
 const startInquiry = () => {
-  uni.navigateTo({
-    url: '/pages/inquiry/inquiry?position=' + interId + '-post',
-  })
-  // uni.redirectTo({
-  //   url: '/pages/inquiry/end',
+  // 测试阶段跳过问卷
+  // uni.navigateTo({
+  //   url: '/pages/inquiry/inquiry?position=' + interId + '-post',
   // })
+  uni.redirectTo({
+    url: '/pages/inquiry/end',
+  })
 }
 </script>
 
