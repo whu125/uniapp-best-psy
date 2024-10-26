@@ -34,7 +34,7 @@
       }"
       v-if="pageType === 'normal'"
     >
-      <view style="height: 10%"></view>
+      <view style="height: 13%"></view>
       <view class="middle-img-common">
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
       </view>
@@ -62,7 +62,7 @@
       }"
       v-if="pageType === 'input'"
     >
-      <view style="height: 10%"></view>
+      <view style="height: 13%"></view>
       <view class="middle-img-input">
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
       </view>
@@ -99,7 +99,7 @@
       }"
       v-if="pageType === 'button'"
     >
-      <view style="height: 10%"></view>
+      <view style="height: 13%"></view>
       <view class="middle-img-button">
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%; margin: 0 auto" />
       </view>
@@ -138,7 +138,7 @@
       }"
       v-if="pageType === 'radio'"
     >
-      <view style="height: 10%"></view>
+      <view style="height: 13%"></view>
       <view class="middle-img-input">
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
       </view>
@@ -178,7 +178,7 @@
       }"
       v-if="pageType === 'checkBox'"
     >
-      <view style="height: 10%"></view>
+      <view style="height: 13%"></view>
       <view class="middle-img-input">
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
       </view>
@@ -212,7 +212,7 @@
       }"
       v-if="pageType === 'slide'"
     >
-      <view style="height: 10%"></view>
+      <view style="height: 13%"></view>
       <view class="middle-img-input">
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
       </view>
@@ -252,7 +252,7 @@
       }"
       v-if="pageType === 'audio'"
     >
-      <view style="height: 10%"></view>
+      <view style="height: 13%"></view>
       <view class="middle-img-input">
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
       </view>
@@ -280,6 +280,7 @@
     <!-- <view>
       <wd-button @click="testsubmit">测试提交干预</wd-button>
     </view> -->
+    <wd-toast />
   </view>
 </template>
 
