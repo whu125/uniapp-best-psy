@@ -39,19 +39,38 @@
     <wd-button @click="exportExcel()">导出用户做题数据</wd-button>
   </view>
 
+  <view>
+    <wd-button @click="testsub">测试订阅消息</wd-button>
+  </view>
+
   <wd-popup v-model="show" custom-style="padding: 0;" :close-on-click-modal="false">
     <view class="popup-container">
       <view class="arrow"></view>
       <view class="content">
         <view class="info-row">
-          <text class="label">当前用户：</text>
+          <text class="label">当前用户手机号：</text>
           <text class="value">{{ currentUser }}</text>
         </view>
 
-        <view class="input-row">
-          <text class="label">请输入用户组别：</text>
-          <input type="text" v-model="newGroup" class="input" placeholder="请输入新的组别名称" />
+        <view class="info-row">
+          <text class="label">当前用户组别：</text>
+          <text class="value">{{ curGroup }}</text>
         </view>
+
+        <view class="input-row">
+          <text class="label">修改用户组别：</text>
+          <!-- <input type="text" v-model="newGroup" class="input" placeholder="请输入新的组别名称" /> -->
+          <view class="flex">
+            <wd-radio-group v-model="chooseGroupId" shape="button" @change="change">
+              <wd-radio :value="1">实验组</wd-radio>
+              <wd-radio :value="0">对照组</wd-radio>
+            </wd-radio-group>
+          </view>
+        </view>
+        <view>
+          <wd-button @click="sendNotice">发送订阅消息</wd-button>
+        </view>
+
         <view class="button-group">
           <button @tap="onCancel" class="btn cancel-btn">取消</button>
           <button @tap="onConfirm" class="btn confirm-btn">确定</button>
@@ -62,15 +81,20 @@
 </template>
 
 <script lang="ts" setup>
-import { exportExcelApi } from '@/service/admin/admin'
+import { exportExcelApi, getAccessTokenApi } from '@/service/admin/admin'
 import { getAllUserInfo, User } from '@/service/index/user'
 import { useMessage, useToast } from 'wot-design-uni'
 
+const curopenid = ref()
 const toast = useToast()
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const show = ref(false)
 const userInfo = ref([])
 const flag = ref(false)
+const currentUser = ref('')
+const curGroup = ref('')
+const chooseGroupId = ref()
+const access_token = ref()
 const dataList = reactive([
   {
     avatar: '',
@@ -93,10 +117,19 @@ onLoad(async () => {
   flag.value = true
 })
 const edit = (row) => {
+  curopenid.value = row.userId
   console.log(row)
+  currentUser.value = row.phone
+  if (row.groupId === 0) {
+    curGroup.value = '对照组'
+  } else {
+    curGroup.value = '实验组'
+  }
   show.value = true
 }
-
+const onCancel = () => {
+  show.value = false
+}
 const toAdminInquiry = () => {
   uni.redirectTo({
     url: '/pages/admin/inquiry',
@@ -171,12 +204,63 @@ const exportExcel = async () => {
   })
   console.log(333)
 }
+
+const change = () => {
+  console.log(chooseGroupId.value)
+}
+
+const testsub = () => {
+  uni.requestSubscribeMessage({
+    tmplIds: ['kAcfm-7a4wnQ03jYBqa_rplhsYjfJXNN71MhlMGADPg'], // 模板ID
+    success(res) {
+      console.log('123123', res)
+    },
+    fail(err) {
+      console.log('err', err)
+    },
+  })
+}
+
+const getAccessToken = () => {
+  // 向后端拿access_token
+}
+
+const sendNotice = async () => {
+  const res = await getAccessTokenApi()
+  console.log(res)
+  console.log('curopenid', curopenid.value)
+  access_token.value = res.data
+  const pushmsg = {
+    touser: curopenid.value,
+    template_id: 'kAcfm-7a4wnQ03jYBqa_rplhsYjfJXNN71MhlMGADPg',
+    data: {
+      thing1: {
+        value: '下一次干预已开启',
+      },
+      thing3: {
+        value: '快来完成吧',
+      },
+    },
+  }
+  uni.request({
+    url:
+      'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=' + access_token.value,
+    data: JSON.stringify(pushmsg),
+    method: 'POST',
+    success: (res) => {
+      console.log('发送成功', res)
+    },
+    fail(err) {
+      console.log('发送失败', err)
+    },
+  })
+}
 </script>
 
 <style>
 .popup-container {
   position: relative;
-  width: 300px;
+  width: 350px;
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
