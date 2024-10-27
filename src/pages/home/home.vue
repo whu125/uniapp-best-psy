@@ -170,17 +170,17 @@ const enterJourney = async (progress: number) => {
       url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
     })
     // 如果不是导入，跳转到站前测量
-    // if (numberStr === '0' || numberStr === '1') {
-    //   uni.redirectTo({
-    //     url:
-    //       '/pages/journey_common/start_journey?progress=' + encodeURIComponent(progress.toString()),
-    //   })
-    // }
-    // if (numberStr !== '0' && numberStr !== '1') {
-    //   uni.redirectTo({
-    //     url: '/pages/inquiry/before?progress=' + encodeURIComponent(progress.toString()),
-    //   })
-    // }
+    if (numberStr === '0' || numberStr === '1') {
+      uni.redirectTo({
+        url:
+          '/pages/journey_common/start_journey?progress=' + encodeURIComponent(progress.toString()),
+      })
+    }
+    if (numberStr !== '0' && numberStr !== '1') {
+      uni.redirectTo({
+        url: '/pages/inquiry/before?progress=' + encodeURIComponent(progress.toString()),
+      })
+    }
   } else if (interStore.interInfo.interId === progress) {
     uni.navigateTo({
       url: '/pages/journey_common/common',
@@ -201,16 +201,16 @@ const enterJourney = async (progress: number) => {
         uni.redirectTo({
           url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
         })
-        // if (numberStr === '0' || numberStr === '1') {
-        //   uni.redirectTo({
-        //     url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
-        //   })
-        // }
-        // if (numberStr !== '0' && numberStr !== '1') {
-        //   uni.redirectTo({
-        //     url: '/pages/inquiry/before?progress=' + encodeURIComponent(numberStr),
-        //   })
-        // }
+        if (numberStr === '0' || numberStr === '1') {
+          uni.redirectTo({
+            url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+          })
+        }
+        if (numberStr !== '0' && numberStr !== '1') {
+          uni.redirectTo({
+            url: '/pages/inquiry/before?progress=' + encodeURIComponent(numberStr),
+          })
+        }
       })
       .catch(() => {
         console.log('取消')
