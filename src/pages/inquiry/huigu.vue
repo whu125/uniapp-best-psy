@@ -46,7 +46,7 @@ const currentSlideImage = ref<number>(0)
 const selectedItem = ref()
 const userInputList = ref<Array<string>>([])
 const interIdToUrlMap = new Map<number, string>([
-  [1, 'http://115.159.83.61:9000/journey2/daka6.png'],
+  [1, 'http://115.159.83.61:9000/journey1/daka5.png'],
   [2, 'http://115.159.83.61:9000/journey2/daka6.png'],
   [3, 'http://115.159.83.61:9000/journey3/daka5.png'],
   [4, 'http://115.159.83.61:9000/journey4/daka5.png'],

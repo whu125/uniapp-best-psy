@@ -17,6 +17,8 @@
         @click-left="ToHome"
       ></wd-navbar>
 
+      <wd-toast />
+
       <view style="width: 100%; height: 20%">
         <image :src="currContent.logoUrl" mode="aspectFit" style="width: 100%" />
       </view>

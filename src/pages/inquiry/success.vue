@@ -19,7 +19,8 @@
       </view>
 
       <view class="instructions mt-4">
-        <p class="text-xl font-800">第{{ interText[interId] }}站</p>
+        <!-- <p class="text-xl font-800">第{{ interText[interId] }}站</p> -->
+        <p class="text-xl font-800">本站</p>
         <p class="text-xl font-800">打卡成功</p>
       </view>
 

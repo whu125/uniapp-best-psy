@@ -18,7 +18,10 @@
       left-arrow
       @click-left="ToHome"
     ></wd-navbar>
-
+    <!-- <view v-if="!loadFlag">
+      111
+      <wd-loading />
+    </view> -->
     <!-- 普通页面 -->
     <view
       class="main-container"
@@ -36,7 +39,11 @@
     >
       <view style="height: 13%"></view>
       <view class="middle-img-common">
-        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
+        <view class="loading" v-if="!loadFlag">
+          <wd-loading></wd-loading>
+        </view>
+
+        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" @load="loadFinished" />
       </view>
 
       <view class="operation-area">
@@ -70,7 +77,7 @@
     >
       <view style="height: 13%"></view>
       <view class="middle-img-input">
-        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
+        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" @load="loadFinished" />
       </view>
       <view class="input-area px-2">
         <view v-for="(placeholder, index) in pageContent.inputPlaceholders" :key="index">
@@ -113,7 +120,15 @@
     >
       <view style="height: 13%"></view>
       <view class="middle-img-button">
-        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%; margin: 0 auto" />
+        <view class="loading" v-if="!loadFlag">
+          <wd-loading></wd-loading>
+        </view>
+        <image
+          :src="pageContent.imgUrl"
+          mode="widthFix"
+          style="width: 100%; margin: 0 auto"
+          @load="loadFinished"
+        />
       </view>
       <view class="button-area">
         <view v-for="(buttonUrl, index) in pageContent.buttonUrls" :key="index" class="mb-4">
@@ -123,6 +138,7 @@
               mode="widthFix"
               @click="toPage(buttonUrl)"
               style="width: 100%"
+              @load="loadFinished"
             />
           </view>
         </view>
@@ -158,7 +174,10 @@
     >
       <view style="height: 13%"></view>
       <view class="middle-img-input">
-        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
+        <view class="loading" v-if="!loadFlag">
+          <wd-loading></wd-loading>
+        </view>
+        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" @load="loadFinished" />
       </view>
       <view class="input-area">
         <view class="select-btns">
@@ -204,7 +223,10 @@
     >
       <view style="height: 13%"></view>
       <view class="middle-img-input">
-        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
+        <view class="loading" v-if="!loadFlag">
+          <wd-loading></wd-loading>
+        </view>
+        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" @load="loadFinished" />
       </view>
       <view class="checkBox-area">
         <wd-checkbox-group v-model="checkBoxItem" cell shape="button">
@@ -244,7 +266,10 @@
     >
       <view style="height: 13%"></view>
       <view class="middle-img-input">
-        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
+        <view class="loading" v-if="!loadFlag">
+          <wd-loading></wd-loading>
+        </view>
+        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" @load="loadFinished" />
       </view>
       <view class="input-area" style="width: 100%">
         <wd-swiper
@@ -290,7 +315,10 @@
     >
       <view style="height: 13%"></view>
       <view class="middle-img-input">
-        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" />
+        <view class="loading" v-if="!loadFlag">
+          <wd-loading></wd-loading>
+        </view>
+        <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" @load="loadFinished" />
       </view>
       <view class="input-area">
         <view style="text-align: center">
@@ -334,6 +362,7 @@ import { useToast, useMessage } from 'wot-design-uni'
 import { getFormattedDate } from '@/utils/getTime'
 import { useUserStore } from '@/store/user'
 
+const loadFlag = ref(false)
 const interStore = useInterStore()
 const userStore = useUserStore()
 const message = useMessage()
@@ -451,6 +480,7 @@ const toPrev = () => {
 }
 
 const toPage = (buttonUrl: string) => {
+  loadFlag.value = true
   // botton 页面的跳转逻辑 根据按钮的图片名称判断需要跳转到哪个页面
   // 干预1页面14
   if (buttonUrl === 'http://115.159.83.61:9000/journey1/renwu1(1).png') {
@@ -580,7 +610,15 @@ const toPage = (buttonUrl: string) => {
   })
 }
 
+const loadFinished = () => {
+  console.log('图片加载完成')
+  loadFlag.value = true
+  // toast.close()
+}
+
 const doOperation = async () => {
+  // toast.loading('图片加载中...')
+  loadFlag.value = false
   // 如果是 input 页面 保存用户输入到pinia
   if (pageContent.value.pageType === 'input') {
     let inputContent = ''
@@ -755,12 +793,74 @@ const testsubmit = () => {
   overflow-y: scroll;
 }
 
+.main-container-bg-0 {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 221, 225, 0.67) 0%,
+    rgba(242, 222, 213, 0.3) 41.21%,
+    rgba(255, 252, 219, 0.67) 100%
+  );
+}
+
+.main-container-bg-1 {
+  background: linear-gradient(180deg, rgba(116, 235, 213, 0.1) 0%, rgba(227, 238, 255, 1) 100%);
+}
+
 .main-container-bg-2 {
-  background: linear-gradient(to bottom right, #e6f7ff, #fffbe6);
+  background: linear-gradient(90deg, rgba(171, 236, 214, 0.29) 0%, rgba(251, 237, 150, 0.29) 100%);
 }
 
 .main-container-bg-3 {
-  background: linear-gradient(to bottom, #ffe6eb 0%, #e6f0ff 100%);
+  background: linear-gradient(180deg, rgba(168, 237, 234, 1) 0%, rgba(254, 214, 227, 1) 100%),
+    linear-gradient(180deg, rgba(255, 241, 235, 1) 0%, rgba(172, 224, 249, 1) 100%),
+    linear-gradient(180deg, rgba(230, 233, 240, 1) 0%, rgba(238, 241, 245, 1) 100%),
+    linear-gradient(180deg, rgba(193, 223, 196, 1) 0%, rgba(222, 236, 221, 1) 100%),
+    linear-gradient(90deg, rgba(100, 179, 244, 1) 0%, rgba(194, 229, 156, 1) 100%),
+    linear-gradient(90deg, rgba(238, 156, 167, 1) 0%, rgba(255, 221, 225, 1) 100%),
+    linear-gradient(180deg, rgba(253, 219, 146, 1) 0%, rgba(209, 253, 255, 1) 100%),
+    linear-gradient(90deg, rgba(253, 252, 251, 1) 0%, rgba(226, 209, 195, 1) 100%),
+    linear-gradient(180deg, rgba(168, 237, 234, 1) 0%, rgba(254, 214, 227, 1) 100%),
+    linear-gradient(180deg, rgba(161, 196, 253, 1) 0%, rgba(194, 233, 251, 1) 100%),
+    linear-gradient(180deg, rgba(172, 203, 238, 1) 0%, rgba(231, 240, 253, 1) 100%),
+    linear-gradient(180deg, rgba(161, 196, 253, 1) 0%, rgba(194, 233, 251, 1) 100%),
+    linear-gradient(180deg, rgba(193, 223, 196, 0.75) 0%, rgba(222, 236, 221, 0.75) 100%);
+}
+
+.main-container-bg-4 {
+  background: linear-gradient(
+    180deg,
+    rgba(243, 231, 233, 1) 0%,
+    rgba(227, 238, 255, 1) 99%,
+    rgba(227, 238, 255, 1) 100%
+  );
+}
+.main-container-bg-5 {
+  background: linear-gradient(
+    180deg,
+    rgba(42, 130, 228, 0.44) 0%,
+    rgba(175, 205, 253, 0.36) 0%,
+    rgba(246, 223, 255, 0.46) 20.84%,
+    rgba(203, 245, 244, 0.8) 99.71%,
+    rgba(42, 130, 228, 0.04) 101.71%
+  );
+}
+.main-container-bg-6 {
+  background: linear-gradient(
+    180deg,
+    rgba(227, 238, 255, 0.8) 0%,
+    rgba(227, 237, 255, 0.8) 16.94%,
+    rgba(233, 222, 250, 0.78) 100%
+  );
+}
+
+.main-container-bg-7 {
+  background: linear-gradient(
+    180deg,
+    rgba(141, 247, 252, 0.3) 0%,
+    rgba(176, 232, 172, 0.3) 59.37%,
+    rgba(248, 255, 174, 0.3) 99.01%,
+    rgba(255, 252, 219, 1) 100.01%
+  );
 }
 
 .middle-img-common {
@@ -847,5 +947,12 @@ const testsubmit = () => {
 
 .swiper {
   /* height: 540rpx; */
+}
+
+.loading {
+  position: absolute; /* 使元素脱离文档流，以便可以随意定位 */
+  top: 15%; /* 距离顶部 25% */
+  left: 50%; /* 距离左边 50% */
+  transform: translate(-50%, -50%); /* 将元素的中心点移到指定位置 */
 }
 </style>

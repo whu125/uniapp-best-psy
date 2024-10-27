@@ -235,7 +235,7 @@ const sendNotice = async () => {
     template_id: 'kAcfm-7a4wnQ03jYBqa_rplhsYjfJXNN71MhlMGADPg',
     data: {
       thing1: {
-        value: '下一次干预已开启',
+        value: '下一次干预已解锁',
       },
       thing3: {
         value: '快来完成吧',

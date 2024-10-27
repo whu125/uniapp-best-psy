@@ -114,11 +114,13 @@ import { getInquiryByPos, submitInquiry, InquiryResultArray } from '@/service/ga
 import { useInquiryStore } from '@/store/inquiry'
 import { useInterStore } from '@/store/inter'
 import { useToast, useNotify } from 'wot-design-uni'
+import { useUserStore } from '@/store/user'
 
 defineOptions({
   name: 'tool',
 })
 
+const userStore = useUserStore()
 const toast = useToast()
 const interStore = useInterStore()
 const position = ref('1-post')
@@ -163,6 +165,12 @@ onLoad(async (param) => {
   position.value = param.position
 
   console.log('position', position.value)
+
+  // 如果是第二套，interId要取余
+
+  // if(userStore.userInfo.groupId==1){
+  //   interId.value
+  // }
 
   interId.value = parseInt(param.position.split('-')[0])
 
