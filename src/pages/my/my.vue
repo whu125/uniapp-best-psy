@@ -133,6 +133,18 @@
           <span class="label ml-4">进入登录页面</span>
           <span class="arrow">›</span>
         </div>
+
+        <div class="menu-item" @click="toEval()">
+          <view>
+            <image
+              style="width: 60rpx; height: 60rpx"
+              mode="aspectFit"
+              src="../../static/images/my/xinshouzhinan.png"
+            />
+          </view>
+          <span class="label ml-4">测试回顾页面</span>
+          <span class="arrow">›</span>
+        </div>
       </div>
       <view class="flex justify-center mt-4" v-if="userInfo.username == '未登录用户'">
         <wd-button type="success" @click="toLogin">登录</wd-button>
@@ -205,6 +217,12 @@ const logoutByToken = async () => {
 const toLogin = () => {
   uni.navigateTo({
     url: '/pages/login/login',
+  })
+}
+
+const toEval = () => {
+  uni.navigateTo({
+    url: '/pages/inquiry/success',
   })
 }
 

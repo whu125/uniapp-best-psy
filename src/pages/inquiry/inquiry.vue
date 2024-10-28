@@ -58,6 +58,15 @@
         <wd-textarea v-model="answers[curId - 1]" placeholder="请在这里输入..." />
       </view>
 
+      <!-- 选择0-8题 -->
+      <view class="flex justify-center">
+        <view class="options" v-if="questions[curId - 1]?.type === 2" style="width: 75%">
+          <view class="">
+            <wd-slider v-model="answers[curId - 1]" min="0" max="8" />
+          </view>
+        </view>
+      </view>
+
       <!-- 选择1-9题 -->
       <view class="flex justify-center">
         <view class="options" v-if="questions[curId - 1]?.type === 3" style="width: 75%">

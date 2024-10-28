@@ -249,6 +249,13 @@ const sendNotice = async () => {
     method: 'POST',
     success: (res) => {
       console.log('发送成功', res)
+      const code = res.data.errcode
+      if (code == 0) {
+        toast.success('发送成功')
+      }
+      if (code == 43101) {
+        toast.error('发送失败，用户没有接收订阅消息')
+      }
     },
     fail(err) {
       console.log('发送失败', err)

@@ -34,11 +34,11 @@
       </view>
 
       <view class="helpful-box">
-        <text class="helpful-title">本章对你最有帮助的部分有（可多选）：</text>
+        <text class="helpful-title mb-4">本章对你最有帮助的部分有（可多选）：</text>
         <view class="helpful-options">
           <view
             class="option-item"
-            v-for="(item, index) in helpfulOptions"
+            v-for="(item, index) in helpfulOptionsMap.get(interId)"
             :key="index"
             :class="{ selected: selectedOptions.includes(item) }"
             @click="toggleOption(item)"
@@ -76,12 +76,80 @@ const shouhuo = ref(9)
 const userStore = useUserStore()
 const interStore = useInterStore()
 const toast = useToast()
-const helpfulOptions = ref([
-  '认识到想法影响情绪',
-  '对自动思维的探索',
-  '识别自动思维的练习',
-  '学习认知解离的练习',
-  '其他......',
+const interId = interStore.interInfo.interId
+// const interId = ref(1)
+const helpfulOptionsMap = new Map([
+  [
+    1,
+    [
+      '了解常见情绪困扰类型',
+      '了解情绪困扰和痛苦之间的关系',
+      '了解情绪的成分',
+      '尝试记录情绪',
+      '分析成分并记录应对方式',
+      '其他......',
+    ],
+  ],
+  [
+    2,
+    [
+      '认识到想法影响情绪',
+      '对自动思维的探索',
+      '识别自动思维的练习',
+      '学习认知解离的练习',
+      '其他......',
+    ],
+  ],
+  [
+    3,
+    [
+      '了解“回避”应对方式',
+      '阅读与回避有关的隐喻故事',
+      '探索我的回避模式',
+      '体验对此时此刻的觉察—正念',
+      '其他......',
+    ],
+  ],
+  [
+    4,
+    [
+      '了解“回避为何不起作用”',
+      '体验与情绪的另一种相处方式',
+      '认识正念之路',
+      '认识正念之路的各个路口',
+      '其他......',
+    ],
+  ],
+  [
+    5,
+    [
+      '认识并了解接纳',
+      '尝试进行接纳练习',
+      '认识照顾自己的重要性，以及自我关怀',
+      '进行自我关怀书写练习',
+      '其他......',
+    ],
+  ],
+  [
+    6,
+    [
+      '了解“价值是什么”',
+      '尝试与价值建立联结',
+      '尝试澄清自己的价值',
+      '了解“为什么我们要关注价值”',
+      '其他......',
+    ],
+  ],
+  [
+    7,
+    [
+      '了解行动的重要性',
+      '了解如何开展基于正念的行动',
+      '了解如何制定目标',
+      '尝试基于价值明确目标并制定行动计划',
+      '其他......',
+    ],
+  ],
 ])
 
 const selectedOptions = ref([])
@@ -134,8 +202,7 @@ const submit = async () => {
       userStore.addProgress()
       userStore.setLockTime()
     }
-    // 清除缓存
-    interStore.clearInternfo()
+
     globalPageControl.clearInternfo()
     uni.redirectTo({ url: '/pages/inquiry/success' })
   } else {

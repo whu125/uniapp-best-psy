@@ -15,16 +15,16 @@
     <view class="con px-2">
       <view style="height: 15%"></view>
       <view class="illustration-placeholder">
-        <img src="http://115.159.83.61:9000/inquiry/success.png" alt="" />
+        <img src="http://115.159.83.61:9000/common/dakaend.png" alt="" />
       </view>
 
-      <view class="instructions mt-4">
-        <!-- <p class="text-xl font-800">第{{ interText[interId] }}站</p> -->
+      <!-- <view class="instructions mt-4">
+        <p class="text-xl font-800">第{{ interText[interId] }}站</p>
         <p class="text-xl font-800">本站</p>
         <p class="text-xl font-800">打卡成功</p>
-      </view>
+      </view> -->
 
-      <view class="flex justify-center" v-if="isLast === false">
+      <view class="flex justify-center mt-14" v-if="isLast === false">
         <wd-button @click="toHome" type="success" size="large">返回主界面</wd-button>
       </view>
       <view class="flex justify-center" v-if="isLast === true">
@@ -54,6 +54,8 @@ const interText = ref(['零', '一', '二', '三', '四', '五', '六', '七'])
 
 // 这里可以添加任何需要的逻辑
 const toHome = () => {
+  interStore.clearInternfo()
+
   uni.switchTab({
     url: '/pages/home/home',
   })
@@ -127,7 +129,7 @@ onLoad(() => {
 
 .illustration-placeholder {
   width: 100%;
-  height: 400px;
+  height: 50%;
   /* background-color: #c8e6c9; */
   border-radius: 10px;
 }
