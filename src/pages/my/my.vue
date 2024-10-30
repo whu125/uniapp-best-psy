@@ -111,6 +111,18 @@
           <span class="label ml-4">意见反馈</span>
           <span class="arrow">›</span>
         </div>
+
+        <div class="menu-item">
+          <view>
+            <image
+              style="width: 60rpx; height: 60rpx"
+              mode="aspectFit"
+              src="../../static/images/my/guanyu.png"
+            />
+          </view>
+          <span class="label ml-4">关于我们</span>
+          <span class="arrow">›</span>
+        </div>
         <div class="menu-item" @click="toadmin()" v-if="userInfo.role == 'admin'">
           <view>
             <image
@@ -122,7 +134,7 @@
           <span class="label ml-4">进入管理员页面</span>
           <span class="arrow">›</span>
         </div>
-        <div class="menu-item" @click="toLogin()">
+        <!-- <div class="menu-item" @click="toLogin()">
           <view>
             <image
               style="width: 60rpx; height: 60rpx"
@@ -132,9 +144,9 @@
           </view>
           <span class="label ml-4">进入登录页面</span>
           <span class="arrow">›</span>
-        </div>
+        </div> -->
 
-        <div class="menu-item" @click="toEval()">
+        <!-- <div class="menu-item" @click="toEval()">
           <view>
             <image
               style="width: 60rpx; height: 60rpx"
@@ -144,7 +156,7 @@
           </view>
           <span class="label ml-4">测试回顾页面</span>
           <span class="arrow">›</span>
-        </div>
+        </div> -->
       </div>
       <view class="flex justify-center mt-4" v-if="userInfo.username == '未登录用户'">
         <wd-button type="success" @click="toLogin">登录</wd-button>
@@ -253,7 +265,7 @@ const testAPI = async () => {
 }
 
 const toadmin = () => {
-  uni.navigateTo({
+  uni.redirectTo({
     url: '/pages/admin/admin',
   })
 }

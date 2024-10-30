@@ -26,6 +26,8 @@
         </view>
       </view>
 
+      <wd-toast />
+
       <!-- 选项列表 -->
       <!-- <view class="options" style="background: linear-gradient(to bottom right, #e6f7ff, #e6ffe6)">
         <wd-radio-group v-model="answers[curId - 1]" cell>
@@ -55,7 +57,11 @@
 
       <!-- 填空题 -->
       <view class="options" v-if="questions[curId - 1]?.type === 1">
-        <wd-textarea v-model="answers[curId - 1]" placeholder="请在这里输入..." />
+        <wd-textarea
+          v-model="answers[curId - 1]"
+          placeholder="请在这里输入..."
+          custom-class="textarea"
+        />
       </view>
 
       <!-- 选择0-8题 -->
@@ -246,6 +252,13 @@ const ToHome = () => {
 }
 
 const changeNext = () => {
+  // 检查是否填写
+
+  if (answers.value[curId.value - 1] === '') {
+    toast.error('请填写答案')
+    return
+  }
+
   curId.value++
   // Save the current answers to the store
   inquiryStore.AnsInfo.positions[position.value] = answers.value
@@ -255,6 +268,11 @@ const changeNext = () => {
   if (answers.value[curId.value - 1] === -1) {
     optionFlag.value = false
   }
+
+  // if (answers.value[curId.value - 1] === '') {
+  //   optionFlag.value = false
+  // }
+
   // inquiryStore.setInquiryInfo(inquiryStore.AnsInfo)
 }
 
@@ -458,5 +476,9 @@ const loadStorage = () => {
 
 .arrow {
   font-size: 20px;
+}
+
+.textarea {
+  border-radius: 8px;
 }
 </style>

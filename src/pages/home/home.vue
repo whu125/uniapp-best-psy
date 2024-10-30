@@ -173,9 +173,9 @@ const enterJourney = async (progress: number) => {
         globalPageControl.clearInternfo()
         const numberStr = progress.toString()
 
-        uni.redirectTo({
-          url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
-        })
+        // uni.redirectTo({
+        //   url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+        // })
         // 如果不是导入，跳转到站前测量
         if (numberStr === '0' || numberStr === '1') {
           uni.redirectTo({
@@ -206,9 +206,9 @@ const enterJourney = async (progress: number) => {
             const numberStr = progress.toString()
             interStore.clearInternfo()
             globalPageControl.clearInternfo()
-            uni.redirectTo({
-              url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
-            })
+            // uni.redirectTo({
+            //   url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+            // })
             if (numberStr === '0' || numberStr === '1') {
               uni.redirectTo({
                 url:
