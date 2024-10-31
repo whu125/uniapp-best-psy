@@ -132,7 +132,7 @@
       </view>
       <view class="button-area">
         <view v-for="(buttonUrl, index) in pageContent.buttonUrls" :key="index" class="mb-4">
-          <view style="width: 80%; height: auto; margin: 0 auto">
+          <view style="width: 80%; height: auto; margin: 12px auto">
             <image
               :src="buttonUrl"
               mode="widthFix"
@@ -375,7 +375,7 @@ const pageContent = ref<IInterPage>()
 const currentSlideImage = ref<number>(0)
 const selectedItem = ref<number>(-1)
 const checkBoxItem = ref<number[]>([])
-const currInterId = ref<number>(interStore.interInfo.interId)
+const currInterId = ref<number>(interStore.interInfo.interId % 8)
 const userInputList = ref<Array<string>>([])
 const hasOperation = computed(() => {
   return pageContent.value.operationIcon != null && pageContent.value.operationText != null
@@ -459,12 +459,12 @@ const selectItem = (index) => {
 
 const toPrev = () => {
   const currIndex = interStore.pageIndex
+  // 任务部分的第一个页面禁止返回上一页
   if (interStore.pageIndex > 0) {
     if (interStore.interInfo.interPages[currIndex - 1].pageType !== 'common') {
       if (interStore.interInfo.interPages[currIndex].operationText === '开始任务') {
-        uni.redirectTo({
-          url: '/pages/journey_common/daolanHome',
-        })
+        toast.warning('请先完成任务！')
+        return
       }
       interStore.minusPageIndex()
       uni.redirectTo({

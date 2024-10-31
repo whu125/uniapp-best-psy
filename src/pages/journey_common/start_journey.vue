@@ -72,6 +72,14 @@ const stationMap = new Map([
   [5, '我的旅程: 第五站'],
   [6, '我的旅程: 第六站'],
   [7, '我的旅程: 第七站'],
+  [8, '我的旅程: 导入'],
+  [9, '我的旅程: 第一站'],
+  [10, '我的旅程: 第二站'],
+  [11, '我的旅程: 第三站'],
+  [12, '我的旅程: 第四站'],
+  [13, '我的旅程: 第五站'],
+  [14, '我的旅程: 第六站'],
+  [15, '我的旅程: 第七站'],
 ])
 
 const navbarTitle = ref<string>('')
@@ -88,6 +96,12 @@ const imageMap = new Map([
   [7, 'http://115.159.83.61:9000/journey7/start_journey_logo7.png'],
   [8, 'http://115.159.83.61:9000/journey8/start_journey_logo8.png'],
   [9, 'http://115.159.83.61:9000/journey9/start_journey_logo9.png'],
+  [10, 'http://115.159.83.61:9000/journey10/start_journey_logo10.png'],
+  [11, 'http://115.159.83.61:9000/journey11/start_journey_logo11.png'],
+  [12, 'http://115.159.83.61:9000/journey12/start_journey_logo12.png'],
+  [13, 'http://115.159.83.61:9000/journey13/start_journey_logo13.png'],
+  [14, 'http://115.159.83.61:9000/journey14/start_journey_logo14.png'],
+  [15, 'http://115.159.83.61:9000/journey15/start_journey_logo15.png'],
 ])
 const currContent = ref()
 
@@ -154,6 +168,39 @@ const pageContent = ref([
       '• 情绪困扰是什么，又表现为什么？',
       '• 多个情绪困扰会同时出现吗？',
       '• 与情绪困扰有关的常见误解有哪些？',
+    ],
+  },
+  {
+    title: '第二站：探索情绪源头',
+    questions: [
+      '• 情绪困扰来源何处？',
+      '• 遗传和环境之间的关系是什么样的？',
+      '• 什么构成现在的你？',
+    ],
+  },
+  {
+    title: '第三站：调整消极认知',
+    questions: ['• 影响情绪状态的认知模式都有哪些？', '• 它们如何造成影响？', '• 我们应该怎么做？'],
+  },
+  {
+    title: '第四站：情绪调节驿站',
+    questions: ['• 情绪调节指的是什么？', '• 常用的情绪调节方式有哪些？', '• 我们应该怎么做？'],
+  },
+  {
+    title: '第五站：寻找社会支持',
+    questions: ['• 如何寻找社会支持？', '• 如何改善人际关系？', '• 如何应对人际冲突？'],
+  },
+  {
+    title: '第六站: ',
+    questions: [],
+  },
+  {
+    title: '第七站：自我关怀指南',
+    questions: [
+      '• 自我关怀',
+      '• 持续关注和评估自己的状态',
+      '• 在必要时寻求专业支持',
+      '下一站是什么',
     ],
   },
 ])

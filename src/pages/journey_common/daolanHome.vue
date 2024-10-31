@@ -149,22 +149,22 @@ const contentList = [
   {
     navbarTitle: '第二站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey10/journeyHome10.png',
-    text: [],
+    text: ['探寻情绪的源头，看看情绪从哪里来'],
   },
   {
     navbarTitle: '第三站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey11/journeyHome11.png',
-    text: [],
+    text: ['思考决定感受，缓解情绪，从调整认知开始'],
   },
   {
     navbarTitle: '第四站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey12/journeyHome12.png',
-    text: [],
+    text: ['让每一份负面情绪得到温柔化解，', '让每一颗心灵找到平静与力量'],
   },
   {
     navbarTitle: '第五站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey13/journeyHome13.png',
-    text: [],
+    text: ['用温暖的关系编织守护网'],
   },
   {
     navbarTitle: '第六站: 导览',
@@ -174,7 +174,7 @@ const contentList = [
   {
     navbarTitle: '第七站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey15/journeyHome15.png',
-    text: [],
+    text: ['用温暖的关系编织守护网'],
   },
 ]
 
