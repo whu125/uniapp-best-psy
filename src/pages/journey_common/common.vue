@@ -714,8 +714,12 @@ const doOperation = async () => {
     })
     return
   }
-  // 如果是结束部分最后一页,提交内容
-  if (pageContent.value.interId === 99 && pageContent.value.operationIcon.endsWith('finish.png')) {
+  // 如果是结束部分最后一页 提交干预 返回主页面
+  // 如果是第二套干预的拓展 提交干预 返回主页面
+  if (
+    (pageContent.value.interId === 99 && pageContent.value.operationIcon.endsWith('finish.png')) ||
+    (userStore.userInfo.groupId === 1 && pageContent.value.operationText.endsWith('拓展'))
+  ) {
     const submitObj: ISubmitInter = {
       userId: userStore.userInfo.userId,
       interId: interStore.interInfo.interId,
