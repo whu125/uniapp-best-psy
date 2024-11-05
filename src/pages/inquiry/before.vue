@@ -76,6 +76,10 @@ const imageMap = new Map([
   [1, 'http://115.159.83.61:9000/common/before.png'],
   [2, 'http://115.159.83.61:9000/common/before.png'],
   [3, 'http://115.159.83.61:9000/common/before.png'],
+  [4, 'http://115.159.83.61:9000/common/before.png'],
+  [5, 'http://115.159.83.61:9000/common/before.png'],
+  [6, 'http://115.159.83.61:9000/common/before.png'],
+  [7, 'http://115.159.83.61:9000/common/before.png'],
 ])
 const currContent = ref()
 

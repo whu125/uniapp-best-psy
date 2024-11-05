@@ -34,13 +34,17 @@
     </wd-table>
   </view>
 
-  <view>
+  <view class="card">
     <wd-toast />
     <wd-button @click="exportExcel()">导出用户做题数据</wd-button>
   </view>
 
-  <view>
+  <view class="card">
     <wd-button @click="testsub">测试订阅消息</wd-button>
+  </view>
+
+  <view class="card">
+    <wd-button @click="toAddUser">跳转录入页面</wd-button>
   </view>
 
   <wd-popup v-model="show" custom-style="padding: 0;" :close-on-click-modal="false">
@@ -81,7 +85,7 @@
 </template>
 
 <script lang="ts" setup>
-import { exportExcelApi, getAccessTokenApi } from '@/service/admin/admin'
+import { exportExcelApi, getAccessTokenApi, setUserGroupApi } from '@/service/admin/admin'
 import { getAllUserInfo, User } from '@/service/index/user'
 import { useMessage, useToast } from 'wot-design-uni'
 
@@ -127,6 +131,11 @@ const edit = (row) => {
   }
   show.value = true
 }
+
+const toAddUser = () => {
+  uni.navigateTo({ url: '/pages/admin/user' })
+}
+
 const onCancel = () => {
   show.value = false
 }
@@ -341,5 +350,15 @@ const sendNotice = async () => {
 .confirm-btn {
   color: #ffffff;
   background-color: #007aff;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  height: auto;
+  padding: 15px;
+  /* background-color: white; */
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 </style>

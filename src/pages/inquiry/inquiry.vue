@@ -114,9 +114,10 @@
         </view>
         <text>上一题</text> -->
         <wd-button @click="changeLast" v-if="curId != 1">上一题</wd-button>
-        <wd-button @click="changeNext" v-if="curId != queLen" :disabled="!optionFlag">
+        <!-- <wd-button @click="changeNext" v-if="curId != queLen" :disabled="!optionFlag">
           下一题
-        </wd-button>
+        </wd-button> -->
+        <wd-button @click="changeNext" v-if="curId != queLen">下一题</wd-button>
         <wd-button @click="submit" v-if="curId == queLen" :disabled="!optionFlag">提交</wd-button>
       </view>
     </view>
@@ -259,15 +260,20 @@ const changeNext = () => {
     return
   }
 
+  if (answers.value[curId.value - 1] === -1) {
+    toast.error('请选择答案')
+    return
+  }
+
   curId.value++
   // Save the current answers to the store
   inquiryStore.AnsInfo.positions[position.value] = answers.value
 
   // todo:后面完善不同的题型
 
-  if (answers.value[curId.value - 1] === -1) {
-    optionFlag.value = false
-  }
+  // if (answers.value[curId.value - 1] === -1) {
+  //   optionFlag.value = false
+  // }
 
   // if (answers.value[curId.value - 1] === '') {
   //   optionFlag.value = false
@@ -298,6 +304,15 @@ const selectOption = (score: number) => {
 // ])
 
 const submit = async () => {
+  if (answers.value[curId.value - 1] === '') {
+    toast.error('请填写答案')
+    return
+  }
+
+  if (answers.value[curId.value - 1] === -1) {
+    toast.error('请选择答案')
+    return
+  }
   toast.loading('正在提交...')
   // const answersString = Array.from(answers.value.values()).join(';')
   // console.log(answersString)

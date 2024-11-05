@@ -7,6 +7,7 @@ interface NavigateToOptions {
   url: "/pages/home/home" |
        "/pages/admin/admin" |
        "/pages/admin/inquiry" |
+       "/pages/admin/user" |
        "/pages/diaryList/diaryDetail" |
        "/pages/diaryList/diaryList" |
        "/pages/feeling/feeling" |
