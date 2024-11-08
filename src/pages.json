@@ -69,6 +69,14 @@
       }
     },
     {
+      "path": "pages/admin/user",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "我的旅程"
+      }
+    },
+    {
       "path": "pages/diaryList/diaryDetail",
       "type": "page",
       "style": {

@@ -7,3 +7,7 @@ export const exportExcelApi = () => {
 export const getAccessTokenApi = () => {
   return http.get('/getAccessToken', {})
 }
+
+export const setUserGroupApi = (phone: any, groupId: any) => {
+  return http.post('/admin/setUser', { phone, groupId })
+}

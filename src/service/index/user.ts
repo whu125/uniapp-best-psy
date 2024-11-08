@@ -22,6 +22,10 @@ export const getAllUserInfo = () => {
   return http.post<User>('/user/getAllUser', {}, {})
 }
 
+export const getAllPreUserInfo = () => {
+  return http.post<User>('/user/getPreUser', {}, {})
+}
+
 export const logout = () => {
   return http.post<null>('/logout', {}, {})
 }
