@@ -169,7 +169,7 @@ const contentList = [
   {
     navbarTitle: '第六站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey14/journeyHome14.png',
-    text: [],
+    text: ['用心生活，用手创造，你拥有的每一个瞬间', '都是最珍贵的'],
   },
   {
     navbarTitle: '第七站: 导览',

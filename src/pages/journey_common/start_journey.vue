@@ -192,7 +192,7 @@ const pageContent = ref([
   },
   {
     title: '第六站: ',
-    questions: [],
+    questions: ['• 什么是幸福？', '• 如何获得幸福？', '• 怎样探索属于你的幸福之路？'],
   },
   {
     title: '第七站：自我关怀指南',

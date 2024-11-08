@@ -357,7 +357,13 @@
 <script lang="ts" setup>
 import { IInterPage, useInterStore } from '@/store/inter'
 import { useGlobalPageControlStore } from '@/store/globalPageControl'
-import { getPageByInterId, submitInter, ISubmitInter } from '@/service/index/inter'
+import {
+  getPageByInterId,
+  submitInter,
+  ISubmitInter,
+  startInter,
+  IStartInter,
+} from '@/service/index/inter'
 import { useToast, useMessage } from 'wot-design-uni'
 import { getFormattedDate } from '@/utils/getTime'
 import { useUserStore } from '@/store/user'
@@ -718,6 +724,7 @@ const doOperation = async () => {
   // 如果是第二套干预的拓展 提交干预 返回主页面
   if (
     (pageContent.value.interId === 99 && pageContent.value.operationIcon.endsWith('finish.png')) ||
+    (pageContent.value.interId === 100 && pageContent.value.operationIcon.endsWith('finish.png')) ||
     (userStore.userInfo.groupId === 1 && pageContent.value.operationText.endsWith('拓展'))
   ) {
     const submitObj: ISubmitInter = {
@@ -738,7 +745,27 @@ const doOperation = async () => {
     } else {
       toast.error('出现了一些问题')
     }
-    return
+  }
+  // 如果是第二套干预7的最后一页 提交干预 跳转到旅程报告
+  if (userStore.userInfo.groupId === 1 && pageContent.value.operationText === '查看你的旅程报告') {
+    const submitObj: ISubmitInter = {
+      userId: userStore.userInfo.userId,
+      interId: interStore.interInfo.interId,
+      endTime: getFormattedDate(),
+      inputPages: interStore.inputPages,
+      inputContent: interStore.inputContent,
+    }
+    const res = await submitInter(submitObj)
+    console.log(res)
+    if (res.code === 200) {
+      toast.success('感谢！')
+      // 清除缓存
+      interStore.clearInternfo()
+      globalPageControlStore.clearInternfo()
+      toReport()
+    } else {
+      toast.error('出现了一些问题')
+    }
   }
 
   // pageIndex 自增
@@ -786,6 +813,24 @@ const testsubmit = () => {
   uni.redirectTo({
     url: '/pages/inquiry/eval',
   })
+}
+
+const toReport = async () => {
+  interStore.clearInternfo()
+  const startObj: IStartInter = {
+    userId: userStore.userInfo.userId,
+    interId: 100,
+    startTime: getFormattedDate(),
+  }
+  const res = await startInter(startObj)
+  if (res.code === 200) {
+    interStore.setInterInfo(res.data)
+    uni.redirectTo({
+      url: '/pages/journey_common/common',
+    })
+  } else {
+    toast.error('出现了一些问题')
+  }
 }
 </script>
 
