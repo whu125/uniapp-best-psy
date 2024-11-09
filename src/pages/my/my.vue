@@ -158,7 +158,10 @@
           <span class="arrow">›</span>
         </div> -->
       </div>
-      <view class="flex justify-center mt-4" v-if="userInfo.username == '未登录用户'">
+      <!-- <view class="flex justify-center mt-4" v-if="userInfo.username == '未登录用户'">
+        <wd-button type="success" @click="toLogin">登录</wd-button>
+      </view> -->
+      <view class="flex justify-center mt-4">
         <wd-button type="success" @click="toLogin">登录</wd-button>
       </view>
       <view style="height: 150rpx"></view>

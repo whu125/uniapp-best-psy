@@ -16,9 +16,9 @@
     <wd-navbar title="用户管理" left-arrow @click-left="ToHome"></wd-navbar>
   </view>
 
-  <view>
+  <!-- <view>
     <button @click="toAdminInquiry()">查看问卷数据</button>
-  </view>
+  </view> -->
   <view class="admin-container" v-if="flag">
     <wd-table :data="userInfo">
       <wd-table-col label="操作" fixed>

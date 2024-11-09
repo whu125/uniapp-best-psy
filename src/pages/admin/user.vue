@@ -35,13 +35,13 @@
       <view class="input-group">
         <text class="label">选项</text>
         <view class="radio-group">
-          <label class="radio-item" @tap="selectOption(0)">
-            <view class="radio-circle" :class="{ selected: chooseGroupId === 0 }"></view>
-            <text>对照组（groupId:0）</text>
-          </label>
           <label class="radio-item" @tap="selectOption(1)">
             <view class="radio-circle" :class="{ selected: chooseGroupId === 1 }"></view>
-            <text>实验组（groupId:1）</text>
+            <text>对照组（groupId:1）</text>
+          </label>
+          <label class="radio-item" @tap="selectOption(0)">
+            <view class="radio-circle" :class="{ selected: chooseGroupId === 0 }"></view>
+            <text>实验组（groupId:0）</text>
           </label>
         </view>
       </view>

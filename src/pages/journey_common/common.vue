@@ -1015,4 +1015,8 @@ const toReport = async () => {
   left: 50%; /* 距离左边 50% */
   transform: translate(-50%, -50%); /* 将元素的中心点移到指定位置 */
 }
+
+.check-group {
+  background-color: rgba(255, 255, 255, 0);
+}
 </style>
