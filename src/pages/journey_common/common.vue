@@ -417,6 +417,19 @@ onShow(async () => {
       }
     }
   } else if (pageType.value === 'checkBox') {
+    const checkBoxItemList = pageContent.value.selectUrls
+    if (interStore.userInputMap && interStore.userInputMap.size > 0) {
+      if (interStore.userInputMap.has(pageContent.value.pageId)) {
+        let checkBoxInputString = interStore.userInputMap.get(pageContent.value.pageId)
+        checkBoxInputString = checkBoxInputString.slice(0, -1)
+        const checkBoxInputList = checkBoxInputString.split('_')
+        checkBoxInputList.forEach((item, index) => {
+          if (checkBoxItemList.includes(item)) {
+            checkBoxItem.value.push(checkBoxItemList.indexOf(item))
+          }
+        })
+      }
+    }
     return
   }
   console.log('pageContent.value', pageContent.value)
@@ -469,6 +482,7 @@ const toPrev = () => {
   const currIndex = interStore.pageIndex
   // 任务部分的第一个页面禁止返回上一页
   if (interStore.pageIndex > 0) {
+    saveDateToPinia()
     if (interStore.interInfo.interPages[currIndex - 1].pageType !== 'common') {
       if (interStore.interInfo.interPages[currIndex].operationText === '开始任务') {
         toast.warning('请先完成任务！')
@@ -627,49 +641,8 @@ const loadFinished = () => {
 const doOperation = async () => {
   // toast.loading('图片加载中...')
   loadFlag.value = false
-  // 如果是 input 页面 保存用户输入到pinia
-  if (pageContent.value.pageType === 'input') {
-    let inputContent = ''
-    for (let i = 0; i < userInputList.value.length; i++) {
-      // 判断用户有无未填写
-      if (userInputList.value[i] === '') {
-        toast.error('请不要留下空白！')
-        return
-      } else if (
-        userInputList.value[i].indexOf('%') !== -1 ||
-        userInputList.value[i].indexOf('#') !== -1 ||
-        userInputList.value[i].indexOf('_') !== -1
-      ) {
-        toast.error('请不要输入 % # _ 字符！')
-        return
-      }
-      inputContent = inputContent + userInputList.value[i] + '%'
-    }
-    interStore.setUserInputMap(pageContent.value.pageId, inputContent)
-  }
-  // 如果是 radio 页面 保存用户输入到pinia
-  if (pageContent.value.pageType === 'radio') {
-    // 判断用户有无未填写
-    if (selectedItem.value === -1) {
-      toast.error('选择一项！')
-      return
-    }
-    const inputContent = pageContent.value.selectUrls[selectedItem.value]
-    interStore.setUserInputMap(pageContent.value.pageId, inputContent)
-  }
-  // 如果是 checkBox 页面 保存用户输入到pinia
-  if (pageContent.value.pageType === 'checkBox') {
-    // 判断用户有无未填写
-    if (checkBoxItem.value.length < 1) {
-      toast.error('选择至少一项！')
-      return
-    }
-    let inputContent = ''
-    for (let i = 0; i < checkBoxItem.value.length; i++) {
-      inputContent = inputContent + pageContent.value.selectUrls[checkBoxItem.value[i]] + '_'
-    }
-    interStore.setUserInputMap(pageContent.value.pageId, inputContent)
-  }
+  // 保存数据到 pinia
+  saveDateToPinia()
   // 如果是 button 页面 判断一下是否前往 daolanHome
   if (pageContent.value.pageType === 'button') {
     if (hasOperation.value && globalPageControlStore.globalPageControlInfo.toDaolanHome) {
@@ -808,6 +781,52 @@ const doOperation = async () => {
     uni.redirectTo({
       url: pageContent.value.specialPage,
     })
+  }
+}
+
+const saveDateToPinia = () => {
+  // 如果是 input 页面 保存用户输入到pinia
+  if (pageContent.value.pageType === 'input') {
+    let inputContent = ''
+    for (let i = 0; i < userInputList.value.length; i++) {
+      // 判断用户有无未填写
+      if (userInputList.value[i] === '') {
+        toast.error('请不要留下空白！')
+        return
+      } else if (
+        userInputList.value[i].indexOf('%') !== -1 ||
+        userInputList.value[i].indexOf('#') !== -1 ||
+        userInputList.value[i].indexOf('_') !== -1
+      ) {
+        toast.error('请不要输入 % # _ 字符！')
+        return
+      }
+      inputContent = inputContent + userInputList.value[i] + '%'
+    }
+    interStore.setUserInputMap(pageContent.value.pageId, inputContent)
+  }
+  // 如果是 radio 页面 保存用户输入到pinia
+  if (pageContent.value.pageType === 'radio') {
+    // 判断用户有无未填写
+    if (selectedItem.value === -1) {
+      toast.error('选择一项！')
+      return
+    }
+    const inputContent = pageContent.value.selectUrls[selectedItem.value]
+    interStore.setUserInputMap(pageContent.value.pageId, inputContent)
+  }
+  // 如果是 checkBox 页面 保存用户输入到pinia
+  if (pageContent.value.pageType === 'checkBox') {
+    // 判断用户有无未填写
+    if (checkBoxItem.value.length < 1) {
+      toast.error('选择至少一项！')
+      return
+    }
+    let inputContent = ''
+    for (let i = 0; i < checkBoxItem.value.length; i++) {
+      inputContent = inputContent + pageContent.value.selectUrls[checkBoxItem.value[i]] + '_'
+    }
+    interStore.setUserInputMap(pageContent.value.pageId, inputContent)
   }
 }
 
