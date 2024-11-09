@@ -229,7 +229,7 @@
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" @load="loadFinished" />
       </view>
       <view class="checkBox-area">
-        <wd-checkbox-group v-model="checkBoxItem" cell shape="button">
+        <wd-checkbox-group v-model="checkBoxItem" cell shape="button" custom-class="check-group">
           <template v-for="(item, index) in pageContent.selectUrls" :key="index">
             <wd-checkbox :modelValue="index">{{ item }}</wd-checkbox>
           </template>
@@ -320,7 +320,7 @@
         </view>
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" @load="loadFinished" />
       </view>
-      <view class="input-area">
+      <view class="audio-area">
         <view style="text-align: center">
           <audio
             style="text-align: left"
@@ -935,13 +935,23 @@ const toReport = async () => {
 .input-area {
   width: 90%;
   height: auto;
-  margin: 0 auto;
+  margin: 18px auto;
+}
+
+.audio-area {
+  width: 90%;
+  height: auto;
+  margin: 55px auto;
 }
 
 .checkBox-area {
   width: auto;
   height: auto;
   overflow-x: scroll;
+}
+
+.check-group {
+  background-color: rgba(255, 255, 255, 0);
 }
 
 .button-area {
@@ -952,6 +962,7 @@ const toReport = async () => {
 
 .operation-area {
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
   width: 85%;
   height: auto;

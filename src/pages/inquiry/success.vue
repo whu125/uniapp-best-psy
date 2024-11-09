@@ -27,7 +27,7 @@
       <view class="flex justify-center mt-14" v-if="isLast === false">
         <wd-button @click="toHome" type="success" size="large">返回主界面</wd-button>
       </view>
-      <view class="flex justify-center" v-if="isLast === true">
+      <view class="flex justify-center btn" v-if="isLast === true">
         <wd-button @click="toReport" type="success" size="large">查看你的旅程报告</wd-button>
       </view>
     </view>
@@ -111,6 +111,10 @@ onLoad(() => {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.btn {
+  margin-top: 20px;
 }
 
 .back-arrow {

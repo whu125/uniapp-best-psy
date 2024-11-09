@@ -261,7 +261,7 @@ const startJourney = async () => {
 
 .title {
   margin-bottom: 20px;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: bold;
   color: #333;
   text-align: center;

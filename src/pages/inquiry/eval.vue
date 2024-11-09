@@ -34,7 +34,7 @@
       </view>
 
       <view class="helpful-box">
-        <text class="helpful-title mb-4">本章对你最有帮助的部分有（可多选）：</text>
+        <text class="helpful-title mb-7">本章对你最有帮助的部分有（可多选）：</text>
         <view class="helpful-options">
           <view
             class="option-item"

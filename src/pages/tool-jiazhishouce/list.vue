@@ -22,7 +22,7 @@
       <view v-for="(jiazhi, index) in jiazhiList" :key="index">
         <view class="box" @click="selectJiazhi(index)">
           <view style="font-size: 20px; font-weight: bold">{{ jiazhi.date }}</view>
-          <view style="font-size: 20px; font-weight: bold">人际关系</view>
+          <view style="font-size: 20px; font-weight: bold">{{ jiazhi.lingyu }}</view>
           <image
             src="http://115.159.83.61:9000/tool/tool-list.png"
             style="width: 45px; height: 45px"

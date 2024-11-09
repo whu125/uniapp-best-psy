@@ -9,7 +9,7 @@
 </route>
 <template>
   <view
-    class="bg-white overflow-hidden pt-2 px-4"
+    class="overflow-hidden pt-2 px-4 bg"
     :style="{ marginTop: safeAreaInsets?.top + 'px' }"
     w-full
     h-full
@@ -77,6 +77,15 @@ const ToDiaryList = () => {
   font-size: 18px;
   font-weight: bold;
   text-align: center;
+}
+
+.bg {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 221, 225, 0.67) 0%,
+    rgba(242, 222, 213, 0.3) 41.21%,
+    rgba(255, 252, 219, 0.67) 100%
+  );
 }
 
 .title {
