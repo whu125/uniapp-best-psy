@@ -397,42 +397,12 @@ const audioAction = ref({
 })
 
 onShow(async () => {
+  // 获取页面数据
   const index = interStore.pageIndex
   pageContent.value = interStore.interInfo.interPages[index]
-  // const res = await getPageByInterId(2, 28)
-  // pageContent.value = res.data
-
-  pageType.value = pageContent.value.pageType
-  // 如果是 input 页面 恢复状态
-  if (pageType.value === 'input') {
-    console.log('interStore.userInputMap', interStore.userInputMap)
-    if (interStore.userInputMap && interStore.userInputMap.size > 0) {
-      if (interStore.userInputMap.has(pageContent.value.pageId)) {
-        let inputString = interStore.userInputMap.get(pageContent.value.pageId)
-        inputString = inputString.slice(0, -1)
-        const inputList = inputString.split('%')
-        inputList.forEach((input, index) => {
-          userInputList.value[index] = input
-        })
-      }
-    }
-  } else if (pageType.value === 'checkBox') {
-    const checkBoxItemList = pageContent.value.selectUrls
-    if (interStore.userInputMap && interStore.userInputMap.size > 0) {
-      if (interStore.userInputMap.has(pageContent.value.pageId)) {
-        let checkBoxInputString = interStore.userInputMap.get(pageContent.value.pageId)
-        checkBoxInputString = checkBoxInputString.slice(0, -1)
-        const checkBoxInputList = checkBoxInputString.split('_')
-        checkBoxInputList.forEach((item, index) => {
-          if (checkBoxItemList.includes(item)) {
-            checkBoxItem.value.push(checkBoxItemList.indexOf(item))
-          }
-        })
-      }
-    }
-    return
-  }
   console.log('pageContent.value', pageContent.value)
+  // 恢复页面状态
+  recoverPageStatus()
 })
 
 const ToHome = () => {
@@ -827,6 +797,39 @@ const saveDateToPinia = () => {
       inputContent = inputContent + pageContent.value.selectUrls[checkBoxItem.value[i]] + '_'
     }
     interStore.setUserInputMap(pageContent.value.pageId, inputContent)
+  }
+}
+
+const recoverPageStatus = () => {
+  pageType.value = pageContent.value.pageType
+  // 如果是 input 页面 恢复状态
+  if (pageType.value === 'input') {
+    console.log('interStore.userInputMap', interStore.userInputMap)
+    if (interStore.userInputMap && interStore.userInputMap.size > 0) {
+      if (interStore.userInputMap.has(pageContent.value.pageId)) {
+        let inputString = interStore.userInputMap.get(pageContent.value.pageId)
+        inputString = inputString.slice(0, -1)
+        const inputList = inputString.split('%')
+        inputList.forEach((input, index) => {
+          userInputList.value[index] = input
+        })
+      }
+    }
+    // 如果是 checkBox 页面 恢复状态
+  } else if (pageType.value === 'checkBox') {
+    const checkBoxItemList = pageContent.value.selectUrls
+    if (interStore.userInputMap && interStore.userInputMap.size > 0) {
+      if (interStore.userInputMap.has(pageContent.value.pageId)) {
+        let checkBoxInputString = interStore.userInputMap.get(pageContent.value.pageId)
+        checkBoxInputString = checkBoxInputString.slice(0, -1)
+        const checkBoxInputList = checkBoxInputString.split('_')
+        checkBoxInputList.forEach((item, index) => {
+          if (checkBoxItemList.includes(item)) {
+            checkBoxItem.value.push(checkBoxItemList.indexOf(item))
+          }
+        })
+      }
+    }
   }
 }
 
