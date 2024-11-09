@@ -21,37 +21,37 @@
       <view class="title">一封给你的信</view>
       <view class="box">
         <view class="text-area">
-          <view>给：</view>
+          <view class="detail-title">给：</view>
           <view>{{ content.name }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>我知道，当：</view>
+          <view class="detail-title">我知道，当：</view>
           <view>{{ content.qingjing }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>你会感觉：</view>
+          <view class="detail-title">你会感觉：</view>
           <view>{{ content.ganshou }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>你会：</view>
+          <view class="detail-title">你会：</view>
           <view>{{ content.xingdong }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>然而，我知道：</view>
+          <view class="detail-title">然而，我知道：</view>
           <view>{{ content.zhidao }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>我想告诉你：</view>
+          <view class="detail-title">我想告诉你：</view>
           <view>{{ content.gaosu }}</view>
         </view>
       </view>
@@ -96,6 +96,11 @@ const goBack = () => {
   font-size: 25px;
   font-weight: bold;
   text-align: center;
+}
+
+.detail-title {
+  font-size: 18px;
+  font-weight: 900;
 }
 
 .box {

@@ -91,9 +91,7 @@ const doSubmit = async () => {
   submitObj.value.date = getFormattedDate().split(' ')[0]
   const res = await submitHuibidangan(submitObj.value)
   if (res.code === 200) {
-    uni.redirectTo({
-      url: '/pages/tool-huibidangan/huibidangan',
-    })
+    uni.navigateBack({ delta: 1 })
   } else {
     message.alert('网络错误！')
   }

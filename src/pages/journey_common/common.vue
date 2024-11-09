@@ -416,6 +416,8 @@ onShow(async () => {
         })
       }
     }
+  } else if (pageType.value === 'checkBox') {
+    return
   }
   console.log('pageContent.value', pageContent.value)
 })

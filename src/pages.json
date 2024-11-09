@@ -414,6 +414,31 @@
       }
     },
     {
+      "path": "pages/tool-renzhijieli/distance",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
+      "path": "pages/tool-renzhijieli/leaf",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
+      "path": "pages/tool-renzhijieli/renzhijieli",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "心情日记"
+      },
+      "needLogin": true
+    },
+    {
       "path": "pages/tool-xingdongjihua/catching",
       "type": "page",
       "style": {
@@ -513,6 +538,31 @@
     },
     {
       "path": "pages/tool-zhengnianlianxi/zhengnianlianxi",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "心情日记"
+      },
+      "needLogin": true
+    },
+    {
+      "path": "pages/tool-zhuanzhudangxia/breath",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
+      "path": "pages/tool-zhuanzhudangxia/scan",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
+      "path": "pages/tool-zhuanzhudangxia/zhuanzhudangxia",
       "type": "page",
       "style": {
         "navigationStyle": "custom",

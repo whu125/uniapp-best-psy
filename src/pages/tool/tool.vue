@@ -132,7 +132,7 @@ const ToTool = (toolName: string) => {
     })
   } else if (toolName === '认知解离') {
     uni.navigateTo({
-      url: '/pages/mood/mood',
+      url: '/pages/tool-renzhijieli/renzhijieli',
     })
   } else if (toolName === '回避档案') {
     uni.navigateTo({
@@ -140,7 +140,7 @@ const ToTool = (toolName: string) => {
     })
   } else if (toolName === '专注当下') {
     uni.navigateTo({
-      url: '/pages/mood/mood',
+      url: '/pages/tool-zhuanzhudangxia/zhuanzhudangxia',
     })
   } else if (toolName === '正念练习') {
     uni.navigateTo({

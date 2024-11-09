@@ -14,27 +14,29 @@
     w-full
     h-full
   >
-    <wd-navbar title="应对计划" left-arrow @click-left="handleClickLeft"></wd-navbar>
+    <wd-navbar title="专注当下" left-arrow @click-left="handleClickLeft"></wd-navbar>
     <view style="height: 15%"></view>
+
     <view class="big-icon">
       <img
         style="width: 200px; height: 180px"
-        src="http://115.159.83.61:9000/tool/yingduijihua/yingduijihua-logo.png"
+        src="http://115.159.83.61:9000/tool/zhuanzhudangxia/zhuanzhudangxia-logo.png"
       />
     </view>
-    <view class="title">应对计划</view>
-    <view class="font">未雨绸缪，锦囊妙计，兵来将挡，水来土掩</view>
+    <view class="title">专注当下</view>
+    <view class="font">专注当下，觉知你的每一刻</view>
+    <view class="small-font">下面两个正念练习将帮助你回到此时此刻</view>
     <view>
       <wd-card>
-        <view class="card-content" @click="start">
-          <view class="card-title">开始记录</view>
-          <view><wd-icon name="edit-1" size="26px" /></view>
+        <view class="card-content" @click="toBreath">
+          <view class="card-title">正念呼吸</view>
+          <view><wd-icon name="chart-bubble" size="26px"></wd-icon></view>
         </view>
       </wd-card>
       <wd-card>
-        <view class="card-content" @click="ToList">
-          <view class="card-title">查看手册</view>
-          <view><wd-icon name="copy" size="26px" /></view>
+        <view class="card-content" @click="ToScan">
+          <view class="card-title">身体扫描</view>
+          <view><wd-icon name="user" size="26px"></wd-icon></view>
         </view>
       </wd-card>
     </view>
@@ -48,15 +50,15 @@ const handleClickLeft = () => {
   uni.navigateBack()
 }
 
-const start = () => {
+const toBreath = () => {
   uni.navigateTo({
-    url: '/pages/tool-yingduijihua/catching',
+    url: '/pages/tool-zhuanzhudangxia/breath',
   })
 }
 
-const ToList = () => {
+const ToScan = () => {
   uni.navigateTo({
-    url: '/pages/tool-yingduijihua/list',
+    url: '/pages/tool-zhuanzhudangxia/scan',
   })
 }
 </script>
@@ -72,6 +74,13 @@ const ToList = () => {
 .title {
   margin-top: 12px;
   font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.small-font {
+  margin-top: 12px;
+  font-size: 14px;
   font-weight: bold;
   text-align: center;
 }

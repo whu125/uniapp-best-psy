@@ -14,27 +14,29 @@
     w-full
     h-full
   >
-    <wd-navbar title="应对计划" left-arrow @click-left="handleClickLeft"></wd-navbar>
+    <wd-navbar title="认知解离" left-arrow @click-left="handleClickLeft"></wd-navbar>
     <view style="height: 15%"></view>
+
     <view class="big-icon">
       <img
         style="width: 200px; height: 180px"
-        src="http://115.159.83.61:9000/tool/yingduijihua/yingduijihua-logo.png"
+        src="http://115.159.83.61:9000/tool/renzhijieli/renzhijieli-logo.png"
       />
     </view>
-    <view class="title">应对计划</view>
-    <view class="font">未雨绸缪，锦囊妙计，兵来将挡，水来土掩</view>
+    <view class="title">认知解离</view>
+    <view class="font">我是我，想法是想法，我不被想法定义</view>
+    <view class="small-font">下面两个正念练习将帮助你将自己和想法区分开</view>
     <view>
       <wd-card>
-        <view class="card-content" @click="start">
-          <view class="card-title">开始记录</view>
-          <view><wd-icon name="edit-1" size="26px" /></view>
+        <view class="card-content" @click="toDistance">
+          <view class="card-title">与想法拉开距离</view>
+          <view><wd-icon name="fullsreen" size="26px"></wd-icon></view>
         </view>
       </wd-card>
       <wd-card>
-        <view class="card-content" @click="ToList">
-          <view class="card-title">查看手册</view>
-          <view><wd-icon name="copy" size="26px" /></view>
+        <view class="card-content" @click="ToLeaf">
+          <view class="card-title">随溪飘走的落叶</view>
+          <view><wd-icon name="format-vertical-align-right" size="26px"></wd-icon></view>
         </view>
       </wd-card>
     </view>
@@ -48,15 +50,15 @@ const handleClickLeft = () => {
   uni.navigateBack()
 }
 
-const start = () => {
+const toDistance = () => {
   uni.navigateTo({
-    url: '/pages/tool-yingduijihua/catching',
+    url: '/pages/tool-renzhijieli/distance',
   })
 }
 
-const ToList = () => {
+const ToLeaf = () => {
   uni.navigateTo({
-    url: '/pages/tool-yingduijihua/list',
+    url: '/pages/tool-renzhijieli/leaf',
   })
 }
 </script>
@@ -72,6 +74,13 @@ const ToList = () => {
 .title {
   margin-top: 12px;
   font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.small-font {
+  margin-top: 12px;
+  font-size: 14px;
   font-weight: bold;
   text-align: center;
 }

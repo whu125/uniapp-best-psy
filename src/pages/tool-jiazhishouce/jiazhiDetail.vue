@@ -21,31 +21,31 @@
       <view class="font">我的价值手册</view>
       <view class="box">
         <view class="text-area">
-          <view>我的生活领域：</view>
+          <view class="detail-title">我的生活领域：</view>
           <view>{{ content.lingyu }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>我的价值：</view>
+          <view class="detail-title">我的价值：</view>
           <view>{{ content.miaoshu }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>我的意图：</view>
+          <view class="detail-title">我的意图：</view>
           <view>{{ content.yitu }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>我正在做对我来说重要的事情吗？</view>
+          <view class="detail-title">我正在做对我来说重要的事情吗？</view>
           <view>{{ content.pingjia }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>是什么鼓励了我，又是什么阻碍了我？</view>
+          <view class="detail-title">是什么鼓励了我，又是什么阻碍了我？</view>
           <view>{{ content.shiqing }}</view>
         </view>
       </view>
@@ -90,6 +90,11 @@ const goBack = () => {
   font-size: 25px;
   font-weight: bold;
   text-align: center;
+}
+
+.detail-title {
+  font-size: 18px;
+  font-weight: 900;
 }
 
 .box {

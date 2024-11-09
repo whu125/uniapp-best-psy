@@ -25,13 +25,13 @@
       </view>
       <view class="box">
         <view class="text-area">
-          <view>给你的应对计划起个名字：</view>
+          <view class="detail-title">给你的应对计划起个名字：</view>
           <view>{{ content.jihuaName }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>
+          <view class="detail-title">
             1
             触发情境：什么时刻、发生什么事情可能会让你陷入糟糕的情绪状态？这可能不是一个具体的事情，而是一类相似的情境，想一想，写下来
           </view>
@@ -40,7 +40,7 @@
       </view>
       <view class="box">
         <view class="text-area">
-          <view>
+          <view class="detail-title">
             2
             惯常的应对策略：当糟糕的消极情绪产生，你最有可能采取什么样的应对行为？可以想想第四站里你在回避档案里写下的那些，也可以重新总结
           </view>
@@ -49,7 +49,7 @@
       </view>
       <view class="box">
         <view class="text-area">
-          <view>
+          <view class="detail-title">
             3 新的替代反应：
             你打算运用哪些新技能来代替上面的惯常应对策略？可以从短期和长期两个角度来思考：当你有糟糕感受的时候，有什么你立刻就能做并且可以起作用的？在平时，有哪些技能可以被发展为习惯，从而对你产生长期帮助？
           </view>
@@ -107,6 +107,11 @@ const goBack = () => {
   padding: 12px;
   margin: 15px auto;
   border-radius: 10px;
+}
+
+.detail-title {
+  font-size: 18px;
+  font-weight: 900;
 }
 
 .box-top {

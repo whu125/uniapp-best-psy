@@ -80,9 +80,7 @@ const doSubmit = async () => {
   submitObj.value.date = getFormattedDate().split(' ')[0]
   const res = await submitZhengnianlianxi(submitObj.value)
   if (res.code === 200) {
-    uni.redirectTo({
-      url: '/pages/tool-zhengnianlianxi/zhengnianlianxi',
-    })
+    uni.navigateBack({ delta: 2 })
   } else {
     message.alert('网络错误！')
   }

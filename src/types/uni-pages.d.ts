@@ -50,6 +50,9 @@ interface NavigateToOptions {
        "/pages/tool-qingxucaiji/list" |
        "/pages/tool-qingxucaiji/qingxucaiji" |
        "/pages/tool-qingxucaiji/qingxuDetail" |
+       "/pages/tool-renzhijieli/distance" |
+       "/pages/tool-renzhijieli/leaf" |
+       "/pages/tool-renzhijieli/renzhijieli" |
        "/pages/tool-xingdongjihua/catching" |
        "/pages/tool-xingdongjihua/list" |
        "/pages/tool-xingdongjihua/xingdongDetail" |
@@ -63,6 +66,9 @@ interface NavigateToOptions {
        "/pages/tool-zhengnianlianxi/startPractise" |
        "/pages/tool-zhengnianlianxi/zhengnianDetail" |
        "/pages/tool-zhengnianlianxi/zhengnianlianxi" |
+       "/pages/tool-zhuanzhudangxia/breath" |
+       "/pages/tool-zhuanzhudangxia/scan" |
+       "/pages/tool-zhuanzhudangxia/zhuanzhudangxia" |
        "/pages/tool-zidongsiwei/catching" |
        "/pages/tool-zidongsiwei/list" |
        "/pages/tool-zidongsiwei/siweiDetail" |

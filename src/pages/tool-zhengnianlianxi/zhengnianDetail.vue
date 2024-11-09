@@ -21,31 +21,31 @@
       <view class="font">正念练习：旅行手记</view>
       <view class="box">
         <view class="text-area">
-          <view>1.引发消极情绪的情境是什么?</view>
+          <view class="detail-title">1.引发消极情绪的情境是什么?</view>
           <view>{{ content.qingjing }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>2.一开始的情绪是什么样子的?</view>
+          <view class="detail-title">2.一开始的情绪是什么样子的?</view>
           <view>{{ content.qingxu }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>3.尝试正念接纳后， 情绪是否有变化?</view>
+          <view class="detail-title">3.尝试正念接纳后， 情绪是否有变化?</view>
           <view>{{ content.bianhua }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>4.情绪发生了怎样的变化?</view>
+          <view class="detail-title">4.情绪发生了怎样的变化?</view>
           <view>{{ content.zenyang }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>5.对于整个过程，你的感受是什么?</view>
+          <view class="detail-title">5.对于整个过程，你的感受是什么?</view>
           <view>{{ content.ganshou }}</view>
         </view>
       </view>
@@ -90,6 +90,11 @@ const goBack = () => {
   font-size: 25px;
   font-weight: bold;
   text-align: center;
+}
+
+.detail-title {
+  font-size: 18px;
+  font-weight: 900;
 }
 
 .box {

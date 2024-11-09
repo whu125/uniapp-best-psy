@@ -8,7 +8,7 @@
 </route>
 <template>
   <view class="" w-full h-full>
-    <wd-navbar fixed safeAreaInsetTop title="自动思维" left-arrow @click-left="goBack"></wd-navbar>
+    <wd-navbar fixed safeAreaInsetTop title="价值手册" left-arrow @click-left="goBack"></wd-navbar>
 
     <!-- 第一步 -->
     <view class="main-container" v-show="currIndex === 0">
@@ -177,9 +177,7 @@ const doSubmit = async () => {
 
   const res = await submitJiazhishouce(submitObj.value)
   if (res.code === 200) {
-    uni.redirectTo({
-      url: '/pages/tool-jiazhishouce/jiazhishouce',
-    })
+    uni.navigateBack({ delta: 2 })
   } else {
     message.alert('网络错误！')
   }

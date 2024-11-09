@@ -22,37 +22,37 @@
       <view class="font">我的回避档案</view>
       <view class="box">
         <view class="text-area">
-          <view>1.首先，为这种应对方式取个名字</view>
+          <view class="detail-title">1.首先，为这种应对方式取个名字</view>
           <view>{{ content.huibiName }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>2.引发情绪的情境或事件：</view>
+          <view class="detail-title">2.引发情绪的情境或事件：</view>
           <view>{{ content.qingjing }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>3.产生了什么感受：</view>
+          <view class="detail-title">3.产生了什么感受：</view>
           <view>{{ content.ganshou }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>4.为了对抗这种感觉，你做了什么尝试?</view>
+          <view class="detail-title">4.为了对抗这种感觉，你做了什么尝试?</view>
           <view>{{ content.changshi }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>5.这种尝试给你带来了什么长期影响?</view>
+          <view class="detail-title">5.这种尝试给你带来了什么长期影响?</view>
           <view>{{ content.yingxiang }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>6.下一次，你希望自己怎么做?</view>
+          <view class="detail-title">6.下一次，你希望自己怎么做?</view>
           <view>{{ content.zenme }}</view>
         </view>
       </view>
@@ -105,6 +105,11 @@ const goBack = () => {
   font-size: 25px;
   font-weight: bold;
   text-align: center;
+}
+
+.detail-title {
+  font-size: 18px;
+  font-weight: 900;
 }
 
 .box {

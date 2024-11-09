@@ -29,13 +29,13 @@
       <wd-card>
         <view class="card-content" @click="start">
           <view class="card-title">开始记录</view>
-          <view><wd-icon name="edit-1" size="23px" /></view>
+          <view><wd-icon name="edit-1" size="26px" /></view>
         </view>
       </wd-card>
       <wd-card>
         <view class="card-content" @click="ToList">
           <view class="card-title">查看手册</view>
-          <view><wd-icon name="copy" size="22px" /></view>
+          <view><wd-icon name="copy" size="26px" /></view>
         </view>
       </wd-card>
     </view>
@@ -80,6 +80,7 @@ const ToList = () => {
 .big-icon {
   display: flex;
   justify-content: center;
+  margin-top: 20%;
 }
 
 .card-content {
@@ -92,5 +93,6 @@ const ToList = () => {
 
 .card-title {
   font-size: 20px;
+  color: black;
 }
 </style>

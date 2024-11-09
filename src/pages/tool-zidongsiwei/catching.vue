@@ -183,9 +183,7 @@ const doSubmit = async () => {
 
   const res = await submitZidongsiwei(submitObj.value)
   if (res.code === 200) {
-    uni.redirectTo({
-      url: '/pages/tool-zidongsiwei/zidongsiwei',
-    })
+    uni.navigateBack({ delta: 1 })
   } else {
     message.alert('网络错误！')
   }

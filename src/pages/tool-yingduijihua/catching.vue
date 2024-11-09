@@ -90,9 +90,7 @@ const doSubmit = async () => {
 
   const res = await submitYingduijihua(submitObj.value)
   if (res.code === 200) {
-    uni.redirectTo({
-      url: '/pages/tool-yingduijihua/yingduijihua',
-    })
+    uni.navigateBack({ delta: 1 })
   } else {
     message.alert('网络错误！')
   }

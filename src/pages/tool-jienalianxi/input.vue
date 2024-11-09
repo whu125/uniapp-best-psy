@@ -176,9 +176,7 @@ const doSubmit = async () => {
   submitObj.value.date = getFormattedDate().split(' ')[0]
   const res = await submitJienalianxi(submitObj.value)
   if (res.code === 200) {
-    uni.redirectTo({
-      url: '/pages/tool-jienalianxi/jienalianxi',
-    })
+    uni.navigateBack({ delta: 1 })
   } else {
     message.alert('网络错误！')
   }

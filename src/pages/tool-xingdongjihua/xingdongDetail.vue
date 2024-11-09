@@ -25,49 +25,51 @@
       </view>
       <view class="box">
         <view class="text-area">
-          <view>我想要改变的一个生活领域：</view>
+          <view class="detail-title">我想要改变的一个生活领域：</view>
           <view>{{ content.lingyu }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>在这个生活领域里，我的价值是：</view>
+          <view class="detail-title">在这个生活领域里，我的价值是：</view>
           <view>{{ content.jiazhi }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>我的价值意图：</view>
+          <view class="detail-title">我的价值意图：</view>
           <view>{{ content.yitu }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>在你所选择的生活领域里，基于你想追求的价值和价值意图，你的目标是什么？</view>
+          <view class="detail-title">
+            在你所选择的生活领域里，基于你想追求的价值和价值意图，你的目标是什么？
+          </view>
           <view>{{ content.mubiao }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>针对你的目标，你所能做的最小、最简单的一步是什么？</view>
+          <view class="detail-title">针对你的目标，你所能做的最小、最简单的一步是什么？</view>
           <view>{{ content.xingdong }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>你打算什么时候开始做？请输入一个尽量准确的时间：</view>
+          <view class="detail-title">你打算什么时候开始做？请输入一个尽量准确的时间：</view>
           <view>{{ content.xingdongTime }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>你觉得你遇到的障碍可能是什么？</view>
+          <view class="detail-title">你觉得你遇到的障碍可能是什么？</view>
           <view>{{ content.zhangai }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view>如果这个障碍真的发生了，你打算如何应对（越具体越好）</view>
+          <view class="detail-title">如果这个障碍真的发生了，你打算如何应对（越具体越好）</view>
           <view>{{ content.yingdui }}</view>
         </view>
       </view>
@@ -116,6 +118,11 @@ const goBack = () => {
   font-size: 25px;
   font-weight: bold;
   text-align: center;
+}
+
+.detail-title {
+  font-size: 18px;
+  font-weight: 900;
 }
 
 .box {
