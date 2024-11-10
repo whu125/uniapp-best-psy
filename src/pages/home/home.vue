@@ -41,35 +41,31 @@
         <img class="card-icon" :src="journey.icon" />
         <view class="card-text">{{ journey.text }}</view>
         <!-- 体验版 -->
-        <image
-          style="width: 60rpx; height: 60rpx"
-          mode="aspectFit"
-          src="../../static/images/home/finish.png"
-        />
+        <img style="width: 60rpx; height: 60rpx" mode="aspectFit" :src="finishIconUrl" />
 
         <!-- <image
           style="width: 60rpx; height: 60rpx"
           mode="aspectFit"
-          src="../../static/images/home/finish.png"
+          :src="finishIconUrl"
           v-show="currProgress > journey.progress"
           @click="enterJourney(journey.progress)"
         />
         <image
           style="width: 60rpx; height: 60rpx"
           mode="aspectFit"
-          src="../../static/images/home/startJourney.png"
+          :src="startIconUrl"
           v-show="currProgress == journey.progress && checkTimeFlag"
           @click="enterJourney(journey.progress)"
         />
         <image
           style="width: 60rpx; height: 60rpx"
-          src="../../static/images/home/lockJourney.png"
+          :src="lockIconUrl"
           mode="aspectFit"
           v-show="currProgress == journey.progress && !checkTimeFlag"
         />
         <image
           style="width: 60rpx; height: 60rpx"
-          src="../../static/images/home/lockJourney.png"
+          :src="lockIconUrl"
           mode="aspectFit"
           v-show="currProgress < journey.progress"
         /> -->
@@ -117,15 +113,50 @@ const checkTimeFlag = ref(false)
 
 const waitingTime = ref(1)
 
+const finishIconUrl = 'http://115.159.83.61:9000/home/icon/finish.png'
+const lockIconUrl = 'http://115.159.83.61:9000/home/icon/lockJourney.png'
+const startIconUrl = 'http://115.159.83.61:9000/home/icon/startJourney.png'
 const journeySteps = ref([
-  { icon: '../../static/images/home/journey0.png', text: '导入：开启你的旅程', progress: 0 },
-  { icon: '../../static/images/home/journey1.png', text: '第一站：认识你的情绪', progress: 1 },
-  { icon: '../../static/images/home/journey2.png', text: '第二站：观察你的思维', progress: 2 },
-  { icon: '../../static/images/home/journey3.png', text: '第三站：回到此时此刻', progress: 3 },
-  { icon: '../../static/images/home/journey4.png', text: '第四站：面对你的痛苦', progress: 4 },
-  { icon: '../../static/images/home/journey5.png', text: '第五站：接纳当下的你', progress: 5 },
-  { icon: '../../static/images/home/journey6.png', text: '第六站：开始你的行动', progress: 6 },
-  { icon: '../../static/images/home/journey7.png', text: '第七站：发现你的价值', progress: 7 },
+  {
+    icon: 'http://115.159.83.61:9000/home/icon/journey0.png',
+    text: '导入：开启你的旅程',
+    progress: 0,
+  },
+  {
+    icon: 'http://115.159.83.61:9000/home/icon/journey1.png',
+    text: '第一站：认识你的情绪',
+    progress: 1,
+  },
+  {
+    icon: 'http://115.159.83.61:9000/home/icon/journey2.png',
+    text: '第二站：观察你的思维',
+    progress: 2,
+  },
+  {
+    icon: 'http://115.159.83.61:9000/home/icon/journey3.png',
+    text: '第三站：回到此时此刻',
+    progress: 3,
+  },
+  {
+    icon: 'http://115.159.83.61:9000/home/icon/journey4.png',
+    text: '第四站：面对你的痛苦',
+    progress: 4,
+  },
+  {
+    icon: 'http://115.159.83.61:9000/home/icon/journey5.png',
+    text: '第五站：接纳当下的你',
+    progress: 5,
+  },
+  {
+    icon: 'http://115.159.83.61:9000/home/icon/journey6.png',
+    text: '第六站：开始你的行动',
+    progress: 6,
+  },
+  {
+    icon: 'http://115.159.83.61:9000/home/icon/journey7.png',
+    text: '第七站：开启新旅程',
+    progress: 7,
+  },
 ])
 
 onShow(() => {

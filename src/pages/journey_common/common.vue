@@ -363,6 +363,7 @@ import {
   ISubmitInter,
   startInter,
   IStartInter,
+  getUserGoal,
 } from '@/service/index/inter'
 import { useToast, useMessage } from 'wot-design-uni'
 import { getFormattedDate } from '@/utils/getTime'
@@ -374,7 +375,6 @@ const userStore = useUserStore()
 const message = useMessage()
 const globalPageControlStore = useGlobalPageControlStore()
 const toast = useToast()
-
 const pageType = ref<string>('normal')
 const prevIconUrl = ref<string>('http://115.159.83.61:9000/common/prev.png')
 const pageContent = ref<IInterPage>()
@@ -403,6 +403,8 @@ onShow(async () => {
   console.log('pageContent.value', pageContent.value)
   // 恢复页面状态
   recoverPageStatus()
+  // 第一套干预的结束部分展示之前的目标
+  fillUserGoal()
 })
 
 const ToHome = () => {
@@ -837,6 +839,14 @@ const testsubmit = () => {
   uni.redirectTo({
     url: '/pages/inquiry/eval',
   })
+}
+
+const fillUserGoal = () => {
+  if (pageContent.value.interId === 99 && pageContent.value.pageId === 1) {
+    getUserGoal().then((res) => {
+      userInputList.value[0] = res.data
+    })
+  }
 }
 
 const toReport = async () => {

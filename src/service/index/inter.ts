@@ -70,3 +70,7 @@ export const submitInter = (submitInter: ISubmitInter) => {
 export const checkInterAvailability = (interId: number) => {
   return http.post(`/inter/checkInterAvailability?interId=${interId}`, {}, {})
 }
+
+export const getUserGoal = () => {
+  return http.post<string>(`/inter/getUserGoal`, {}, {})
+}
