@@ -422,14 +422,6 @@
       "needLogin": true
     },
     {
-      "path": "pages/tool-qingxucaiji/qingxuDetail",
-      "type": "page",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "导览"
-      }
-    },
-    {
       "path": "pages/tool-renzhijieli/distance",
       "type": "page",
       "style": {

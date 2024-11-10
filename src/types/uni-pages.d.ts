@@ -50,10 +50,10 @@ interface NavigateToOptions {
        "/pages/tool-qingxucaiji/input" |
        "/pages/tool-qingxucaiji/list" |
        "/pages/tool-qingxucaiji/qingxuDetail" |
+       "/pages/tool-qingxucaiji/qingxucaiji" |
        "/pages/tool-renzhijieli/distance" |
        "/pages/tool-renzhijieli/leaf" |
        "/pages/tool-renzhijieli/renzhijieli" |
-       "/pages/tool-qingxucaiji/qingxucaiji" |
        "/pages/tool-xingdongjihua/catching" |
        "/pages/tool-xingdongjihua/list" |
        "/pages/tool-xingdongjihua/xingdongDetail" |
