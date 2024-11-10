@@ -54,6 +54,10 @@ interface NavigateToOptions {
        "/pages/tool-renzhijieli/distance" |
        "/pages/tool-renzhijieli/leaf" |
        "/pages/tool-renzhijieli/renzhijieli" |
+       "/pages/tool-sanjianxiaoshi/input" |
+       "/pages/tool-sanjianxiaoshi/list" |
+       "/pages/tool-sanjianxiaoshi/sanjianDetail" |
+       "/pages/tool-sanjianxiaoshi/shanjianxiaoshi" |
        "/pages/tool-xingdongjihua/catching" |
        "/pages/tool-xingdongjihua/list" |
        "/pages/tool-xingdongjihua/xingdongDetail" |

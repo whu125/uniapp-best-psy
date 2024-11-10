@@ -447,6 +447,39 @@
       "needLogin": true
     },
     {
+      "path": "pages/tool-sanjianxiaoshi/input",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
+      "path": "pages/tool-sanjianxiaoshi/list",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
+      "path": "pages/tool-sanjianxiaoshi/sanjianDetail",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
+      "path": "pages/tool-sanjianxiaoshi/shanjianxiaoshi",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "心情日记"
+      },
+      "needLogin": true
+    },
+    {
       "path": "pages/tool-xingdongjihua/catching",
       "type": "page",
       "style": {
