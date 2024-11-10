@@ -4,6 +4,10 @@ export const exportExcelApi = () => {
   return http.get('/upload/excel', {})
 }
 
+export const exportSingleExcelApi = (id) => {
+  return http.get(`/upload/singleexcel?id=${id}`, {})
+}
+
 export const getAccessTokenApi = () => {
   return http.get('/getAccessToken', {})
 }

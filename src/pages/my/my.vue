@@ -77,7 +77,7 @@
           <span class="label ml-4">新手指南</span>
           <span class="arrow">›</span>
         </div>
-        <div class="menu-item">
+        <div class="menu-item" @click="toRexian">
           <view>
             <image
               style="width: 60rpx; height: 60rpx"
@@ -211,6 +211,12 @@ onShow(() => {
     avator.value = userInfo.value.avatar
   }
 })
+
+const toRexian = () => {
+  uni.redirectTo({
+    url: '/pages/my/common?url=' + 'home/rexian.jpg',
+  })
+}
 
 const getUserInfo = () => {
   console.log('获取用户信息')
