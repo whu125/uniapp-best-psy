@@ -89,7 +89,7 @@
           <span class="label ml-4">心理危机热线</span>
           <span class="arrow">›</span>
         </div>
-        <div class="menu-item">
+        <div class="menu-item" @click="toEmail">
           <view>
             <image
               style="width: 60rpx; height: 60rpx"
@@ -100,7 +100,7 @@
           <span class="label ml-4">咨询师信箱</span>
           <span class="arrow">›</span>
         </div>
-        <div class="menu-item">
+        <div class="menu-item" @click="toFeedBack">
           <view>
             <image
               style="width: 60rpx; height: 60rpx"
@@ -191,6 +191,7 @@ const userInfo = ref(userStore.userInfo)
 const baseURL = ref('http://115.159.83.61:9000/mindease/')
 
 const username = ref('')
+
 uni.hideTabBar()
 defineOptions({
   name: 'my',
@@ -212,9 +213,65 @@ onShow(() => {
   }
 })
 
-const toRexian = () => {
+const toAboutUs = () => {
+  const params = {
+    url: 'home/mine-5.png',
+    groupId: 0,
+    title: '意见反馈',
+  }
   uni.redirectTo({
-    url: '/pages/my/common?url=' + 'home/rexian.jpg',
+    url:
+      '/pages/my/common?' +
+      Object.keys(params)
+        .map((key) => `${key}=${params[key]}`)
+        .join('&'),
+  })
+}
+
+const toFeedBack = () => {
+  const params = {
+    url: 'home/mine-5.png',
+    groupId: 0,
+    title: '意见反馈',
+  }
+  uni.redirectTo({
+    url:
+      '/pages/my/common?' +
+      Object.keys(params)
+        .map((key) => `${key}=${params[key]}`)
+        .join('&'),
+  })
+}
+
+const toEmail = () => {
+  const params = {
+    url: 'home/mine-4.png',
+    groupId: 0,
+    title: '咨询师信箱',
+  }
+
+  console.log('params', params)
+  uni.redirectTo({
+    url:
+      '/pages/my/common?' +
+      Object.keys(params)
+        .map((key) => `${key}=${params[key]}`)
+        .join('&'),
+  })
+}
+
+const toRexian = () => {
+  const params = {
+    url: 'home/mine-3.png',
+    groupId: 0,
+    title: '心理危机热线',
+  }
+  uni.redirectTo({
+    url:
+      '/pages/my/common?' +
+      Object.keys(params)
+        .map((key) => `${key}=${params[key]}`)
+        .join('&'),
   })
 }
 

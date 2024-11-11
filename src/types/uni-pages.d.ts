@@ -34,8 +34,8 @@ interface NavigateToOptions {
        "/pages/tabbar/tabbar" |
        "/pages/test2/test2" |
        "/pages/tool/tool" |
-       "/pages/tool-huibidangan/huibidangan" |
        "/pages/tool-huibidangan/huibiDetail" |
+       "/pages/tool-huibidangan/huibidangan" |
        "/pages/tool-huibidangan/input" |
        "/pages/tool-huibidangan/list" |
        "/pages/tool-jiazhishouce/catching" |
@@ -49,8 +49,8 @@ interface NavigateToOptions {
        "/pages/tool-jienalianxi/list" |
        "/pages/tool-qingxucaiji/input" |
        "/pages/tool-qingxucaiji/list" |
-       "/pages/tool-qingxucaiji/qingxucaiji" |
        "/pages/tool-qingxucaiji/qingxuDetail" |
+       "/pages/tool-qingxucaiji/qingxucaiji" |
        "/pages/tool-renzhijieli/distance" |
        "/pages/tool-renzhijieli/leaf" |
        "/pages/tool-renzhijieli/renzhijieli" |
