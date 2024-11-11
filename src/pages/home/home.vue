@@ -11,7 +11,7 @@
   <view class="" h-full w-full>
     <wd-navbar fixed safeAreaInsetTop title="我的旅程"></wd-navbar>
 
-    <view class="content px-4">
+    <view class="content px-4" style="min-height: 100vh">
       <view style="height: 150rpx"></view>
       <view class="h-40 w-full">
         <image src="http://115.159.83.61:9000/home/home.png" mode="scaleToFill" />
@@ -28,51 +28,60 @@
       <view class="card flex justify-center" v-if="waitingTime <= 0">
         <span class="font-800 text-xl" v-if="currProgress != 0">
           已解锁 第 {{ currProgress }} 站
+
+          {{ userInfo.groupId }}
         </span>
         <span class="font-800 text-xl" v-if="currProgress == 0">已解锁 导入</span>
         <!-- <span class="font-800 text-xl ml-4">下一站</span> -->
       </view>
-      <view
-        class="card"
-        v-for="(journey, index) in journeySteps"
-        :key="index"
-        @click="enterJourney(journey.progress)"
-      >
-        <img class="card-icon" :src="journey.icon" />
-        <view class="card-text">{{ journey.text }}</view>
-        <!-- 体验版 -->
-        <img
-          style="width: 60rpx; height: 60rpx"
-          mode="aspectFit"
-          src="http://115.159.83.61:9000/home/icon/finish.png"
-        />
 
-        <!-- <image
-          style="width: 60rpx; height: 60rpx"
-          mode="aspectFit"
-          :src="finishIconUrl"
-          v-show="currProgress > journey.progress"
+      <view v-if="userInfo.groupId !== 2">
+        <view
+          class="card"
+          v-for="(journey, index) in journeySteps"
+          :key="index"
           @click="enterJourney(journey.progress)"
-        />
-        <image
-          style="width: 60rpx; height: 60rpx"
-          mode="aspectFit"
-          :src="startIconUrl"
-          v-show="currProgress == journey.progress && checkTimeFlag"
-          @click="enterJourney(journey.progress)"
-        />
-        <image
-          style="width: 60rpx; height: 60rpx"
-          :src="lockIconUrl"
-          mode="aspectFit"
-          v-show="currProgress == journey.progress && !checkTimeFlag"
-        />
-        <image
-          style="width: 60rpx; height: 60rpx"
-          :src="lockIconUrl"
-          mode="aspectFit"
-          v-show="currProgress < journey.progress"
-        /> -->
+        >
+          <img class="card-icon" :src="journey.icon" />
+          <view class="card-text">{{ journey.text }}</view>
+          <!-- 体验版 -->
+          <!-- <img
+            style="width: 60rpx; height: 60rpx"
+            mode="aspectFit"
+            src="http://115.159.83.61:9000/home/icon/finish.png"
+          /> -->
+
+          <image
+            style="width: 60rpx; height: 60rpx"
+            mode="aspectFit"
+            src="http://115.159.83.61:9000/home/icon/finish.png"
+            v-show="currProgress > journey.progress"
+            @click="enterJourney(journey.progress)"
+          />
+          <image
+            style="width: 60rpx; height: 60rpx"
+            mode="aspectFit"
+            src="http://115.159.83.61:9000/home/icon/startJourney.png"
+            v-show="currProgress == journey.progress && checkTimeFlag"
+            @click="enterJourney(journey.progress)"
+          />
+          <image
+            style="width: 60rpx; height: 60rpx"
+            src="http://115.159.83.61:9000/home/icon/lockJourney.png"
+            mode="aspectFit"
+            v-show="currProgress == journey.progress && !checkTimeFlag"
+          />
+          <image
+            style="width: 60rpx; height: 60rpx"
+            src="http://115.159.83.61:9000/home/icon/lockJourney.png"
+            mode="aspectFit"
+            v-show="currProgress < journey.progress"
+          />
+        </view>
+      </view>
+
+      <view v-if="userInfo.groupId === 2">
+        <p>抱歉，您不属于实验对象，请联系相关负责人</p>
       </view>
       <view style="height: 150rpx"></view>
     </view>
@@ -185,7 +194,7 @@ onLoad(() => {
 })
 
 const calculateHour = () => {
-  const currentTime = new Date().getTime() + 24 * 1000 * 60 * 60
+  const currentTime = new Date().getTime()
   const lockTime = userInfo.value.lockTime
   const remainingTime = (lockTime - currentTime) / (1000 * 60 * 60) // 转化为小时
 
@@ -206,20 +215,22 @@ const enterJourney = async (progress: number) => {
         console.log('没有干预记录')
         interStore.clearInternfo()
         globalPageControl.clearInternfo()
+
         const numberStr = progress.toString()
+        console.log('numberStr', numberStr)
 
         // uni.redirectTo({
         //   url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
         // })
         // 如果不是导入，跳转到站前测量
-        if (numberStr === '0' || numberStr === '1') {
+        if (numberStr === '0' || numberStr === '1' || numberStr === '8' || numberStr === '9') {
           uni.redirectTo({
             url:
               '/pages/journey_common/start_journey?progress=' +
               encodeURIComponent(progress.toString()),
           })
         }
-        if (numberStr !== '0' && numberStr !== '1') {
+        if (numberStr !== '0' && numberStr !== '1' && numberStr !== '8' && numberStr !== '9') {
           uni.redirectTo({
             url: '/pages/inquiry/before?progress=' + encodeURIComponent(progress.toString()),
           })
@@ -304,7 +315,7 @@ const enterJourney = async (progress: number) => {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 15px;
+  gap: 40rpx;
 
   padding-top: 1.25rem;
   /* margin-top: 3rem; */
@@ -316,6 +327,7 @@ const enterJourney = async (progress: number) => {
   align-items: center;
   height: auto;
   padding: 15px;
+  margin-bottom: 20rpx;
   /* background-color: white; */
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
