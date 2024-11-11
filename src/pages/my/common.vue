@@ -37,8 +37,9 @@ const username = ref('')
 
 const imgUrl = ref('')
 const operationIcon = 'http://115.159.83.61:9000/common/back.png'
-const navbarTitle = ref('热线')
+const navbarTitle = ref('')
 const top = ref(0)
+const groupId = ref(0)
 // onLoad(() => {
 //   console.log(userStore.userInfo)
 // })
@@ -48,6 +49,11 @@ const { safeAreaInsets } = uni.getSystemInfoSync()
 onLoad(async (param) => {
   imgUrl.value = 'http://115.159.83.61:9000/' + param.url
   console.log('imgUrl:', imgUrl.value)
+
+  groupId.value = param.groupId
+  console.log('groupId:', groupId.value)
+
+  navbarTitle.value = param.title
 
   console.log('safeAreaInsets', safeAreaInsets)
   top.value = safeAreaInsets.top
@@ -60,6 +66,8 @@ const doOperation = () => {
 
 <style>
 .main-container {
+  /* height: 100vh;
+  overflow: y-scroll; */
   background: rgb(237, 248, 243);
 }
 
