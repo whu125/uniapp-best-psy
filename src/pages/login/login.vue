@@ -84,11 +84,6 @@ const loginInfo = ref({
   wechatPassword: null,
 })
 
-const login = () => {
-  // 实现登录逻辑
-  console.log('登录123')
-}
-
 // const openid = ref()
 const check = () => {
   message.alert('请先同意用户协议、隐私协议')
@@ -108,7 +103,7 @@ const loginApi = async () => {
     // 服务端获取手机号
     console.log('res2', res2)
     toast.close()
-    if (res2.code == 200) {
+    if (res2.code === 200) {
       // 更改role
 
       await setRole('admin')
@@ -116,7 +111,7 @@ const loginApi = async () => {
 
       toast.success('登录成功')
       // 判断是否是第一次登录
-      if (res2.data == true) {
+      if (res2.data === true) {
         uni.navigateTo({
           url: '/pages/inquiry/first',
         })
@@ -174,12 +169,12 @@ const getPhoneNumber = async (e) => {
     // 服务端获取手机号
     console.log('res2', res2)
     toast.close()
-    if (res2.code == 200) {
+    if (res2.code === 200) {
       uni.showToast({
         title: '登录成功',
       })
       // 判断是否是第一次登录
-      if (res2.data == true) {
+      if (res2.data === true) {
         uni.navigateTo({
           url: '/pages/inquiry/first',
         })

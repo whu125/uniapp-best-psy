@@ -195,12 +195,13 @@ const submit = async () => {
   console.log(res)
   if (res.code === 200) {
     toast.success('干预完成！')
-
+    // 清除 pinia 干预缓存
+    interStore.clearInternfo()
     // 这里要判断是否是第一次提交最新一次干预
     if (res.data === userStore.userInfo.currProgress + 1) {
       // 说明此时是第一次提交最新一次干预
       userStore.addProgress()
-      userStore.setLockTime()
+      // userStore.setLockTime()
     }
 
     globalPageControl.clearInternfo()

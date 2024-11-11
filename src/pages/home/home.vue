@@ -28,20 +28,14 @@
       <view class="card flex justify-center" v-if="waitingTime <= 0">
         <span class="font-800 text-xl" v-if="currProgress != 0">
           已解锁 第 {{ currProgress }} 站
-
-          {{ userInfo.groupId }}
+          {{ userStore.userInfo.groupId }}
         </span>
         <span class="font-800 text-xl" v-if="currProgress == 0">已解锁 导入</span>
         <!-- <span class="font-800 text-xl ml-4">下一站</span> -->
       </view>
 
-      <view v-if="userInfo.groupId !== 2">
-        <view
-          class="card"
-          v-for="(journey, index) in journeySteps"
-          :key="index"
-          @click="enterJourney(journey.progress)"
-        >
+      <view v-if="userStore.userInfo.groupId !== 2">
+        <view class="card" v-for="(journey, index) in journeySteps" :key="index">
           <img class="card-icon" :src="journey.icon" />
           <view class="card-text">{{ journey.text }}</view>
           <!-- 体验版 -->
@@ -62,14 +56,14 @@
             style="width: 60rpx; height: 60rpx"
             mode="aspectFit"
             src="http://115.159.83.61:9000/home/icon/startJourney.png"
-            v-show="currProgress == journey.progress && checkTimeFlag"
+            v-show="currProgress == journey.progress && waitingTime <= 0"
             @click="enterJourney(journey.progress)"
           />
           <image
             style="width: 60rpx; height: 60rpx"
             src="http://115.159.83.61:9000/home/icon/lockJourney.png"
             mode="aspectFit"
-            v-show="currProgress == journey.progress && !checkTimeFlag"
+            v-show="currProgress == journey.progress && waitingTime > 0"
           />
           <image
             style="width: 60rpx; height: 60rpx"
@@ -80,7 +74,7 @@
         </view>
       </view>
 
-      <view v-if="userInfo.groupId === 2">
+      <view v-if="userStore.userInfo.groupId === 2">
         <p>抱歉，您不属于实验对象，请联系相关负责人</p>
       </view>
       <view style="height: 150rpx"></view>
@@ -99,6 +93,7 @@ import { useUserStore } from '@/store/user'
 import { useInterStore } from '@/store/inter'
 import { useGlobalPageControlStore } from '@/store/globalPageControl'
 import { useMessage, useToast } from 'wot-design-uni'
+import { url } from '@/interceptors/request'
 
 defineOptions({
   name: 'Home',
@@ -110,25 +105,17 @@ uni.hideTabBar()
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const userStore = useUserStore()
 const message = useMessage()
-
 const toast = useToast()
 const interStore = useInterStore()
 const globalPageControl = useGlobalPageControlStore()
-
-const userInfo = ref<IUserInfo>(userStore.userInfo)
+// const userInfo = ref<IUserInfo>(userStore.userInfo)
 // const currProgress = ref<number>(2)
 const currProgress = ref<number>(userStore.userInfo.currProgress % 8)
-
 const curInter = ref<number>(interStore.interInfo.interId % 8)
-
-const checkTimeFlag = ref(false)
+// const checkTimeFlag = ref(false)
 // const checkTimeFlag = ref(true)
-
-const waitingTime = ref(1)
-
-const finishIconUrl = 'http://115.159.83.61:9000/home/icon/finish.png'
-const lockIconUrl = 'http://115.159.83.61:9000/home/icon/lockJourney.png'
-const startIconUrl = 'http://115.159.83.61:9000/home/icon/startJourney.png'
+const waitingTime = ref(0)
+const websocket = ref()
 const journeySteps = ref([
   {
     icon: 'http://115.159.83.61:9000/home/icon/journey0.png',
@@ -176,28 +163,60 @@ onShow(() => {
   currProgress.value = userStore.userInfo.currProgress % 8
   curInter.value = interStore.interInfo.interId % 8
 })
+
 // 测试 uni API 自动引入
 onLoad(() => {
   const currentTime = new Date().getTime()
 
   // userInfo.value.lockTime = new Date().getTime() + 3 * 60 * 60 * 1000 // 设置锁定时间为当前时间加3小时
-  console.log('userInfo', userInfo.value)
-  const leftTime = calculateHour()
-  console.log('leftTime', leftTime)
-  if (leftTime > 0) {
-    waitingTime.value = Math.floor(leftTime) + 1
-  } else {
-    console.log('请求后端，更新下一站')
-    waitingTime.value = 0
-    checkTimeFlag.value = true
-  }
+  console.log('userInfo', userStore.userInfo)
+  // const leftTime = calculateHour()
+  // console.log('leftTime', leftTime)
+  // if (leftTime > 0) {
+  //   waitingTime.value = Math.floor(leftTime) + 1
+  // } else {
+  //   console.log('请求后端，更新下一站')
+  //   waitingTime.value = 0
+  //   checkTimeFlag.value = true
+  // }
+
+  // 建立 websocket 连接
+  websocket.value = uni.connectSocket({
+    url: `wss://${url}/websocket/` + userStore.userInfo.userId,
+    success: () => {
+      console.log('websocket connect success')
+    },
+    fail: () => {
+      console.log('websocket connect fail')
+    },
+  })
+  uni.onSocketOpen((res) => {
+    console.log('websocket open')
+  })
+  uni.onSocketError((res) => {
+    console.log('websocket open error')
+  })
+})
+
+onUnload(() => {
+  uni.onSocketClose((res) => {
+    console.log('websocket close')
+  })
+})
+
+uni.onSocketMessage((res) => {
+  console.log('收到服务器内容：' + res.data)
+  // 后端 websocket 发来的数据形如 waitingTime # currProgress
+  waitingTime.value = res.data.split('#')[0]
+  userStore.userInfo.currProgress = res.data.split('#')[1]
+  currProgress.value = userStore.userInfo.currProgress % 8
 })
 
 const calculateHour = () => {
+  // 这个函数应该用不到了
   const currentTime = new Date().getTime()
-  const lockTime = userInfo.value.lockTime
+  const lockTime = userStore.userInfo.lockTime
   const remainingTime = (lockTime - currentTime) / (1000 * 60 * 60) // 转化为小时
-
   return remainingTime
 }
 
@@ -206,7 +225,7 @@ const enterJourney = async (progress: number) => {
     tmplIds: ['kAcfm-7a4wnQ03jYBqa_rplhsYjfJXNN71MhlMGADPg'], // 模板ID
     success(res) {
       console.log('interStore.value', interStore.interInfo)
-      if (userInfo.value.groupId === 1) {
+      if (userStore.userInfo.groupId === 1) {
         progress += 8
       }
 

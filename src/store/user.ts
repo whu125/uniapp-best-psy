@@ -38,6 +38,7 @@ export const useUserStore = defineStore(
 
     const setLockTime = () => {
       // 24小时后解锁
+      // 这个函数应该用不到了
       userInfo.value.lockTime = new Date().getTime() + 24 * 60 * 60 * 1000
     }
 

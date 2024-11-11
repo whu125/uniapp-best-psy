@@ -11,8 +11,9 @@ export type CustomRequestOptions = UniApp.RequestOptions & {
 
 // 请求基准地址
 // const baseUrl = import.meta.env.VITE_SERVER_BASEURL
-// const baseUrl = 'https://mindease.online:28081'
-const baseUrl = 'https://localhost:443'
+// export const url = 'mindease.online:28081'
+export const url = 'localhost:443'
+export const baseUrl = 'https://' + url
 
 // 拦截器配置
 const httpInterceptor = {
