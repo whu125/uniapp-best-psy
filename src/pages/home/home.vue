@@ -45,38 +45,38 @@
           <img class="card-icon" :src="journey.icon" />
           <view class="card-text">{{ journey.text }}</view>
           <!-- 体验版 -->
-          <img
+          <!-- <img
             style="width: 60rpx; height: 60rpx"
             mode="aspectFit"
             src="http://115.159.83.61:9000/home/icon/finish.png"
-          />
+          /> -->
 
-          <!-- <image
-          style="width: 60rpx; height: 60rpx"
-          mode="aspectFit"
-          :src="finishIconUrl"
-          v-show="currProgress > journey.progress"
-          @click="enterJourney(journey.progress)"
-        />
-        <image
-          style="width: 60rpx; height: 60rpx"
-          mode="aspectFit"
-          :src="startIconUrl"
-          v-show="currProgress == journey.progress && checkTimeFlag"
-          @click="enterJourney(journey.progress)"
-        />
-        <image
-          style="width: 60rpx; height: 60rpx"
-          :src="lockIconUrl"
-          mode="aspectFit"
-          v-show="currProgress == journey.progress && !checkTimeFlag"
-        />
-        <image
-          style="width: 60rpx; height: 60rpx"
-          :src="lockIconUrl"
-          mode="aspectFit"
-          v-show="currProgress < journey.progress"
-        /> -->
+          <image
+            style="width: 60rpx; height: 60rpx"
+            mode="aspectFit"
+            src="http://115.159.83.61:9000/home/icon/finish.png"
+            v-show="currProgress > journey.progress"
+            @click="enterJourney(journey.progress)"
+          />
+          <image
+            style="width: 60rpx; height: 60rpx"
+            mode="aspectFit"
+            src="http://115.159.83.61:9000/home/icon/startJourney.png"
+            v-show="currProgress == journey.progress && checkTimeFlag"
+            @click="enterJourney(journey.progress)"
+          />
+          <image
+            style="width: 60rpx; height: 60rpx"
+            src="http://115.159.83.61:9000/home/icon/lockJourney.png"
+            mode="aspectFit"
+            v-show="currProgress == journey.progress && !checkTimeFlag"
+          />
+          <image
+            style="width: 60rpx; height: 60rpx"
+            src="http://115.159.83.61:9000/home/icon/lockJourney.png"
+            mode="aspectFit"
+            v-show="currProgress < journey.progress"
+          />
         </view>
       </view>
 
@@ -194,7 +194,7 @@ onLoad(() => {
 })
 
 const calculateHour = () => {
-  const currentTime = new Date().getTime() + 24 * 1000 * 60 * 60
+  const currentTime = new Date().getTime()
   const lockTime = userInfo.value.lockTime
   const remainingTime = (lockTime - currentTime) / (1000 * 60 * 60) // 转化为小时
 
@@ -215,20 +215,22 @@ const enterJourney = async (progress: number) => {
         console.log('没有干预记录')
         interStore.clearInternfo()
         globalPageControl.clearInternfo()
+
         const numberStr = progress.toString()
+        console.log('numberStr', numberStr)
 
         // uni.redirectTo({
         //   url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
         // })
         // 如果不是导入，跳转到站前测量
-        if (numberStr === '0' || numberStr === '1') {
+        if (numberStr === '0' || numberStr === '1' || numberStr === '8' || numberStr === '9') {
           uni.redirectTo({
             url:
               '/pages/journey_common/start_journey?progress=' +
               encodeURIComponent(progress.toString()),
           })
         }
-        if (numberStr !== '0' && numberStr !== '1') {
+        if (numberStr !== '0' && numberStr !== '1' && numberStr !== '8' && numberStr !== '9') {
           uni.redirectTo({
             url: '/pages/inquiry/before?progress=' + encodeURIComponent(progress.toString()),
           })
