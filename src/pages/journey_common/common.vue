@@ -403,7 +403,7 @@ onShow(async () => {
   console.log('pageContent.value', pageContent.value)
   // 恢复页面状态
   recoverPageStatus()
-  // 第一套干预的结束部分展示之前的目标
+  // 在干预99显示初始目标
   fillUserGoal()
 })
 

@@ -66,7 +66,7 @@
       </div>
 
       <div class="menu-items">
-        <div class="menu-item">
+        <div class="menu-item" @click="toCommon('新手指南')">
           <view>
             <image
               style="width: 60rpx; height: 60rpx"
@@ -77,7 +77,7 @@
           <span class="label ml-4">新手指南</span>
           <span class="arrow">›</span>
         </div>
-        <div class="menu-item" @click="toRexian">
+        <div class="menu-item" @click="toCommon('心理危机热线')">
           <view>
             <image
               style="width: 60rpx; height: 60rpx"
@@ -85,11 +85,10 @@
               src="../../static/images/my/rexiandianhua.png"
             />
           </view>
-
           <span class="label ml-4">心理危机热线</span>
           <span class="arrow">›</span>
         </div>
-        <div class="menu-item" @click="toEmail">
+        <div class="menu-item" @click="toCommon('咨询师信箱')">
           <view>
             <image
               style="width: 60rpx; height: 60rpx"
@@ -100,7 +99,7 @@
           <span class="label ml-4">咨询师信箱</span>
           <span class="arrow">›</span>
         </div>
-        <div class="menu-item" @click="toFeedBack">
+        <div class="menu-item" @click="toCommon('意见反馈')">
           <view>
             <image
               style="width: 60rpx; height: 60rpx"
@@ -112,7 +111,7 @@
           <span class="arrow">›</span>
         </div>
 
-        <div class="menu-item">
+        <div class="menu-item" @click="toCommon('关于我们')">
           <view>
             <image
               style="width: 60rpx; height: 60rpx"
@@ -177,7 +176,7 @@ import { useUserStore } from '@/store/user'
 import { logout, test, setUserAvatar, setUserName } from '@/service/index/user'
 import { uploadImg } from '@/service/common/upload'
 import tabbar from '@/pages/tabbar/tabbar.vue'
-import { IInterPage, useInterStore } from '@/store/inter'
+import { IMyPage, useInterStore } from '@/store/inter'
 import { useMessage, useToast } from 'wot-design-uni'
 import { exportExcelApi } from '@/service/admin/admin'
 
@@ -201,6 +200,25 @@ defineOptions({
 //   console.log(userStore.userInfo)
 // })
 
+const pageContentList = ref<IMyPage[]>([
+  {
+    navbarTitle: '心理危机热线',
+    imgUrl: 'http://115.159.83.61:9000/home/2mine-3.png',
+  },
+  {
+    navbarTitle: '咨询师信箱',
+    imgUrl: 'http://115.159.83.61:9000/home/2mine-4.png',
+  },
+  {
+    navbarTitle: '意见反馈',
+    imgUrl: 'http://115.159.83.61:9000/home/2mine-5.png',
+  },
+  {
+    navbarTitle: '关于我们',
+    imgUrl: 'http://115.159.83.61:9000/home/2mine-6.png',
+  },
+])
+
 onShow(() => {
   userInfo.value = userStore.userInfo
   console.log('userInfo:', userInfo.value)
@@ -213,73 +231,30 @@ onShow(() => {
   }
 })
 
-const toAboutUs = () => {
-  const params = {
-    url: 'home/mine-5.png',
-    groupId: 0,
-    title: '意见反馈',
-  }
-  uni.redirectTo({
-    url:
-      '/pages/my/common?' +
-      Object.keys(params)
-        .map((key) => `${key}=${params[key]}`)
-        .join('&'),
-  })
-}
-
-const toFeedBack = () => {
-  const params = {
-    url: 'home/mine-5.png',
-    groupId: 0,
-    title: '意见反馈',
-  }
-  uni.redirectTo({
-    url:
-      '/pages/my/common?' +
-      Object.keys(params)
-        .map((key) => `${key}=${params[key]}`)
-        .join('&'),
-  })
-}
-
-const toEmail = () => {
-  const params = {
-    url: 'home/mine-4.png',
-    groupId: 0,
-    title: '咨询师信箱',
+const toCommon = (name: string) => {
+  let detailObject = ''
+  if (name === '心理危机热线') {
+    detailObject = encodeURIComponent(JSON.stringify(pageContentList.value[0]))
+  } else if (name === '咨询师信箱') {
+    detailObject = encodeURIComponent(JSON.stringify(pageContentList.value[1]))
+  } else if (name === '意见反馈') {
+    detailObject = encodeURIComponent(JSON.stringify(pageContentList.value[2]))
+  } else if (name === '关于我们') {
+    detailObject = encodeURIComponent(JSON.stringify(pageContentList.value[3]))
+  } else if (name === '新手指南') {
+    uni.navigateTo({
+      url: `/pages/my/guide`,
+    })
   }
 
-  console.log('params', params)
-  uni.redirectTo({
-    url:
-      '/pages/my/common?' +
-      Object.keys(params)
-        .map((key) => `${key}=${params[key]}`)
-        .join('&'),
-  })
-}
-
-const toRexian = () => {
-  const params = {
-    url: 'home/mine-3.png',
-    groupId: 0,
-    title: '心理危机热线',
-  }
-  uni.redirectTo({
-    url:
-      '/pages/my/common?' +
-      Object.keys(params)
-        .map((key) => `${key}=${params[key]}`)
-        .join('&'),
+  uni.navigateTo({
+    url: `/pages/my/common?detail=${detailObject}`,
   })
 }
 
 const getUserInfo = () => {
   console.log('获取用户信息')
 }
-// 获取屏幕边界到安全区域距离
-const { safeAreaInsets } = uni.getSystemInfoSync()
 
 const logoutByToken = async () => {
   const res = await logout()

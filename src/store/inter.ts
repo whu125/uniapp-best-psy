@@ -25,6 +25,11 @@ export type IInterPage = {
   pageType: string
 }
 
+export type IMyPage = {
+  imgUrl: string
+  navbarTitle: string
+}
+
 type IInterState = {
   interId: number
   recordId: number
