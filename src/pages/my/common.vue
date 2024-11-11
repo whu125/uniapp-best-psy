@@ -66,8 +66,8 @@ const doOperation = () => {
 
 <style>
 .main-container {
-  /* height: 100vh;
-  overflow: y-scroll; */
+  /* height: 1000px;
+  overflow: hidden; */
   background: rgb(237, 248, 243);
 }
 

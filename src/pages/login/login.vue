@@ -203,6 +203,7 @@ const weixinLogin = async () => {
       // 客户端成功获取授权临时票据（code）,向业务服务器发起登录请求。
       uni.request({
         url: 'https://mindease.online:28081/loginByWechat',
+        // url: 'https://localhost:443/loginByWechat',
         method: 'POST',
         data: {
           code: event.code,
