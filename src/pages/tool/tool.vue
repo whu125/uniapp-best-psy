@@ -124,7 +124,7 @@ const ToTool = (toolName: string) => {
     })
   } else if (toolName === '三件小事') {
     uni.navigateTo({
-      url: '/pages/mood/mood',
+      url: '/pages/tool-sanjianxiaoshi/sanjianxiaoshi',
     })
   } else if (toolName === '自动思维') {
     uni.navigateTo({

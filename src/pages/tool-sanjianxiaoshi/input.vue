@@ -54,15 +54,19 @@
           style="width: 100%"
         />
       </view>
-      <view class="mood-container">
-        <view class="mood-font" v-for="(mood, index) in statusList" :key="index">
-          <img
-            :src="mood.iconUrl"
-            style="width: 50px; height: 50px"
-            @click="selectStatus(mood.iconUrl)"
-          />
+
+      <view class="select-btns">
+        <view
+          v-for="(status, index) in statusList"
+          :key="index"
+          class="select-btn"
+          :class="{ selected: selectedItem === index }"
+          @click="selectItem(index)"
+        >
+          <image :src="status.iconUrl" mode="aspectFit" style="width: 100%" />
         </view>
       </view>
+
       <view @click="doSubmit" class="operation-area">
         <img src="http://115.159.83.61:9000/common/finish.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">添加到日记</view>
@@ -78,9 +82,6 @@ import { useUserStore } from '@/store/user'
 import { useMessage, useToast } from 'wot-design-uni'
 
 const currIndex = ref<number>(0)
-const selectStatus = (url: string) => {
-  submitObj.value.statusUrl = url
-}
 const statusList = ref([
   {
     iconUrl: 'http://115.159.83.61:9000/tool/sanjianxiaoshi/icon1.png',
@@ -138,9 +139,15 @@ const submitObj = ref<ISanjianxiaoshi>({
 })
 const userStore = useUserStore()
 const message = useMessage()
+const selectedItem = ref<number>(-1)
 
 const toNext = () => {
   currIndex.value = currIndex.value + 1
+}
+
+const selectItem = (index) => {
+  selectedItem.value = index
+  submitObj.value.statusUrl = statusList.value[index].iconUrl
 }
 
 const goBack = () => {
@@ -149,6 +156,7 @@ const goBack = () => {
 const doSubmit = async () => {
   submitObj.value.userId = userStore.userInfo.userId
   submitObj.value.date = getFormattedDate().split(' ')[0]
+  console.log(submitObj.value)
 
   const res = await submitSanjianxiaoshi(submitObj.value)
   if (res.code === 200) {
@@ -197,11 +205,6 @@ const doSubmit = async () => {
   width: 100%;
   height: auto;
   margin: 15px 0 20px 0;
-}
-
-.mood-container {
-  display: flex;
-  justify-content: space-around;
 }
 
 .mood-font {

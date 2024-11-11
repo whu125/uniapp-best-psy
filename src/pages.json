@@ -471,7 +471,7 @@
       }
     },
     {
-      "path": "pages/tool-sanjianxiaoshi/shanjianxiaoshi",
+      "path": "pages/tool-sanjianxiaoshi/sanjianxiaoshi",
       "type": "page",
       "style": {
         "navigationStyle": "custom",

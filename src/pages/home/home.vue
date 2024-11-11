@@ -41,7 +41,11 @@
         <img class="card-icon" :src="journey.icon" />
         <view class="card-text">{{ journey.text }}</view>
         <!-- 体验版 -->
-        <img style="width: 60rpx; height: 60rpx" mode="aspectFit" :src="finishIconUrl" />
+        <img
+          style="width: 60rpx; height: 60rpx"
+          mode="aspectFit"
+          src="http://115.159.83.61:9000/home/icon/finish.png"
+        />
 
         <!-- <image
           style="width: 60rpx; height: 60rpx"

@@ -57,7 +57,7 @@ interface NavigateToOptions {
        "/pages/tool-sanjianxiaoshi/input" |
        "/pages/tool-sanjianxiaoshi/list" |
        "/pages/tool-sanjianxiaoshi/sanjianDetail" |
-       "/pages/tool-sanjianxiaoshi/shanjianxiaoshi" |
+       "/pages/tool-sanjianxiaoshi/sanjianxiaoshi" |
        "/pages/tool-xingdongjihua/catching" |
        "/pages/tool-xingdongjihua/list" |
        "/pages/tool-xingdongjihua/xingdongDetail" |

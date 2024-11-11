@@ -11,7 +11,6 @@
     <wd-navbar fixed safeAreaInsetTop left-text="返回" left-arrow @click-left="goBack"></wd-navbar>
     <view class="main-container">
       <view style="height: 15%"></view>
-      <view class="font">情绪采集手册</view>
       <view v-for="(sanjian, index) in sanjianList" :key="index">
         <view class="box" @click="selectSanjian(index)">
           <view style="font-size: 18px; color: gray">{{ sanjian.date }}</view>
