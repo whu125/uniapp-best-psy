@@ -85,6 +85,7 @@ import PLATFORM from '@/utils/platform'
 import { useMessage, useToast } from 'wot-design-uni'
 import { useUserStore } from '@/store'
 import { getUserInfo, getPhoneNumberApi, evalRole, setRole } from '@/service/index/user'
+import { url } from '@/interceptors/request'
 
 const toast = useToast()
 const phonecode = ref('')
@@ -270,6 +271,23 @@ const weixinLogin = async () => {
           console.log('-----------------userinfo------------------')
           console.log(userStore.userInfo)
           console.log(userStore.userInfo.token)
+
+          // 建立 websocket 连接
+          uni.connectSocket({
+            url: `wss://${url}/websocket/` + userStore.userInfo.userId,
+            success: () => {
+              console.log('websocket connect success')
+            },
+            fail: () => {
+              console.log('websocket connect fail')
+            },
+          })
+          uni.onSocketOpen((res) => {
+            console.log('websocket open')
+          })
+          uni.onSocketError((res) => {
+            console.log('websocket open error')
+          })
         },
       })
     },

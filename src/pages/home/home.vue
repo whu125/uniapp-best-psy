@@ -92,7 +92,6 @@ import { useUserStore } from '@/store/user'
 import { useInterStore } from '@/store/inter'
 import { useGlobalPageControlStore } from '@/store/globalPageControl'
 import { useMessage, useToast } from 'wot-design-uni'
-import { url } from '@/interceptors/request'
 
 defineOptions({
   name: 'Home',
@@ -114,7 +113,6 @@ const curInter = ref<number>(interStore.interInfo.interId % 8)
 // const checkTimeFlag = ref(false)
 // const checkTimeFlag = ref(true)
 const waitingTime = ref(0)
-const websocket = ref()
 const journeySteps = ref([
   {
     icon: 'http://115.159.83.61:9000/home/icon/journey0.png',
@@ -153,7 +151,7 @@ const journeySteps = ref([
   },
   {
     icon: 'http://115.159.83.61:9000/home/icon/journey7.png',
-    text: '第七站：开启新旅程',
+    text: '第七站：开启新的旅程',
     progress: 7,
   },
 ])
@@ -178,30 +176,13 @@ onLoad(() => {
   //   waitingTime.value = 0
   //   checkTimeFlag.value = true
   // }
-
-  // 建立 websocket 连接
-  websocket.value = uni.connectSocket({
-    url: `wss://${url}/websocket/` + userStore.userInfo.userId,
-    success: () => {
-      console.log('websocket connect success')
-    },
-    fail: () => {
-      console.log('websocket connect fail')
-    },
-  })
-  uni.onSocketOpen((res) => {
-    console.log('websocket open')
-  })
-  uni.onSocketError((res) => {
-    console.log('websocket open error')
-  })
 })
 
-onUnload(() => {
-  uni.onSocketClose((res) => {
-    console.log('websocket close')
-  })
-})
+// onUnload(() => {
+//   uni.onSocketClose((res) => {
+//     console.log('websocket close')
+//   })
+// })
 
 uni.onSocketMessage((res) => {
   console.log('收到服务器内容：' + res.data)
