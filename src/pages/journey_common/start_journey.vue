@@ -222,9 +222,15 @@ const startJourney = async () => {
         url: '/pages/journey_common/common',
       })
     } else if (userStore.userInfo.groupId === 1) {
-      uni.redirectTo({
-        url: '/pages/journey_common/daolanHome',
-      })
+      if (progress.value !== 8) {
+        uni.redirectTo({
+          url: '/pages/journey_common/daolanHome',
+        })
+      } else {
+        uni.redirectTo({
+          url: '/pages/journey_common/common',
+        })
+      }
     }
   } else {
     toast.error('出现了一些问题')

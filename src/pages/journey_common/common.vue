@@ -377,7 +377,23 @@ const globalPageControlStore = useGlobalPageControlStore()
 const toast = useToast()
 const pageType = ref<string>('normal')
 const prevIconUrl = ref<string>('http://115.159.83.61:9000/common/prev.png')
-const pageContent = ref<IInterPage>()
+const pageContent = ref<IInterPage>({
+  pageId: -1,
+  interId: -1,
+  imgUrl: '',
+  textContent: '',
+  navbarTitle: '',
+  operationIcon: '',
+  operationText: '',
+  slideImages: [],
+  inputQuestions: [],
+  inputPlaceholders: [],
+  buttonUrls: [],
+  audioUrls: [],
+  selectUrls: [],
+  specialPage: '',
+  pageType: '',
+})
 const currentSlideImage = ref<number>(0)
 const selectedItem = ref<number>(-1)
 const checkBoxItem = ref<number[]>([])
@@ -669,10 +685,13 @@ const doOperation = async () => {
   }
   // 如果是结束部分最后一页 提交干预 返回主页面
   // 如果是第二套干预的拓展 提交干预 返回主页面
+  // 如果是导入 提交干预 返回主页面
   if (
     (pageContent.value.interId === 99 && pageContent.value.operationIcon.endsWith('finish.png')) ||
     (pageContent.value.interId === 100 && pageContent.value.operationIcon.endsWith('finish.png')) ||
-    (userStore.userInfo.groupId === 1 && pageContent.value.operationText.endsWith('拓展'))
+    (userStore.userInfo.groupId === 1 && pageContent.value.operationText.endsWith('拓展')) ||
+    (pageContent.value.interId === 0 && pageContent.value.operationIcon.endsWith('finish.png')) ||
+    (pageContent.value.interId === 8 && pageContent.value.operationIcon.endsWith('finish.png'))
   ) {
     const submitObj: ISubmitInter = {
       userId: userStore.userInfo.userId,
@@ -688,9 +707,11 @@ const doOperation = async () => {
       // 清除缓存
       interStore.clearInternfo()
       globalPageControlStore.clearInternfo()
-      uni.redirectTo({ url: '/pages/home/home' })
+      uni.switchTab({ url: '/pages/home/home' })
+      return
     } else {
       toast.error('出现了一些问题')
+      return
     }
   }
   // 如果是第二套干预7的最后一页 提交干预 跳转到旅程报告
@@ -726,27 +747,6 @@ const doOperation = async () => {
   if (pageContent.value.specialPage === null) {
     uni.redirectTo({
       url: '/pages/journey_common/common',
-    })
-  } else if (pageContent.value.specialPage === '/pages/home/home') {
-    // 如果是干预0，提交内容
-    const submitObj: ISubmitInter = {
-      userId: userStore.userInfo.userId,
-      interId: interStore.interInfo.interId,
-      endTime: getFormattedDate(),
-      inputPages: interStore.inputPages,
-      inputContent: interStore.inputContent,
-    }
-    const res = await submitInter(submitObj)
-    if (res.code === 200) {
-      // 清除缓存
-      interStore.clearInternfo()
-      globalPageControlStore.clearInternfo()
-      uni.redirectTo({ url: '/pages/home/home' })
-    } else {
-      toast.error('出现了一些问题')
-    }
-    uni.switchTab({
-      url: pageContent.value.specialPage,
     })
   } else {
     // 否则跳转到特殊页面
