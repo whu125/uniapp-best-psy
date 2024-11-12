@@ -377,7 +377,23 @@ const globalPageControlStore = useGlobalPageControlStore()
 const toast = useToast()
 const pageType = ref<string>('normal')
 const prevIconUrl = ref<string>('http://115.159.83.61:9000/common/prev.png')
-const pageContent = ref<IInterPage>()
+const pageContent = ref<IInterPage>({
+  pageId: -1,
+  interId: -1,
+  imgUrl: '',
+  textContent: '',
+  navbarTitle: '',
+  operationIcon: '',
+  operationText: '',
+  slideImages: [],
+  inputQuestions: [],
+  inputPlaceholders: [],
+  buttonUrls: [],
+  audioUrls: [],
+  selectUrls: [],
+  specialPage: '',
+  pageType: '',
+})
 const currentSlideImage = ref<number>(0)
 const selectedItem = ref<number>(-1)
 const checkBoxItem = ref<number[]>([])
@@ -688,7 +704,7 @@ const doOperation = async () => {
       // 清除缓存
       interStore.clearInternfo()
       globalPageControlStore.clearInternfo()
-      uni.redirectTo({ url: '/pages/home/home' })
+      uni.switchTab({ url: '/pages/home/home' })
     } else {
       toast.error('出现了一些问题')
     }

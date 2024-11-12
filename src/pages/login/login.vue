@@ -42,9 +42,35 @@
       </div>
 
       <div class="agreement">
-        <wd-checkbox v-model="agreed" @change="handleAgreementChange">
-          <p class="c-white">同意用户协议、隐私协议</p>
-        </wd-checkbox>
+        <wd-checkbox
+          v-model="agreed"
+          @change="handleAgreementChange"
+          style="width: 20px"
+        ></wd-checkbox>
+        <view class="c-white">
+          同意
+          <span
+            @click="showRule"
+            style="
+              color: skyblue; /* 文字颜色设置为蓝色 */
+              text-decoration: underline; /* 下划线效果 */
+              cursor: pointer;
+            "
+          >
+            用户协议
+          </span>
+          <span>、</span>
+          <span
+            @click="showPrivacy"
+            style="
+              color: skyblue; /* 文字颜色设置为蓝色 */
+              text-decoration: underline; /* 下划线效果 */
+              cursor: pointer;
+            "
+          >
+            隐私协议
+          </span>
+        </view>
       </div>
 
       <!-- <p class="note">注：该小程序非商业应用，仅为科学研究使用，用户为参与研究人员，请勿转载</p> -->
@@ -65,7 +91,7 @@ const phonecode = ref('')
 const message = useMessage()
 
 const agreed = ref(false)
-
+const ruleFlag = ref(false)
 const passwd = ref()
 defineOptions({
   name: 'login',
@@ -87,6 +113,36 @@ const loginInfo = ref({
 // const openid = ref()
 const check = () => {
   message.alert('请先同意用户协议、隐私协议')
+}
+
+const showPrivacy = () => {
+  ruleFlag.value = true
+  uni.navigateTo({
+    url: '/pages/login/privacyRule',
+  })
+}
+
+const showRule = () => {
+  ruleFlag.value = true
+  uni.navigateTo({
+    url: '/pages/login/userRule',
+  })
+  //   message.alert({
+  //     msg: `
+  // 武汉次元科技有限公司（以下简称"我们"）依据本协议为用户（以下简称"你"）提供心旅奇遇服务。本协议对你和我们均具有法律约束力。\n
+  // 一、本服务的功能\n
+  // 你可以使用本服务进行自主化心理干预。\n
+  // 二、责任范围及限制\n
+  // 你使用本服务得到的结果仅供参考，实际情况以官方为准。\n
+  // 三、隐私保护\n
+  // 我们重视对你隐私的保护，你的个人隐私信息将根据《隐私政策》受到保护与规范，详情请参阅《隐私政策》。\n
+  // 四、其他条款\n
+  // 4.1 本协议所有条款的标题仅为阅读方便，本身并无实际涵义，不能作为本协议涵义解释的依据。\n
+  // 4.2 本协议条款无论因何种原因部分无效或不可执行，其余条款仍有效，对双方具有约束力。\n
+
+  // `,
+  //     title: '用户协议',
+  //   })
 }
 
 const loginApi = async () => {
@@ -295,6 +351,7 @@ const handleAgreementChange = () => {
 }
 
 .agreement {
+  display: flex;
   margin-top: 20px;
   font-size: 14px;
   transform: translateY(150rpx);
