@@ -1,14 +1,54 @@
 <script setup lang="ts">
-import { onLaunch, onShow, onHide } from '@dcloudio/uni-app'
+import { onLaunch, onShow, onHide, onExit } from '@dcloudio/uni-app'
+import { useUserStore } from './store'
+import { url } from '@/interceptors/request'
 
+const userStore = useUserStore()
 onLaunch(() => {
   console.log('App Launch')
 })
 onShow(() => {
   console.log('App Show')
+  // 如果是已登陆状态 建立连接
+  if (userStore.userInfo.userId !== '1') {
+    uni.connectSocket({
+      url: `wss://${url}/websocket/` + userStore.userInfo.userId,
+      success: () => {
+        console.log('websocket connect success')
+      },
+      fail: () => {
+        console.log('websocket connect fail')
+      },
+    })
+    uni.onSocketOpen((res) => {
+      console.log('websocket open')
+    })
+    uni.onSocketError((res) => {
+      console.log('websocket open error')
+    })
+  }
 })
 onHide(() => {
   console.log('App Hide')
+  uni.closeSocket({
+    success: (res) => {
+      console.info('websocket close success')
+    },
+    fail: (res) => {
+      console.info('websocket close fail')
+    },
+  })
+})
+onExit(() => {
+  console.log('App Exit')
+  uni.closeSocket({
+    success: (res) => {
+      console.info('websocket close success')
+    },
+    fail: (res) => {
+      console.info('websocket close fail')
+    },
+  })
 })
 </script>
 
