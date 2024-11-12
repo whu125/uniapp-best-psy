@@ -235,6 +235,22 @@
       }
     },
     {
+      "path": "pages/login/privacyRule",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "login"
+      }
+    },
+    {
+      "path": "pages/login/userRule",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "login"
+      }
+    },
+    {
       "path": "pages/mood/mood",
       "type": "page",
       "style": {

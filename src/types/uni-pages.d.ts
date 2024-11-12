@@ -27,6 +27,8 @@ interface NavigateToOptions {
        "/pages/journey_common/start_journey" |
        "/pages/login/login" |
        "/pages/login/login_origin" |
+       "/pages/login/privacyRule" |
+       "/pages/login/userRule" |
        "/pages/mood/mood" |
        "/pages/my/common" |
        "/pages/my/guide" |
