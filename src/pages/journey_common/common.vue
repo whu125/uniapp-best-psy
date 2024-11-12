@@ -708,10 +708,7 @@ const doOperation = async () => {
       interStore.clearInternfo()
       globalPageControlStore.clearInternfo()
       uni.switchTab({ url: '/pages/home/home' })
-<<<<<<< HEAD
       return
-=======
->>>>>>> 901fe947abb309959ba485d2ffc1eb1d4c149526
     } else {
       toast.error('出现了一些问题')
       return
