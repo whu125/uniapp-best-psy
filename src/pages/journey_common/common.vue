@@ -470,7 +470,10 @@ const toPrev = () => {
   const currIndex = interStore.pageIndex
   // 任务部分的第一个页面禁止返回上一页
   if (interStore.pageIndex > 0) {
-    saveDateToPinia()
+    const saveResult = saveDateToPinia()
+    if (saveResult === false) {
+      return
+    }
     if (interStore.interInfo.interPages[currIndex - 1].pageType !== 'common') {
       if (interStore.interInfo.interPages[currIndex].operationText === '开始任务') {
         toast.warning('请先完成任务！')
@@ -630,7 +633,10 @@ const doOperation = async () => {
   // toast.loading('图片加载中...')
   loadFlag.value = false
   // 保存数据到 pinia
-  saveDateToPinia()
+  const saveResult = saveDateToPinia()
+  if (saveResult === false) {
+    return
+  }
   // 如果是 button 页面 判断一下是否前往 daolanHome
   if (pageContent.value.pageType === 'button') {
     if (hasOperation.value && globalPageControlStore.globalPageControlInfo.toDaolanHome) {
@@ -764,41 +770,44 @@ const saveDateToPinia = () => {
       // 判断用户有无未填写
       if (userInputList.value[i] === '') {
         toast.error('请不要留下空白！')
-        return
+        return false
       } else if (
         userInputList.value[i].indexOf('%') !== -1 ||
         userInputList.value[i].indexOf('#') !== -1 ||
         userInputList.value[i].indexOf('_') !== -1
       ) {
         toast.error('请不要输入 % # _ 字符！')
-        return
+        return false
       }
       inputContent = inputContent + userInputList.value[i] + '%'
     }
     interStore.setUserInputMap(pageContent.value.pageId, inputContent)
+    return true
   }
   // 如果是 radio 页面 保存用户输入到pinia
   if (pageContent.value.pageType === 'radio') {
     // 判断用户有无未填写
     if (selectedItem.value === -1) {
       toast.error('选择一项！')
-      return
+      return false
     }
     const inputContent = pageContent.value.selectUrls[selectedItem.value]
     interStore.setUserInputMap(pageContent.value.pageId, inputContent)
+    return true
   }
   // 如果是 checkBox 页面 保存用户输入到pinia
   if (pageContent.value.pageType === 'checkBox') {
     // 判断用户有无未填写
     if (checkBoxItem.value.length < 1) {
       toast.error('选择至少一项！')
-      return
+      return false
     }
     let inputContent = ''
     for (let i = 0; i < checkBoxItem.value.length; i++) {
       inputContent = inputContent + pageContent.value.selectUrls[checkBoxItem.value[i]] + '_'
     }
     interStore.setUserInputMap(pageContent.value.pageId, inputContent)
+    return true
   }
 }
 

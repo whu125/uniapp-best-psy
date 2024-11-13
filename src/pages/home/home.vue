@@ -92,6 +92,7 @@ import { useUserStore } from '@/store/user'
 import { useInterStore } from '@/store/inter'
 import { useGlobalPageControlStore } from '@/store/globalPageControl'
 import { useMessage, useToast } from 'wot-design-uni'
+import { url } from '@/interceptors/request'
 
 defineOptions({
   name: 'Home',
@@ -159,6 +160,29 @@ const journeySteps = ref([
 onShow(() => {
   currProgress.value = userStore.userInfo.currProgress % 8
   curInter.value = interStore.interInfo.interId % 8
+
+  if (JSON.stringify(userStore.websocket) === '{}' && userStore.userInfo.userId !== '1') {
+    // 建立 websocket 连接
+    userStore.websocket = uni.connectSocket({
+      url: `wss://${url}/websocket/` + userStore.userInfo.userId,
+      success: () => {
+        console.log('websocket connect success')
+      },
+      fail: () => {
+        console.log('websocket connect fail')
+      },
+    })
+    console.log(userStore.websocket)
+    userStore.websocket.onOpen((res) => {
+      console.log('websocket open')
+    })
+    userStore.websocket.onError((res) => {
+      console.log('websocket error')
+    })
+    userStore.websocket.onClose((res) => {
+      console.log('websocket close')
+    })
+  }
 })
 
 // 测试 uni API 自动引入

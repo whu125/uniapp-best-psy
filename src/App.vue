@@ -6,24 +6,6 @@ import { url } from '@/interceptors/request'
 const userStore = useUserStore()
 onLaunch(() => {
   console.log('App Launch')
-  // 如果是已登陆状态 建立连接
-  if (userStore.userInfo.userId !== '1') {
-    uni.connectSocket({
-      url: `wss://${url}/websocket/` + userStore.userInfo.userId,
-      success: () => {
-        console.log('websocket connect success')
-      },
-      fail: () => {
-        console.log('websocket connect fail')
-      },
-    })
-    uni.onSocketOpen((res) => {
-      console.log('websocket open')
-    })
-    uni.onSocketError((res) => {
-      console.log('websocket open error')
-    })
-  }
 })
 onShow(() => {
   console.log('App Show')

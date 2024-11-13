@@ -19,6 +19,7 @@ export const useUserStore = defineStore(
   'user',
   () => {
     const userInfo = ref<IUserInfo>({ ...initState })
+    const websocket = ref({})
 
     const setUserInfo = (val: IUserInfo) => {
       userInfo.value = { ...val }
@@ -30,6 +31,7 @@ export const useUserStore = defineStore(
 
     const clearUserInfo = () => {
       userInfo.value = { ...initState }
+      websocket.value = {}
     }
     // 一般没有reset需求，不需要的可以删除
     const reset = () => {
@@ -62,6 +64,7 @@ export const useUserStore = defineStore(
       addProgress,
       setLockTime,
       setRole,
+      websocket,
     }
   },
   {

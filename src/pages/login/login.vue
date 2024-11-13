@@ -273,21 +273,28 @@ const weixinLogin = async () => {
           console.log(userStore.userInfo.token)
 
           // 建立 websocket 连接
-          uni.connectSocket({
-            url: `wss://${url}/websocket/` + userStore.userInfo.userId,
-            success: () => {
-              console.log('websocket connect success')
-            },
-            fail: () => {
-              console.log('websocket connect fail')
-            },
-          })
-          uni.onSocketOpen((res) => {
-            console.log('websocket open')
-          })
-          uni.onSocketError((res) => {
-            console.log('websocket open error')
-          })
+          if (JSON.stringify(userStore.websocket) === '{}') {
+            // 建立 websocket 连接
+            userStore.websocket = uni.connectSocket({
+              url: `wss://${url}/websocket/` + userStore.userInfo.userId,
+              success: () => {
+                console.log('websocket connect success')
+              },
+              fail: () => {
+                console.log('websocket connect fail')
+              },
+            })
+            console.log(userStore.websocket)
+            userStore.websocket.onOpen((res) => {
+              console.log('websocket open')
+            })
+            userStore.websocket.onError((res) => {
+              console.log('websocket error')
+            })
+            userStore.websocket.onClose((res) => {
+              console.log('websocket close')
+            })
+          }
         },
       })
     },
