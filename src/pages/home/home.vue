@@ -178,12 +178,6 @@ onLoad(() => {
   // }
 })
 
-// onUnload(() => {
-//   uni.onSocketClose((res) => {
-//     console.log('websocket close')
-//   })
-// })
-
 uni.onSocketMessage((res) => {
   console.log('收到服务器内容：' + res.data)
   // 后端 websocket 发来的数据形如 waitingTime # currProgress
