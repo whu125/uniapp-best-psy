@@ -230,8 +230,12 @@ const getPhoneNumber = async (e) => {
       uni.showToast({
         title: '登录成功',
       })
+
+      // 重新设置groupId
+      userStore.setGroupId(res2.data.groupId)
+
       // 判断是否是第一次登录
-      if (res2.data === true) {
+      if (res2.data.firstLogin === true) {
         uni.navigateTo({
           url: '/pages/inquiry/first',
         })

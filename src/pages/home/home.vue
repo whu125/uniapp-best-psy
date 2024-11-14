@@ -186,7 +186,7 @@ onShow(() => {
 })
 
 // 测试 uni API 自动引入
-onLoad(() => {
+onShow(() => {
   const currentTime = new Date().getTime()
 
   // userInfo.value.lockTime = new Date().getTime() + 3 * 60 * 60 * 1000 // 设置锁定时间为当前时间加3小时
