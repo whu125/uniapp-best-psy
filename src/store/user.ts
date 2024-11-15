@@ -33,6 +33,10 @@ export const useUserStore = defineStore(
       userInfo.value = { ...initState }
       websocket.value = {}
     }
+
+    const clearWebSocket = () => {
+      websocket.value = {}
+    }
     // 一般没有reset需求，不需要的可以删除
     const reset = () => {
       userInfo.value = { ...initState }
@@ -72,6 +76,7 @@ export const useUserStore = defineStore(
       setRole,
       websocket,
       setGroupId,
+      clearWebSocket,
     }
   },
   {

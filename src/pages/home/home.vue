@@ -117,7 +117,8 @@ const curInter = ref<number>(interStore.interInfo.interId % 8)
 // const checkTimeFlag = ref(false)
 // const checkTimeFlag = ref(true)
 const waitingTime = ref(0)
-const journeySteps = ref([
+const journeySteps = ref([])
+const journeySteps0 = ref([
   {
     icon: 'http://115.159.83.61:9000/home/icon/journey0.png',
     text: '导入：开启你的旅程',
@@ -155,7 +156,49 @@ const journeySteps = ref([
   },
   {
     icon: 'http://115.159.83.61:9000/home/icon/journey7.png',
-    text: '第七站：开启新的旅程',
+    text: '第七站：发现你的价值',
+    progress: 7,
+  },
+])
+const journeySteps1 = ref([
+  {
+    icon: 'http://115.159.83.61:9000/home/icon/journey0.png',
+    text: '导入：开启你的旅程',
+    progress: 0,
+  },
+  {
+    icon: 'http://115.159.83.61:9000/home/icon/journey1.png',
+    text: '第一站：认识情绪困扰',
+    progress: 1,
+  },
+  {
+    icon: 'http://115.159.83.61:9000/home/icon/journey2.png',
+    text: '第二站：探索情绪源头',
+    progress: 2,
+  },
+  {
+    icon: 'http://115.159.83.61:9000/home/icon/journey3.png',
+    text: '第三站：调整消极认知',
+    progress: 3,
+  },
+  {
+    icon: 'http://115.159.83.61:9000/home/icon/journey4.png',
+    text: '第四站：情绪调节驿站',
+    progress: 4,
+  },
+  {
+    icon: 'http://115.159.83.61:9000/home/icon/journey5.png',
+    text: '第五站：寻找社会支持',
+    progress: 5,
+  },
+  {
+    icon: 'http://115.159.83.61:9000/home/icon/journey6.png',
+    text: '第六站：探索幸福之路',
+    progress: 6,
+  },
+  {
+    icon: 'http://115.159.83.61:9000/home/icon/journey7.png',
+    text: '第七站：自我关怀指南',
     progress: 7,
   },
 ])
@@ -164,10 +207,16 @@ onShow(() => {
   currProgress.value = userStore.userInfo.currProgress % 8
   curInter.value = interStore.interInfo.interId % 8
   curGroupId.value = userStore.userInfo.groupId
+  if (curGroupId.value === 0) {
+    journeySteps.value = journeySteps0.value
+  } else if (curGroupId.value === 1) {
+    journeySteps.value = journeySteps1.value
+  }
 
   // 判断前端有无连接
   if (JSON.stringify(userStore.websocket) === '{}' && userStore.userInfo.userId !== '1') {
-    console.log(userStore.websocket)
+    // 已登录情况下无 websocket 连接 进行重连
+    console.log('websocket empty')
     // 建立 websocket 连接
     userStore.websocket = uni.connectSocket({
       url: `wss://${url}/websocket/` + userStore.userInfo.userId,
@@ -189,9 +238,10 @@ onShow(() => {
       console.log('websocket close')
     })
   } else if (JSON.stringify(userStore.websocket) !== '{}') {
-    console.log(userStore.websocket)
+    // 假如 websocket 连接失效 进行重连
+    console.log('websocket not empty')
     let websocketAvailability = false
-    userStore.websocket.send({
+    uni.sendSocketMessage({
       data: 'test websocket',
       success: () => {
         console.log('websocket connect avail')
