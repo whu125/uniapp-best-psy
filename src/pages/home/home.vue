@@ -164,6 +164,7 @@ onShow(() => {
   currProgress.value = userStore.userInfo.currProgress % 8
   curInter.value = interStore.interInfo.interId % 8
   curGroupId.value = userStore.userInfo.groupId
+  console.log('curGroupId.value', curGroupId.value)
 
   // 判断前端有无连接
   if (JSON.stringify(userStore.websocket) === '{}' && userStore.userInfo.userId !== '1') {
@@ -297,15 +298,16 @@ const enterJourney = async (progress: number) => {
             // uni.redirectTo({
             //   url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
             // })
-            if (numberStr === '0' || numberStr === '1') {
+            if (numberStr === '0' || numberStr === '1' || numberStr === '8' || numberStr === '9') {
               uni.redirectTo({
                 url:
-                  '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+                  '/pages/journey_common/start_journey?progress=' +
+                  encodeURIComponent(progress.toString()),
               })
             }
-            if (numberStr !== '0' && numberStr !== '1') {
+            if (numberStr !== '0' && numberStr !== '1' && numberStr !== '8' && numberStr !== '9') {
               uni.redirectTo({
-                url: '/pages/inquiry/before?progress=' + encodeURIComponent(numberStr),
+                url: '/pages/inquiry/before?progress=' + encodeURIComponent(progress.toString()),
               })
             }
           })
