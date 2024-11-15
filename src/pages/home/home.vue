@@ -347,15 +347,16 @@ const enterJourney = async (progress: number) => {
             // uni.redirectTo({
             //   url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
             // })
-            if (numberStr === '0' || numberStr === '1') {
+            if (numberStr === '0' || numberStr === '1' || numberStr === '8' || numberStr === '9') {
               uni.redirectTo({
                 url:
-                  '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+                  '/pages/journey_common/start_journey?progress=' +
+                  encodeURIComponent(progress.toString()),
               })
             }
-            if (numberStr !== '0' && numberStr !== '1') {
+            if (numberStr !== '0' && numberStr !== '1' && numberStr !== '8' && numberStr !== '9') {
               uni.redirectTo({
-                url: '/pages/inquiry/before?progress=' + encodeURIComponent(numberStr),
+                url: '/pages/inquiry/before?progress=' + encodeURIComponent(progress.toString()),
               })
             }
           })
