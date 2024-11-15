@@ -33,7 +33,7 @@
         <!-- <span class="font-800 text-xl ml-4">下一站</span> -->
       </view>
 
-      <view v-if="userStore.userInfo.groupId !== 2">
+      <view v-if="curGroupId !== 2">
         <view class="card" v-for="(journey, index) in journeySteps" :key="index">
           <img class="card-icon" :src="journey.icon" />
           <view class="card-text">{{ journey.text }}</view>
@@ -73,7 +73,7 @@
         </view>
       </view>
 
-      <view v-if="userStore.userInfo.groupId === 2">
+      <view v-if="curGroupId === 2">
         <p>抱歉，您不属于实验对象，请联系相关负责人</p>
       </view>
       <view style="height: 150rpx"></view>
@@ -102,6 +102,8 @@ uni.hideTabBar()
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
+
+const curGroupId = ref()
 const userStore = useUserStore()
 const message = useMessage()
 const toast = useToast()
@@ -160,6 +162,7 @@ const journeySteps = ref([
 onShow(() => {
   currProgress.value = userStore.userInfo.currProgress % 8
   curInter.value = interStore.interInfo.interId % 8
+  curGroupId.value = userStore.userInfo.groupId
 
   if (JSON.stringify(userStore.websocket) === '{}' && userStore.userInfo.userId !== '1') {
     // 建立 websocket 连接
@@ -185,23 +188,6 @@ onShow(() => {
   }
 })
 
-// 测试 uni API 自动引入
-onShow(() => {
-  const currentTime = new Date().getTime()
-
-  // userInfo.value.lockTime = new Date().getTime() + 3 * 60 * 60 * 1000 // 设置锁定时间为当前时间加3小时
-  console.log('userInfo', userStore.userInfo)
-  // const leftTime = calculateHour()
-  // console.log('leftTime', leftTime)
-  // if (leftTime > 0) {
-  //   waitingTime.value = Math.floor(leftTime) + 1
-  // } else {
-  //   console.log('请求后端，更新下一站')
-  //   waitingTime.value = 0
-  //   checkTimeFlag.value = true
-  // }
-})
-
 uni.onSocketMessage((res) => {
   console.log('收到服务器内容：' + res.data)
   // 后端 websocket 发来的数据形如 waitingTime # currProgress
@@ -223,7 +209,8 @@ const enterJourney = async (progress: number) => {
     tmplIds: ['kAcfm-7a4wnQ03jYBqa_rplhsYjfJXNN71MhlMGADPg'], // 模板ID
     success(res) {
       console.log('interStore.value', interStore.interInfo)
-      if (userStore.userInfo.groupId === 1) {
+      if (curGroupId.value === 1) {
+        console.log('第二套，对照组')
         progress += 8
       }
 
