@@ -7,13 +7,8 @@
 }
 </route>
 <template>
-  <view
-    class="bg-white overflow-hidden pt-2 px-4"
-    :style="{ marginTop: safeAreaInsets?.top + 'px' }"
-    w-full
-    h-full
-  >
-    <wd-navbar title="用户管理" left-arrow @click-left="ToHome"></wd-navbar>
+  <view class="" h-full w-full>
+    <wd-navbar fixed safeAreaInsetTop title="用户管理" left-arrow @click-left="ToHome"></wd-navbar>
   </view>
 
   <view class="container">
