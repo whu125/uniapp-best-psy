@@ -93,6 +93,7 @@ import { useInterStore } from '@/store/inter'
 import { useGlobalPageControlStore } from '@/store/globalPageControl'
 import { useMessage, useToast } from 'wot-design-uni'
 import { url } from '@/interceptors/request'
+import Success from '../inquiry/success.vue'
 
 defineOptions({
   name: 'Home',
@@ -161,7 +162,9 @@ onShow(() => {
   currProgress.value = userStore.userInfo.currProgress % 8
   curInter.value = interStore.interInfo.interId % 8
 
+  // 判断前端有无连接
   if (JSON.stringify(userStore.websocket) === '{}' && userStore.userInfo.userId !== '1') {
+    console.log(userStore.websocket)
     // 建立 websocket 连接
     userStore.websocket = uni.connectSocket({
       url: `wss://${url}/websocket/` + userStore.userInfo.userId,
@@ -182,6 +185,41 @@ onShow(() => {
     userStore.websocket.onClose((res) => {
       console.log('websocket close')
     })
+  } else if (JSON.stringify(userStore.websocket) !== '{}') {
+    console.log(userStore.websocket)
+    let websocketAvailability = false
+    userStore.websocket.send({
+      data: 'test websocket',
+      success: () => {
+        console.log('websocket connect avail')
+        websocketAvailability = true
+      },
+      fail: () => {
+        console.log('websocket connect unavail')
+      },
+    })
+    if (websocketAvailability === false) {
+      // 建立 websocket 连接
+      userStore.websocket = uni.connectSocket({
+        url: `wss://${url}/websocket/` + userStore.userInfo.userId,
+        success: () => {
+          console.log('websocket connect success')
+        },
+        fail: () => {
+          console.log('websocket connect fail')
+        },
+      })
+      console.log(userStore.websocket)
+      userStore.websocket.onOpen((res) => {
+        console.log('websocket open')
+      })
+      userStore.websocket.onError((res) => {
+        console.log('websocket error')
+      })
+      userStore.websocket.onClose((res) => {
+        console.log('websocket close')
+      })
+    }
   }
 })
 
