@@ -18,14 +18,16 @@
           style="width: 100%"
         />
       </view>
-      <view class="card" v-for="(guide, index) in guideSteps" :key="index" @click="toGuide(index)">
-        <img class="card-icon" :src="guide.icon" />
-        <view class="card-text">{{ guide.text }}</view>
-        <img
-          style="width: 60rpx; height: 60rpx"
-          mode="aspectFit"
-          src="http://115.159.83.61:9000/home/guideIcon/enter.png"
-        />
+      <view class="card" v-for="(guide, index) in guideSteps" :key="index">
+        <view @click="toGuide(index)">
+          <img class="card-icon" :src="guide.icon" />
+          <view class="card-text">{{ guide.text }}</view>
+          <img
+            style="width: 60rpx; height: 60rpx"
+            mode="aspectFit"
+            src="http://115.159.83.61:9000/home/guideIcon/enter.png"
+          />
+        </view>
       </view>
     </view>
   </view>
