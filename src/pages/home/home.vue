@@ -8,6 +8,7 @@
 </route>
 <template>
   <tabbar selected="0"></tabbar>
+  <wd-toast />
   <view class="" h-full w-full>
     <wd-navbar fixed safeAreaInsetTop title="我的旅程"></wd-navbar>
 
@@ -16,67 +17,70 @@
       <view class="h-40 w-full">
         <image src="http://115.159.83.61:9000/home/home.png" mode="scaleToFill" />
       </view>
-      <view class="card flex justify-center" v-if="curInter != -1">
-        <span class="font-800 text-2xl">正在完成</span>
-        <span class="font-800 text-2xl ml-4" v-show="curInter == 0">导入</span>
-        <span class="font-800 text-2xl ml-4" v-show="curInter != 0">第 {{ curInter }} 站</span>
-      </view>
-      <view class="card flex justify-center" v-show="waitingTime > 0">
-        <span class="font-800 text-xl">剩余 {{ waitingTime }} 小时 解锁</span>
-        <span class="font-800 text-xl ml-4">第 {{ currProgress }} 站</span>
-      </view>
-      <view class="card flex justify-center" v-if="waitingTime <= 0">
-        <span class="font-800 text-xl" v-if="currProgress != 0">
-          已解锁 第 {{ currProgress }} 站
-        </span>
-        <span class="font-800 text-xl" v-if="currProgress == 0">已解锁 导入</span>
-        <!-- <span class="font-800 text-xl ml-4">下一站</span> -->
-      </view>
+      <!-- <view v-if="loadingSocket">获取进度中....</view> -->
+      <view v-if="!loadingSocket">
+        <view class="card flex justify-center" v-if="curInter != -1">
+          <span class="font-800 text-2xl">正在完成</span>
+          <span class="font-800 text-2xl ml-4" v-show="curInter == 0">导入</span>
+          <span class="font-800 text-2xl ml-4" v-show="curInter != 0">第 {{ curInter }} 站</span>
+        </view>
+        <view class="card flex justify-center" v-show="waitingTime > 0">
+          <span class="font-800 text-xl">剩余 {{ waitingTime }} 小时 解锁</span>
+          <span class="font-800 text-xl ml-4">第 {{ currProgress }} 站</span>
+        </view>
+        <view class="card flex justify-center" v-if="waitingTime <= 0">
+          <span class="font-800 text-xl" v-if="currProgress != 0">
+            已解锁 第 {{ currProgress }} 站
+          </span>
+          <span class="font-800 text-xl" v-if="currProgress == 0">已解锁 导入</span>
+          <!-- <span class="font-800 text-xl ml-4">下一站</span> -->
+        </view>
 
-      <view v-if="curGroupId !== 2">
-        <view class="card" v-for="(journey, index) in journeySteps" :key="index">
-          <img class="card-icon" :src="journey.icon" />
-          <view class="card-text">{{ journey.text }}</view>
-          <!-- 体验版 -->
-          <!-- <img
+        <view v-if="curGroupId !== 2">
+          <view class="card" v-for="(journey, index) in journeySteps" :key="index">
+            <img class="card-icon" :src="journey.icon" />
+            <view class="card-text">{{ journey.text }}</view>
+            <!-- 体验版 -->
+            <!-- <img
             style="width: 60rpx; height: 60rpx"
             mode="aspectFit"
             src="http://115.159.83.61:9000/home/icon/finish.png"
           /> -->
 
-          <image
-            style="width: 60rpx; height: 60rpx"
-            mode="aspectFit"
-            src="http://115.159.83.61:9000/home/icon/finish.png"
-            v-show="currProgress > journey.progress"
-            @click="enterJourney(journey.progress)"
-          />
-          <image
-            style="width: 60rpx; height: 60rpx"
-            mode="aspectFit"
-            src="http://115.159.83.61:9000/home/icon/startJourney.png"
-            v-show="currProgress == journey.progress && waitingTime <= 0"
-            @click="enterJourney(journey.progress)"
-          />
-          <image
-            style="width: 60rpx; height: 60rpx"
-            src="http://115.159.83.61:9000/home/icon/lockJourney.png"
-            mode="aspectFit"
-            v-show="currProgress == journey.progress && waitingTime > 0"
-          />
-          <image
-            style="width: 60rpx; height: 60rpx"
-            src="http://115.159.83.61:9000/home/icon/lockJourney.png"
-            mode="aspectFit"
-            v-show="currProgress < journey.progress"
-          />
+            <image
+              style="width: 60rpx; height: 60rpx"
+              mode="aspectFit"
+              src="http://115.159.83.61:9000/home/icon/finish.png"
+              v-show="currProgress > journey.progress"
+              @click="enterJourney(journey.progress)"
+            />
+            <image
+              style="width: 60rpx; height: 60rpx"
+              mode="aspectFit"
+              src="http://115.159.83.61:9000/home/icon/startJourney.png"
+              v-show="currProgress == journey.progress && waitingTime <= 0"
+              @click="enterJourney(journey.progress)"
+            />
+            <image
+              style="width: 60rpx; height: 60rpx"
+              src="http://115.159.83.61:9000/home/icon/lockJourney.png"
+              mode="aspectFit"
+              v-show="currProgress == journey.progress && waitingTime > 0"
+            />
+            <image
+              style="width: 60rpx; height: 60rpx"
+              src="http://115.159.83.61:9000/home/icon/lockJourney.png"
+              mode="aspectFit"
+              v-show="currProgress < journey.progress"
+            />
+          </view>
         </view>
-      </view>
 
-      <view v-if="curGroupId === 2">
-        <p>抱歉，您不属于实验对象，请联系相关负责人</p>
+        <view v-if="curGroupId === 2">
+          <p>抱歉，您不属于实验对象，请联系相关负责人</p>
+        </view>
+        <view style="height: 150rpx"></view>
       </view>
-      <view style="height: 150rpx"></view>
     </view>
     <wd-message-box />
   </view>
@@ -118,6 +122,7 @@ const curInter = ref<number>(interStore.interInfo.interId % 8)
 // const checkTimeFlag = ref(true)
 const waitingTime = ref(0)
 const journeySteps = ref([])
+const loadingSocket = ref(true)
 const journeySteps0 = ref([
   {
     icon: 'http://115.159.83.61:9000/home/icon/journey0.png',
@@ -202,6 +207,17 @@ const journeySteps1 = ref([
     progress: 7,
   },
 ])
+const finishFlag = ref(false) // 记录是否是完成干预后跳转过来的
+
+onMounted(() => {
+  console.log('loadingSocket', loadingSocket.value)
+  // 需要有5s建立连接
+  toast.loading('请求进度中...')
+  setTimeout(() => {
+    loadingSocket.value = false
+    toast.close()
+  }, 5000)
+})
 
 onShow(() => {
   currProgress.value = userStore.userInfo.currProgress % 8
