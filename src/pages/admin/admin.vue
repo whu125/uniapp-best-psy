@@ -7,82 +7,62 @@
 }
 </route>
 <template>
-  <view
-    class="bg-white overflow-hidden pt-2 px-4"
-    :style="{ marginTop: safeAreaInsets?.top + 'px' }"
-    w-full
-    h-full
-  >
-    <wd-navbar title="用户管理" left-arrow @click-left="ToHome"></wd-navbar>
-  </view>
+  <view class="" h-full w-full>
+    <wd-navbar fixed safeAreaInsetTop title="用户管理" left-arrow @click-left="ToHome"></wd-navbar>
 
-  <!-- <view>
+    <!-- <view>
     <button @click="toAdminInquiry()">查看问卷数据</button>
   </view> -->
-  <view class="admin-container" v-if="flag">
-    <wd-table :data="userInfo">
-      <wd-table-col label="操作" fixed>
-        <template #value="{ row }">
-          <view class="custom-class" style="width: 100px">
-            <wd-button type="info" size="small" @click="edit(row)">编辑</wd-button>
-            <wd-button type="info" size="small" @click="exportSingleExcel(row)">导出</wd-button>
+    <view class="admin-container" v-if="flag">
+      <wd-table :data="userInfo">
+        <wd-table-col label="操作" fixed>
+          <template #value="{ row }">
+            <view class="custom-class" style="width: 100px">
+              <!-- <wd-button type="info" size="small" @click="edit(row)">编辑</wd-button> -->
+              <wd-button type="info" size="small" @click="exportSingleExcel(row)">导出</wd-button>
+            </view>
+          </template>
+        </wd-table-col>
+        <wd-table-col prop="username" label="微信名"></wd-table-col>
+        <wd-table-col prop="phone" label="手机号" width="150"></wd-table-col>
+        <wd-table-col prop="currProgress" label="已解锁单元"></wd-table-col>
+      </wd-table>
+    </view>
+
+    <!-- <view class="card">
+      <wd-toast />
+      <wd-button @click="exportExcel()">导出用户做题数据</wd-button>
+    </view>
+
+    <view class="card">
+      <wd-button @click="testsub">测试订阅消息</wd-button>
+    </view> -->
+
+    <view class="card">
+      <wd-button @click="toAddUser">跳转录入页面</wd-button>
+    </view>
+
+    <wd-popup v-model="show" custom-style="padding: 0;" :close-on-click-modal="false">
+      <view class="popup-container">
+        <view class="arrow"></view>
+        <view class="content">
+          <view class="info-row">
+            <text class="label">当前用户手机号：</text>
+            <text class="value">{{ currentUser }}</text>
           </view>
-        </template>
-      </wd-table-col>
-      <wd-table-col prop="username" label="微信名"></wd-table-col>
-      <wd-table-col prop="phone" label="手机号" width="150"></wd-table-col>
-      <wd-table-col prop="currProgress" label="已解锁单元"></wd-table-col>
-    </wd-table>
-  </view>
 
-  <view class="card">
-    <wd-toast />
-    <wd-button @click="exportExcel()">导出用户做题数据</wd-button>
-  </view>
-
-  <view class="card">
-    <wd-button @click="testsub">测试订阅消息</wd-button>
-  </view>
-
-  <view class="card">
-    <wd-button @click="toAddUser">跳转录入页面</wd-button>
-  </view>
-
-  <wd-popup v-model="show" custom-style="padding: 0;" :close-on-click-modal="false">
-    <view class="popup-container">
-      <view class="arrow"></view>
-      <view class="content">
-        <view class="info-row">
-          <text class="label">当前用户手机号：</text>
-          <text class="value">{{ currentUser }}</text>
-        </view>
-
-        <view class="info-row">
-          <text class="label">当前用户组别：</text>
-          <text class="value">{{ curGroup }}</text>
-        </view>
-
-        <view class="input-row">
-          <text class="label">修改用户组别：</text>
-          <!-- <input type="text" v-model="newGroup" class="input" placeholder="请输入新的组别名称" /> -->
-          <view class="flex">
-            <wd-radio-group v-model="chooseGroupId" shape="button" @change="change">
-              <wd-radio :value="1">实验组</wd-radio>
-              <wd-radio :value="0">对照组</wd-radio>
-            </wd-radio-group>
+          <view class="info-row">
+            <text class="label">当前用户组别：</text>
+            <text class="value">{{ curGroup }}</text>
           </view>
-        </view>
-        <view>
-          <wd-button @click="sendNotice">发送订阅消息</wd-button>
-        </view>
 
-        <view class="button-group">
-          <button @tap="onCancel" class="btn cancel-btn">取消</button>
-          <button @tap="onConfirm" class="btn confirm-btn">确定</button>
+          <view class="button-group">
+            <button @tap="onCancel" class="btn cancel-btn">取消</button>
+          </view>
         </view>
       </view>
-    </view>
-  </wd-popup>
+    </wd-popup>
+  </view>
 </template>
 
 <script lang="ts" setup>
@@ -216,13 +196,20 @@ const exportExcel = async () => {
       if (res.statusCode === 200) {
         const filePath = res.tempFilePath
         console.log('下载成功')
-        uni.openDocument({
-          filePath,
+        uni.saveFile({
+          tempFilePath: filePath,
           success: function (res) {
-            console.log('打开文档成功')
-          },
-          fail: function (err) {
-            console.log('打开文档失败', err)
+            const savedFilePath = res.savedFilePath
+            uni.openDocument({
+              showMenu: true,
+              filePath: savedFilePath,
+              success: function (res) {
+                console.log('打开文档成功')
+              },
+              fail: function (err) {
+                console.log('打开文档失败', err)
+              },
+            })
           },
         })
       }

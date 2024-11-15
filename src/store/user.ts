@@ -48,6 +48,12 @@ export const useUserStore = defineStore(
       // 24小时后解锁
       userInfo.value.role = role
     }
+
+    const setGroupId = (id) => {
+      // 24小时后解锁
+      userInfo.value.groupId = id
+    }
+
     const addProgress = () => {
       userInfo.value.currProgress = userInfo.value.currProgress + 1
     }
@@ -65,6 +71,7 @@ export const useUserStore = defineStore(
       setLockTime,
       setRole,
       websocket,
+      setGroupId,
     }
   },
   {
