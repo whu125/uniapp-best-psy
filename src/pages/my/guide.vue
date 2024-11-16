@@ -18,8 +18,8 @@
           style="width: 100%"
         />
       </view>
-      <view class="card" v-for="(guide, index) in guideSteps" :key="index">
-        <view @click="toGuide(index)">
+      <view v-for="(guide, index) in guideSteps" :key="index">
+        <view @click="toGuide(index)" class="card">
           <img class="card-icon" :src="guide.icon" />
           <view class="card-text">{{ guide.text }}</view>
           <img
