@@ -1,5 +1,9 @@
 import { http } from '@/utils/http'
 
+export const exportInterExcelApi = (id) => {
+  return http.get(`/upload/excel/inter?id=${id}`, {})
+}
+
 export const exportExcelApi = () => {
   return http.get('/upload/excel', {})
 }

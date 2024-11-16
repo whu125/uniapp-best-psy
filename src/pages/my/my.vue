@@ -160,8 +160,11 @@
       <!-- <view class="flex justify-center mt-4" v-if="userInfo.username == '未登录用户'">
         <wd-button type="success" @click="toLogin">登录</wd-button>
       </view> -->
-      <view class="flex justify-center mt-4">
+      <view class="flex justify-center mt-4" v-if="userInfo.username == '未登录用户'">
         <wd-button type="success" @click="toLogin">登录</wd-button>
+      </view>
+      <view class="flex justify-center mt-4" v-if="userInfo.username != '未登录用户'">
+        <wd-button type="success" @click="toLogin">退出登录</wd-button>
       </view>
       <view style="height: 150rpx"></view>
     </div>

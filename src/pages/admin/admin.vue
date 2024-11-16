@@ -19,7 +19,8 @@
           <template #value="{ row }">
             <view class="custom-class" style="width: 100px">
               <!-- <wd-button type="info" size="small" @click="edit(row)">编辑</wd-button> -->
-              <wd-button type="info" size="small" @click="exportSingleExcel(row)">导出</wd-button>
+              <wd-button type="info" size="small" @click="exportInterExcel(row)">干预</wd-button>
+              <wd-button type="info" size="small" @click="exportSingleExcel(row)">打卡</wd-button>
             </view>
           </template>
         </wd-table-col>
@@ -69,6 +70,7 @@
 import {
   exportExcelApi,
   exportSingleExcelApi,
+  exportInterExcelApi,
   getAccessTokenApi,
   setUserGroupApi,
 } from '@/service/admin/admin'
@@ -134,6 +136,43 @@ const toAdminInquiry = () => {
 const ToHome = () => {
   uni.switchTab({
     url: '/pages/my/my',
+  })
+}
+
+const exportInterExcel = async (row) => {
+  console.log('导出excel')
+  toast.loading('导出中...')
+  curopenid.value = row.userId
+  console.log(row)
+  currentUser.value = row.phone
+  console.log('导出', row)
+  const res = await exportInterExcelApi(row.userId)
+  console.log(res)
+
+  const dataUrl = res.data
+
+  toast.close()
+
+  console.log(dataUrl)
+  console.log(222)
+  uni.downloadFile({
+    url: dataUrl, // 仅为示例，并非真实的资源
+    success: (res) => {
+      console.log(res)
+      if (res.statusCode === 200) {
+        const filePath = res.tempFilePath
+        console.log('下载成功')
+        uni.openDocument({
+          filePath,
+          success: function (res) {
+            console.log('打开文档成功')
+          },
+          fail: function (err) {
+            console.log('打开文档失败', err)
+          },
+        })
+      }
+    },
   })
 }
 
@@ -278,6 +317,10 @@ const sendNotice = async () => {
 </script>
 
 <style>
+.admin-container {
+  margin-top: 300rpx;
+}
+
 .popup-container {
   position: relative;
   width: 350px;
