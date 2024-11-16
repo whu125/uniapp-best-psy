@@ -695,7 +695,9 @@ const doOperation = async () => {
   if (
     (pageContent.value.interId === 99 && pageContent.value.operationIcon.endsWith('finish.png')) ||
     (pageContent.value.interId === 100 && pageContent.value.operationIcon.endsWith('finish.png')) ||
-    (userStore.userInfo.groupId === 1 && pageContent.value.navbarTitle.endsWith('拓展')) ||
+    (userStore.userInfo.groupId === 1 &&
+      pageContent.value.navbarTitle.endsWith('拓展') &&
+      interStore.interInfo.interId !== 15) ||
     (pageContent.value.interId === 0 && pageContent.value.operationIcon.endsWith('finish.png')) ||
     (pageContent.value.interId === 8 && pageContent.value.operationIcon.endsWith('finish.png'))
   ) {
