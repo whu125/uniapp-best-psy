@@ -18,21 +18,27 @@
         <image src="http://115.159.83.61:9000/home/home.png" mode="scaleToFill" />
       </view>
       <!-- <view v-if="loadingSocket">获取进度中....</view> -->
-      <view v-if="!loadingSocket">
-        <view class="card flex justify-center" v-if="curInter != -1">
+      <view>
+        <view class="card flex justify-center" v-show="curInter != -1">
           <span class="font-800 text-2xl">正在完成</span>
-          <span class="font-800 text-2xl ml-4" v-show="curInter == 0">导入</span>
-          <span class="font-800 text-2xl ml-4" v-show="curInter != 0">第 {{ curInter }} 站</span>
+          <view v-show="curInter == 0">
+            <span class="font-800 text-2xl ml-4">导入</span>
+          </view>
+          <view v-show="curInter != 0">
+            <span class="font-800 text-2xl ml-4">第 {{ curInter }} 站</span>
+          </view>
         </view>
         <view class="card flex justify-center" v-show="waitingTime > 0">
           <span class="font-800 text-xl">剩余 {{ waitingTime }} 小时 解锁</span>
           <span class="font-800 text-xl ml-4">第 {{ currProgress }} 站</span>
         </view>
-        <view class="card flex justify-center" v-if="waitingTime <= 0">
-          <span class="font-800 text-xl" v-if="currProgress != 0 && currProgress != 999">
-            已解锁 第 {{ currProgress }} 站
-          </span>
-          <span class="font-800 text-xl" v-if="currProgress == 0">已解锁 导入</span>
+        <view class="card flex justify-center" v-show="waitingTime <= 0">
+          <view v-show="currProgress != 0 && currProgress != 999">
+            <span class="font-800 text-xl">已解锁 第 {{ currProgress }} 站</span>
+          </view>
+          <view v-show="currProgress == 0">
+            <span class="font-800 text-xl">已解锁 导入</span>
+          </view>
           <!-- <span class="font-800 text-xl ml-4">下一站</span> -->
         </view>
 
@@ -209,15 +215,15 @@ const journeySteps1 = ref([
 ])
 const finishFlag = ref(false) // 记录是否是完成干预后跳转过来的
 
-onMounted(() => {
-  console.log('loadingSocket', loadingSocket.value)
-  // 需要有5s建立连接
-  toast.loading('请求进度中...')
-  setTimeout(() => {
-    loadingSocket.value = false
-    toast.close()
-  }, 5000)
-})
+// onMounted(() => {
+//   console.log('loadingSocket', loadingSocket.value)
+//   // 需要有5s建立连接
+//   toast.loading('请求进度中...')
+//   setTimeout(() => {
+//     loadingSocket.value = false
+//     toast.close()
+//   }, 5000)
+// })
 
 onShow(() => {
   currProgress.value = userStore.userInfo.currProgress % 8
@@ -252,6 +258,18 @@ onShow(() => {
     })
     userStore.websocket.onClose((res) => {
       console.log('websocket close')
+    })
+    userStore.websocket.onMessage((res) => {
+      console.log('收到服务器内容：' + res.data)
+      // 后端 websocket 发来的数据形如 waitingTime # currProgress
+      // userStore.websocketMsg = res.data
+
+      waitingTime.value = Number(res.data.split('#')[0])
+      userStore.userInfo.currProgress = Number(res.data.split('#')[1])
+      currProgress.value = userStore.userInfo.currProgress % 8
+
+      console.log(waitingTime.value)
+      console.log(currProgress.value)
     })
   } else if (JSON.stringify(userStore.websocket) !== '{}') {
     // 假如 websocket 连接失效 进行重连
@@ -288,16 +306,16 @@ onShow(() => {
       userStore.websocket.onClose((res) => {
         console.log('websocket close')
       })
+      userStore.websocket.onMessage((res) => {
+        console.log('收到服务器内容：' + res.data)
+        // 后端 websocket 发来的数据形如 waitingTime # currProgress
+        // userStore.websocketMsg = res.data
+        waitingTime.value = Number(res.data.split('#')[0])
+        userStore.userInfo.currProgress = Number(res.data.split('#')[1])
+        currProgress.value = userStore.userInfo.currProgress % 8
+      })
     }
   }
-})
-
-uni.onSocketMessage((res) => {
-  console.log('收到服务器内容：' + res.data)
-  // 后端 websocket 发来的数据形如 waitingTime # currProgress
-  waitingTime.value = res.data.split('#')[0]
-  userStore.userInfo.currProgress = res.data.split('#')[1]
-  currProgress.value = userStore.userInfo.currProgress % 8
 })
 
 const calculateHour = () => {

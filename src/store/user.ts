@@ -20,6 +20,7 @@ export const useUserStore = defineStore(
   () => {
     const userInfo = ref<IUserInfo>({ ...initState })
     const websocket = ref({})
+    const websocketMsg = ref<string>('')
 
     const setUserInfo = (val: IUserInfo) => {
       userInfo.value = { ...val }
@@ -75,6 +76,7 @@ export const useUserStore = defineStore(
       setLockTime,
       setRole,
       websocket,
+      websocketMsg,
       setGroupId,
       clearWebSocket,
     }
