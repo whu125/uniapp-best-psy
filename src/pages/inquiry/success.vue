@@ -54,9 +54,16 @@ const interText = ref(['零', '一', '二', '三', '四', '五', '六', '七'])
 
 // 这里可以添加任何需要的逻辑
 const toHome = () => {
-  uni.switchTab({
-    url: '/pages/home/home?flag=true',
-  })
+  // 加逻辑，如果是第一套，跳转home，如果是第二套，跳转daolanHome
+  if (userStore.userInfo.groupId === 0) {
+    uni.switchTab({
+      url: '/pages/home/home?flag=true',
+    })
+  } else {
+    uni.redirectTo({
+      url: '/pages/daolanHome/daolanHome',
+    })
+  }
 }
 
 const toReport = async () => {
