@@ -467,6 +467,12 @@ const selectItem = (index) => {
 }
 
 const toPrev = () => {
+  if (pageContent.value.navbarTitle.endsWith('拓展')) {
+    uni.redirectTo({
+      url: '/pages/journey_common/daolanHome',
+    })
+    return
+  }
   const currIndex = interStore.pageIndex
   // 任务部分的第一个页面禁止返回上一页
   if (interStore.pageIndex > 0) {

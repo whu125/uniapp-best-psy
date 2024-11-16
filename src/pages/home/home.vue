@@ -122,7 +122,7 @@ const interStore = useInterStore()
 const globalPageControl = useGlobalPageControlStore()
 // const userInfo = ref<IUserInfo>(userStore.userInfo)
 // const currProgress = ref<number>(2)
-const currProgress = ref<number>(userStore.userInfo.currProgress % 8)
+const currProgress = ref<number>(0)
 const curInter = ref<number>(interStore.interInfo.interId % 8)
 // const checkTimeFlag = ref(false)
 // const checkTimeFlag = ref(true)
@@ -215,15 +215,15 @@ const journeySteps1 = ref([
 ])
 const finishFlag = ref(false) // 记录是否是完成干预后跳转过来的
 
-// onMounted(() => {
-//   console.log('loadingSocket', loadingSocket.value)
-//   // 需要有5s建立连接
-//   toast.loading('请求进度中...')
-//   setTimeout(() => {
-//     loadingSocket.value = false
-//     toast.close()
-//   }, 5000)
-// })
+onMounted(() => {
+  console.log('loadingSocket', loadingSocket.value)
+  // 需要有5s建立连接
+  toast.loading('请求进度中...')
+  setTimeout(() => {
+    loadingSocket.value = false
+    toast.close()
+  }, 5000)
+})
 
 onShow(() => {
   currProgress.value = userStore.userInfo.currProgress % 8
@@ -259,18 +259,18 @@ onShow(() => {
     userStore.websocket.onClose((res) => {
       console.log('websocket close')
     })
-    userStore.websocket.onMessage((res) => {
-      console.log('收到服务器内容：' + res.data)
-      // 后端 websocket 发来的数据形如 waitingTime # currProgress
-      // userStore.websocketMsg = res.data
+    // userStore.websocket.onMessage((res) => {
+    //   console.log('收到服务器内容：' + res.data)
+    //   // 后端 websocket 发来的数据形如 waitingTime # currProgress
+    //   // userStore.websocketMsg = res.data
 
-      waitingTime.value = Number(res.data.split('#')[0])
-      userStore.userInfo.currProgress = Number(res.data.split('#')[1])
-      currProgress.value = userStore.userInfo.currProgress % 8
+    //   waitingTime.value = Number(res.data.split('#')[0])
+    //   userStore.userInfo.currProgress = Number(res.data.split('#')[1])
+    //   currProgress.value = userStore.userInfo.currProgress % 8
 
-      console.log(waitingTime.value)
-      console.log(currProgress.value)
-    })
+    //   console.log(waitingTime.value)
+    //   console.log(currProgress.value)
+    // })
   } else if (JSON.stringify(userStore.websocket) !== '{}') {
     // 假如 websocket 连接失效 进行重连
     console.log('websocket not empty')
@@ -306,16 +306,24 @@ onShow(() => {
       userStore.websocket.onClose((res) => {
         console.log('websocket close')
       })
-      userStore.websocket.onMessage((res) => {
-        console.log('收到服务器内容：' + res.data)
-        // 后端 websocket 发来的数据形如 waitingTime # currProgress
-        // userStore.websocketMsg = res.data
-        waitingTime.value = Number(res.data.split('#')[0])
-        userStore.userInfo.currProgress = Number(res.data.split('#')[1])
-        currProgress.value = userStore.userInfo.currProgress % 8
-      })
+      // userStore.websocket.onMessage((res) => {
+      //   console.log('收到服务器内容：' + res.data)
+      //   // 后端 websocket 发来的数据形如 waitingTime # currProgress
+      //   // userStore.websocketMsg = res.data
+      //   waitingTime.value = Number(res.data.split('#')[0])
+      //   userStore.userInfo.currProgress = Number(res.data.split('#')[1])
+      //   currProgress.value = userStore.userInfo.currProgress % 8
+      // })
     }
   }
+})
+
+uni.onSocketMessage((res) => {
+  console.log('收到服务器内容：' + res.data)
+  // 后端 websocket 发来的数据形如 waitingTime # currProgress
+  waitingTime.value = Number(res.data.split('#')[0])
+  userStore.userInfo.currProgress = Number(res.data.split('#')[1])
+  currProgress.value = userStore.userInfo.currProgress % 8
 })
 
 const calculateHour = () => {
