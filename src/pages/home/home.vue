@@ -29,7 +29,7 @@
           <span class="font-800 text-xl ml-4">第 {{ currProgress }} 站</span>
         </view>
         <view class="card flex justify-center" v-if="waitingTime <= 0">
-          <span class="font-800 text-xl" v-if="currProgress != 0">
+          <span class="font-800 text-xl" v-if="currProgress != 0 && currProgress != 999">
             已解锁 第 {{ currProgress }} 站
           </span>
           <span class="font-800 text-xl" v-if="currProgress == 0">已解锁 导入</span>
