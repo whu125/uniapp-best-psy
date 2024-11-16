@@ -14,8 +14,8 @@ export const getPhoneNumberApi = (openid: string, code: string) => {
   return http.post<User>('/getphone', { openid, code }, {})
 }
 
-export const getUserInfo = (token: string) => {
-  return http.post<User>('/user/getUserInfo', { token }, {})
+export const getUserInfo = () => {
+  return http.post<User>('/user/getUserInfo', {}, {})
 }
 
 export const getAllUserInfo = () => {

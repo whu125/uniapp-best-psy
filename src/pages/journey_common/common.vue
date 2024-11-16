@@ -695,7 +695,7 @@ const doOperation = async () => {
   if (
     (pageContent.value.interId === 99 && pageContent.value.operationIcon.endsWith('finish.png')) ||
     (pageContent.value.interId === 100 && pageContent.value.operationIcon.endsWith('finish.png')) ||
-    (userStore.userInfo.groupId === 1 && pageContent.value.operationText.endsWith('拓展')) ||
+    (userStore.userInfo.groupId === 1 && pageContent.value.navbarTitle.endsWith('拓展')) ||
     (pageContent.value.interId === 0 && pageContent.value.operationIcon.endsWith('finish.png')) ||
     (pageContent.value.interId === 8 && pageContent.value.operationIcon.endsWith('finish.png'))
   ) {
@@ -706,6 +706,8 @@ const doOperation = async () => {
       inputPages: interStore.inputPages,
       inputContent: interStore.inputContent,
     }
+    console.log('submitObj: ')
+    console.log(submitObj)
     const res = await submitInter(submitObj)
     console.log(res)
     if (res.code === 200) {

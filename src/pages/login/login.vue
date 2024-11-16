@@ -259,8 +259,8 @@ const weixinLogin = async () => {
     success: function (event) {
       // 客户端成功获取授权临时票据（code）,向业务服务器发起登录请求。
       uni.request({
-        url: 'https://mindease.online:28081/loginByWechat',
-        // url: 'https://localhost:443/loginByWechat',
+        // url: 'https://mindease.online:28081/loginByWechat',
+        url: 'https://localhost:443/loginByWechat',
         method: 'POST',
         data: {
           code: event.code,
@@ -270,12 +270,12 @@ const weixinLogin = async () => {
           // 获得token完成登录
           const token = res.data.data
           userStore.setUserToken(token)
-          const getInfoRes = await getUserInfo(userStore.userInfo.token)
+          const getInfoRes = await getUserInfo()
+          console.log(getInfoRes)
           userStore.setUserInfo(getInfoRes.data)
           userStore.setUserToken(token)
           console.log('-----------------userinfo------------------')
           console.log(userStore.userInfo)
-          console.log(userStore.userInfo.token)
 
           // 建立 websocket 连接
           if (JSON.stringify(userStore.websocket) === '{}') {

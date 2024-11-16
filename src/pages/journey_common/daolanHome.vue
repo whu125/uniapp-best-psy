@@ -234,9 +234,9 @@ const toPunch1 = () => {
     return
   }
   interStore.isPunchFinished1 = true
-  // uni.navigateTo({
-  //   url: '/pages/inquiry/start',
-  // })
+  uni.navigateTo({
+    url: '/pages/inquiry/start',
+  })
 }
 const toExpand = async () => {
   if (interStore.isStartJourney1 !== true || interStore.isPunchFinished1 !== true) {
@@ -244,22 +244,22 @@ const toExpand = async () => {
     toast.warning('请先完成站点打卡！')
     return
   }
-  if (interStore.interInfo.interId === 8) {
-    await interStore.setPageIndex(-1)
-  } else if (interStore.interInfo.interId === 9) {
+  if (interStore.interInfo.interId === 9) {
     await interStore.setPageIndex(9)
   } else if (interStore.interInfo.interId === 10) {
-    await interStore.setPageIndex(-1)
+    await interStore.setPageIndex(10)
   } else if (interStore.interInfo.interId === 11) {
-    await interStore.setPageIndex(-1)
+    await interStore.setPageIndex(9)
   } else if (interStore.interInfo.interId === 12) {
-    await interStore.setPageIndex(-1)
+    await interStore.setPageIndex(7)
   } else if (interStore.interInfo.interId === 13) {
-    await interStore.setPageIndex(-1)
+    await interStore.setPageIndex(9)
   } else if (interStore.interInfo.interId === 14) {
-    await interStore.setPageIndex(-1)
+    await interStore.setPageIndex(9)
+  } else if (interStore.interInfo.interId === 15) {
+    await interStore.setPageIndex(9)
   }
-  uni.navigateTo({
+  uni.redirectTo({
     url: '/pages/journey_common/common',
   })
 }
