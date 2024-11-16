@@ -163,6 +163,7 @@ const exportInterExcel = async (row) => {
         const filePath = res.tempFilePath
         console.log('下载成功')
         uni.openDocument({
+          showMenu: true,
           filePath,
           success: function (res) {
             console.log('打开文档成功')
@@ -200,6 +201,7 @@ const exportSingleExcel = async (row) => {
         const filePath = res.tempFilePath
         console.log('下载成功')
         uni.openDocument({
+          showMenu: true,
           filePath,
           success: function (res) {
             console.log('打开文档成功')

@@ -52,15 +52,15 @@
 
       <div class="stats">
         <div class="stat-item">
-          <span class="stat-value">2</span>
+          <span class="stat-value">{{ currProgress }}</span>
           <span class="stat-label">已解锁单元</span>
         </div>
         <div class="stat-item">
-          <span class="stat-value">10</span>
-          <span class="stat-label">已获得金币</span>
+          <span class="stat-value">{{ 5 * currProgress }}</span>
+          <span class="stat-label">已解锁金币</span>
         </div>
         <div class="stat-item">
-          <span class="stat-value">40</span>
+          <span class="stat-value">{{ 35 - 5 * currProgress }}</span>
           <span class="stat-label">待解锁金币</span>
         </div>
       </div>
@@ -189,6 +189,8 @@ const toast = useToast()
 const interStore = useInterStore()
 const avator = ref('http://115.159.83.61:9000/common/avatar.png')
 const userStore = useUserStore()
+
+const currProgress = ref<number>(userStore.userInfo.currProgress % 8)
 const userInfo = ref(userStore.userInfo)
 const baseURL = ref('http://115.159.83.61:9000/mindease/')
 
@@ -226,6 +228,8 @@ onShow(() => {
   userInfo.value = userStore.userInfo
   console.log('userInfo:', userInfo.value)
   console.log('当前 websocket ', userStore.websocket)
+
+  console.log('userInfo:', currProgress.value)
 
   if (Object.keys(userInfo.value).length === 0 && userInfo.value.constructor === Object) {
     // 如果 userInfo.value 是一个空对象，则执行以下代码
