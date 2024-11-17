@@ -29,7 +29,7 @@
         <view style="text-align: center">
           <audio
             style="text-align: left"
-            src="https://web-ext-storage.dcloud.net.cn/uni-app/ForElise.mp3"
+            src="http://115.159.83.61:9000/tool/renzhijieli/distance.MP3"
             :poster="audioPlayer.poster"
             :name="audioPlayer.name"
             :author="audioPlayer.author"
@@ -49,8 +49,8 @@
 <script lang="ts" setup>
 const audioPlayer = ref({
   poster: 'https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/music-a.png',
-  name: '致爱丽丝',
-  author: '暂无',
+  name: '与想法拉开距离',
+  author: '',
 })
 const audioAction = ref({
   method: 'pause',

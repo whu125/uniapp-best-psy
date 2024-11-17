@@ -29,7 +29,7 @@
         <view style="text-align: center">
           <audio
             style="text-align: left"
-            src="https://web-ext-storage.dcloud.net.cn/uni-app/ForElise.mp3"
+            src="http://115.159.83.61:9000/tool/zhuanzhudangxia/scan.MP3"
             :poster="audioPlayer.poster"
             :name="audioPlayer.name"
             :author="audioPlayer.author"

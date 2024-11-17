@@ -85,7 +85,12 @@
         </view>
 
         <view v-if="curGroupId === 2">
-          <p>抱歉，您不属于实验对象，请联系相关负责人</p>
+          <view>
+            您好，本程序为华中师范大学心理学院任志洪教授团队开发的负性情绪自助干预系统，目前正在测试推广过程中，若您有意向参与免费体验，欢迎您扫码填写报名表，感谢您的支持！
+          </view>
+          <view class="h-40 w-40" style="margin: 0 auto; margin-top: 25px">
+            <image src="http://115.159.83.61:9000/common/queryQR.png" mode="scaleToFill" />
+          </view>
         </view>
         <view style="height: 150rpx"></view>
       </view>
@@ -240,7 +245,7 @@ onPullDownRefresh(() => {
 onShow(() => {
   currProgress.value = userStore.userInfo.currProgress % 8
   curInter.value = interStore.interInfo.interId % 8
-  // curGroupId.value = userStore.userInfo.groupId
+  curGroupId.value = userStore.userInfo.groupId
   if (curGroupId.value === 0) {
     journeySteps.value = journeySteps0.value
   } else if (curGroupId.value === 1) {

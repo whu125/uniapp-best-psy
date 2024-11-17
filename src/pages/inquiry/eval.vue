@@ -199,6 +199,7 @@ const submit = async () => {
       inputPages: interStore.inputPages,
       inputContent: interStore.inputContent,
     }
+    console.log(submitObj)
     const res = await submitInter(submitObj)
     console.log(res)
     if (res.code === 200) {

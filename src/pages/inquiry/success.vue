@@ -37,12 +37,14 @@
 <script lang="ts" setup>
 import { useInterStore } from '@/store/inter'
 import { useUserStore } from '@/store/user'
+import { useGlobalPageControlStore } from '@/store/globalPageControl'
 import { startInter, IStartInter } from '@/service/index/inter'
 import { getFormattedDate } from '@/utils/getTime'
 import { useMessage, useToast } from 'wot-design-uni'
 
 const interStore = useInterStore()
 const userStore = useUserStore()
+const globalPageControlStore = useGlobalPageControlStore()
 const toast = useToast()
 const isLast = computed(() => {
   return interStore.interInfo.interId === 7
@@ -68,6 +70,7 @@ const toHome = () => {
 
 const toReport = async () => {
   interStore.clearInternfo()
+  globalPageControlStore.clearInternfo()
   const startObj: IStartInter = {
     userId: userStore.userInfo.userId,
     interId: 99,

@@ -323,11 +323,6 @@ const submitInter = () => {
   console.log('模拟提交干预')
 }
 
-const clear = () => {
-  console.log('测试清楚干预缓存')
-  interStore.clearInternfo()
-}
-
 const onChooseavatar = async (e) => {
   console.log('选择头像')
   console.log('e:', e)

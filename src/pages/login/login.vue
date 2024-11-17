@@ -85,6 +85,7 @@ import PLATFORM from '@/utils/platform'
 import { useMessage, useToast } from 'wot-design-uni'
 import { useUserStore } from '@/store'
 import { useInterStore } from '@/store/inter'
+import { useGlobalPageControlStore } from '@/store/globalPageControl'
 import { getUserInfo, getPhoneNumberApi, evalRole, setRole } from '@/service/index/user'
 import { url } from '@/interceptors/request'
 
@@ -103,6 +104,7 @@ defineOptions({
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const userStore = useUserStore()
 const interStore = useInterStore()
+const globalPageControl = useGlobalPageControlStore()
 
 const ToHome = () => {
   uni.switchTab({ url: '/pages/home/home' })
@@ -270,6 +272,7 @@ const weixinLogin = async () => {
         success: async (res) => {
           console.log('res', res)
           interStore.clearInternfo()
+          globalPageControl.clearInternfo()
           // 获得token完成登录
           const token = res.data.data
           userStore.setUserToken(token)

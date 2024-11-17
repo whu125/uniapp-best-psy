@@ -405,8 +405,8 @@ const hasOperation = computed(() => {
 
 const audioPlayer = ref({
   poster: 'https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/music-a.png',
-  name: '致爱丽丝',
-  author: '暂无',
+  name: '开始播放',
+  author: '',
 })
 const audioAction = ref({
   method: 'pause',
@@ -640,6 +640,7 @@ const doOperation = async () => {
   loadFlag.value = false
   // 保存数据到 pinia
   const saveResult = saveDateToPinia()
+  console.log(interStore.inputContent)
   if (saveResult === false) {
     return
   }
@@ -869,7 +870,6 @@ const fillUserGoal = () => {
 }
 
 const toReport = async () => {
-  interStore.clearInternfo()
   const startObj: IStartInter = {
     userId: userStore.userInfo.userId,
     interId: 100,
