@@ -180,6 +180,17 @@ onLoad(async (param) => {
 
   position.value = param.position
 
+  // 处理
+  const parts = position.value.split('-')
+  const num = parseInt(parts[0])
+  const newNum = num % 8 === 0 ? 8 : num % 8
+
+  if (position.value.includes('pre')) {
+    position.value = newNum + '-pre'
+  } else {
+    position.value = newNum + '-post'
+  }
+
   console.log('position', position.value)
 
   // 如果是第二套，interId要取余
