@@ -8,52 +8,53 @@
 }
 </route>
 <template>
-  <view
-    class="bg-white overflow-hidden pt-2 px-4"
-    :style="{ marginTop: safeAreaInsets?.top + 'px' }"
-    w-full
-    h-full
-  >
-    <wd-navbar title="心情日记" left-arrow @click-left="handleClickLeft"></wd-navbar>
-    <view v-show="!editMood">
-      <view class="font">你此刻感觉怎么样?</view>
-      <view class="time-component">
-        <view>
-          <wd-toast />
-          <wd-datetime-picker
-            v-model="timeValue"
-            :before-confirm="beforeConfirm"
-            @confirm="handleConfirm"
-          />
+  <view w-full h-full>
+    <wd-navbar
+      fixed
+      safeAreaInsetTop
+      title="心情日记"
+      left-arrow
+      @click-left="handleClickLeft"
+    ></wd-navbar>
+    <view class="main-container">
+      <view style="height: 15%"></view>
+      <view v-show="!editMood">
+        <view class="font">你此刻感觉怎么样?</view>
+        <view class="time-component">
+          <view>
+            <wd-toast />
+            <wd-datetime-picker
+              v-model="timeValue"
+              :before-confirm="beforeConfirm"
+              @confirm="handleConfirm"
+            />
+          </view>
+        </view>
+        <view class="mood-container">
+          <view class="mood-font" v-for="(mood, index) in moodList" :key="index">
+            <img
+              :src="mood.iconUrl"
+              :style="{ width: '50px', height: '50px', opacity: mood.selected ? 1 : 0.3 }"
+              @click="selectMood(mood)"
+            />
+            <view>{{ mood.desc }}</view>
+          </view>
+        </view>
+        <view class="response-font">
+          听到你这么{{ selectedMood }}，我也感到很{{ selectedMood }}!
+        </view>
+        <view class="edit-mood-container" @click="switchEditMood">
+          <view><wd-icon name="chevron-right-circle" size="40px"></wd-icon></view>
+          <view class="edit-mood-font">下一步</view>
         </view>
       </view>
 
-      <view class="mood-container">
-        <view class="mood-font" v-for="(mood, index) in moodList" :key="index">
-          <img
-            :src="mood.iconUrl"
-            style="width: 50px; height: 50px"
-            @click="selectMood(mood.desc)"
-          />
-          <view>{{ mood.desc }}</view>
+      <view v-show="editMood">
+        <view class="font">今天发生了什么?</view>
+        <view style="margin-top: 20px">
+          <wd-textarea v-model="moodInput" placeholder="记录你的此时此刻……" />
         </view>
-      </view>
-
-      <view class="response-font">听到你这么{{ selectedMood }}，我也感到很{{ selectedMood }}!</view>
-
-      <view class="edit-mood-container" @click="switchEditMood">
-        <view><wd-icon name="chevron-right-circle" size="40px"></wd-icon></view>
-        <view class="edit-mood-font">下一步</view>
-      </view>
-    </view>
-
-    <view v-show="editMood">
-      <view class="font">今天发生了什么?</view>
-      <view style="margin-top: 20px">
-        <wd-textarea v-model="moodInput" placeholder="记录你的此时此刻……" />
-      </view>
-      <view @click="submitDiary">
-        <view class="edit-mood-container">
+        <view class="edit-mood-container" @click="submitDiary">
           <view><wd-icon name="check-circle" size="40px"></wd-icon></view>
           <view class="edit-mood-font">添加到日记簿</view>
         </view>
@@ -90,26 +91,32 @@ const moodList = ref([
   {
     iconUrl: 'http://115.159.83.61:9000/tool/moodDiary/mood-happy.png',
     desc: '开心',
+    selected: false,
   },
   {
     iconUrl: 'http://115.159.83.61:9000/tool/moodDiary/mood-calm.png',
     desc: '平静',
+    selected: false,
   },
   {
     iconUrl: 'http://115.159.83.61:9000/tool/moodDiary/mood-angry.png',
     desc: '生气',
+    selected: false,
   },
   {
     iconUrl: 'http://115.159.83.61:9000/tool/moodDiary/mood-upset.png',
     desc: '沮丧',
+    selected: false,
   },
   {
     iconUrl: 'http://115.159.83.61:9000/tool/moodDiary/mood-anxious.png',
     desc: '焦虑',
+    selected: false,
   },
   {
     iconUrl: 'http://115.159.83.61:9000/tool/moodDiary/mood-sad.png',
     desc: '悲伤',
+    selected: false,
   },
 ])
 
@@ -160,9 +167,13 @@ const submitDiary = async () => {
   }
 }
 
-const selectMood = (mood: string) => {
+const selectMood = (mood) => {
   console.log(mood)
-  selectedMood.value = mood
+  selectedMood.value = mood.desc
+  moodList.value.forEach((mood) => {
+    mood.selected = false
+  })
+  mood.selected = true
 }
 </script>
 
@@ -182,6 +193,19 @@ const selectMood = (mood: string) => {
   font-size: 12px;
   font-weight: bold;
   text-align: center;
+}
+
+.main-container {
+  box-sizing: content-box;
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 221, 225, 0.67) 0%,
+    rgba(241, 221, 212, 0.3) 60%,
+    rgba(255, 252, 219, 0.67) 100%
+  );
 }
 
 .time-component {

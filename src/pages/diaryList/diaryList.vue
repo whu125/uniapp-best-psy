@@ -8,12 +8,7 @@
 }
 </route>
 <template>
-  <view
-    class="bg-white overflow-hidden pt-2 px-4"
-    :style="{ marginTop: safeAreaInsets?.top + 'px' }"
-    w-full
-    h-full
-  >
+  <view w-full h-full>
     <wd-navbar
       fixed
       safeAreaInsetTop
@@ -21,21 +16,24 @@
       left-arrow
       @click-left="handleClickLeft"
     ></wd-navbar>
-    <view class="main-container" v-for="(diary, index) in diaryList" :key="index">
-      <view class="card" @click="toDiaryDetail(index)">
-        <img class="emoji" :src="imageMap.get(diary.diaryMood)" />
-        <view class="info">
-          <view class="left-box">
-            <view class="date">{{ diary.dateDay }}</view>
-            <view class="time">{{ diary.dateTime }}</view>
+    <view class="main-container">
+      <view style="height: 10%"></view>
+      <view class="card-container" v-for="(diary, index) in diaryList" :key="index">
+        <view class="card" @click="toDiaryDetail(index)">
+          <img class="emoji" :src="imageMap.get(diary.diaryMood)" />
+          <view class="info">
+            <view class="left-box">
+              <view class="date">{{ diary.dateDay }}</view>
+              <view class="time">{{ diary.dateTime }}</view>
+            </view>
+            <view class="mood">{{ diary.diaryMood }}</view>
           </view>
-          <view class="mood">{{ diary.diaryMood }}</view>
-        </view>
-        <view class="right_box">
-          <image
-            src="http://115.159.83.61:9000/tool/tool-list.png"
-            style="width: 45px; height: 45px"
-          />
+          <view class="right_box">
+            <image
+              src="http://115.159.83.61:9000/tool/tool-list.png"
+              style="width: 45px; height: 45px"
+            />
+          </view>
         </view>
       </view>
     </view>
@@ -113,11 +111,23 @@ const ToFeeling = () => {
   color: #d14328;
 }
 
-.main-container {
+.card-container {
   display: flex;
   flex-direction: column;
   width: 100%;
   margin: 55px 0 20px 0;
+}
+.main-container {
+  box-sizing: content-box;
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 221, 225, 0.67) 0%,
+    rgba(241, 221, 212, 0.3) 60%,
+    rgba(255, 252, 219, 0.67) 100%
+  );
 }
 .card {
   box-sizing: border-box;

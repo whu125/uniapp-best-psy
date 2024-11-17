@@ -7,7 +7,7 @@
 }
 </route>
 <template>
-  <view class="" w-full h-full>
+  <view w-full h-full>
     <wd-navbar
       fixed
       safeAreaInsetTop
@@ -22,7 +22,7 @@
       <view v-for="(huibi, index) in huibiList" :key="index">
         <view class="box" @click="selectHuibi(index)">
           <view style="font-size: 18px; color: gray">{{ index }}</view>
-          <view style="font-size: 20px; font-weight: bold">{{ huibi.huibiName }}</view>
+          <view class="name">{{ huibi.huibiName }}</view>
           <image
             src="http://115.159.83.61:9000/tool/tool-list.png"
             style="width: 45px; height: 45px"
@@ -67,9 +67,16 @@ const selectHuibi = (index: number) => {
 
 <style>
 .main-container {
+  box-sizing: content-box;
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 221, 225, 0.67) 0%,
+    rgba(241, 221, 212, 0.3) 60%,
+    rgba(255, 252, 219, 0.67) 100%
+  );
 }
 
 .font {
@@ -77,6 +84,13 @@ const selectHuibi = (index: number) => {
   font-size: 25px;
   font-weight: bold;
   text-align: center;
+}
+
+.name {
+  width: 65%;
+  overflow: hidden;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .box {

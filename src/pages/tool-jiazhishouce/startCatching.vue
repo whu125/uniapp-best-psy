@@ -7,7 +7,7 @@
 }
 </route>
 <template>
-  <view class="" w-full h-full>
+  <view w-full h-full>
     <wd-navbar fixed safeAreaInsetTop title="价值手册" left-arrow @click-left="goBack"></wd-navbar>
 
     <!-- 普通页面 -->
@@ -47,7 +47,12 @@ const goBack = () => {
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
-  background: linear-gradient(to bottom right, #e6f7ff, #fffbe6);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 221, 225, 0.67) 0%,
+    rgba(241, 221, 212, 0.3) 60%,
+    rgba(255, 252, 219, 0.67) 100%
+  );
 }
 
 .middle-img-common {

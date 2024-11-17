@@ -189,6 +189,9 @@ const startJourney = () => {
   } else if (userStore.userInfo.groupId === 1) {
     interStore.isStartJourney1 = true
   }
+  if (interStore.isStartJourney1 === true) {
+    interStore.minusPageIndex()
+  }
   uni.navigateTo({
     url: '/pages/journey_common/common',
   })

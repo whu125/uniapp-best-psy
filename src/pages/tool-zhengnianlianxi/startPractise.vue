@@ -65,7 +65,12 @@ const goBack = () => {
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
-  background: linear-gradient(to bottom right, #e6f7ff, #fffbe6);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 221, 225, 0.67) 0%,
+    rgba(241, 221, 212, 0.3) 60%,
+    rgba(255, 252, 219, 0.67) 100%
+  );
 }
 
 .operation-area {

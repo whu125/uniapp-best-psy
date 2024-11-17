@@ -7,8 +7,15 @@
 }
 </route>
 <template>
-  <view class="" w-full h-full>
-    <wd-navbar fixed safeAreaInsetTop left-text="返回" left-arrow @click-left="goBack"></wd-navbar>
+  <view w-full h-full>
+    <wd-navbar
+      fixed
+      title="情绪采集"
+      safeAreaInsetTop
+      left-text="返回"
+      left-arrow
+      @click-left="goBack"
+    ></wd-navbar>
     <view class="main-container">
       <view style="height: 15%"></view>
       <view class="font">情绪采集手册</view>
@@ -60,9 +67,16 @@ const selectQingxu = (index: number) => {
 
 <style>
 .main-container {
+  box-sizing: content-box;
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 221, 225, 0.67) 0%,
+    rgba(241, 221, 212, 0.3) 60%,
+    rgba(255, 252, 219, 0.67) 100%
+  );
 }
 
 .font {

@@ -84,6 +84,7 @@
 import PLATFORM from '@/utils/platform'
 import { useMessage, useToast } from 'wot-design-uni'
 import { useUserStore } from '@/store'
+import { useInterStore } from '@/store/inter'
 import { getUserInfo, getPhoneNumberApi, evalRole, setRole } from '@/service/index/user'
 import { url } from '@/interceptors/request'
 
@@ -101,6 +102,7 @@ defineOptions({
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const userStore = useUserStore()
+const interStore = useInterStore()
 
 const ToHome = () => {
   uni.switchTab({ url: '/pages/home/home' })
@@ -267,6 +269,7 @@ const weixinLogin = async () => {
         },
         success: async (res) => {
           console.log('res', res)
+          interStore.clearInternfo()
           // 获得token完成登录
           const token = res.data.data
           userStore.setUserToken(token)

@@ -7,8 +7,8 @@
 }
 </route>
 <template>
-  <view class="" w-full h-full>
-    <wd-navbar fixed safeAreaInsetTop title="情绪采集" left-arrow @click-left="goBack"></wd-navbar>
+  <view w-full h-full>
+    <wd-navbar fixed safeAreaInsetTop title="三件小事" left-arrow @click-left="goBack"></wd-navbar>
 
     <!-- 第一步 -->
     <view class="main-container" v-show="currIndex === 0">
@@ -175,7 +175,12 @@ const doSubmit = async () => {
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
-  background: linear-gradient(to bottom right, #e6f7ff, #fffbe6);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 221, 225, 0.67) 0%,
+    rgba(241, 221, 212, 0.3) 60%,
+    rgba(255, 252, 219, 0.67) 100%
+  );
 }
 
 .middle-img-input {

@@ -7,7 +7,7 @@
 }
 </route>
 <template>
-  <view class="" w-full h-full>
+  <view w-full h-full>
     <wd-navbar
       fixed
       safeAreaInsetTop
@@ -80,9 +80,16 @@ const goBack = () => {
 
 <style>
 .main-container {
+  box-sizing: content-box;
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 221, 225, 0.67) 0%,
+    rgba(241, 221, 212, 0.3) 60%,
+    rgba(255, 252, 219, 0.67) 100%
+  );
 }
 
 .font {

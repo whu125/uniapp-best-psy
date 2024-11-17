@@ -3,6 +3,7 @@
   style: {
     navigationStyle: 'custom',
     navigationBarTitleText: '我的旅程',
+    enablePullDownRefresh: true,
   },
 }
 </route>
@@ -14,6 +15,7 @@
 
     <view class="content px-4" style="min-height: 100vh">
       <view style="height: 150rpx"></view>
+      <!-- <view>19</view> -->
       <view class="h-40 w-full">
         <image src="http://115.159.83.61:9000/home/home.png" mode="scaleToFill" />
       </view>
@@ -162,12 +164,12 @@ const journeySteps0 = ref([
   },
   {
     icon: 'http://115.159.83.61:9000/home/icon/journey6.png',
-    text: '第六站：开始你的行动',
+    text: '第六站：朝着价值出发',
     progress: 6,
   },
   {
     icon: 'http://115.159.83.61:9000/home/icon/journey7.png',
-    text: '第七站：发现你的价值',
+    text: '第七站：开启新的旅程',
     progress: 7,
   },
 ])
@@ -225,8 +227,18 @@ onMounted(() => {
   }, 5000)
 })
 
+onPullDownRefresh(() => {
+  console.log('refresh')
+  setTimeout(function () {
+    uni.stopPullDownRefresh()
+  }, 1000)
+  uni.reLaunch({
+    url: '/pages/home/home',
+  })
+})
+
 onShow(() => {
-  // currProgress.value = userStore.userInfo.currProgress % 8
+  currProgress.value = userStore.userInfo.currProgress % 8
   curInter.value = interStore.interInfo.interId % 8
   // curGroupId.value = userStore.userInfo.groupId
   if (curGroupId.value === 0) {
@@ -259,18 +271,6 @@ onShow(() => {
     userStore.websocket.onClose((res) => {
       console.log('websocket close')
     })
-    // userStore.websocket.onMessage((res) => {
-    //   console.log('收到服务器内容：' + res.data)
-    //   // 后端 websocket 发来的数据形如 waitingTime # currProgress
-    //   // userStore.websocketMsg = res.data
-
-    //   waitingTime.value = Number(res.data.split('#')[0])
-    //   userStore.userInfo.currProgress = Number(res.data.split('#')[1])
-    //   currProgress.value = userStore.userInfo.currProgress % 8
-
-    //   console.log(waitingTime.value)
-    //   console.log(currProgress.value)
-    // })
   } else if (JSON.stringify(userStore.websocket) !== '{}') {
     // 假如 websocket 连接失效 进行重连
     console.log('websocket not empty')

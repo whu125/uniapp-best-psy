@@ -182,6 +182,12 @@ const ToTool = (toolName: string) => {
   justify-content: center;
   width: 100%;
   height: auto;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 221, 225, 0.67) 0%,
+    rgba(241, 221, 212, 0.3) 60%,
+    rgba(255, 252, 219, 0.67) 100%
+  );
 }
 
 .img {
