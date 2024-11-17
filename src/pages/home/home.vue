@@ -114,8 +114,8 @@ uni.hideTabBar()
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
 
-const curGroupId = ref()
 const userStore = useUserStore()
+const curGroupId = ref<number>(userStore.userInfo.groupId)
 const message = useMessage()
 const toast = useToast()
 const interStore = useInterStore()
@@ -226,9 +226,9 @@ onMounted(() => {
 })
 
 onShow(() => {
-  currProgress.value = userStore.userInfo.currProgress % 8
+  // currProgress.value = userStore.userInfo.currProgress % 8
   curInter.value = interStore.interInfo.interId % 8
-  curGroupId.value = userStore.userInfo.groupId
+  // curGroupId.value = userStore.userInfo.groupId
   if (curGroupId.value === 0) {
     journeySteps.value = journeySteps0.value
   } else if (curGroupId.value === 1) {
@@ -316,22 +316,15 @@ onShow(() => {
       // })
     }
   }
-  uni.onSocketMessage((res) => {
-    console.log('收到服务器内容：' + res.data)
-    // 后端 websocket 发来的数据形如 waitingTime # currProgress
-    waitingTime.value = Number(res.data.split('#')[0])
-    userStore.userInfo.currProgress = Number(res.data.split('#')[1])
-    currProgress.value = userStore.userInfo.currProgress % 8
-  })
 })
 
-// uni.onSocketMessage((res) => {
-//   console.log('收到服务器内容：' + res.data)
-//   // 后端 websocket 发来的数据形如 waitingTime # currProgress
-//   waitingTime.value = Number(res.data.split('#')[0])
-//   userStore.userInfo.currProgress = Number(res.data.split('#')[1])
-//   currProgress.value = userStore.userInfo.currProgress % 8
-// })
+uni.onSocketMessage((res) => {
+  console.log('收到服务器内容：' + res.data)
+  // 后端 websocket 发来的数据形如 waitingTime # currProgress
+  waitingTime.value = Number(res.data.split('#')[0])
+  userStore.userInfo.currProgress = Number(res.data.split('#')[1])
+  currProgress.value = userStore.userInfo.currProgress % 8
+})
 
 const calculateHour = () => {
   // 这个函数应该用不到了
