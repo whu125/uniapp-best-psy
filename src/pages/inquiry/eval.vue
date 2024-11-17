@@ -190,31 +190,35 @@ const submit = async () => {
     help,
   })
 
-  // 生成用于提交后端的数据
-  const submitObj: ISubmitInter = {
-    userId: userStore.userInfo.userId,
-    interId: interStore.interInfo.interId,
-    endTime: getFormattedDate(),
-    inputPages: interStore.inputPages,
-    inputContent: interStore.inputContent,
-  }
-  const res = await submitInter(submitObj)
-  console.log(res)
-  if (res.code === 200) {
-    toast.success('干预完成！')
-    // 清除 pinia 干预缓存
-    interStore.clearInternfo()
-    // 这里要判断是否是第一次提交最新一次干预
-    if (res.data === userStore.userInfo.currProgress + 1) {
-      // 说明此时是第一次提交最新一次干预
-      userStore.addProgress()
-      // userStore.setLockTime()
+  if (userStore.userInfo.groupId === 0) {
+    // 生成用于提交后端的数据
+    const submitObj: ISubmitInter = {
+      userId: userStore.userInfo.userId,
+      interId: interStore.interInfo.interId,
+      endTime: getFormattedDate(),
+      inputPages: interStore.inputPages,
+      inputContent: interStore.inputContent,
     }
+    const res = await submitInter(submitObj)
+    console.log(res)
+    if (res.code === 200) {
+      toast.success('干预完成！')
+      // 清除 pinia 干预缓存
+      interStore.clearInternfo()
+      // 这里要判断是否是第一次提交最新一次干预
+      if (res.data === userStore.userInfo.currProgress + 1) {
+        // 说明此时是第一次提交最新一次干预
+        userStore.addProgress()
+        // userStore.setLockTime()
+      }
 
-    globalPageControl.clearInternfo()
+      globalPageControl.clearInternfo()
+      uni.redirectTo({ url: '/pages/inquiry/success' })
+    } else {
+      toast.error('出现了一些问题')
+    }
+  } else if (userStore.userInfo.groupId === 1) {
     uni.redirectTo({ url: '/pages/inquiry/success' })
-  } else {
-    toast.error('出现了一些问题')
   }
 }
 </script>
