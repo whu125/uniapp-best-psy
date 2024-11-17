@@ -61,7 +61,7 @@ const toHome = () => {
     })
   } else {
     uni.redirectTo({
-      url: '/pages/daolanHome/daolanHome',
+      url: '/pages/journey_common/daolanHome',
     })
   }
 }

@@ -54,6 +54,13 @@ const interIdToUrlMap = new Map<number, string>([
   [6, 'http://115.159.83.61:9000/journey6/daka5.png'],
   [7, 'http://115.159.83.61:9000/journey7/daka5.png'],
   // Add more mappings as needed
+  [9, 'http://115.159.83.61:9000/journey9/daka5.png'],
+  [10, 'http://115.159.83.61:9000/journey10/daka5.png'],
+  [11, 'http://115.159.83.61:9000/journey11/daka5.png'],
+  [12, 'http://115.159.83.61:9000/journey12/daka5.png'],
+  [13, 'http://115.159.83.61:9000/journey13/daka5.png'],
+  [14, 'http://115.159.83.61:9000/journey14/daka5.png'],
+  [15, 'http://115.159.83.61:9000/journey15/daka5.png'],
 ])
 
 onShow(async () => {

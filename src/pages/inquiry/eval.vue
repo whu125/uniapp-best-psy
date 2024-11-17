@@ -33,21 +33,23 @@
         </view>
       </view>
 
-      <view class="helpful-box">
-        <text class="helpful-title mb-7">本章对你最有帮助的部分有（可多选）：</text>
-        <view class="helpful-options">
-          <view
-            class="option-item"
-            v-for="(item, index) in helpfulOptionsMap.get(interId)"
-            :key="index"
-            :class="{ selected: selectedOptions.includes(item) }"
-            @click="toggleOption(item)"
-          >
-            {{ item }}
+      <view v-if="curGroupId != 1">
+        <view class="helpful-box">
+          <text class="helpful-title mb-7">本章对你最有帮助的部分有（可多选）：</text>
+          <view class="helpful-options">
+            <view
+              class="option-item"
+              v-for="(item, index) in helpfulOptionsMap.get(interId)"
+              :key="index"
+              :class="{ selected: selectedOptions.includes(item) }"
+              @click="toggleOption(item)"
+            >
+              {{ item }}
+            </view>
           </view>
-        </view>
-        <view v-if="selectedOptions.includes('其他......')" class="">
-          <wd-input v-model="helpText" placeholder="请输入其他对你最有帮助的部分" />
+          <view v-if="selectedOptions.includes('其他......')" class="">
+            <wd-input v-model="helpText" placeholder="请输入其他对你最有帮助的部分" />
+          </view>
         </view>
       </view>
 
@@ -77,6 +79,8 @@ const userStore = useUserStore()
 const interStore = useInterStore()
 const toast = useToast()
 const interId = interStore.interInfo.interId
+
+const curGroupId = ref()
 // const interId = ref(1)
 const helpfulOptionsMap = new Map([
   [
@@ -152,6 +156,9 @@ const helpfulOptionsMap = new Map([
   ],
 ])
 
+onShow(() => {
+  curGroupId.value = userStore.userInfo.groupId
+})
 const selectedOptions = ref([])
 const helpText = ref('')
 
