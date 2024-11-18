@@ -50,6 +50,7 @@ interface NavigateToOptions {
        "/pages/tool-jienalianxi/jienaDetail" |
        "/pages/tool-jienalianxi/jienalianxi" |
        "/pages/tool-jienalianxi/list" |
+       "/pages/tool-jienalianxi/practice" |
        "/pages/tool-qingxucaiji/input" |
        "/pages/tool-qingxucaiji/list" |
        "/pages/tool-qingxucaiji/qingxucaiji" |

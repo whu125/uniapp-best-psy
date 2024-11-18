@@ -21,7 +21,7 @@
         />
       </view>
 
-      <view class="card-container" v-if="currGroupId === 1">
+      <view class="card-container" v-show="currGroupId === 1">
         <view
           class="card"
           v-for="(tool, index) in toolList1"
@@ -33,7 +33,7 @@
         </view>
       </view>
 
-      <view class="card-container" v-if="currGroupId === 0">
+      <view class="card-container" v-show="currGroupId === 0">
         <view
           class="card"
           v-for="(tool, index) in toolList0"

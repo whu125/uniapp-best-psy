@@ -414,6 +414,14 @@
       }
     },
     {
+      "path": "pages/tool-jienalianxi/practice",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
       "path": "pages/tool-qingxucaiji/input",
       "type": "page",
       "style": {

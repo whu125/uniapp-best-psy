@@ -174,7 +174,7 @@ const contentList = [
   {
     navbarTitle: '第七站: 导览',
     logoUrl: 'http://115.159.83.61:9000/journey15/journeyHome15.png',
-    text: ['用温暖的关系编织守护网'],
+    text: ['从今天开始，好好照顾自己'],
   },
 ]
 

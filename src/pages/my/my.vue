@@ -66,7 +66,7 @@
       </div>
 
       <div class="menu-items">
-        <div class="menu-item" @click="toCommon('新手指南')">
+        <div class="menu-item" @click="toGuide()">
           <view>
             <image
               style="width: 60rpx; height: 60rpx"
@@ -239,6 +239,12 @@ onShow(() => {
   }
 })
 
+const toGuide = () => {
+  uni.navigateTo({
+    url: `/pages/my/guide`,
+  })
+}
+
 const toCommon = (name: string) => {
   let detailObject = ''
   if (name === '心理危机热线') {
@@ -249,10 +255,6 @@ const toCommon = (name: string) => {
     detailObject = encodeURIComponent(JSON.stringify(pageContentList.value[2]))
   } else if (name === '关于我们') {
     detailObject = encodeURIComponent(JSON.stringify(pageContentList.value[3]))
-  } else if (name === '新手指南') {
-    uni.navigateTo({
-      url: `/pages/my/guide`,
-    })
   }
 
   uni.navigateTo({

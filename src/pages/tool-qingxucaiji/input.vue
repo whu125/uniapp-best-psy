@@ -40,8 +40,8 @@
         <view class="mood-font" v-for="(mood, index) in moodList" :key="index">
           <img
             :src="mood.iconUrl"
-            style="width: 50px; height: 50px"
-            @click="selectMood(mood.iconUrl, mood.desc)"
+            :style="{ width: '50px', height: '50px', opacity: mood.selected ? 1 : 0.3 }"
+            @click="selectMood(mood)"
           />
           <view>{{ mood.desc }}</view>
         </view>
@@ -157,34 +157,44 @@ import { useUserStore } from '@/store/user'
 import { useMessage, useToast } from 'wot-design-uni'
 
 const currIndex = ref<number>(0)
-const selectMood = (url: string, name: string) => {
-  submitObj.value.feelingUrl = url
-  submitObj.value.feelingName = name
+const selectMood = (mood) => {
+  moodList.value.forEach((mood) => {
+    mood.selected = false
+  })
+  mood.selected = true
+  submitObj.value.feelingUrl = mood.iconUrl
+  submitObj.value.feelingName = mood.desc
 }
 const moodList = ref([
   {
     iconUrl: 'http://115.159.83.61:9000/tool/moodDiary/mood-happy.png',
     desc: '开心',
+    selected: false,
   },
   {
     iconUrl: 'http://115.159.83.61:9000/tool/moodDiary/mood-calm.png',
     desc: '平静',
+    selected: false,
   },
   {
     iconUrl: 'http://115.159.83.61:9000/tool/moodDiary/mood-angry.png',
     desc: '生气',
+    selected: false,
   },
   {
     iconUrl: 'http://115.159.83.61:9000/tool/moodDiary/mood-upset.png',
     desc: '沮丧',
+    selected: false,
   },
   {
     iconUrl: 'http://115.159.83.61:9000/tool/moodDiary/mood-anxious.png',
     desc: '焦虑',
+    selected: false,
   },
   {
     iconUrl: 'http://115.159.83.61:9000/tool/moodDiary/mood-sad.png',
     desc: '悲伤',
+    selected: false,
   },
 ])
 const submitObj = ref<IQingxucaiji>({

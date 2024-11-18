@@ -49,8 +49,8 @@
 <script lang="ts" setup>
 const audioPlayer = ref({
   poster: 'https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/music-a.png',
-  name: '致爱丽丝',
-  author: '暂无',
+  name: '身体扫描',
+  author: '',
 })
 const audioAction = ref({
   method: 'pause',

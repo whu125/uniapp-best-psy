@@ -18,7 +18,7 @@
       @click-left="handleClickLeft"
     ></wd-navbar>
     <view class="main-container">
-      <view style="height: 15%"></view>
+      <view style="height: 5%"></view>
       <view class="big-icon">
         <img
           style="width: 200px; height: 180px"
@@ -31,14 +31,20 @@
       <view class="small-font">自我关怀书写将帮助你用温暖、慈悲的态度理解自己</view>
       <view class="button-area">
         <wd-card>
-          <view class="card-content" @click="start">
+          <view class="card-content" @click="practice">
             <view class="card-title">接纳练习</view>
+            <view><wd-icon name="calendar" size="26px" /></view>
+          </view>
+        </wd-card>
+        <wd-card>
+          <view class="card-content" @click="start">
+            <view class="card-title">自我关怀书写</view>
             <view><wd-icon name="edit-1" size="26px" /></view>
           </view>
         </wd-card>
         <wd-card>
           <view class="card-content" @click="ToList">
-            <view class="card-title">自我关怀书写</view>
+            <view class="card-title">我的收件箱</view>
             <view><wd-icon name="copy" size="26px" /></view>
           </view>
         </wd-card>
@@ -52,6 +58,12 @@
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const handleClickLeft = () => {
   uni.navigateBack()
+}
+
+const practice = () => {
+  uni.navigateTo({
+    url: '/pages/tool-jienalianxi/practice',
+  })
 }
 
 const start = () => {

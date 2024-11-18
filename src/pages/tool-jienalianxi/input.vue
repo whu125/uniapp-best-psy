@@ -15,67 +15,6 @@
       <view style="height: 15%"></view>
       <view class="middle-img-common">
         <image
-          src="http://115.159.83.61:9000/journey5/renwu3.png"
-          mode="widthFix"
-          style="width: 100%"
-        />
-      </view>
-      <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
-        <view style="width: 100%; font-size: 18px; text-align: center">开始接纳体验</view>
-      </view>
-    </view>
-
-    <!-- 第二步 -->
-    <view class="main-container" v-show="currIndex === 1">
-      <view style="height: 15%"></view>
-      <view class="middle-img-input">
-        <image
-          src="http://115.159.83.61:9000/journey5/renwu4.png"
-          mode="widthFix"
-          style="width: 100%"
-        />
-      </view>
-      <view class="input-area">
-        <view style="text-align: center">
-          <audio
-            style="text-align: left"
-            src="http://115.159.83.61:9000/tool/jienalianxi/accept.MP3"
-            :poster="audioPlayer.poster"
-            :name="audioPlayer.name"
-            :author="audioPlayer.author"
-            :action="audioAction"
-            controls
-          ></audio>
-        </view>
-      </view>
-      <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
-        <view style="width: 100%; font-size: 18px; text-align: center">我完成啦</view>
-      </view>
-    </view>
-
-    <!-- 第三步 -->
-    <view class="main-container" v-show="currIndex === 2">
-      <view style="height: 15%"></view>
-      <view class="middle-img-common">
-        <image
-          src="http://115.159.83.61:9000/tool/jienalianxi/jienalianxi1.png"
-          mode="widthFix"
-          style="width: 100%"
-        />
-      </view>
-      <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
-        <view style="width: 100%; font-size: 18px; text-align: center">下一步</view>
-      </view>
-    </view>
-
-    <!-- 第四步 -->
-    <view class="main-container" v-show="currIndex === 3">
-      <view style="height: 15%"></view>
-      <view class="middle-img-common">
-        <image
           src="http://115.159.83.61:9000/journey5/renwu8.png"
           mode="widthFix"
           style="width: 100%"
@@ -87,8 +26,8 @@
       </view>
     </view>
 
-    <!-- 第五步 -->
-    <view class="main-container" v-show="currIndex === 4">
+    <!-- 第二步 -->
+    <view class="main-container" v-show="currIndex === 1">
       <view style="height: 15%"></view>
       <view class="title">一封给你的信</view>
       <view class="input-area px-2">
@@ -150,15 +89,6 @@ const submitObj = ref<IJienalianxi>({
   xingdong: '',
   zhidao: '',
   gaosu: '',
-})
-
-const audioPlayer = ref({
-  poster: 'https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/music-a.png',
-  name: '致爱丽丝',
-  author: '暂无',
-})
-const audioAction = ref({
-  method: 'pause',
 })
 
 const message = useMessage()
