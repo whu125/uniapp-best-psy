@@ -9,54 +9,65 @@
 <template>
   <view class="" h-full w-full>
     <wd-navbar fixed safeAreaInsetTop title="用户管理" left-arrow @click-left="ToHome"></wd-navbar>
-  </view>
 
-  <view class="container">
-    <wd-toast></wd-toast>
-    <view class="form-box">
-      <!-- 手机号输入 -->
-      <view class="input-group">
-        <text class="label">手机号</text>
-        <input
-          type="number"
-          v-model="phone"
-          maxlength="11"
-          placeholder="请输入手机号"
-          class="input"
-        />
-      </view>
-
-      <!-- 选项选择 -->
-      <view class="input-group">
-        <text class="label">选项</text>
-        <view class="radio-group">
-          <label class="radio-item" @tap="selectOption(1)">
-            <view class="radio-circle" :class="{ selected: chooseGroupId === 1 }"></view>
-            <text>对照组（groupId:1）</text>
-          </label>
-          <label class="radio-item" @tap="selectOption(0)">
-            <view class="radio-circle" :class="{ selected: chooseGroupId === 0 }"></view>
-            <text>实验组（groupId:0）</text>
-          </label>
+    <view class="container">
+      <wd-toast></wd-toast>
+      <view class="form-box">
+        <!-- 手机号输入 -->
+        <view class="input-group">
+          <text class="label">手机号</text>
+          <input
+            type="number"
+            v-model="phone"
+            maxlength="11"
+            placeholder="请输入手机号"
+            class="input"
+          />
         </view>
+
+        <view class="input-group">
+          <text class="label">序号</text>
+          <input
+            type="text"
+            v-model="userId"
+            maxlength="11"
+            placeholder="请输入序号"
+            class="input"
+          />
+        </view>
+
+        <!-- 选项选择 -->
+        <view class="input-group">
+          <text class="label">选项</text>
+          <view class="radio-group">
+            <label class="radio-item" @tap="selectOption(1)">
+              <view class="radio-circle" :class="{ selected: chooseGroupId === 1 }"></view>
+              <text>对照组（groupId:1）</text>
+            </label>
+            <label class="radio-item" @tap="selectOption(0)">
+              <view class="radio-circle" :class="{ selected: chooseGroupId === 0 }"></view>
+              <text>实验组（groupId:0）</text>
+            </label>
+          </view>
+        </view>
+
+        <!-- 提交按钮 -->
+        <button class="submit-btn" @tap="handleSubmit">提交</button>
       </view>
-
-      <!-- 提交按钮 -->
-      <button class="submit-btn" @tap="handleSubmit">提交</button>
     </view>
-  </view>
 
-  <view class="admin-container" v-if="flag">
-    <wd-card title="已录入的用户表">
-      <wd-table :data="userInfo">
-        <wd-table-col prop="phone" label="手机号" width="200"></wd-table-col>
-        <wd-table-col prop="groupId" label="组别" width="150"></wd-table-col>
-      </wd-table>
-    </wd-card>
-    <!-- <wd-table :data="userInfo">
+    <view class="admin-container" v-if="flag">
+      <wd-card title="已录入的用户表">
+        <wd-table :data="userInfo">
+          <wd-table-col prop="phone" label="手机号" width="200"></wd-table-col>
+          <wd-table-col prop="groupId" label="组别" width="150"></wd-table-col>
+        </wd-table>
+      </wd-card>
+      <!-- <wd-table :data="userInfo">
       <wd-table-col prop="phone" label="手机号" width="150"></wd-table-col>
       <wd-table-col prop="groupId" label="组别"></wd-table-col>
     </wd-table> -->
+    </view>
   </view>
 
   <wd-popup v-model="show" custom-style="padding: 0;" :close-on-click-modal="false">
@@ -86,6 +97,7 @@ import { exportExcelApi, getAccessTokenApi, setUserGroupApi } from '@/service/ad
 import { getAllUserInfo, User, getAllPreUserInfo } from '@/service/index/user'
 import { useMessage, useToast } from 'wot-design-uni'
 
+const userId = ref()
 const phone = ref()
 const curopenid = ref()
 const toast = useToast()
@@ -153,7 +165,7 @@ const selectOption = (option) => {
 }
 
 const handleSubmit = async () => {
-  const res = await setUserGroupApi(phone.value, chooseGroupId.value)
+  const res = await setUserGroupApi(phone.value, chooseGroupId.value, userId.value)
 
   console.log(res)
   if (res.code === 200) {
@@ -166,6 +178,9 @@ const handleSubmit = async () => {
 </script>
 
 <style>
+.container {
+  margin-top: 200rpx;
+}
 .popup-container {
   position: relative;
   width: 350px;

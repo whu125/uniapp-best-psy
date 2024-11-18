@@ -15,7 +15,7 @@
   </view> -->
     <view class="admin-container" v-if="flag">
       <wd-table :data="userInfo">
-        <wd-table-col label="操作" fixed>
+        <wd-table-col label="导出操作" fixed>
           <template #value="{ row }">
             <view class="custom-class" style="width: 100px">
               <!-- <wd-button type="info" size="small" @click="edit(row)">编辑</wd-button> -->
@@ -24,7 +24,7 @@
             </view>
           </template>
         </wd-table-col>
-        <wd-table-col prop="username" label="微信名"></wd-table-col>
+        <wd-table-col prop="userId" label="实验序号"></wd-table-col>
         <wd-table-col prop="phone" label="手机号" width="150"></wd-table-col>
         <wd-table-col prop="currProgress" label="已解锁单元"></wd-table-col>
       </wd-table>

@@ -307,6 +307,14 @@
       }
     },
     {
+      "path": "pages/tool-huibidangan/huibiDetail",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
       "path": "pages/tool-huibidangan/huibidangan",
       "type": "page",
       "style": {
@@ -314,14 +322,6 @@
         "navigationBarTitleText": "心情日记"
       },
       "needLogin": true
-    },
-    {
-      "path": "pages/tool-huibidangan/huibiDetail",
-      "type": "page",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "导览"
-      }
     },
     {
       "path": "pages/tool-huibidangan/input",
@@ -430,6 +430,14 @@
       }
     },
     {
+      "path": "pages/tool-qingxucaiji/qingxuDetail",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "导览"
+      }
+    },
+    {
       "path": "pages/tool-qingxucaiji/qingxucaiji",
       "type": "page",
       "style": {
@@ -437,14 +445,6 @@
         "navigationBarTitleText": "心情日记"
       },
       "needLogin": true
-    },
-    {
-      "path": "pages/tool-qingxucaiji/qingxuDetail",
-      "type": "page",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "导览"
-      }
     },
     {
       "path": "pages/tool-renzhijieli/distance",
