@@ -256,7 +256,7 @@ const toExpand = async () => {
   } else if (interStore.interInfo.interId === 12) {
     await interStore.setPageIndex(7)
   } else if (interStore.interInfo.interId === 13) {
-    await interStore.setPageIndex(9)
+    await interStore.setPageIndex(10)
   } else if (interStore.interInfo.interId === 14) {
     await interStore.setPageIndex(9)
   } else if (interStore.interInfo.interId === 15) {

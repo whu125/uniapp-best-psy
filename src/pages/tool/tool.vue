@@ -179,9 +179,9 @@ const ToTool = (toolName: string) => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   width: 100%;
   height: auto;
+  min-height: 100vh;
   background: linear-gradient(
     180deg,
     rgba(255, 221, 225, 0.67) 0%,
