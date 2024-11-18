@@ -16,6 +16,6 @@ export const getAccessTokenApi = () => {
   return http.get('/getAccessToken', {})
 }
 
-export const setUserGroupApi = (phone: any, groupId: any) => {
-  return http.post('/admin/setUser', { phone, groupId })
+export const setUserGroupApi = (phone: any, groupId: any, userId) => {
+  return http.post('/admin/setUser', { phone, groupId, userId })
 }
