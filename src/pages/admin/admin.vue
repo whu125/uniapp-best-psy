@@ -27,6 +27,7 @@
         <wd-table-col prop="userId" label="实验序号"></wd-table-col>
         <wd-table-col prop="phone" label="手机号" width="150"></wd-table-col>
         <wd-table-col prop="currProgress" label="已解锁单元"></wd-table-col>
+        <wd-table-col prop="finishTime" label="上次打卡时间"></wd-table-col>
       </wd-table>
     </view>
 
@@ -142,11 +143,12 @@ const ToHome = () => {
 const exportInterExcel = async (row) => {
   console.log('导出excel')
   toast.loading('导出中...')
-  curopenid.value = row.userId
+  console.log(row)
+  curopenid.value = row.openid
   console.log(row)
   currentUser.value = row.phone
   console.log('导出', row)
-  const res = await exportInterExcelApi(row.userId)
+  const res = await exportInterExcelApi(row.openid)
   console.log(res)
 
   const dataUrl = res.data
