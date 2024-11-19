@@ -186,7 +186,7 @@ const exportSingleExcel = async (row) => {
   console.log(row)
   currentUser.value = row.phone
   console.log('导出', row)
-  const res = await exportSingleExcelApi(row.userId)
+  const res = await exportSingleExcelApi(row.openid)
   console.log(res)
 
   const dataUrl = res.data
