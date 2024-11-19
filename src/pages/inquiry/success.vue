@@ -18,12 +18,6 @@
         <img src="http://115.159.83.61:9000/common/dakaend.png" alt="" />
       </view>
 
-      <!-- <view class="instructions mt-4">
-        <p class="text-xl font-800">第{{ interText[interId] }}站</p>
-        <p class="text-xl font-800">本站</p>
-        <p class="text-xl font-800">打卡成功</p>
-      </view> -->
-
       <view class="flex justify-center mt-14" v-if="isLast === false">
         <wd-button @click="toHome" type="success" size="large">返回主界面</wd-button>
       </view>
@@ -47,10 +41,8 @@ const userStore = useUserStore()
 const globalPageControlStore = useGlobalPageControlStore()
 const toast = useToast()
 const isLast = computed(() => {
-  return interStore.interInfo.interId === 7
+  return userStore.userInfo.currProgress === 999
 })
-
-const interId = interStore.interInfo.interId
 
 const interText = ref(['零', '一', '二', '三', '四', '五', '六', '七'])
 
@@ -89,7 +81,6 @@ const toReport = async () => {
 
 onLoad(() => {
   console.log(interStore.interInfo)
-  console.log('interId', interId)
 })
 </script>
 

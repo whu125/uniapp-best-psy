@@ -724,6 +724,9 @@ const doOperation = async () => {
       // 清除缓存
       interStore.clearInternfo()
       globalPageControlStore.clearInternfo()
+      if (pageContent.value.interId !== 99 && pageContent.value.interId !== 100) {
+        userStore.userInfo.currProgress = res.data
+      }
       uni.switchTab({ url: '/pages/home/home' })
       return
     } else {
@@ -732,7 +735,7 @@ const doOperation = async () => {
     }
   }
   // 如果是第二套干预7的最后一页 提交干预 跳转到旅程报告
-  if (userStore.userInfo.groupId === 1 && pageContent.value.operationText === '查看你的旅程报告') {
+  if (userStore.userInfo.groupId === 1 && interStore.interInfo.interId === 15) {
     const submitObj: ISubmitInter = {
       userId: userStore.userInfo.userId,
       interId: interStore.interInfo.interId,
@@ -747,6 +750,7 @@ const doOperation = async () => {
       // 清除缓存
       interStore.clearInternfo()
       globalPageControlStore.clearInternfo()
+      userStore.userInfo.currProgress = res.data
       toReport()
     } else {
       toast.error('出现了一些问题')

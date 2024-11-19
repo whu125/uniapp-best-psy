@@ -32,7 +32,7 @@
       <view class="button-area">
         <wd-card>
           <view class="card-content" @click="start">
-            <view class="card-title">正念练习</view>
+            <view class="card-title">消极情绪</view>
             <view><wd-icon name="edit-1" size="26px" /></view>
           </view>
         </wd-card>

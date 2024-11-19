@@ -11,8 +11,6 @@ interface NavigateToOptions {
        "/pages/diaryList/diaryDetail" |
        "/pages/diaryList/diaryList" |
        "/pages/feeling/feeling" |
-       "/pages/ganyu/ganyu" |
-       "/pages/ganyu/ganyu_temp" |
        "/pages/inquiry/before" |
        "/pages/inquiry/end" |
        "/pages/inquiry/eval" |
@@ -37,8 +35,8 @@ interface NavigateToOptions {
        "/pages/tabbar/tabbar" |
        "/pages/test2/test2" |
        "/pages/tool/tool" |
-       "/pages/tool-huibidangan/huibiDetail" |
        "/pages/tool-huibidangan/huibidangan" |
+       "/pages/tool-huibidangan/huibiDetail" |
        "/pages/tool-huibidangan/input" |
        "/pages/tool-huibidangan/list" |
        "/pages/tool-jiazhishouce/catching" |
@@ -53,8 +51,8 @@ interface NavigateToOptions {
        "/pages/tool-jienalianxi/practice" |
        "/pages/tool-qingxucaiji/input" |
        "/pages/tool-qingxucaiji/list" |
-       "/pages/tool-qingxucaiji/qingxuDetail" |
        "/pages/tool-qingxucaiji/qingxucaiji" |
+       "/pages/tool-qingxucaiji/qingxuDetail" |
        "/pages/tool-renzhijieli/distance" |
        "/pages/tool-renzhijieli/leaf" |
        "/pages/tool-renzhijieli/renzhijieli" |

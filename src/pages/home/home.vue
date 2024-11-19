@@ -243,7 +243,11 @@ onPullDownRefresh(() => {
 })
 
 onShow(() => {
-  currProgress.value = userStore.userInfo.currProgress % 8
+  if (userStore.userInfo.currProgress !== 999) {
+    currProgress.value = userStore.userInfo.currProgress % 8
+  } else {
+    currProgress.value = userStore.userInfo.currProgress
+  }
   curInter.value = interStore.interInfo.interId % 8
   curGroupId.value = userStore.userInfo.groupId
   if (curGroupId.value === 0) {

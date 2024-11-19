@@ -64,7 +64,7 @@ export const startInter = (startInter: IStartInter) => {
 }
 
 export const submitInter = (submitInter: ISubmitInter) => {
-  return http.post(`/inter/submitInter`, submitInter, {})
+  return http.post<number>(`/inter/submitInter`, submitInter, {})
 }
 
 export const checkInterAvailability = (interId: number) => {

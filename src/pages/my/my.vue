@@ -321,10 +321,6 @@ const toadmin = () => {
   })
 }
 
-const submitInter = () => {
-  console.log('模拟提交干预')
-}
-
 const onChooseavatar = async (e) => {
   console.log('选择头像')
   console.log('e:', e)

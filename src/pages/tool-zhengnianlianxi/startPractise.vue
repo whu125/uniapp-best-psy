@@ -42,7 +42,7 @@
 <script lang="ts" setup>
 const audioPlayer = ref({
   poster: 'https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/music-a.png',
-  name: '正念呼吸',
+  name: '应对消极情绪',
   author: '',
 })
 const audioAction = ref({
