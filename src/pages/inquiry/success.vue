@@ -41,7 +41,7 @@ const userStore = useUserStore()
 const globalPageControlStore = useGlobalPageControlStore()
 const toast = useToast()
 const isLast = computed(() => {
-  return userStore.userInfo.currProgress === 999
+  return userStore.userInfo.groupId === 0 && userStore.userInfo.currProgress === 99
 })
 
 const interText = ref(['零', '一', '二', '三', '四', '五', '六', '七'])

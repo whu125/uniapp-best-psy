@@ -248,6 +248,7 @@ onShow(() => {
   } else {
     currProgress.value = userStore.userInfo.currProgress
   }
+  console.log(currProgress.value)
   curInter.value = interStore.interInfo.interId % 8
   curGroupId.value = userStore.userInfo.groupId
   if (curGroupId.value === 0) {

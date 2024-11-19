@@ -207,12 +207,11 @@ const submit = async () => {
       // 清除 pinia 干预缓存
       interStore.clearInternfo()
       globalPageControl.clearInternfo()
-      userStore.userInfo.currProgress = res.data
-      // // 这里要判断是否是第一次提交最新一次干预
-      // if (res.data === userStore.userInfo.currProgress + 1) {
-      //   // 说明此时是第一次提交最新一次干预
-      //   userStore.userInfo.currProgress = res.data
-      // }
+      // 这里要判断是否是第一次提交最新一次干预
+      if (res.data > userStore.userInfo.currProgress) {
+        // 说明此时是第一次提交最新一次干预
+        userStore.userInfo.currProgress = res.data
+      }
       uni.redirectTo({ url: '/pages/inquiry/success' })
     } else {
       toast.error('出现了一些问题')

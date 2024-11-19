@@ -724,9 +724,7 @@ const doOperation = async () => {
       // 清除缓存
       interStore.clearInternfo()
       globalPageControlStore.clearInternfo()
-      if (pageContent.value.interId !== 99 && pageContent.value.interId !== 100) {
-        userStore.userInfo.currProgress = res.data
-      }
+      userStore.userInfo.currProgress = res.data
       uni.switchTab({ url: '/pages/home/home' })
       return
     } else {
