@@ -229,8 +229,6 @@ onShow(() => {
   console.log('userInfo:', userInfo.value)
   console.log('当前 websocket ', userStore.websocket)
 
-  console.log('userInfo:', currProgress.value)
-
   if (Object.keys(userInfo.value).length === 0 && userInfo.value.constructor === Object) {
     // 如果 userInfo.value 是一个空对象，则执行以下代码
     getUserInfo()

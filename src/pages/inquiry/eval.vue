@@ -211,6 +211,7 @@ const submit = async () => {
       if (res.data > userStore.userInfo.currProgress) {
         // 说明此时是第一次提交最新一次干预
         userStore.userInfo.currProgress = res.data
+        console.log(userStore.userInfo.currProgress)
       }
       uni.redirectTo({ url: '/pages/inquiry/success' })
     } else {

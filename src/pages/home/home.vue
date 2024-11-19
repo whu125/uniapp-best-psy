@@ -38,6 +38,7 @@
           <view v-show="currProgress != 0 && currProgress != 999">
             <span class="font-800 text-xl">已解锁 第 {{ currProgress }} 站</span>
           </view>
+          <view v-show="currProgress == 999"></view>
           <view v-show="currProgress == 0">
             <span class="font-800 text-xl">已解锁 导入</span>
           </view>
@@ -249,6 +250,7 @@ onShow(() => {
     currProgress.value = userStore.userInfo.currProgress
   }
   console.log(currProgress.value)
+  console.log(waitingTime.value)
   curInter.value = interStore.interInfo.interId % 8
   curGroupId.value = userStore.userInfo.groupId
   if (curGroupId.value === 0) {
@@ -316,24 +318,20 @@ onShow(() => {
       userStore.websocket.onClose((res) => {
         console.log('websocket close')
       })
-      // userStore.websocket.onMessage((res) => {
-      //   console.log('收到服务器内容：' + res.data)
-      //   // 后端 websocket 发来的数据形如 waitingTime # currProgress
-      //   // userStore.websocketMsg = res.data
-      //   waitingTime.value = Number(res.data.split('#')[0])
-      //   userStore.userInfo.currProgress = Number(res.data.split('#')[1])
-      //   currProgress.value = userStore.userInfo.currProgress % 8
-      // })
     }
   }
+  uni.onSocketMessage((res) => {
+    console.log('收到服务器内容：' + res.data)
+    waitingTime.value = Number(res.data.split('#')[0])
+  })
 })
 
 uni.onSocketMessage((res) => {
   console.log('收到服务器内容：' + res.data)
   // 后端 websocket 发来的数据形如 waitingTime # currProgress
   waitingTime.value = Number(res.data.split('#')[0])
-  userStore.userInfo.currProgress = Number(res.data.split('#')[1])
-  currProgress.value = userStore.userInfo.currProgress % 8
+  // userStore.userInfo.currProgress = Number(res.data.split('#')[1])
+  // currProgress.value = userStore.userInfo.currProgress % 8
 })
 
 const calculateHour = () => {
