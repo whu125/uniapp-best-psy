@@ -21,8 +21,8 @@
       <view class="font">我的旅行手记</view>
       <view v-for="(zhengnian, index) in zhengnianList" :key="index">
         <view class="box" @click="selectZhengNian(index)">
-          <view style="font-size: 16px; color: gray">{{ zhengnian.date }}</view>
-          <view style="font-size: 16px; color: gray">手记</view>
+          <view style="font-size: 20px; color: gray">{{ zhengnian.date }}</view>
+          <view style="font-size: 20px; color: gray">旅行手记</view>
           <image
             src="http://115.159.83.61:9000/tool/tool-list.png"
             style="width: 45px; height: 45px"
