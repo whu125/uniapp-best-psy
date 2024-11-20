@@ -46,8 +46,11 @@
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" @load="loadFinished" />
       </view>
 
-      <view class="operation-area">
-        <view class="operation-btn" @click="toPrev">
+      <view
+        class="operation-area"
+        :style="{ 'justify-content': showPrev ? 'space-between' : 'center' }"
+      >
+        <view class="operation-btn" @click="toPrev" v-show="showPrev">
           <img :src="prevIconUrl" style="width: 50px; height: 50px" />
           <view style="width: 100%; font-size: 18px; text-align: center">上一页</view>
         </view>
@@ -89,8 +92,11 @@
           </view>
         </view>
       </view>
-      <view class="operation-area">
-        <view class="operation-btn" @click="toPrev">
+      <view
+        class="operation-area"
+        :style="{ 'justify-content': showPrev ? 'space-between' : 'center' }"
+      >
+        <view class="operation-btn" @click="toPrev" v-show="showPrev">
           <img :src="prevIconUrl" style="width: 50px; height: 50px" />
           <view style="width: 100%; font-size: 18px; text-align: center">上一页</view>
         </view>
@@ -143,8 +149,11 @@
           </view>
         </view>
       </view>
-      <view class="operation-area">
-        <view class="operation-btn" @click="toPrev">
+      <view
+        class="operation-area"
+        :style="{ 'justify-content': showPrev ? 'space-between' : 'center' }"
+      >
+        <view class="operation-btn" @click="toPrev" v-show="showPrev">
           <img :src="prevIconUrl" style="width: 50px; height: 50px" />
           <view style="width: 100%; font-size: 18px; text-align: center">上一页</view>
         </view>
@@ -192,8 +201,11 @@
           </view>
         </view>
       </view>
-      <view class="operation-area">
-        <view class="operation-btn" @click="toPrev">
+      <view
+        class="operation-area"
+        :style="{ 'justify-content': showPrev ? 'space-between' : 'center' }"
+      >
+        <view class="operation-btn" @click="toPrev" v-show="showPrev">
           <img :src="prevIconUrl" style="width: 50px; height: 50px" />
           <view style="width: 100%; font-size: 18px; text-align: center">上一页</view>
         </view>
@@ -235,8 +247,11 @@
           </template>
         </wd-checkbox-group>
       </view>
-      <view class="operation-area">
-        <view class="operation-btn" @click="toPrev">
+      <view
+        class="operation-area"
+        :style="{ 'justify-content': showPrev ? 'space-between' : 'center' }"
+      >
+        <view class="operation-btn" @click="toPrev" v-show="showPrev">
           <img :src="prevIconUrl" style="width: 50px; height: 50px" />
           <view style="width: 100%; font-size: 18px; text-align: center">上一页</view>
         </view>
@@ -284,8 +299,11 @@
           customClass="swiper"
         ></wd-swiper>
       </view>
-      <view class="operation-area">
-        <view class="operation-btn" @click="toPrev">
+      <view
+        class="operation-area"
+        :style="{ 'justify-content': showPrev ? 'space-between' : 'center' }"
+      >
+        <view class="operation-btn" @click="toPrev" v-show="showPrev">
           <img :src="prevIconUrl" style="width: 50px; height: 50px" />
           <view style="width: 100%; font-size: 18px; text-align: center">上一页</view>
         </view>
@@ -333,8 +351,11 @@
           ></audio>
         </view>
       </view>
-      <view class="operation-area">
-        <view class="operation-btn" @click="toPrev">
+      <view
+        class="operation-area"
+        :style="{ 'justify-content': showPrev ? 'space-between' : 'center' }"
+      >
+        <view class="operation-btn" @click="toPrev" v-show="showPrev">
           <img :src="prevIconUrl" style="width: 50px; height: 50px" />
           <view style="width: 100%; font-size: 18px; text-align: center">上一页</view>
         </view>
@@ -466,6 +487,18 @@ const selectItem = (index) => {
   selectedItem.value = index
 }
 
+const showPrev = computed(() => {
+  const currIndex = interStore.pageIndex
+  if (interStore.interInfo.interPages[currIndex].operationText === '开始任务') {
+    return false
+  } else if (currIndex === 0) {
+    return false
+  } else if (interStore.interInfo.interPages[currIndex - 1].pageType === 'common') {
+    return false
+  }
+  return true
+})
+
 const toPrev = () => {
   if (pageContent.value.navbarTitle.endsWith('拓展')) {
     uni.redirectTo({
@@ -476,7 +509,7 @@ const toPrev = () => {
   const currIndex = interStore.pageIndex
   // 任务部分的第一个页面禁止返回上一页
   if (interStore.pageIndex > 0) {
-    const saveResult = saveDateToPinia()
+    const saveResult = saveDateToPinia('prev')
     if (saveResult === false) {
       return
     }
@@ -639,7 +672,7 @@ const doOperation = async () => {
   // toast.loading('图片加载中...')
   loadFlag.value = false
   // 保存数据到 pinia
-  const saveResult = saveDateToPinia()
+  const saveResult = saveDateToPinia('next')
   console.log(interStore.inputContent)
   if (saveResult === false) {
     return
@@ -775,16 +808,19 @@ const doOperation = async () => {
   }
 }
 
-const saveDateToPinia = () => {
+const saveDateToPinia = (operation: string) => {
   // 如果是 input 页面 保存用户输入到pinia
   if (pageContent.value.pageType === 'input') {
     let inputContent = ''
     for (let i = 0; i < userInputList.value.length; i++) {
       // 判断用户有无未填写
       if (userInputList.value[i] === '') {
-        toast.error('请不要留下空白！')
-        return false
-      } else if (
+        if (operation === 'next') {
+          toast.error('请不要留下空白！')
+          return false
+        }
+      }
+      if (
         userInputList.value[i].indexOf('%') !== -1 ||
         userInputList.value[i].indexOf('#') !== -1 ||
         userInputList.value[i].indexOf('_') !== -1
@@ -1018,7 +1054,6 @@ const toReport = async () => {
 .operation-area {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
   width: 85%;
   height: auto;
   margin: 20px auto;
