@@ -3,9 +3,11 @@ import { onLaunch, onShow, onHide, onExit } from '@dcloudio/uni-app'
 import { useUserStore } from './store'
 import { url } from '@/interceptors/request'
 
-const userStore = useUserStore()
 onLaunch(() => {
   console.log('App Launch')
+  uni.setInnerAudioOption({
+    obeyMuteSwitch: false,
+  })
 })
 onShow(() => {
   console.log('App Show')
