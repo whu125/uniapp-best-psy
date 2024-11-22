@@ -24,7 +24,7 @@
           :activeColor="activeColor"
           @change="sliderChange"
           :value="sliderIndex"
-          block-size="12"
+          block-size="15"
           :min="0"
           :max="audioDuration"
         />
@@ -35,18 +35,48 @@
 
 <script setup lang="ts">
 let timer
-const audioStatus = ref<boolean>(false)
-
-const timeTxt = ref<string>('00 : 00')
-const sliderIndex = ref<number>(0)
-const audioDuration = ref<number>(0)
-const audioTitleColor = ref<string>('#333')
-const activeColor = ref<string>('#00994c')
-const backgroundColor = ref<string>('#c0c0c0')
-
 const props = defineProps({
   audioObject: Object,
 })
+
+const audioStatus = ref<boolean>(false)
+const audioDuration = ref<number>(0)
+const innerAudioContext: UniNamespace.InnerAudioContext = uni.createInnerAudioContext()
+innerAudioContext.src = props.audioObject.audioSrc
+innerAudioContext.loop = false
+
+innerAudioContext.onCanplay(() => {
+  audioDuration.value = innerAudioContext.duration
+})
+innerAudioContext.onPlay(() => {
+  console.log('audio play')
+})
+innerAudioContext.onPause(() => {
+  console.log('audio pause')
+})
+innerAudioContext.onEnded(() => {
+  console.log('audio end')
+  sliderIndex.value = 0
+  audioStatus.value = false
+  timeTxt.value = '00 : 00'
+  innerAudioContext.stop()
+})
+innerAudioContext.onTimeUpdate(() => {
+  audioDuration.value = innerAudioContext.duration
+  console.log(innerAudioContext.duration)
+  // 计算剩余时间
+  const duration = innerAudioContext.duration // 音频总时长
+  const currentTime = innerAudioContext.currentTime // 当前播放时间
+  // const remainingTime = duration - currentTime // 剩余时间
+  // 这里可以更新倒计时显示
+  timeTxt.value = getTimeStr(currentTime) + ' / ' + getTimeStr(duration)
+})
+
+const timeTxt = ref<string>('00 : 00')
+const sliderIndex = ref<number>(0)
+const audioTitleColor = ref<string>('#333')
+const activeColor = ref<string>('#00994c')
+const backgroundColor = ref<string>('#c0c0c0')
 
 export interface IAudio {
   audioSrc: string
@@ -57,35 +87,9 @@ export interface IAudio {
 //   audioTitle: 'title',
 // })
 
-const innerAudioContext: UniNamespace.InnerAudioContext = uni.createInnerAudioContext()
-
 onMounted(() => {
   console.log('---audioplayer---')
   console.log(props.audioObject)
-  innerAudioContext.src = props.audioObject.audioSrc
-  innerAudioContext.loop = false
-  innerAudioContext.onPlay(() => {
-    console.log('audio play')
-    audioDuration.value = innerAudioContext.duration
-  })
-  innerAudioContext.onPause(() => {
-    console.log('audio pause')
-  })
-  innerAudioContext.onEnded(() => {
-    console.log('audio end')
-    sliderIndex.value = 0
-    audioStatus.value = false
-    timeTxt.value = '00 : 00'
-    innerAudioContext.stop()
-  })
-  innerAudioContext.onTimeUpdate(() => {
-    // 计算剩余时间
-    const duration = innerAudioContext.duration // 音频总时长
-    const currentTime = innerAudioContext.currentTime // 当前播放时间
-    // const remainingTime = duration - currentTime // 剩余时间
-    // 这里可以更新倒计时显示
-    timeTxt.value = getTimeStr(currentTime) + ' / ' + getTimeStr(duration)
-  })
 })
 
 onHide(() => {
@@ -111,9 +115,8 @@ const audioDestroy = () => {
 }
 
 const clickAudio = () => {
-  if (audioStatus.value && !innerAudioContext.paused) {
+  if (audioStatus.value) {
     innerAudioContext.pause()
-    clearInterval(timer)
   } else {
     innerAudioContext.play()
   }
@@ -161,9 +164,9 @@ defineExpose({
 
   .single {
     display: flex;
-    flex: 1;
     flex-direction: column;
     justify-content: space-between;
+    width: 90%;
     padding: 16rpx 24rpx 10rpx 0;
 
     .tips {

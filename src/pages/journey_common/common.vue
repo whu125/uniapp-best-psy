@@ -435,6 +435,9 @@ onMounted(() => {
 })
 
 const loadPageData = () => {
+  selectedItem.value = -1
+  checkBoxItem.value.length = 0
+  userInputList.value.length = 0
   // 获取页面数据
   const index = interStore.pageIndex
   pageContent.value = interStore.interInfo.interPages[index]
@@ -452,14 +455,15 @@ const ToHome = () => {
   if (pageContent.value.pageType === 'audio') {
     audioRef.value.audioDestroy()
   }
-  // 如果是 input 页面 保存用户输入到pinia
-  if (pageContent.value.pageType === 'input') {
-    let inputContent = ''
-    for (let i = 0; i < userInputList.value.length; i++) {
-      inputContent = inputContent + userInputList.value[i] + '%'
-    }
-    interStore.setUserInputMap(pageContent.value.pageId, inputContent)
-  }
+  // // 如果是 input 页面 保存用户输入到pinia
+  // if (pageContent.value.pageType === 'input') {
+  //   let inputContent = ''
+  //   for (let i = 0; i < userInputList.value.length; i++) {
+  //     inputContent = inputContent + userInputList.value[i] + '%'
+  //   }
+  //   interStore.setUserInputMap(pageContent.value.pageId, inputContent)
+  // }
+  saveDateToPinia('next')
   uni.switchTab({ url: '/pages/home/home' })
 }
 
