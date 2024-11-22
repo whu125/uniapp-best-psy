@@ -59,7 +59,7 @@ export interface IAudio {
 
 const innerAudioContext: UniNamespace.InnerAudioContext = uni.createInnerAudioContext()
 
-onLoad(() => {
+onMounted(() => {
   console.log('---audioplayer---')
   console.log(props.audioObject)
   innerAudioContext.src = props.audioObject.audioSrc

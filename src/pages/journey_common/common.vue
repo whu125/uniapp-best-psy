@@ -430,38 +430,25 @@ onUnload(() => {
 
 const audioRef = ref(null)
 
-onShow(async () => {
+onMounted(() => {
+  loadPageData()
+})
+
+const loadPageData = () => {
   // 获取页面数据
   const index = interStore.pageIndex
   pageContent.value = interStore.interInfo.interPages[index]
   console.log('pageContent.value', pageContent.value)
+  if (pageContent.value.pageType === 'audio') {
+    audioObject.value.audioSrc = pageContent.value.audioUrls[0]
+  }
   // 恢复页面状态
   recoverPageStatus()
   // 在干预99显示初始目标
   fillUserGoal()
-})
+}
 
 const ToHome = () => {
-  // message
-  //   .confirm({
-  //     msg: '确定退出干预吗？',
-  //     title: '提示',
-  //   })
-  //   .then(() => {
-  //     // 如果是 input 页面 保存用户输入到pinia
-  //     if (pageContent.value.pageType === 'input') {
-  //       let inputContent = ''
-  //       for (let i = 0; i < userInputList.value.length; i++) {
-  //         inputContent = inputContent + userInputList.value[i] + '%'
-  //       }
-  //       interStore.setUserInputMap(pageContent.value.pageId, inputContent)
-  //     }
-  //     uni.switchTab({ url: '/pages/home/home' })
-  //   })
-  //   .catch((error) => {
-  //     console.log(error)
-  //   })
-
   if (pageContent.value.pageType === 'audio') {
     audioRef.value.audioDestroy()
   }
@@ -523,9 +510,7 @@ const toPrev = () => {
         return
       }
       interStore.minusPageIndex()
-      uni.redirectTo({
-        url: '/pages/journey_common/common',
-      })
+      loadPageData()
     } else {
       interStore.minusPageIndex()
       uni.redirectTo({
@@ -661,9 +646,7 @@ const toPage = (buttonUrl: string) => {
     interStore.setPageIndex(15)
     globalPageControlStore.globalPageControlInfo.toDaolanHome = true
   }
-  uni.redirectTo({
-    url: '/pages/journey_common/common',
-  })
+  loadPageData()
 }
 
 const loadFinished = () => {
@@ -731,9 +714,7 @@ const doOperation = async () => {
     } else if (pageContent.value.pageId === 19 && pageContent.value.interId === 7) {
       await interStore.setPageIndex(14)
     }
-    uni.redirectTo({
-      url: '/pages/journey_common/common',
-    })
+    loadPageData()
     return
   }
   // 如果是结束部分最后一页 提交干预 返回主页面
@@ -804,9 +785,7 @@ const doOperation = async () => {
 
   // 如果下一页不是跳转到特殊页面(journey通用页面) 就刷新当前页面
   if (pageContent.value.specialPage === null) {
-    uni.redirectTo({
-      url: '/pages/journey_common/common',
-    })
+    loadPageData()
   } else {
     // 否则跳转到特殊页面
     uni.redirectTo({
@@ -923,9 +902,7 @@ const toReport = async () => {
   const res = await startInter(startObj)
   if (res.code === 200) {
     interStore.setInterInfo(res.data)
-    uni.redirectTo({
-      url: '/pages/journey_common/common',
-    })
+    loadPageData()
   } else {
     toast.error('出现了一些问题')
   }
