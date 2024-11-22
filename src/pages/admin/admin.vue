@@ -10,6 +10,7 @@
   <view class="" h-full w-full>
     <wd-navbar fixed safeAreaInsetTop title="用户管理" left-arrow @click-left="ToHome"></wd-navbar>
 
+    <wd-toast />
     <!-- <view>
     <button @click="toAdminInquiry()">查看问卷数据</button>
   </view> -->
@@ -24,10 +25,19 @@
             </view>
           </template>
         </wd-table-col>
-        <wd-table-col prop="userId" label="实验序号"></wd-table-col>
+        <wd-table-col prop="userId" label="实验序号" fixed></wd-table-col>
         <wd-table-col prop="phone" label="手机号" width="150"></wd-table-col>
         <wd-table-col prop="currProgress" label="已解锁单元"></wd-table-col>
         <wd-table-col prop="finishTime" label="上次打卡时间"></wd-table-col>
+
+        <wd-table-col label="提醒操作" fixed>
+          <template #value="{ row }">
+            <view class="custom-class" style="width: 100px">
+              <!-- <wd-button type="info" size="small" @click="edit(row)">编辑</wd-button> -->
+              <wd-button type="info" size="small" @click="sendNotice(row)">提醒</wd-button>
+            </view>
+          </template>
+        </wd-table-col>
       </wd-table>
     </view>
 
@@ -281,13 +291,13 @@ const getAccessToken = () => {
   // 向后端拿access_token
 }
 
-const sendNotice = async () => {
+const sendNotice = async (row) => {
   const res = await getAccessTokenApi()
   console.log(res)
   console.log('curopenid', curopenid.value)
   access_token.value = res.data
   const pushmsg = {
-    touser: curopenid.value,
+    touser: row.openid,
     template_id: 'kAcfm-7a4wnQ03jYBqa_rplhsYjfJXNN71MhlMGADPg',
     data: {
       thing1: {
