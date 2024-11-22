@@ -27,15 +27,7 @@
       </view>
       <view class="input-area">
         <view style="text-align: center">
-          <audio
-            style="text-align: left"
-            src="http://115.159.83.61:9000/tool/zhuanzhudangxia/scan.MP3"
-            :poster="audioPlayer.poster"
-            :name="audioPlayer.name"
-            :author="audioPlayer.author"
-            :action="audioAction"
-            controls
-          ></audio>
+          <audio-player :audioObject="audioObject" ref="audioRef"></audio-player>
         </view>
       </view>
       <view @click="doStart" class="operation-area">
@@ -47,14 +39,19 @@
 </template>
 
 <script lang="ts" setup>
-const audioPlayer = ref({
-  poster: 'https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/music-a.png',
-  name: '身体扫描',
-  author: '',
+import audioPlayer, { IAudio } from '../journey_common/audioPlayer.vue'
+
+const audioObject = ref<IAudio>({
+  audioSrc: 'http://115.159.83.61:9000/tool/zhuanzhudangxia/scan.MP3',
+  audioTitle: '身体扫描',
 })
-const audioAction = ref({
-  method: 'pause',
+
+const audioRef = ref(null)
+
+onUnload(() => {
+  audioRef.value.audioDestroy()
 })
+
 const doStart = () => {
   uni.navigateBack()
 }

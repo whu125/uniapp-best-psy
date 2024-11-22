@@ -38,15 +38,7 @@
       </view>
       <view class="input-area">
         <view style="text-align: center">
-          <audio
-            style="text-align: left"
-            src="http://115.159.83.61:9000/tool/jienalianxi/accept.MP3"
-            :poster="audioPlayer.poster"
-            :name="audioPlayer.name"
-            :author="audioPlayer.author"
-            :action="audioAction"
-            controls
-          ></audio>
+          <audio-player :audioObject="audioObject" ref="audioRef"></audio-player>
         </view>
       </view>
       <view @click="toNext" class="operation-area">
@@ -74,18 +66,17 @@
 </template>
 
 <script lang="ts" setup>
-import { submitJienalianxi, IJienalianxi } from '@/service/index/jienalianxi'
-import { getFormattedDate } from '@/utils/getTime'
-import { useUserStore } from '@/store/user'
-import { useMessage, useToast } from 'wot-design-uni'
+import audioPlayer, { IAudio } from '../journey_common/audioPlayer.vue'
 
-const audioPlayer = ref({
-  poster: 'https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/music-a.png',
-  name: '接纳练习',
-  author: '',
+const audioObject = ref<IAudio>({
+  audioSrc: 'http://115.159.83.61:9000/tool/jienalianxi/accept.MP3',
+  audioTitle: '接纳练习',
 })
-const audioAction = ref({
-  method: 'pause',
+
+const audioRef = ref(null)
+
+onUnload(() => {
+  audioRef.value.audioDestroy()
 })
 
 const currIndex = ref<number>(0)
@@ -97,6 +88,9 @@ const toNext = () => {
   if (currIndex.value === 2) {
     uni.navigateBack()
   } else {
+    if (currIndex.value === 1) {
+      audioRef.value.audioDestroy()
+    }
     currIndex.value = currIndex.value + 1
   }
 }

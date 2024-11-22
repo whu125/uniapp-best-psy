@@ -340,15 +340,7 @@
       </view>
       <view class="audio-area">
         <view style="text-align: center">
-          <audio
-            style="text-align: left"
-            :src="pageContent.audioUrls[0]"
-            :poster="audioPlayer.poster"
-            :name="audioPlayer.name"
-            :author="audioPlayer.author"
-            :action="audioAction"
-            controls
-          ></audio>
+          <audio-player :audioObject="audioObject" ref="audioRef"></audio-player>
         </view>
       </view>
       <view
@@ -389,6 +381,7 @@ import {
 import { useToast, useMessage } from 'wot-design-uni'
 import { getFormattedDate } from '@/utils/getTime'
 import { useUserStore } from '@/store/user'
+import audioPlayer, { IAudio } from '../journey_common/audioPlayer.vue'
 
 const loadFlag = ref(false)
 const interStore = useInterStore()
@@ -424,14 +417,18 @@ const hasOperation = computed(() => {
   return pageContent.value.operationIcon != null && pageContent.value.operationText != null
 })
 
-const audioPlayer = ref({
-  poster: 'https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/music-a.png',
-  name: '开始播放',
-  author: '',
+const audioObject = ref<IAudio>({
+  audioSrc: pageContent.value.audioUrls[0],
+  audioTitle: '开始播放',
 })
-const audioAction = ref({
-  method: 'pause',
+
+onUnload(() => {
+  if (pageContent.value.pageType === 'audio') {
+    audioRef.value.audioDestroy()
+  }
 })
+
+const audioRef = ref(null)
 
 onShow(async () => {
   // 获取页面数据
@@ -464,6 +461,10 @@ const ToHome = () => {
   //   .catch((error) => {
   //     console.log(error)
   //   })
+
+  if (pageContent.value.pageType === 'audio') {
+    audioRef.value.audioDestroy()
+  }
   // 如果是 input 页面 保存用户输入到pinia
   if (pageContent.value.pageType === 'input') {
     let inputContent = ''
@@ -500,6 +501,9 @@ const showPrev = computed(() => {
 })
 
 const toPrev = () => {
+  if (pageContent.value.pageType === 'audio') {
+    audioRef.value.audioDestroy()
+  }
   if (pageContent.value.navbarTitle.endsWith('拓展')) {
     uni.redirectTo({
       url: '/pages/journey_common/daolanHome',
@@ -676,6 +680,9 @@ const doOperation = async () => {
   console.log(interStore.inputContent)
   if (saveResult === false) {
     return
+  }
+  if (pageContent.value.pageType === 'audio') {
+    audioRef.value.audioDestroy()
   }
   // 如果是 button 页面 判断一下是否前往 daolanHome
   if (pageContent.value.pageType === 'button') {

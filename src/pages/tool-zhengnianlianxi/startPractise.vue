@@ -20,15 +20,7 @@
       </view>
       <view class="input-area">
         <view style="text-align: center">
-          <audio
-            style="text-align: left"
-            src="http://115.159.83.61:9000/tool/zhengnianlianxi/handleNegative.MP3"
-            :poster="audioPlayer.poster"
-            :name="audioPlayer.name"
-            :author="audioPlayer.author"
-            :action="audioAction"
-            controls
-          ></audio>
+          <audio-player :audioObject="audioObject" ref="audioRef"></audio-player>
         </view>
       </view>
       <view @click="doStart" class="operation-area">
@@ -40,16 +32,21 @@
 </template>
 
 <script lang="ts" setup>
-const audioPlayer = ref({
-  poster: 'https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/music-a.png',
-  name: '应对消极情绪',
-  author: '',
+import audioPlayer, { IAudio } from '../journey_common/audioPlayer.vue'
+
+const audioObject = ref<IAudio>({
+  audioSrc: 'http://115.159.83.61:9000/tool/zhengnianlianxi/handleNegative.MP3',
+  audioTitle: '应对消极情绪',
 })
-const audioAction = ref({
-  method: 'pause',
+
+const audioRef = ref(null)
+
+onUnload(() => {
+  audioRef.value.audioDestroy()
 })
+
 const doStart = () => {
-  uni.navigateTo({
+  uni.redirectTo({
     url: '/pages/tool-zhengnianlianxi/input',
   })
 }
@@ -99,5 +96,6 @@ const goBack = () => {
 .input-area {
   width: 100%;
   height: auto;
+  margin-top: 20px;
 }
 </style>

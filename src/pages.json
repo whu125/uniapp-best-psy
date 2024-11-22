@@ -171,6 +171,10 @@
       "needLogin": true
     },
     {
+      "path": "pages/journey_common/audioPlayer",
+      "type": "page"
+    },
+    {
       "path": "pages/journey_common/common",
       "type": "page",
       "style": {

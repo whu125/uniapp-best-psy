@@ -19,6 +19,7 @@ interface NavigateToOptions {
        "/pages/inquiry/inquiry" |
        "/pages/inquiry/start" |
        "/pages/inquiry/success" |
+       "/pages/journey_common/audioPlayer" |
        "/pages/journey_common/common" |
        "/pages/journey_common/daolanHome" |
        "/pages/journey_common/daolanStart" |
