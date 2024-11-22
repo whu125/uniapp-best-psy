@@ -59,6 +59,7 @@
     <view class="admin-container" v-if="flag">
       <wd-card title="已录入的用户表">
         <wd-table :data="userInfo">
+          <wd-table-col prop="userId" label="实验序号" width="200"></wd-table-col>
           <wd-table-col prop="phone" label="手机号" width="200"></wd-table-col>
           <wd-table-col prop="groupId" label="组别" width="150"></wd-table-col>
         </wd-table>
