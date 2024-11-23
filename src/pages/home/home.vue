@@ -46,7 +46,6 @@
         </view>
 
         <view v-if="curGroupId !== 2">
-<<<<<<< HEAD
           <view v-for="(journey, index) in journeySteps" :key="index">
             <view class="card" @click="enterJourney(journey.progress)">
               <img class="card-icon" :src="journey.icon" />
@@ -78,41 +77,6 @@
                 v-show="currProgress < journey.progress"
               />
             </view>
-=======
-          <view
-            class="card"
-            v-for="(journey, index) in journeySteps"
-            :key="index"
-            @click="enterJourney(journey.progress)"
-          >
-            <img class="card-icon" :src="journey.icon" />
-            <view class="card-text">{{ journey.text }}</view>
-
-            <image
-              style="width: 60rpx; height: 60rpx"
-              mode="aspectFit"
-              src="http://115.159.83.61:9000/home/icon/finish.png"
-              v-show="currProgress > journey.progress"
-            />
-            <image
-              style="width: 60rpx; height: 60rpx"
-              mode="aspectFit"
-              src="http://115.159.83.61:9000/home/icon/startJourney.png"
-              v-show="currProgress == journey.progress && waitingTime <= 0"
-            />
-            <image
-              style="width: 60rpx; height: 60rpx"
-              src="http://115.159.83.61:9000/home/icon/lockJourney.png"
-              mode="aspectFit"
-              v-show="currProgress == journey.progress && waitingTime > 0"
-            />
-            <image
-              style="width: 60rpx; height: 60rpx"
-              src="http://115.159.83.61:9000/home/icon/lockJourney.png"
-              mode="aspectFit"
-              v-show="currProgress < journey.progress"
-            />
->>>>>>> 95c4fdf9dc0d85acc0428d9b193cb17e26ae8bfd
           </view>
         </view>
 
@@ -374,7 +338,6 @@ const calculateHour = () => {
 }
 
 const enterJourney = async (progress: number) => {
-<<<<<<< HEAD
   if (
     currProgress.value > progress ||
     (currProgress.value === progress && waitingTime.value <= 0)
@@ -386,41 +349,6 @@ const enterJourney = async (progress: number) => {
         if (curGroupId.value === 1) {
           console.log('第二套，对照组')
           progress += 8
-=======
-  // 进入要判断是否解锁
-  if (currProgress.value < progress || (currProgress.value === progress && waitingTime.value > 0)) {
-    return
-  }
-
-  uni.requestSubscribeMessage({
-    tmplIds: ['kAcfm-7a4wnQ03jYBqa_rplhsYjfJXNN71MhlMGADPg'], // 模板ID
-    success(res) {
-      console.log('interStore.value', interStore.interInfo)
-      if (curGroupId.value === 1) {
-        console.log('第二套，对照组')
-        progress += 8
-      }
-
-      // 检查是否有干预记录
-      if (interStore.interInfo.interId === -1) {
-        console.log('没有干预记录')
-        interStore.clearInternfo()
-        globalPageControl.clearInternfo()
-
-        const numberStr = progress.toString()
-        console.log('numberStr', numberStr)
-
-        // uni.redirectTo({
-        //   url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
-        // })
-        // 如果不是导入，跳转到站前测量
-        if (numberStr === '0' || numberStr === '1' || numberStr === '8' || numberStr === '9') {
-          uni.redirectTo({
-            url:
-              '/pages/journey_common/start_journey?progress=' +
-              encodeURIComponent(progress.toString()),
-          })
->>>>>>> 95c4fdf9dc0d85acc0428d9b193cb17e26ae8bfd
         }
 
         // 检查是否有干预记录
