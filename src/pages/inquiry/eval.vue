@@ -73,8 +73,8 @@ import { useGlobalPageControlStore } from '@/store/globalPageControl'
 
 const globalPageControl = useGlobalPageControlStore()
 const { safeAreaInsets } = uni.getSystemInfoSync()
-const tiyan = ref(9)
-const shouhuo = ref(9)
+const tiyan = ref(0)
+const shouhuo = ref(0)
 const userStore = useUserStore()
 const interStore = useInterStore()
 const toast = useToast()

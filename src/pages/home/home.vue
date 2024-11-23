@@ -46,29 +46,26 @@
         </view>
 
         <view v-if="curGroupId !== 2">
-          <view class="card" v-for="(journey, index) in journeySteps" :key="index">
+          <view
+            class="card"
+            v-for="(journey, index) in journeySteps"
+            :key="index"
+            @click="enterJourney(journey.progress)"
+          >
             <img class="card-icon" :src="journey.icon" />
             <view class="card-text">{{ journey.text }}</view>
-            <!-- 体验版 -->
-            <!-- <img
-            style="width: 60rpx; height: 60rpx"
-            mode="aspectFit"
-            src="http://115.159.83.61:9000/home/icon/finish.png"
-          /> -->
 
             <image
               style="width: 60rpx; height: 60rpx"
               mode="aspectFit"
               src="http://115.159.83.61:9000/home/icon/finish.png"
               v-show="currProgress > journey.progress"
-              @click="enterJourney(journey.progress)"
             />
             <image
               style="width: 60rpx; height: 60rpx"
               mode="aspectFit"
               src="http://115.159.83.61:9000/home/icon/startJourney.png"
               v-show="currProgress == journey.progress && waitingTime <= 0"
-              @click="enterJourney(journey.progress)"
             />
             <image
               style="width: 60rpx; height: 60rpx"
@@ -343,6 +340,11 @@ const calculateHour = () => {
 }
 
 const enterJourney = async (progress: number) => {
+  // 进入要判断是否解锁
+  if (currProgress.value < progress || (currProgress.value === progress && waitingTime.value > 0)) {
+    return
+  }
+
   uni.requestSubscribeMessage({
     tmplIds: ['kAcfm-7a4wnQ03jYBqa_rplhsYjfJXNN71MhlMGADPg'], // 模板ID
     success(res) {
