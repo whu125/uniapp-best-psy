@@ -34,7 +34,7 @@
           <template #value="{ row }">
             <view class="custom-class" style="width: 100px">
               <!-- <wd-button type="info" size="small" @click="edit(row)">编辑</wd-button> -->
-              <wd-button type="info" size="small" @click="sendNotice(row)">提醒</wd-button>
+              <wd-button type="info" size="small" @click="sendNoticeNew(row)">提醒</wd-button>
             </view>
           </template>
         </wd-table-col>
@@ -84,6 +84,7 @@ import {
   exportInterExcelApi,
   getAccessTokenApi,
   setUserGroupApi,
+  sendNoticeApi,
 } from '@/service/admin/admin'
 import { getAllUserInfo, User } from '@/service/index/user'
 import { useMessage, useToast } from 'wot-design-uni'
@@ -289,6 +290,18 @@ const testsub = () => {
 
 const getAccessToken = () => {
   // 向后端拿access_token
+}
+
+const sendNoticeNew = async (row) => {
+  console.log(row.openid)
+  const res = await sendNoticeApi(row.openid)
+  console.log(res)
+  const code = res.data
+  if (code === 0) {
+    toast.success('发送成功')
+  } else {
+    toast.error('发送失败，用户没有接收订阅消息')
+  }
 }
 
 const sendNotice = async (row) => {
