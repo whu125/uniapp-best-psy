@@ -46,42 +46,37 @@
         </view>
 
         <view v-if="curGroupId !== 2">
-          <view class="card" v-for="(journey, index) in journeySteps" :key="index">
-            <img class="card-icon" :src="journey.icon" />
-            <view class="card-text">{{ journey.text }}</view>
-            <!-- 体验版 -->
-            <!-- <img
-            style="width: 60rpx; height: 60rpx"
-            mode="aspectFit"
-            src="http://115.159.83.61:9000/home/icon/finish.png"
-          /> -->
-
-            <image
-              style="width: 60rpx; height: 60rpx"
-              mode="aspectFit"
-              src="http://115.159.83.61:9000/home/icon/finish.png"
-              v-show="currProgress > journey.progress"
-              @click="enterJourney(journey.progress)"
-            />
-            <image
-              style="width: 60rpx; height: 60rpx"
-              mode="aspectFit"
-              src="http://115.159.83.61:9000/home/icon/startJourney.png"
-              v-show="currProgress == journey.progress && waitingTime <= 0"
-              @click="enterJourney(journey.progress)"
-            />
-            <image
-              style="width: 60rpx; height: 60rpx"
-              src="http://115.159.83.61:9000/home/icon/lockJourney.png"
-              mode="aspectFit"
-              v-show="currProgress == journey.progress && waitingTime > 0"
-            />
-            <image
-              style="width: 60rpx; height: 60rpx"
-              src="http://115.159.83.61:9000/home/icon/lockJourney.png"
-              mode="aspectFit"
-              v-show="currProgress < journey.progress"
-            />
+          <view v-for="(journey, index) in journeySteps" :key="index">
+            <view class="card" @click="enterJourney(journey.progress)">
+              <img class="card-icon" :src="journey.icon" />
+              <view class="card-text" :class="{ 'bold-font': currProgress === journey.progress }">
+                {{ journey.text }}
+              </view>
+              <image
+                style="width: 60rpx; height: 60rpx"
+                mode="aspectFit"
+                src="http://115.159.83.61:9000/home/icon/finish.png"
+                v-show="currProgress > journey.progress"
+              />
+              <image
+                style="width: 60rpx; height: 60rpx"
+                mode="aspectFit"
+                src="http://115.159.83.61:9000/home/icon/startJourney.png"
+                v-show="currProgress == journey.progress && waitingTime <= 0"
+              />
+              <image
+                style="width: 60rpx; height: 60rpx"
+                src="http://115.159.83.61:9000/home/icon/lockJourney.png"
+                mode="aspectFit"
+                v-show="currProgress == journey.progress && waitingTime > 0"
+              />
+              <image
+                style="width: 60rpx; height: 60rpx"
+                src="http://115.159.83.61:9000/home/icon/lockJourney.png"
+                mode="aspectFit"
+                v-show="currProgress < journey.progress"
+              />
+            </view>
           </view>
         </view>
 
@@ -343,82 +338,97 @@ const calculateHour = () => {
 }
 
 const enterJourney = async (progress: number) => {
-  uni.requestSubscribeMessage({
-    tmplIds: ['kAcfm-7a4wnQ03jYBqa_rplhsYjfJXNN71MhlMGADPg'], // 模板ID
-    success(res) {
-      console.log('interStore.value', interStore.interInfo)
-      if (curGroupId.value === 1) {
-        console.log('第二套，对照组')
-        progress += 8
-      }
-
-      // 检查是否有干预记录
-      if (interStore.interInfo.interId === -1) {
-        console.log('没有干预记录')
-        interStore.clearInternfo()
-        globalPageControl.clearInternfo()
-
-        const numberStr = progress.toString()
-        console.log('numberStr', numberStr)
-
-        // uni.redirectTo({
-        //   url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
-        // })
-        // 如果不是导入，跳转到站前测量
-        if (numberStr === '0' || numberStr === '1' || numberStr === '8' || numberStr === '9') {
-          uni.redirectTo({
-            url:
-              '/pages/journey_common/start_journey?progress=' +
-              encodeURIComponent(progress.toString()),
-          })
+  if (
+    currProgress.value > progress ||
+    (currProgress.value === progress && waitingTime.value <= 0)
+  ) {
+    uni.requestSubscribeMessage({
+      tmplIds: ['kAcfm-7a4wnQ03jYBqa_rplhsYjfJXNN71MhlMGADPg'], // 模板ID
+      success(res) {
+        console.log('interStore.value', interStore.interInfo)
+        if (curGroupId.value === 1) {
+          console.log('第二套，对照组')
+          progress += 8
         }
-        if (numberStr !== '0' && numberStr !== '1' && numberStr !== '8' && numberStr !== '9') {
-          uni.redirectTo({
-            url: '/pages/inquiry/before?progress=' + encodeURIComponent(progress.toString()),
+
+        // 检查是否有干预记录
+        if (interStore.interInfo.interId === -1) {
+          console.log('没有干预记录')
+          interStore.clearInternfo()
+          globalPageControl.clearInternfo()
+
+          const numberStr = progress.toString()
+          console.log('numberStr', numberStr)
+
+          // uni.redirectTo({
+          //   url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+          // })
+          // 如果不是导入，跳转到站前测量
+          if (numberStr === '0' || numberStr === '1' || numberStr === '8' || numberStr === '9') {
+            uni.redirectTo({
+              url:
+                '/pages/journey_common/start_journey?progress=' +
+                encodeURIComponent(progress.toString()),
+            })
+          }
+          if (numberStr !== '0' && numberStr !== '1' && numberStr !== '8' && numberStr !== '9') {
+            uni.redirectTo({
+              url: '/pages/inquiry/before?progress=' + encodeURIComponent(progress.toString()),
+            })
+          }
+        } else if (interStore.interInfo.interId === progress) {
+          uni.navigateTo({
+            url: '/pages/journey_common/common',
           })
+        } else {
+          message
+            .confirm({
+              msg: '是否开始新的干预，这会清除上次干预缓存，建议先完成上次干预',
+              title: '检测到上次其他干预未完成',
+              closeOnClickModal: false,
+              type: 'confirm',
+            })
+            .then(() => {
+              console.log('进入干预')
+              const numberStr = progress.toString()
+              interStore.clearInternfo()
+              globalPageControl.clearInternfo()
+              // uni.redirectTo({
+              //   url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
+              // })
+              if (
+                numberStr === '0' ||
+                numberStr === '1' ||
+                numberStr === '8' ||
+                numberStr === '9'
+              ) {
+                uni.redirectTo({
+                  url:
+                    '/pages/journey_common/start_journey?progress=' +
+                    encodeURIComponent(progress.toString()),
+                })
+              }
+              if (
+                numberStr !== '0' &&
+                numberStr !== '1' &&
+                numberStr !== '8' &&
+                numberStr !== '9'
+              ) {
+                uni.redirectTo({
+                  url: '/pages/inquiry/before?progress=' + encodeURIComponent(progress.toString()),
+                })
+              }
+            })
+            .catch(() => {
+              console.log('取消')
+            })
         }
-      } else if (interStore.interInfo.interId === progress) {
-        uni.navigateTo({
-          url: '/pages/journey_common/common',
-        })
-      } else {
-        message
-          .confirm({
-            msg: '是否开始新的干预，这会清除上次干预缓存，建议先完成上次干预',
-            title: '检测到上次其他干预未完成',
-            closeOnClickModal: false,
-            type: 'confirm',
-          })
-          .then(() => {
-            console.log('进入干预')
-            const numberStr = progress.toString()
-            interStore.clearInternfo()
-            globalPageControl.clearInternfo()
-            // uni.redirectTo({
-            //   url: '/pages/journey_common/start_journey?progress=' + encodeURIComponent(numberStr),
-            // })
-            if (numberStr === '0' || numberStr === '1' || numberStr === '8' || numberStr === '9') {
-              uni.redirectTo({
-                url:
-                  '/pages/journey_common/start_journey?progress=' +
-                  encodeURIComponent(progress.toString()),
-              })
-            }
-            if (numberStr !== '0' && numberStr !== '1' && numberStr !== '8' && numberStr !== '9') {
-              uni.redirectTo({
-                url: '/pages/inquiry/before?progress=' + encodeURIComponent(progress.toString()),
-              })
-            }
-          })
-          .catch(() => {
-            console.log('取消')
-          })
-      }
-    },
-    fail(err) {
-      console.log('fail', err)
-    },
-  })
+      },
+      fail(err) {
+        console.log('fail', err)
+      },
+    })
+  }
 }
 </script>
 
@@ -447,6 +457,9 @@ const enterJourney = async (progress: number) => {
   font-size: 24px;
   color: #333;
   text-decoration: none;
+}
+.bold-font {
+  font-weight: bold;
 }
 .title {
   margin-bottom: 20px;
