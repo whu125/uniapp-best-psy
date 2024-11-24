@@ -71,7 +71,10 @@
       </view>
       <view class="input-area px-2">
         <view style="margin-top: 5px">
-          <wd-textarea v-model="submitObj.siweiName" placeholder="..." />
+          <wd-textarea
+            v-model="submitObj.siweiName"
+            placeholder="比如，用“焦虑兔子”指代“自己会搞砸那些重要事情”的自动思维"
+          />
         </view>
       </view>
       <view @click="toNext" class="operation-area">
@@ -120,7 +123,10 @@
       </view>
       <view class="input-area px-2">
         <view style="margin-top: 5px">
-          <wd-textarea v-model="submitObj.ruheshibie" placeholder="..." />
+          <wd-textarea
+            v-model="submitObj.ruheshibie"
+            placeholder="例如，当我在非常担心一件事的时候，焦虑兔子就会告诉我“你肯定会搞砸”，所以，我可以在下次感到焦虑的时候，先看看是否是焦虑兔子作祟"
+          />
         </view>
       </view>
       <view @click="doSubmit" class="operation-area">

@@ -27,15 +27,15 @@
         </view>
       </view>
       <view class="input-area px-2">
-        <view style="margin-top: 15px">2.引发情绪的情境或事件：</view>
+        <view style="margin-top: 15px">2.产生了什么感受：</view>
         <view style="margin-top: 5px">
-          <wd-textarea v-model="submitObj.qingjing" placeholder="当时发生了什么……" />
+          <wd-textarea v-model="submitObj.ganshou" placeholder="焦虑，沮丧，恐惧，或者别的什么?" />
         </view>
       </view>
       <view class="input-area px-2">
-        <view style="margin-top: 15px">3.产生了什么感受：</view>
+        <view style="margin-top: 15px">3.引发情绪的情境或事件：</view>
         <view style="margin-top: 5px">
-          <wd-textarea v-model="submitObj.ganshou" placeholder="焦虑，沮丧，恐惧，或者别的什么?" />
+          <wd-textarea v-model="submitObj.qingjing" placeholder="当时发生了什么……" />
         </view>
       </view>
       <view class="input-area px-2">

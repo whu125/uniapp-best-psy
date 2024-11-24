@@ -28,14 +28,14 @@
       </view>
       <view class="box">
         <view class="text-area">
-          <view class="detail-title">2.引发情绪的情境或事件：</view>
-          <view>{{ content.qingjing }}</view>
+          <view class="detail-title">2.产生了什么感受：</view>
+          <view>{{ content.ganshou }}</view>
         </view>
       </view>
       <view class="box">
         <view class="text-area">
-          <view class="detail-title">3.产生了什么感受：</view>
-          <view>{{ content.ganshou }}</view>
+          <view class="detail-title">3.引发情绪的情境或事件：</view>
+          <view>{{ content.qingjing }}</view>
         </view>
       </view>
       <view class="box">

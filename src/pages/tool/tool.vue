@@ -17,7 +17,7 @@
       <view>
         <img
           src="http://115.159.83.61:9000/tool/tool_logo.png"
-          style="width: 200px; height: 200px"
+          style="width: 300px; height: 430px"
         />
       </view>
 
