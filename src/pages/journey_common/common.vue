@@ -84,7 +84,10 @@
       </view>
       <view class="input-area px-2">
         <view v-for="(placeholder, index) in pageContent.inputPlaceholders" :key="index">
-          <view style="margin-top: 15px" v-if="pageContent.inputQuestions != null">
+          <view
+            style="margin-top: 15px; line-height: 1.8"
+            v-if="pageContent.inputQuestions != null"
+          >
             {{ pageContent.inputQuestions[index] }}
           </view>
           <view style="margin-top: 5px">
@@ -189,7 +192,10 @@
         <image :src="pageContent.imgUrl" mode="widthFix" style="width: 100%" @load="loadFinished" />
       </view>
       <view class="input-area">
-        <view class="select-btns">
+        <view
+          class="select-btns"
+          :class="currInterId === 2 ? 'select-btn-column-5' : 'select-btn-column-3'"
+        >
           <view
             v-for="(monster, index) in pageContent.selectUrls"
             :key="index"
@@ -1058,11 +1064,19 @@ const toReport = async () => {
 
 .select-btns {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
   gap: 10px;
   width: 100%;
   overflow-x: hidden;
 }
+
+.select-btn-column-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.select-btn-column-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
 .select-btn {
   width: 100%;
   aspect-ratio: 1;
