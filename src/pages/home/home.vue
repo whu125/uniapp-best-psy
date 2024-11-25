@@ -315,14 +315,14 @@ onShow(() => {
       })
     }
   }
-  uni.onSocketMessage((res) => {
-    console.log('收到服务器内容：' + res.data)
+  userStore.websocket.onMessage((res) => {
+    console.log('收到服务器内容1：' + res.data)
     waitingTime.value = Number(res.data.split('#')[0])
   })
 })
 
 uni.onSocketMessage((res) => {
-  console.log('收到服务器内容：' + res.data)
+  console.log('收到服务器内容2：' + res.data)
   // 后端 websocket 发来的数据形如 waitingTime # currProgress
   waitingTime.value = Number(res.data.split('#')[0])
   // userStore.userInfo.currProgress = Number(res.data.split('#')[1])
