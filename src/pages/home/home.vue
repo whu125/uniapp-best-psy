@@ -218,15 +218,15 @@ const journeySteps1 = ref([
 ])
 const finishFlag = ref(false) // 记录是否是完成干预后跳转过来的
 
-// onMounted(() => {
-//   console.log('loadingSocket', loadingSocket.value)
-//   // 需要有5s建立连接
-//   toast.loading('请求进度中...')
-//   setTimeout(() => {
-//     loadingSocket.value = false
-//     toast.close()
-//   }, 5000)
-// })
+onMounted(() => {
+  console.log('loadingSocket', loadingSocket.value)
+  // 需要有5s建立连接
+  toast.loading('请求进度中...')
+  setTimeout(() => {
+    loadingSocket.value = false
+    toast.close()
+  }, 5000)
+})
 
 onPullDownRefresh(() => {
   console.log('refresh')

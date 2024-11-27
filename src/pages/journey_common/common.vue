@@ -7,7 +7,7 @@
 }
 </route>
 <template>
-  <view class="" w-full h-full v-if="pageContent">
+  <view w-full h-full v-if="pageContent">
     <!-- <wd-navbar fixed safeAreaInsetTop :title="pageContent.navbarTitle"></wd-navbar> -->
 
     <wd-navbar
@@ -18,10 +18,6 @@
       left-arrow
       @click-left="ToHome"
     ></wd-navbar>
-    <!-- <view v-if="!loadFlag">
-      111
-      <wd-loading />
-    </view> -->
     <!-- 普通页面 -->
     <view
       class="main-container"
