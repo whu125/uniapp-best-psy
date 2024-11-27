@@ -218,15 +218,15 @@ const journeySteps1 = ref([
 ])
 const finishFlag = ref(false) // 记录是否是完成干预后跳转过来的
 
-onMounted(() => {
-  console.log('loadingSocket', loadingSocket.value)
-  // 需要有5s建立连接
-  toast.loading('请求进度中...')
-  setTimeout(() => {
-    loadingSocket.value = false
-    toast.close()
-  }, 5000)
-})
+// onMounted(() => {
+//   console.log('loadingSocket', loadingSocket.value)
+//   // 需要有5s建立连接
+//   toast.loading('请求进度中...')
+//   setTimeout(() => {
+//     loadingSocket.value = false
+//     toast.close()
+//   }, 5000)
+// })
 
 onPullDownRefresh(() => {
   console.log('refresh')
@@ -377,6 +377,31 @@ const enterJourney = async (progress: number) => {
             })
           }
         } else if (interStore.interInfo.interId === progress) {
+          if (interStore.interInfo.interPages[interStore.pageIndex].pageType === 'common') {
+            if (
+              interStore.interInfo.interPages[interStore.pageIndex].navbarTitle.endsWith('导入')
+            ) {
+              uni.redirectTo({
+                url: '/pages/journey_common/daolanStart',
+              })
+            } else if (
+              interStore.interInfo.interPages[interStore.pageIndex].navbarTitle.endsWith('导览')
+            ) {
+              uni.redirectTo({
+                url: '/pages/journey_common/daolanHome',
+              })
+            }
+            return
+          } else if (
+            interStore.interInfo.interPages[interStore.pageIndex].operationText === '开始任务'
+          ) {
+            interStore.minusPageIndex()
+            interStore.minusPageIndex()
+            uni.navigateTo({
+              url: '/pages/journey_common/daolanHome',
+            })
+            return
+          }
           uni.navigateTo({
             url: '/pages/journey_common/common',
           })
