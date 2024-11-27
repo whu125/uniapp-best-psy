@@ -105,6 +105,10 @@
       <view class="flex justify-center mt-5">
         <wd-button @click="submit" v-if="curId == questionItem.length">提交</wd-button>
       </view>
+
+      <view class="flex justify-center mt-5" v-if="curId != 1">
+        <wd-button @click="toLast">上一题</wd-button>
+      </view>
     </view>
   </view>
 </template>
@@ -210,6 +214,10 @@ const handleAgeChange = () => {
     text: String(age.value),
   }
   curId.value++
+}
+
+const toLast = () => {
+  curId.value--
 }
 
 const submit = async () => {
