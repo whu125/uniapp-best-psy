@@ -19,7 +19,7 @@
         <view class="rating-item">
           <text class="rating-label">体验感</text>
           <text class="rating-desc ml-2">0代表"不好"，10代表"非常好"</text>
-          <view class="">
+          <view class="pl-10" style="width: 75%">
             <wd-slider v-model="tiyan" min="0" max="10" />
           </view>
         </view>
@@ -27,7 +27,7 @@
         <view class="rating-item">
           <text class="rating-label">收获度</text>
           <text class="rating-desc ml-2">0代表"没有收获"，10代表"很有收获"</text>
-          <view class="">
+          <view class="pl-10" style="width: 75%">
             <wd-slider v-model="shouhuo" min="0" max="10" />
           </view>
         </view>
