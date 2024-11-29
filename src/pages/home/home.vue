@@ -395,8 +395,6 @@ const enterJourney = async (progress: number) => {
           } else if (
             interStore.interInfo.interPages[interStore.pageIndex].operationText === '开始任务'
           ) {
-            interStore.minusPageIndex()
-            interStore.minusPageIndex()
             uni.navigateTo({
               url: '/pages/journey_common/daolanHome',
             })

@@ -182,9 +182,23 @@ const ToHome = () => {
   uni.switchTab({ url: '/pages/home/home' })
 }
 
-const startJourney = () => {
+const startJourney = async () => {
   if (userStore.userInfo.groupId === 0) {
-    interStore.addPageIndex()
+    if (interStore.interInfo.interId === 1) {
+      await interStore.setPageIndex(6)
+    } else if (interStore.interInfo.interId === 2) {
+      await interStore.setPageIndex(6)
+    } else if (interStore.interInfo.interId === 3) {
+      await interStore.setPageIndex(5)
+    } else if (interStore.interInfo.interId === 4) {
+      await interStore.setPageIndex(8)
+    } else if (interStore.interInfo.interId === 5) {
+      await interStore.setPageIndex(6)
+    } else if (interStore.interInfo.interId === 6) {
+      await interStore.setPageIndex(4)
+    } else if (interStore.interInfo.interId === 7) {
+      await interStore.setPageIndex(4)
+    }
     interStore.isStartJourney0 = true
   } else if (userStore.userInfo.groupId === 1) {
     interStore.isStartJourney1 = true
@@ -211,7 +225,7 @@ const toTask = async () => {
   } else if (interStore.interInfo.interId === 4) {
     await interStore.setPageIndex(36)
   } else if (interStore.interInfo.interId === 5) {
-    await interStore.setPageIndex(17)
+    await interStore.setPageIndex(18)
   } else if (interStore.interInfo.interId === 6) {
     await interStore.setPageIndex(17)
   } else if (interStore.interInfo.interId === 7) {
