@@ -26,7 +26,7 @@
         />
       </view>
       <view class="title">三件小事</view>
-      <view class="font">采集情绪，分析成分，觉察应对模式</view>
+      <view class="font">察觉、记录生活中闪闪发光的小事</view>
       <view class="button-area">
         <wd-card>
           <view class="card-content" @click="start">
