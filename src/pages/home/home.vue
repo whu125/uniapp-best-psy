@@ -21,25 +21,25 @@
       </view>
       <!-- <view v-if="loadingSocket">获取进度中....</view> -->
       <view>
-        <view class="card flex justify-center" v-show="curInter != -1">
+        <view class="card flex justify-center" v-if="curInter != -1">
           <span class="font-800 text-2xl">正在完成</span>
-          <view v-show="curInter == 0">
+          <view v-if="curInter == 0">
             <span class="font-800 text-2xl ml-4">导入</span>
           </view>
-          <view v-show="curInter != 0">
+          <view v-if="curInter != 0">
             <span class="font-800 text-2xl ml-4">第 {{ curInter }} 站</span>
           </view>
         </view>
-        <view class="card flex justify-center" v-show="waitingTime > 0">
+        <view class="card flex justify-center" v-if="waitingTime > 0">
           <span class="font-800 text-xl">剩余 {{ waitingTime }} 小时 解锁</span>
           <span class="font-800 text-xl ml-4">第 {{ currProgress }} 站</span>
         </view>
-        <view class="card flex justify-center" v-show="waitingTime <= 0">
-          <view v-show="currProgress != 0 && currProgress != 999">
+        <view class="card flex justify-center" v-if="waitingTime <= 0">
+          <view v-if="currProgress != 0 && currProgress != 999">
             <span class="font-800 text-xl">已解锁 第 {{ currProgress }} 站</span>
           </view>
-          <view v-show="currProgress == 999"></view>
-          <view v-show="currProgress == 0">
+          <view v-if="currProgress == 999"></view>
+          <view v-if="currProgress == 0">
             <span class="font-800 text-xl">已解锁 导入</span>
           </view>
           <!-- <span class="font-800 text-xl ml-4">下一站</span> -->
@@ -56,25 +56,25 @@
                 style="width: 60rpx; height: 60rpx"
                 mode="aspectFit"
                 src="http://115.159.83.61:9000/home/icon/finish.png"
-                v-show="currProgress > journey.progress"
+                v-if="currProgress > journey.progress"
               />
               <image
                 style="width: 60rpx; height: 60rpx"
                 mode="aspectFit"
                 src="http://115.159.83.61:9000/home/icon/startJourney.png"
-                v-show="currProgress == journey.progress && waitingTime <= 0"
+                v-if="currProgress == journey.progress && waitingTime <= 0"
               />
               <image
                 style="width: 60rpx; height: 60rpx"
                 src="http://115.159.83.61:9000/home/icon/lockJourney.png"
                 mode="aspectFit"
-                v-show="currProgress == journey.progress && waitingTime > 0"
+                v-if="currProgress == journey.progress && waitingTime > 0"
               />
               <image
                 style="width: 60rpx; height: 60rpx"
                 src="http://115.159.83.61:9000/home/icon/lockJourney.png"
                 mode="aspectFit"
-                v-show="currProgress < journey.progress"
+                v-if="currProgress < journey.progress"
               />
             </view>
           </view>
@@ -240,7 +240,11 @@ onPullDownRefresh(() => {
 
 onShow(() => {
   if (userStore.userInfo.currProgress !== 999) {
-    currProgress.value = userStore.userInfo.currProgress % 8
+    if (userStore.userInfo.currProgress === 99 || userStore.userInfo.currProgress === 100) {
+      currProgress.value = 7
+    } else {
+      currProgress.value = userStore.userInfo.currProgress % 8
+    }
   } else {
     currProgress.value = userStore.userInfo.currProgress
   }

@@ -760,7 +760,11 @@ const doOperation = async () => {
     }
   }
   // 如果是第二套干预7的最后一页 提交干预 跳转到旅程报告
-  if (userStore.userInfo.groupId === 1 && interStore.interInfo.interId === 15) {
+  if (
+    userStore.userInfo.groupId === 1 &&
+    pageContent.value.navbarTitle.endsWith('拓展') &&
+    interStore.interInfo.interId === 15
+  ) {
     const submitObj: ISubmitInter = {
       userId: userStore.userInfo.userId,
       interId: interStore.interInfo.interId,
@@ -790,7 +794,7 @@ const doOperation = async () => {
   // }
 
   // 如果下一页不是跳转到特殊页面(journey通用页面) 就刷新当前页面
-  if (pageContent.value.specialPage === null) {
+  if (pageContent.value.specialPage === null || pageContent.value.specialPage === '') {
     loadPageData()
   } else {
     // 否则跳转到特殊页面
@@ -909,6 +913,7 @@ const toReport = async () => {
   if (res.code === 200) {
     interStore.setInterInfo(res.data)
     loadPageData()
+    uni.redirectTo({ url: '/pages/journey_common/common' })
   } else {
     toast.error('出现了一些问题')
   }
