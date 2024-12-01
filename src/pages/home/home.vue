@@ -333,15 +333,21 @@ uni.onSocketMessage((res) => {
   // currProgress.value = userStore.userInfo.currProgress % 8
 })
 
-const calculateHour = () => {
-  // 这个函数应该用不到了
-  const currentTime = new Date().getTime()
-  const lockTime = userStore.userInfo.lockTime
-  const remainingTime = (lockTime - currentTime) / (1000 * 60 * 60) // 转化为小时
-  return remainingTime
-}
-
 const enterJourney = async (progress: number) => {
+  if (userStore.userInfo.currProgress === 99 || userStore.userInfo.currProgress === 100) {
+    uni.navigateTo({
+      url: '/pages/journey_common/common',
+    })
+    return
+  }
+  if (interStore.interInfo.interPages !== null) {
+    if (interStore.interInfo.interPages[interStore.pageIndex].navbarTitle.endsWith('拓展')) {
+      uni.navigateTo({
+        url: '/pages/journey_common/daolanHome',
+      })
+      return
+    }
+  }
   if (
     currProgress.value > progress ||
     (currProgress.value === progress && waitingTime.value <= 0)
