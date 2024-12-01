@@ -446,6 +446,11 @@ const loadPageData = () => {
   console.log('pageContent.value', pageContent.value)
   if (pageContent.value.pageType === 'audio') {
     audioObject.value.audioSrc = pageContent.value.audioUrls[0]
+    uni.setKeepScreenOn({
+      keepScreenOn: true,
+      success: () => {},
+      fail: () => {},
+    })
   }
   // 恢复页面状态
   recoverPageStatus()

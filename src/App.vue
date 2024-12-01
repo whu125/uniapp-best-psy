@@ -8,14 +8,14 @@ onLaunch(() => {
   uni.setInnerAudioOption({
     obeyMuteSwitch: false,
   })
+})
+onShow(() => {
+  console.log('App Show')
   uni.setKeepScreenOn({
     keepScreenOn: true,
     success: () => {},
     fail: () => {},
   })
-})
-onShow(() => {
-  console.log('App Show')
 })
 onHide(() => {
   console.log('App Hide')

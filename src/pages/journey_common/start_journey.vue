@@ -200,7 +200,7 @@ const pageContent = ref([
       '• 自我关怀',
       '• 持续关注和评估自己的状态',
       '• 在必要时寻求专业支持',
-      '下一站是什么',
+      '• 下一站是什么',
     ],
   },
 ])
@@ -266,6 +266,7 @@ const startJourney = async () => {
 }
 
 .title {
+  margin-top: 15px;
   margin-bottom: 20px;
   font-size: 30px;
   font-weight: bold;

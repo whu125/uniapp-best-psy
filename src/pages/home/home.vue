@@ -411,6 +411,11 @@ const enterJourney = async (progress: number) => {
               url: '/pages/journey_common/daolanHome',
             })
             return
+          } else if (userStore.userInfo.groupId === 1 && interStore.pageIndex === 0) {
+            uni.navigateTo({
+              url: '/pages/journey_common/daolanHome',
+            })
+            return
           }
           uni.navigateTo({
             url: '/pages/journey_common/common',
