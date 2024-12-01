@@ -334,19 +334,14 @@ uni.onSocketMessage((res) => {
 })
 
 const enterJourney = async (progress: number) => {
-  if (userStore.userInfo.currProgress === 99 || userStore.userInfo.currProgress === 100) {
+  if (
+    progress === 7 &&
+    (interStore.interInfo.interId === 99 || interStore.interInfo.interId === 100)
+  ) {
     uni.navigateTo({
       url: '/pages/journey_common/common',
     })
     return
-  }
-  if (interStore.interInfo.interPages !== null) {
-    if (interStore.interInfo.interPages[interStore.pageIndex].navbarTitle.endsWith('拓展')) {
-      uni.navigateTo({
-        url: '/pages/journey_common/daolanHome',
-      })
-      return
-    }
   }
   if (
     currProgress.value > progress ||
@@ -404,6 +399,13 @@ const enterJourney = async (progress: number) => {
             return
           } else if (
             interStore.interInfo.interPages[interStore.pageIndex].operationText === '开始任务'
+          ) {
+            uni.navigateTo({
+              url: '/pages/journey_common/daolanHome',
+            })
+            return
+          } else if (
+            interStore.interInfo.interPages[interStore.pageIndex].navbarTitle.endsWith('拓展')
           ) {
             uni.navigateTo({
               url: '/pages/journey_common/daolanHome',

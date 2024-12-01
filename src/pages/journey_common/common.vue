@@ -911,7 +911,7 @@ const toReport = async () => {
   }
   const res = await startInter(startObj)
   if (res.code === 200) {
-    interStore.setInterInfo(res.data)
+    await interStore.setInterInfo(res.data)
     loadPageData()
     uni.redirectTo({ url: '/pages/journey_common/common' })
   } else {
