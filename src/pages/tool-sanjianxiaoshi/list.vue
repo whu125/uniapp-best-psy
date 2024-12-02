@@ -21,6 +21,9 @@
       <view v-for="(sanjian, index) in sanjianList" :key="index">
         <view class="box" @click="selectSanjian(index)">
           <view style="font-size: 18px; color: gray">{{ sanjian.date }}</view>
+          <view style="width: 35%; overflow: hidden; font-size: 18px">
+            {{ sanjian.sanjianName }}
+          </view>
           <img :src="sanjian.statusUrl" style="width: 50px; height: 50px" />
         </view>
       </view>

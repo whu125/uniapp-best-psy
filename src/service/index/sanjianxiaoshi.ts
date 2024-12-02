@@ -3,6 +3,7 @@ export interface ISanjianxiaoshi {
   userId: string
   date: string
   statusUrl: string
+  name: string
   one: string
   two: string
   three: string
@@ -10,6 +11,7 @@ export interface ISanjianxiaoshi {
 
 export interface ISanjianxiaoshiReturn {
   sanjianId: string
+  sanjianName: string
   userId: string
   date: string
   statusUrl: string

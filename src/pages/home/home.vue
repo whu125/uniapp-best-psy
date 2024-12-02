@@ -224,6 +224,14 @@ onMounted(() => {
   toast.loading('请求进度中...')
   setTimeout(() => {
     loadingSocket.value = false
+    uni.onSocketMessage((res) => {
+      console.log('收到服务器内容2：' + res.data)
+      // 后端 websocket 发来的数据形如 waitingTime # currProgress
+      waitingTime.value = Number(res.data.split('#')[0])
+      // userStore.userInfo.currProgress = Number(res.data.split('#')[1])
+      // currProgress.value = userStore.userInfo.currProgress % 8
+    })
+
     toast.close()
   }, 5000)
 })

@@ -67,6 +67,16 @@
         </view>
       </view>
 
+      <view class="input-area px-2" style="margin-top: 30px">
+        <view style="margin-top: 15px">为今天的小事记录取一个标题:</view>
+        <view style="margin-top: 5px">
+          <wd-textarea
+            v-model="submitObj.name"
+            placeholder="例如：小确幸，自我挑战，感受爱意······"
+          />
+        </view>
+      </view>
+
       <view @click="doSubmit" class="operation-area">
         <img src="http://115.159.83.61:9000/common/finish.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">添加到日记</view>
@@ -133,6 +143,7 @@ const submitObj = ref<ISanjianxiaoshi>({
   userId: '',
   date: '',
   statusUrl: '',
+  name: '',
   one: '',
   two: '',
   three: '',
