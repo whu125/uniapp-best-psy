@@ -744,8 +744,8 @@ const doOperation = async () => {
       userId: userStore.userInfo.userId,
       interId: interStore.interInfo.interId,
       endTime: getFormattedDate(),
-      inputPages: interStore.inputPages,
-      inputContent: interStore.inputContent,
+      inputPages: interStore.inputPages(),
+      inputContent: interStore.inputContent(),
     }
     console.log('submitObj: ')
     console.log(submitObj)
@@ -774,8 +774,8 @@ const doOperation = async () => {
       userId: userStore.userInfo.userId,
       interId: interStore.interInfo.interId,
       endTime: getFormattedDate(),
-      inputPages: interStore.inputPages,
-      inputContent: interStore.inputContent,
+      inputPages: interStore.inputPages(),
+      inputContent: interStore.inputContent(),
     }
     const res = await submitInter(submitObj)
     console.log(res)

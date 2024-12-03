@@ -228,8 +228,6 @@ onMounted(() => {
       console.log('收到服务器内容2：' + res.data)
       // 后端 websocket 发来的数据形如 waitingTime # currProgress
       waitingTime.value = Number(res.data.split('#')[0])
-      // userStore.userInfo.currProgress = Number(res.data.split('#')[1])
-      // currProgress.value = userStore.userInfo.currProgress % 8
     })
 
     toast.close()
@@ -266,8 +264,22 @@ onShow(() => {
     journeySteps.value = journeySteps1.value
   }
 
+  checkSocket()
+  setInterval(() => {
+    userStore.websocket.onMessage((res) => {
+      console.log('收到服务器内容1：' + res.data)
+      waitingTime.value = Number(res.data.split('#')[0])
+    })
+    uni.onSocketMessage((res) => {
+      console.log('收到服务器内容2：' + res.data)
+      waitingTime.value = Number(res.data.split('#')[0])
+    })
+  }, 1000)
+})
+
+const checkSocket = () => {
   // 判断前端有无连接
-  if (JSON.stringify(userStore.websocket) === '{}' && userStore.userInfo.userId !== '1') {
+  if (userStore.websocket === null && userStore.userInfo.userId !== '1') {
     // 已登录情况下无 websocket 连接 进行重连
     console.log('websocket empty')
     // 建立 websocket 连接
@@ -290,48 +302,49 @@ onShow(() => {
     userStore.websocket.onClose((res) => {
       console.log('websocket close')
     })
-  } else if (JSON.stringify(userStore.websocket) !== '{}') {
+  } else if (userStore.websocket !== null) {
     // 假如 websocket 连接失效 进行重连
     console.log('websocket not empty')
-    let websocketAvailability = false
     uni.sendSocketMessage({
       data: 'test websocket',
       success: () => {
         console.log('websocket connect avail')
-        websocketAvailability = true
       },
       fail: () => {
         console.log('websocket connect unavail')
+        // 建立 websocket 连接
+        userStore.websocket = uni.connectSocket({
+          url: `wss://${url}/websocket/` + userStore.userInfo.userId,
+          success: () => {
+            console.log('websocket connect success')
+          },
+          fail: () => {
+            console.log('websocket connect fail')
+          },
+        })
+        console.log(userStore.websocket)
+        userStore.websocket.onOpen((res) => {
+          console.log('websocket open')
+        })
+        userStore.websocket.onError((res) => {
+          console.log('websocket error')
+        })
+        userStore.websocket.onClose((res) => {
+          console.log('websocket close')
+        })
       },
     })
-    if (websocketAvailability === false) {
-      // 建立 websocket 连接
-      userStore.websocket = uni.connectSocket({
-        url: `wss://${url}/websocket/` + userStore.userInfo.userId,
-        success: () => {
-          console.log('websocket connect success')
-        },
-        fail: () => {
-          console.log('websocket connect fail')
-        },
-      })
-      console.log(userStore.websocket)
-      userStore.websocket.onOpen((res) => {
-        console.log('websocket open')
-      })
-      userStore.websocket.onError((res) => {
-        console.log('websocket error')
-      })
-      userStore.websocket.onClose((res) => {
-        console.log('websocket close')
-      })
-    }
   }
   userStore.websocket.onMessage((res) => {
     console.log('收到服务器内容1：' + res.data)
     waitingTime.value = Number(res.data.split('#')[0])
   })
-})
+  uni.onSocketMessage((res) => {
+    console.log('收到服务器内容2：' + res.data)
+    // 后端 websocket 发来的数据形如 waitingTime # currProgress
+    waitingTime.value = Number(res.data.split('#')[0])
+  })
+}
 
 uni.onSocketMessage((res) => {
   console.log('收到服务器内容2：' + res.data)

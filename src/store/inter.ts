@@ -45,7 +45,7 @@ export const useInterStore = defineStore(
 
     const pageIndex = ref<number>(0)
 
-    const userInputMap = ref<Map<number, string>>(new Map<number, string>())
+    const userInputMap = ref<Map<number, string>>(null)
 
     const isStartJourney0 = ref<boolean>(false)
 
@@ -55,38 +55,39 @@ export const useInterStore = defineStore(
 
     const isPunchFinished1 = ref<boolean>(false)
 
-    const inputPages = computed(() => {
+    const inputPages: () => string = () => {
       let inputPages = ''
       console.log('userInputMap.value', userInputMap.value)
+      if (userInputMap.value === null) {
+        userInputMap.value = new Map<number, string>()
+      }
 
-      if (userInputMap.value && userInputMap.value.size > 0) {
+      if (userInputMap.value !== null && userInputMap.value.size > 0) {
         userInputMap.value.forEach((value, key) => {
           inputPages = inputPages + key + '#'
         })
       }
 
       return inputPages
-    })
+    }
 
-    const inputContent = computed(() => {
+    const inputContent: () => string = () => {
       let inputContent = ''
 
-      if (userInputMap.value && userInputMap.value.size > 0) {
+      if (userInputMap.value !== null && userInputMap.value.size > 0) {
         userInputMap.value.forEach((value, key) => {
           inputContent = inputContent + value + '#'
         })
       }
       return inputContent
-    })
+    }
 
     const setUserInputMap = (key: number, value: string) => {
       // console.log('setUserInputMap', userInputMap.value)
-      if (userInputMap.value instanceof Map) {
-        userInputMap.value.set(key, value)
-      } else {
+      if (userInputMap.value === null) {
         userInputMap.value = new Map<number, string>()
-        userInputMap.value.set(key, value)
       }
+      userInputMap.value.set(key, value)
       console.log(userInputMap.value)
       console.log(inputContent.value)
     }

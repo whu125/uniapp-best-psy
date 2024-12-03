@@ -196,8 +196,8 @@ const submit = async () => {
       userId: userStore.userInfo.userId,
       interId: interStore.interInfo.interId,
       endTime: getFormattedDate(),
-      inputPages: interStore.inputPages,
-      inputContent: interStore.inputContent,
+      inputPages: interStore.inputPages(),
+      inputContent: interStore.inputContent(),
     }
     console.log(submitObj)
     const res = await submitInter(submitObj)
