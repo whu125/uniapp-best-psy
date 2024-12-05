@@ -206,7 +206,7 @@ const startJourney = async () => {
   if (interStore.isStartJourney1 === true) {
     interStore.minusPageIndex()
   }
-  uni.navigateTo({
+  uni.redirectTo({
     url: '/pages/journey_common/common',
   })
 }
@@ -231,7 +231,7 @@ const toTask = async () => {
   } else if (interStore.interInfo.interId === 7) {
     await interStore.setPageIndex(13)
   }
-  uni.navigateTo({
+  uni.redirectTo({
     url: '/pages/journey_common/common',
   })
 }
@@ -240,7 +240,7 @@ const toPunch0 = () => {
     toast.warning('请先完成站点任务！')
     return
   }
-  uni.navigateTo({
+  uni.redirectTo({
     url: '/pages/inquiry/start',
   })
 }

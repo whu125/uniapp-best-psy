@@ -424,6 +424,10 @@ const audioObject = ref<IAudio>({
   audioTitle: '开始播放',
 })
 
+onBackPress(() => {
+  return true
+})
+
 onUnload(() => {
   if (pageContent.value.pageType === 'audio') {
     audioRef.value.audioDestroy()

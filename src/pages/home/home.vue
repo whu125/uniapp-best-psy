@@ -422,7 +422,7 @@ const enterJourney = async (progress: number) => {
             interStore.interInfo.interPages[interStore.pageIndex].operationText === '开始任务'
           ) {
             uni.navigateTo({
-              url: '/pages/journey_common/daolanHome',
+              url: '/pages/journey_common/common',
             })
             return
           } else if (
