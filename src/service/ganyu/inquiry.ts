@@ -31,3 +31,7 @@ export const getInquiryByPos = (pos: string) => {
 export const submitInquiry = (data: InquiryResultArray) => {
   return http.post<InquiryItem[]>(`/inquiry/submit`, data)
 }
+
+export const submitEval = (data) => {
+  return http.post(`/inquiry/eval`, data)
+}

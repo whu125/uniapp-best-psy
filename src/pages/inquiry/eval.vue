@@ -65,6 +65,7 @@
 
 <script lang="ts" setup>
 import { submitInter, ISubmitInter } from '@/service/index/inter'
+import { submitEval } from '@/service/ganyu/inquiry'
 import { getFormattedDate } from '@/utils/getTime'
 import { useUserStore } from '@/store/user'
 import { useInterStore } from '@/store/inter'
@@ -185,9 +186,16 @@ const submit = async () => {
   const help = selectedOptions.value.join('、')
   console.log(help)
   console.log('提交的数据:', {
-    tiyan: tiyan.value,
-    shouhuo: shouhuo.value,
-    help,
+    experienceScore: tiyan.value,
+    harvestScore: shouhuo.value,
+    helpfulContent: help,
+  })
+
+  const result = await submitEval({
+    interId: interStore.interInfo.interId,
+    experienceScore: tiyan.value,
+    harvestScore: shouhuo.value,
+    helpfulContent: help,
   })
 
   if (userStore.userInfo.groupId === 0) {
