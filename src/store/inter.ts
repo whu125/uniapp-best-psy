@@ -89,7 +89,6 @@ export const useInterStore = defineStore(
       }
       userInputMap.value.set(key, value)
       console.log(userInputMap.value)
-      console.log(inputContent.value)
     }
 
     const setInterInfo = (val: IInterState) => {

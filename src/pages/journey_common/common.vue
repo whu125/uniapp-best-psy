@@ -436,7 +436,7 @@ onUnload(() => {
 
 const audioRef = ref(null)
 
-onMounted(() => {
+onShow(() => {
   loadPageData()
 })
 
@@ -462,7 +462,7 @@ const loadPageData = () => {
   fillUserGoal()
 }
 
-const ToHome = () => {
+const ToHome = async () => {
   if (pageContent.value.pageType === 'audio') {
     audioRef.value.audioDestroy()
   }
@@ -474,7 +474,7 @@ const ToHome = () => {
   //   }
   //   interStore.setUserInputMap(pageContent.value.pageId, inputContent)
   // }
-  saveDateToPinia('next')
+  await saveDateToPinia('return')
   uni.switchTab({ url: '/pages/home/home' })
 }
 
@@ -803,13 +803,13 @@ const doOperation = async () => {
   // }
 
   // 如果下一页不是跳转到特殊页面(journey通用页面) 就刷新当前页面
-  if (pageContent.value.specialPage === null || pageContent.value.specialPage === '') {
-    loadPageData()
-  } else {
-    // 否则跳转到特殊页面
+  if (pageContent.value.specialPage !== null || pageContent.value.specialPage !== '') {
     uni.redirectTo({
       url: pageContent.value.specialPage,
     })
+  } else {
+    // 否则跳转到特殊页面
+    loadPageData()
   }
 }
 
