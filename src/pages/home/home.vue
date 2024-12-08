@@ -421,9 +421,12 @@ const enterJourney = async (progress: number) => {
           } else if (
             interStore.interInfo.interPages[interStore.pageIndex].operationText === '开始任务'
           ) {
-            uni.navigateTo({
-              url: '/pages/journey_common/common',
-            })
+            // uni.navigateTo({
+            //   url: '/pages/journey_common/common',
+            // })
+            uni.redirectTo({
+                url: '/pages/journey_common/daolanHome',
+              })
             return
           } else if (
             interStore.interInfo.interPages[interStore.pageIndex].navbarTitle.endsWith('拓展')

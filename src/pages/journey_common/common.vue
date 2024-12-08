@@ -803,12 +803,16 @@ const doOperation = async () => {
   // }
 
   // 如果下一页不是跳转到特殊页面(journey通用页面) 就刷新当前页面
-  if (pageContent.value.specialPage !== null || pageContent.value.specialPage !== '') {
-    uni.redirectTo({
-      url: pageContent.value.specialPage,
-    })
+  console.log(pageContent.value.specialPage)
+  if (pageContent.value.specialPage !== null) {
+    if (pageContent.value.specialPage !== '') {
+      uni.redirectTo({
+        url: pageContent.value.specialPage,
+      })
+    } else {
+      loadPageData()
+    }
   } else {
-    // 否则跳转到特殊页面
     loadPageData()
   }
 }

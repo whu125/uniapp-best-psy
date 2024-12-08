@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import { onLaunch, onShow, onHide, onExit } from '@dcloudio/uni-app'
-import { useUserStore } from './store'
+import { useInterStore } from '@/store/inter'
+import { useGlobalPageControlStore } from '@/store/globalPageControl'
 import { url } from '@/interceptors/request'
 
+const interStore = useInterStore()
+const globalPageControlStore = useGlobalPageControlStore()
 onLaunch(() => {
   console.log('App Launch')
+  interStore.clearInternfo()
+  globalPageControlStore.clearInternfo()
   uni.setInnerAudioOption({
     obeyMuteSwitch: false,
   })
