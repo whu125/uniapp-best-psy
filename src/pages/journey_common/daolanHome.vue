@@ -240,6 +240,7 @@ const toPunch0 = () => {
     toast.warning('请先完成站点任务！')
     return
   }
+  interStore.isPunchFinished0 = true
   uni.redirectTo({
     url: '/pages/inquiry/start',
   })

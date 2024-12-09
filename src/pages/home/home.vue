@@ -425,8 +425,13 @@ const enterJourney = async (progress: number) => {
             //   url: '/pages/journey_common/common',
             // })
             uni.redirectTo({
-                url: '/pages/journey_common/daolanHome',
-              })
+              url: '/pages/journey_common/daolanHome',
+            })
+            return
+          } else if (interStore.isPunchFinished0 === true) {
+            uni.navigateTo({
+              url: '/pages/journey_common/daolanHome',
+            })
             return
           } else if (
             interStore.interInfo.interPages[interStore.pageIndex].navbarTitle.endsWith('拓展')

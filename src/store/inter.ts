@@ -55,6 +55,8 @@ export const useInterStore = defineStore(
 
     const isPunchFinished1 = ref<boolean>(false)
 
+    const isPunchFinished0 = ref<boolean>(false)
+
     const inputPages: () => string = () => {
       let inputPages = ''
       console.log('userInputMap.value', userInputMap.value)
@@ -110,6 +112,7 @@ export const useInterStore = defineStore(
       isTaskFinished0.value = false
       isStartJourney1.value = false
       isPunchFinished1.value = false
+      isPunchFinished0.value = false
     }
     // 一般没有reset需求，不需要的可以删除
     const reset = () => {
@@ -156,6 +159,7 @@ export const useInterStore = defineStore(
       isTaskFinished0,
       isStartJourney1,
       isPunchFinished1,
+      isPunchFinished0,
       setUserInputMap,
       inputPages,
       inputContent,
