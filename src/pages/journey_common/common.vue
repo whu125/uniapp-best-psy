@@ -570,20 +570,9 @@ const toPage = (buttonUrl: string) => {
   if (buttonUrl === 'http://115.159.83.61:9000/journey2/renwu3.png') {
     interStore.setPageIndex(25)
     globalPageControlStore.globalPageControlInfo.firstStepPage24_2 = true
-  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/renwu4.png') {
+  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/renwu5.png') {
     if (globalPageControlStore.globalPageControlInfo.firstStepPage24_2 === false) {
       toast.warning('请先查看第一步')
-      return
-    } else {
-      interStore.setPageIndex(30)
-      globalPageControlStore.globalPageControlInfo.secondStepPage24_2 = true
-    }
-  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/renwu5.png') {
-    if (
-      globalPageControlStore.globalPageControlInfo.secondStepPage24_2 === false ||
-      globalPageControlStore.globalPageControlInfo.firstStepPage24_2 === false
-    ) {
-      toast.warning('请先查看第二步')
       return
     } else {
       interStore.setPageIndex(31)
@@ -594,20 +583,9 @@ const toPage = (buttonUrl: string) => {
   if (buttonUrl === 'http://115.159.83.61:9000/journey3/renwu2(1).png') {
     interStore.setPageIndex(28)
     globalPageControlStore.globalPageControlInfo.firstStepPage27_3 = true
-  } else if (buttonUrl === 'http://115.159.83.61:9000/journey3/renwu2(2).png') {
+  } else if (buttonUrl === 'http://115.159.83.61:9000/journey3/renwu2(3).png') {
     if (globalPageControlStore.globalPageControlInfo.firstStepPage27_3 === false) {
       toast.warning('请先查看第一步')
-      return
-    } else {
-      interStore.setPageIndex(29)
-      globalPageControlStore.globalPageControlInfo.secondStepPage27_3 = true
-    }
-  } else if (buttonUrl === 'http://115.159.83.61:9000/journey3/renwu2(3).png') {
-    if (
-      globalPageControlStore.globalPageControlInfo.secondStepPage27_3 === false ||
-      globalPageControlStore.globalPageControlInfo.firstStepPage27_3 === false
-    ) {
-      toast.warning('请先查看第二步')
       return
     } else {
       interStore.setPageIndex(30)
@@ -911,7 +889,8 @@ const testsubmit = () => {
 const fillUserGoal = () => {
   if (pageContent.value.interId === 99 && pageContent.value.pageId === 1) {
     getUserGoal().then((res) => {
-      userInputList.value[0] = res.data
+      userInputList.value[0] = res.data[0]
+      userInputList.value[1] = res.data[1]
     })
   }
 }

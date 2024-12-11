@@ -72,5 +72,5 @@ export const checkInterAvailability = (interId: number) => {
 }
 
 export const getUserGoal = () => {
-  return http.post<string>(`/inter/getUserGoal`, {}, {})
+  return http.post<string[]>(`/inter/getUserGoal`, {}, {})
 }
