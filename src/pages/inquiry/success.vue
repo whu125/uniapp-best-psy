@@ -78,10 +78,6 @@ const toReport = async () => {
     toast.error('出现了一些问题')
   }
 }
-
-onLoad(() => {
-  console.log(interStore.interInfo)
-})
 </script>
 
 <style scoped>

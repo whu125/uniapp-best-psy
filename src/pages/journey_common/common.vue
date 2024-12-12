@@ -593,23 +593,12 @@ const toPage = (buttonUrl: string) => {
     }
   }
   // 干预4页面37
-  if (buttonUrl === 'http://115.159.83.61:9000/journey4/renwu2(1).png') {
-    interStore.setPageIndex(38)
-    globalPageControlStore.globalPageControlInfo.firstStepPage37_4 = true
-  } else if (buttonUrl === 'http://115.159.83.61:9000/journey4/renwu2(2).png') {
-    if (globalPageControlStore.globalPageControlInfo.firstStepPage37_4 === false) {
-      toast.warning('请先查看第一步')
-      return
-    } else {
-      interStore.setPageIndex(39)
-      globalPageControlStore.globalPageControlInfo.secondStepPage37_4 = true
-    }
+  if (buttonUrl === 'http://115.159.83.61:9000/journey4/renwu2(2).png') {
+    interStore.setPageIndex(39)
+    globalPageControlStore.globalPageControlInfo.secondStepPage37_4 = true
   } else if (buttonUrl === 'http://115.159.83.61:9000/journey4/renwu2(3).png') {
-    if (
-      globalPageControlStore.globalPageControlInfo.secondStepPage37_4 === false ||
-      globalPageControlStore.globalPageControlInfo.firstStepPage37_4 === false
-    ) {
-      toast.warning('请先查看第二步')
+    if (globalPageControlStore.globalPageControlInfo.secondStepPage37_4 === false) {
+      toast.warning('请先查看第一步')
       return
     } else {
       interStore.setPageIndex(40)
