@@ -12,6 +12,16 @@
     <wd-navbar fixed safeAreaInsetTop title="站前测量" left-arrow @click-left="ToHome"></wd-navbar>
 
     <view class="main-container">
+      <view class="mt-15">
+        <image :src="imageMap.get(progress)" mode="widthFix" style="width: 100%" />
+      </view>
+
+      <view class="flex justify-center mb-10">
+        <wd-button type="success" size="large" @click="startBefore">开始反馈</wd-button>
+      </view>
+    </view>
+
+    <!-- <view class="main-container">
       <view class="card">
         <image class="illustration" :src="imageMap.get(progress)" mode="aspectFit"></image>
         <view class="title">上一站旅程反馈</view>
@@ -20,12 +30,12 @@
           <view class="question">{{ question }}</view>
         </view>
 
-        <!-- <button class="start-button" @click="startJourney">开始旅程</button> -->
+        
         <view class="flex justify-center">
           <wd-button type="success" size="large" @click="startBefore">开始反馈</wd-button>
         </view>
       </view>
-    </view>
+    </view> -->
   </view>
 </template>
 <script lang="ts" setup>
@@ -73,21 +83,21 @@ const navbarTitle = ref<string>('')
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const imageMap = new Map([
   [0, 'http://115.159.83.61:9000/common/before.png'],
-  [1, 'http://115.159.83.61:9000/common/before.png'],
-  [2, 'http://115.159.83.61:9000/common/before.png'],
-  [3, 'http://115.159.83.61:9000/common/before.png'],
-  [4, 'http://115.159.83.61:9000/common/before.png'],
-  [5, 'http://115.159.83.61:9000/common/before.png'],
-  [6, 'http://115.159.83.61:9000/common/before.png'],
-  [7, 'http://115.159.83.61:9000/common/before.png'],
-  [8, 'http://115.159.83.61:9000/common/before.png'],
-  [9, 'http://115.159.83.61:9000/common/before.png'],
-  [10, 'http://115.159.83.61:9000/common/before.png'],
-  [11, 'http://115.159.83.61:9000/common/before.png'],
-  [12, 'http://115.159.83.61:9000/common/before.png'],
-  [13, 'http://115.159.83.61:9000/common/before.png'],
-  [14, 'http://115.159.83.61:9000/common/before.png'],
-  [15, 'http://115.159.83.61:9000/common/before.png'],
+  [1, 'http://115.159.83.61:9000/journey1/before1.png'],
+  [2, 'http://115.159.83.61:9000/journey2/before2.png'],
+  [3, 'http://115.159.83.61:9000/journey3/before3.png'],
+  [4, 'http://115.159.83.61:9000/journey4/before4.png'],
+  [5, 'http://115.159.83.61:9000/journey5/before5.png'],
+  [6, 'http://115.159.83.61:9000/journey6/before6.png'],
+  [7, 'http://115.159.83.61:9000/journey7/before7.png'],
+  [8, 'http://115.159.83.61:9000/journey8/before8.png'],
+  [9, 'http://115.159.83.61:9000/journey9/before9.png'],
+  [10, 'http://115.159.83.61:9000/journey10/before10.png'],
+  [11, 'http://115.159.83.61:9000/journey11/before11.png'],
+  [12, 'http://115.159.83.61:9000/journey12/before12.png'],
+  [13, 'http://115.159.83.61:9000/journey13/before13.png'],
+  [14, 'http://115.159.83.61:9000/journey14/before14.png'],
+  [15, 'http://115.159.83.61:9000/journey15/before15.png'],
 ])
 const currContent = ref()
 
@@ -108,12 +118,12 @@ const startBefore = async () => {
 
 <style>
 .main-container {
-  box-sizing: border-box;
+  /* box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  padding: 10px;
+  padding: 10px; */
   background: linear-gradient(to bottom right, #e6f7ff, #fffbe6);
 }
 
