@@ -12,6 +12,7 @@ const initState = {
   firstStepPage37_4: false,
   secondStepPage37_4: false,
   firstStepPage18_5: false,
+  firstStepPage14_7: false,
 }
 
 // 命名规则: xxxStepPage(page_id)_(inter_id)
@@ -26,6 +27,7 @@ type IGlobalPageState = {
   firstStepPage37_4: boolean
   secondStepPage37_4: boolean
   firstStepPage18_5: boolean
+  firstStepPage14_7: boolean
 }
 
 export const useGlobalPageControlStore = defineStore(

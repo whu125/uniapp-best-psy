@@ -626,7 +626,15 @@ const toPage = (buttonUrl: string) => {
   // 干预7页面14
   if (buttonUrl === 'http://115.159.83.61:9000/journey7/renwu2(1).png') {
     interStore.setPageIndex(15)
-    globalPageControlStore.globalPageControlInfo.toDaolanHome = true
+    globalPageControlStore.globalPageControlInfo.firstStepPage14_7 = true
+  } else if (buttonUrl === 'http://115.159.83.61:9000/journey7/renwu2(2).png') {
+    if (globalPageControlStore.globalPageControlInfo.firstStepPage14_7 === false) {
+      toast.warning('请先查看第一步')
+      return
+    } else {
+      interStore.setPageIndex(16)
+      globalPageControlStore.globalPageControlInfo.toDaolanHome = true
+    }
   }
   loadPageData()
 }
@@ -691,9 +699,11 @@ const doOperation = async () => {
       await interStore.setPageIndex(19)
     } else if (pageContent.value.pageId === 27 && pageContent.value.interId === 5) {
       await interStore.setPageIndex(19)
-    } else if (pageContent.value.pageId === 25 && pageContent.value.interId === 6) {
+    } else if (pageContent.value.pageId === 21 && pageContent.value.interId === 6) {
       await interStore.setPageIndex(18)
-    } else if (pageContent.value.pageId === 19 && pageContent.value.interId === 7) {
+    } else if (pageContent.value.pageId === 15 && pageContent.value.interId === 7) {
+      await interStore.setPageIndex(14)
+    } else if (pageContent.value.pageId === 17 && pageContent.value.interId === 7) {
       await interStore.setPageIndex(14)
     }
     loadPageData()
