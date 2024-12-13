@@ -886,7 +886,10 @@ const testsubmit = () => {
 }
 
 const fillUserGoal = () => {
-  if (pageContent.value.interId === 99 && pageContent.value.pageId === 1) {
+  if (
+    (pageContent.value.interId === 99 && pageContent.value.pageId === 1) ||
+    (pageContent.value.interId === 100 && pageContent.value.pageId === 1)
+  ) {
     getUserGoal().then((res) => {
       userInputList.value[0] = res.data[0]
       userInputList.value[1] = res.data[1]
