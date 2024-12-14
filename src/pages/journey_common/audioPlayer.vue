@@ -63,13 +63,13 @@ innerAudioContext.onEnded(() => {
 })
 innerAudioContext.onTimeUpdate(() => {
   audioDuration.value = innerAudioContext.duration
-  console.log(innerAudioContext.duration)
   // 计算剩余时间
   const duration = innerAudioContext.duration // 音频总时长
   const currentTime = innerAudioContext.currentTime // 当前播放时间
   // const remainingTime = duration - currentTime // 剩余时间
   // 这里可以更新倒计时显示
   timeTxt.value = getTimeStr(currentTime) + ' / ' + getTimeStr(duration)
+  sliderIndex.value = currentTime
 })
 
 const timeTxt = ref<string>('00 : 00')
@@ -126,6 +126,7 @@ const clickAudio = () => {
 const sliderChange = (e) => {
   innerAudioContext.seek(e.detail.value)
   sliderIndex.value = e.detail.value
+  innerAudioContext.currentTime = e.detail.value
 }
 
 defineExpose({

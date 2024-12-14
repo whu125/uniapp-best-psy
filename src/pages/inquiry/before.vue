@@ -19,6 +19,8 @@
       <view class="flex justify-center mb-10">
         <wd-button type="success" size="large" @click="startBefore">开始反馈</wd-button>
       </view>
+
+      <view style="height: 30px"></view>
     </view>
 
     <!-- <view class="main-container">
