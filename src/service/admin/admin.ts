@@ -23,3 +23,7 @@ export const sendNoticeApi = (id) => {
 export const setUserGroupApi = (phone: any, groupId: any, userId) => {
   return http.post('/admin/setUser', { phone, groupId, userId })
 }
+
+export const exportEvalExcelApi = () => {
+  return http.get(`/upload/excel/eval`, {})
+}
