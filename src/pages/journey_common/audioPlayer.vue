@@ -92,7 +92,7 @@ onMounted(() => {
   console.log(props.audioObject)
 })
 
-onHide(() => {
+onUnmounted(() => {
   audioDestroy()
 })
 
