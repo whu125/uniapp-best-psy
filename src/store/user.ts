@@ -9,7 +9,7 @@ const initState = {
   currProgress: 0,
   avatar: 'http://115.159.83.61:9000/common/avatar.png',
   role: 'user',
-  groupId: 0,
+  groupId: 2,
   token: '',
   // 这个字段记录，下一次应该解锁的时间
   lockTime: -1,

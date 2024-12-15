@@ -13,7 +13,7 @@
     <view class="con px-2">
       <view style="height: 10%"></view>
 
-      <view class="mt-8">
+      <view class="mt-15">
         <wd-progress :percentage="curPer" />
       </view>
       <!-- 问题 -->
@@ -21,7 +21,7 @@
         <p v-if="questions[curId - 1]?.subtitle != null" class="font-800 text-xl">
           {{ questions[curId - 1]?.subtitle }}
         </p>
-        <view class="mt-4" style="font-size: 18px">
+        <view class="mt-4" style="max-height: 50px; font-size: 18px">
           <text class="">{{ questions[curId - 1]?.question }}</text>
         </view>
       </view>
@@ -120,6 +120,8 @@
         <wd-button @click="changeNext" v-if="curId != queLen">下一题</wd-button>
         <wd-button @click="submit" v-if="curId == queLen" :disabled="!optionFlag">提交</wd-button>
       </view>
+
+      <view style="height: 30px"></view>
     </view>
   </view>
 </template>
@@ -417,12 +419,12 @@ const loadStorage = () => {
 }
 
 .con {
-  display: flex;
+  /* display: flex; */
   flex: 1;
   flex-direction: column;
   /* gap: 15px; */
-  height: 100vh;
-  overflow: hidden;
+  /* height: 100vh; */
+  overflow: y-scoll;
   /* padding-top: 1.25rem;
   margin-top: 3rem; */
   /* overflow-y: scroll; */
