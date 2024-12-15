@@ -41,12 +41,11 @@
       </wd-table>
     </view>
 
-    <!-- <view class="card">
-      <wd-toast />
-      <wd-button @click="exportExcel()">导出用户做题数据</wd-button>
+    <view class="card">
+      <wd-button @click="exportEvalExcel()">导出评估数据</wd-button>
     </view>
 
-    <view class="card">
+    <!-- <view class="card">
       <wd-button @click="testsub">测试订阅消息</wd-button>
     </view> -->
 
@@ -85,6 +84,7 @@ import {
   getAccessTokenApi,
   setUserGroupApi,
   sendNoticeApi,
+  exportEvalExcelApi,
 } from '@/service/admin/admin'
 import { getAllUserInfo, User } from '@/service/index/user'
 import { useMessage, useToast } from 'wot-design-uni'
@@ -148,6 +148,41 @@ const toAdminInquiry = () => {
 const ToHome = () => {
   uni.switchTab({
     url: '/pages/my/my',
+  })
+}
+
+const exportEvalExcel = async () => {
+  console.log('导出excel')
+  toast.loading('导出中...')
+
+  const res = await exportEvalExcelApi()
+  console.log(res)
+
+  const dataUrl = res.data
+
+  toast.close()
+
+  console.log(dataUrl)
+  console.log(222)
+  uni.downloadFile({
+    url: dataUrl, // 仅为示例，并非真实的资源
+    success: (res) => {
+      console.log(res)
+      if (res.statusCode === 200) {
+        const filePath = res.tempFilePath
+        console.log('下载成功')
+        uni.openDocument({
+          showMenu: true,
+          filePath,
+          success: function (res) {
+            console.log('打开文档成功')
+          },
+          fail: function (err) {
+            console.log('打开文档失败', err)
+          },
+        })
+      }
+    },
   })
 }
 
