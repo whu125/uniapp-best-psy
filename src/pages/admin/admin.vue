@@ -27,8 +27,9 @@
         </wd-table-col>
         <wd-table-col prop="userId" label="实验序号" fixed></wd-table-col>
         <wd-table-col prop="phone" label="手机号" width="150"></wd-table-col>
-        <wd-table-col prop="currProgress" label="已解锁单元"></wd-table-col>
-        <wd-table-col prop="finishTime" label="上次打卡时间"></wd-table-col>
+        <wd-table-col prop="hasFinished" label="已解锁单元"></wd-table-col>
+        <wd-table-col prop="currProgress" label="待完成单元"></wd-table-col>
+        <wd-table-col prop="finishTime" label="完成上一站点时间"></wd-table-col>
 
         <wd-table-col label="提醒操作" fixed>
           <template #value="{ row }">
