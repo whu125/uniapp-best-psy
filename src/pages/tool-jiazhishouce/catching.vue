@@ -15,7 +15,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/journey6/renwu4.png"
+          src="http://115.159.83.61:9000/tool/jiazhishouce/shenghuolingyu.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -37,7 +37,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/journey6/renwu5.png"
+          src="http://115.159.83.61:9000/tool/jiazhishouce/jiazhimiaoshu.png"
           mode="widthFix"
           style="width: 100%"
         />
