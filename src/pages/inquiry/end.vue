@@ -15,7 +15,7 @@
     <view class="con px-2">
       <view style="height: 15%"></view>
       <view class="illustration-placeholder">
-        <img src="http://115.159.83.61:9000/inquiry/end.png" alt="" />
+        <img src="http://110.40.183.254:9000/inquiry/end.png" alt="" />
       </view>
 
       <view class="instructions">

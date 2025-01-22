@@ -21,7 +21,7 @@
       <view class="big-icon">
         <img
           style="width: 200px; height: 180px"
-          src="http://115.159.83.61:9000/tool/moodDiary/diary-logo.png"
+          src="http://110.40.183.254:9000/tool/moodDiary/diary-logo.png"
         />
       </view>
       <view class="title">心情日记</view>

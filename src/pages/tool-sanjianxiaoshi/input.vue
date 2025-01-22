@@ -15,7 +15,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/tool/sanjianxiaoshi/sanjianxiaoshi1.png"
+          src="http://110.40.183.254:9000/tool/sanjianxiaoshi/sanjianxiaoshi1.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -39,7 +39,7 @@
         </view>
       </view>
       <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/next.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">下一页</view>
       </view>
     </view>
@@ -49,7 +49,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/tool/sanjianxiaoshi/sanjianxiaoshi2.png"
+          src="http://110.40.183.254:9000/tool/sanjianxiaoshi/sanjianxiaoshi2.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -78,7 +78,7 @@
       </view>
 
       <view @click="doSubmit" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/finish.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/finish.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">添加到日记</view>
       </view>
     </view>
@@ -94,49 +94,49 @@ import { useMessage, useToast } from 'wot-design-uni'
 const currIndex = ref<number>(0)
 const statusList = ref([
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/sanjianxiaoshi/icon1.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/sanjianxiaoshi/icon1.png',
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/sanjianxiaoshi/icon2.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/sanjianxiaoshi/icon2.png',
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/sanjianxiaoshi/icon3.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/sanjianxiaoshi/icon3.png',
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/sanjianxiaoshi/icon4.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/sanjianxiaoshi/icon4.png',
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/sanjianxiaoshi/icon5.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/sanjianxiaoshi/icon5.png',
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/sanjianxiaoshi/icon6.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/sanjianxiaoshi/icon6.png',
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/sanjianxiaoshi/icon7.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/sanjianxiaoshi/icon7.png',
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/sanjianxiaoshi/icon8.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/sanjianxiaoshi/icon8.png',
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/sanjianxiaoshi/icon9.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/sanjianxiaoshi/icon9.png',
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/sanjianxiaoshi/icon10.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/sanjianxiaoshi/icon10.png',
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/sanjianxiaoshi/icon11.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/sanjianxiaoshi/icon11.png',
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/sanjianxiaoshi/icon12.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/sanjianxiaoshi/icon12.png',
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/sanjianxiaoshi/icon13.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/sanjianxiaoshi/icon13.png',
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/sanjianxiaoshi/icon14.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/sanjianxiaoshi/icon14.png',
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/sanjianxiaoshi/icon15.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/sanjianxiaoshi/icon15.png',
   },
 ])
 const submitObj = ref<ISanjianxiaoshi>({

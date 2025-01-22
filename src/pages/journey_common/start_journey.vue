@@ -86,22 +86,22 @@ const navbarTitle = ref<string>('')
 
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const imageMap = new Map([
-  [0, 'http://115.159.83.61:9000/journey0/start_journey_logo0.png'],
-  [1, 'http://115.159.83.61:9000/journey1/start_journey_logo1.png'],
-  [2, 'http://115.159.83.61:9000/journey2/start_journey_logo2.png'],
-  [3, 'http://115.159.83.61:9000/journey3/start_journey_logo3.png'],
-  [4, 'http://115.159.83.61:9000/journey4/start_journey_logo4.png'],
-  [5, 'http://115.159.83.61:9000/journey5/start_journey_logo5.png'],
-  [6, 'http://115.159.83.61:9000/journey6/start_journey_logo6.png'],
-  [7, 'http://115.159.83.61:9000/journey7/start_journey_logo7.png'],
-  [8, 'http://115.159.83.61:9000/journey8/start_journey_logo8.png'],
-  [9, 'http://115.159.83.61:9000/journey9/start_journey_logo9.png'],
-  [10, 'http://115.159.83.61:9000/journey10/start_journey_logo10.png'],
-  [11, 'http://115.159.83.61:9000/journey11/start_journey_logo11.png'],
-  [12, 'http://115.159.83.61:9000/journey12/start_journey_logo12.png'],
-  [13, 'http://115.159.83.61:9000/journey13/start_journey_logo13.png'],
-  [14, 'http://115.159.83.61:9000/journey14/start_journey_logo14.png'],
-  [15, 'http://115.159.83.61:9000/journey15/start_journey_logo15.png'],
+  [0, 'http://110.40.183.254:9000/journey0/start_journey_logo0.png'],
+  [1, 'http://110.40.183.254:9000/journey1/start_journey_logo1.png'],
+  [2, 'http://110.40.183.254:9000/journey2/start_journey_logo2.png'],
+  [3, 'http://110.40.183.254:9000/journey3/start_journey_logo3.png'],
+  [4, 'http://110.40.183.254:9000/journey4/start_journey_logo4.png'],
+  [5, 'http://110.40.183.254:9000/journey5/start_journey_logo5.png'],
+  [6, 'http://110.40.183.254:9000/journey6/start_journey_logo6.png'],
+  [7, 'http://110.40.183.254:9000/journey7/start_journey_logo7.png'],
+  [8, 'http://110.40.183.254:9000/journey8/start_journey_logo8.png'],
+  [9, 'http://110.40.183.254:9000/journey9/start_journey_logo9.png'],
+  [10, 'http://110.40.183.254:9000/journey10/start_journey_logo10.png'],
+  [11, 'http://110.40.183.254:9000/journey11/start_journey_logo11.png'],
+  [12, 'http://110.40.183.254:9000/journey12/start_journey_logo12.png'],
+  [13, 'http://110.40.183.254:9000/journey13/start_journey_logo13.png'],
+  [14, 'http://110.40.183.254:9000/journey14/start_journey_logo14.png'],
+  [15, 'http://110.40.183.254:9000/journey15/start_journey_logo15.png'],
 ])
 const currContent = ref()
 

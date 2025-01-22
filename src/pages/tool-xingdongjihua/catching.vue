@@ -15,7 +15,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/tool/xingdongjihua/xingdongjihua1.png"
+          src="http://110.40.183.254:9000/tool/xingdongjihua/xingdongjihua1.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -27,7 +27,7 @@
         </view>
       </view>
       <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/next.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">下一页</view>
       </view>
     </view>
@@ -37,7 +37,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/tool/xingdongjihua/xingdongjihua2.png"
+          src="http://110.40.183.254:9000/tool/xingdongjihua/xingdongjihua2.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -61,7 +61,7 @@
         </view>
       </view>
       <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/next.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">下一页</view>
       </view>
     </view>
@@ -71,7 +71,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/tool/xingdongjihua/xingdongjihua3.png"
+          src="http://110.40.183.254:9000/tool/xingdongjihua/xingdongjihua3.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -85,7 +85,7 @@
         </view>
       </view>
       <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/next.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">下一页</view>
       </view>
     </view>
@@ -95,7 +95,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/tool/xingdongjihua/xingdongjihua4.png"
+          src="http://110.40.183.254:9000/tool/xingdongjihua/xingdongjihua4.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -125,7 +125,7 @@
         </view>
       </view>
       <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/next.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">下一页</view>
       </view>
     </view>
@@ -135,13 +135,13 @@
       <view style="height: 15%"></view>
       <view class="middle-img-common">
         <image
-          src="http://115.159.83.61:9000/tool/xingdongjihua/xingdongjihua5.png"
+          src="http://110.40.183.254:9000/tool/xingdongjihua/xingdongjihua5.png"
           mode="widthFix"
           style="width: 100%"
         />
       </view>
       <view @click="doSubmit" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/back.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/back.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">返回任务主页</view>
       </view>
     </view>

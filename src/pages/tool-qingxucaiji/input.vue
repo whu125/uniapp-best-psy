@@ -15,13 +15,13 @@
       <view style="height: 15%"></view>
       <view class="middle-img-common">
         <image
-          src="http://115.159.83.61:9000/tool/qingxucaiji/qingxucaiji1.png"
+          src="http://110.40.183.254:9000/tool/qingxucaiji/qingxucaiji1.png"
           mode="widthFix"
           style="width: 100%"
         />
       </view>
       <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/next.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">开始记录</view>
       </view>
     </view>
@@ -31,7 +31,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/tool/qingxucaiji/qingxucaiji2.png"
+          src="http://110.40.183.254:9000/tool/qingxucaiji/qingxucaiji2.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -50,7 +50,7 @@
         我感到{{ submitObj.feelingName }}
       </view>
       <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/next.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">下一页</view>
       </view>
     </view>
@@ -60,7 +60,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/tool/qingxucaiji/qingxucaiji3.png"
+          src="http://110.40.183.254:9000/tool/qingxucaiji/qingxucaiji3.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -93,7 +93,7 @@
         </view>
       </view>
       <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/next.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">下一页</view>
       </view>
     </view>
@@ -103,7 +103,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/tool/qingxucaiji/qingxucaiji4.png"
+          src="http://110.40.183.254:9000/tool/qingxucaiji/qingxucaiji4.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -127,7 +127,7 @@
         </view>
       </view>
       <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/next.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">下一页</view>
       </view>
     </view>
@@ -137,13 +137,13 @@
       <view style="height: 15%"></view>
       <view class="middle-img-common">
         <image
-          src="http://115.159.83.61:9000/tool/qingxucaiji/qingxucaiji5.png"
+          src="http://110.40.183.254:9000/tool/qingxucaiji/qingxucaiji5.png"
           mode="widthFix"
           style="width: 100%"
         />
       </view>
       <view @click="doSubmit" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/back.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/back.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">返回任务主页</view>
       </view>
     </view>
@@ -167,32 +167,32 @@ const selectMood = (mood) => {
 }
 const moodList = ref([
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/moodDiary/mood-happy.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/moodDiary/mood-happy.png',
     desc: '开心',
     selected: false,
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/moodDiary/mood-calm.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/moodDiary/mood-calm.png',
     desc: '平静',
     selected: false,
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/moodDiary/mood-angry.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/moodDiary/mood-angry.png',
     desc: '生气',
     selected: false,
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/moodDiary/mood-upset.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/moodDiary/mood-upset.png',
     desc: '沮丧',
     selected: false,
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/moodDiary/mood-anxious.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/moodDiary/mood-anxious.png',
     desc: '焦虑',
     selected: false,
   },
   {
-    iconUrl: 'http://115.159.83.61:9000/tool/moodDiary/mood-sad.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/moodDiary/mood-sad.png',
     desc: '悲伤',
     selected: false,
   },

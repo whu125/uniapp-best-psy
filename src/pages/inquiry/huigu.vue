@@ -18,7 +18,7 @@
       </view>
 
       <view @click="doOperation" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/next.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">
           别走，去看看主创人员的隐藏彩蛋
         </view>
@@ -46,21 +46,21 @@ const currentSlideImage = ref<number>(0)
 const selectedItem = ref()
 const userInputList = ref<Array<string>>([])
 const interIdToUrlMap = new Map<number, string>([
-  [1, 'http://115.159.83.61:9000/journey1/daka5.png'],
-  [2, 'http://115.159.83.61:9000/journey2/daka6.png'],
-  [3, 'http://115.159.83.61:9000/journey3/daka5.png'],
-  [4, 'http://115.159.83.61:9000/journey4/daka5.png'],
-  [5, 'http://115.159.83.61:9000/journey5/daka5.png'],
-  [6, 'http://115.159.83.61:9000/journey6/daka5.png'],
-  [7, 'http://115.159.83.61:9000/journey7/daka5.png'],
+  [1, 'http://110.40.183.254:9000/journey1/daka5.png'],
+  [2, 'http://110.40.183.254:9000/journey2/daka6.png'],
+  [3, 'http://110.40.183.254:9000/journey3/daka5.png'],
+  [4, 'http://110.40.183.254:9000/journey4/daka5.png'],
+  [5, 'http://110.40.183.254:9000/journey5/daka5.png'],
+  [6, 'http://110.40.183.254:9000/journey6/daka5.png'],
+  [7, 'http://110.40.183.254:9000/journey7/daka5.png'],
   // Add more mappings as needed
-  [9, 'http://115.159.83.61:9000/journey9/daka5.png'],
-  [10, 'http://115.159.83.61:9000/journey10/daka5.png'],
-  [11, 'http://115.159.83.61:9000/journey11/daka5.png'],
-  [12, 'http://115.159.83.61:9000/journey12/daka5.png'],
-  [13, 'http://115.159.83.61:9000/journey13/daka5.png'],
-  [14, 'http://115.159.83.61:9000/journey14/daka5.png'],
-  [15, 'http://115.159.83.61:9000/journey15/daka5.png'],
+  [9, 'http://110.40.183.254:9000/journey9/daka5.png'],
+  [10, 'http://110.40.183.254:9000/journey10/daka5.png'],
+  [11, 'http://110.40.183.254:9000/journey11/daka5.png'],
+  [12, 'http://110.40.183.254:9000/journey12/daka5.png'],
+  [13, 'http://110.40.183.254:9000/journey13/daka5.png'],
+  [14, 'http://110.40.183.254:9000/journey14/daka5.png'],
+  [15, 'http://110.40.183.254:9000/journey15/daka5.png'],
 ])
 
 onShow(async () => {

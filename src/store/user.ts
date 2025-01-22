@@ -7,7 +7,7 @@ const initState = {
   username: '未登录用户',
   phone: '1234567890',
   currProgress: 0,
-  avatar: 'http://115.159.83.61:9000/common/avatar.png',
+  avatar: 'http://110.40.183.254:9000/common/avatar.png',
   role: 'user',
   groupId: 2,
   token: '',

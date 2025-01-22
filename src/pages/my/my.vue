@@ -187,12 +187,12 @@ const message = useMessage()
 const toast = useToast()
 
 const interStore = useInterStore()
-const avator = ref('http://115.159.83.61:9000/common/avatar.png')
+const avator = ref('http://110.40.183.254:9000/common/avatar.png')
 const userStore = useUserStore()
 
 const currProgress = ref<number>(userStore.userInfo.currProgress % 8)
 const userInfo = ref(userStore.userInfo)
-const baseURL = ref('http://115.159.83.61:9000/mindease/')
+const baseURL = ref('http://110.40.183.254:9000/mindease/')
 
 const username = ref('')
 
@@ -208,19 +208,19 @@ defineOptions({
 const pageContentList = ref<IMyPage[]>([
   {
     navbarTitle: '心理危机热线',
-    imgUrl: 'http://115.159.83.61:9000/home/2mine-3.png',
+    imgUrl: 'http://110.40.183.254:9000/home/2mine-3.png',
   },
   {
     navbarTitle: '咨询师信箱',
-    imgUrl: 'http://115.159.83.61:9000/home/2mine-4.png',
+    imgUrl: 'http://110.40.183.254:9000/home/2mine-4.png',
   },
   {
     navbarTitle: '意见反馈',
-    imgUrl: 'http://115.159.83.61:9000/home/2mine-5.png',
+    imgUrl: 'http://110.40.183.254:9000/home/2mine-5.png',
   },
   {
     navbarTitle: '关于我们',
-    imgUrl: 'http://115.159.83.61:9000/home/2mine-6.png',
+    imgUrl: 'http://110.40.183.254:9000/home/2mine-6.png',
   },
 ])
 

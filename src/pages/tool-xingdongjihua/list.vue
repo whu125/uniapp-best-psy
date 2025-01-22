@@ -24,7 +24,7 @@
           <view style="font-size: 20px; font-weight: bold">{{ xingdong.date }}</view>
           <view class="name">{{ xingdong.jihuaName }}</view>
           <image
-            src="http://115.159.83.61:9000/tool/tool-list.png"
+            src="http://110.40.183.254:9000/tool/tool-list.png"
             style="width: 45px; height: 45px"
           />
         </view>

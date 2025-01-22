@@ -20,7 +20,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/tool/renzhijieli/leaf.png"
+          src="http://110.40.183.254:9000/tool/renzhijieli/leaf.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -31,7 +31,7 @@
         </view>
       </view>
       <view @click="doStart" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/back.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/back.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">我完成啦</view>
       </view>
     </view>
@@ -42,7 +42,7 @@
 import audioPlayer, { IAudio } from '../journey_common/audioPlayer.vue'
 
 const audioObject = ref<IAudio>({
-  audioSrc: 'http://115.159.83.61:9000/tool/renzhijieli/leaf.MP3',
+  audioSrc: 'http://110.40.183.254:9000/tool/renzhijieli/leaf.MP3',
   audioTitle: '随溪漂流的落叶',
 })
 

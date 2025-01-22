@@ -17,7 +17,7 @@
       <view style="height: 150rpx"></view>
       <!-- <view>19</view> -->
       <view class="h-40 w-full">
-        <image src="http://115.159.83.61:9000/home/home.png" mode="scaleToFill" />
+        <image src="http://110.40.183.254:9000/home/home.png" mode="scaleToFill" />
       </view>
       <!-- <view v-if="loadingSocket">获取进度中....</view> -->
       <view>
@@ -55,24 +55,24 @@
               <image
                 style="width: 60rpx; height: 60rpx"
                 mode="aspectFit"
-                src="http://115.159.83.61:9000/home/icon/finish.png"
+                src="http://110.40.183.254:9000/home/icon/finish.png"
                 v-if="currProgress > journey.progress"
               />
               <image
                 style="width: 60rpx; height: 60rpx"
                 mode="aspectFit"
-                src="http://115.159.83.61:9000/home/icon/startJourney.png"
+                src="http://110.40.183.254:9000/home/icon/startJourney.png"
                 v-if="currProgress == journey.progress && waitingTime <= 0"
               />
               <image
                 style="width: 60rpx; height: 60rpx"
-                src="http://115.159.83.61:9000/home/icon/lockJourney.png"
+                src="http://110.40.183.254:9000/home/icon/lockJourney.png"
                 mode="aspectFit"
                 v-if="currProgress == journey.progress && waitingTime > 0"
               />
               <image
                 style="width: 60rpx; height: 60rpx"
-                src="http://115.159.83.61:9000/home/icon/lockJourney.png"
+                src="http://110.40.183.254:9000/home/icon/lockJourney.png"
                 mode="aspectFit"
                 v-if="currProgress < journey.progress"
               />
@@ -85,7 +85,7 @@
             您好，本程序为华中师范大学心理学院任志洪教授团队开发的负性情绪自助干预系统，目前正在测试推广过程中，若您有意向参与免费体验，欢迎您扫码填写报名表，感谢您的支持！
           </view>
           <view class="h-40 w-40" style="margin: 0 auto; margin-top: 25px">
-            <image src="http://115.159.83.61:9000/common/queryQR.png" mode="scaleToFill" />
+            <image src="http://110.40.183.254:9000/common/queryQR.png" mode="scaleToFill" />
           </view>
         </view>
         <view style="height: 150rpx"></view>
@@ -134,84 +134,84 @@ const journeySteps = ref([])
 const loadingSocket = ref(true)
 const journeySteps0 = ref([
   {
-    icon: 'http://115.159.83.61:9000/home/icon/journey0.png',
+    icon: 'http://110.40.183.254:9000/home/icon/journey0.png',
     text: '导入：开启你的旅程',
     progress: 0,
   },
   {
-    icon: 'http://115.159.83.61:9000/home/icon/journey1.png',
+    icon: 'http://110.40.183.254:9000/home/icon/journey1.png',
     text: '第一站：认识你的情绪',
     progress: 1,
   },
   {
-    icon: 'http://115.159.83.61:9000/home/icon/journey2.png',
+    icon: 'http://110.40.183.254:9000/home/icon/journey2.png',
     text: '第二站：观察你的思维',
     progress: 2,
   },
   {
-    icon: 'http://115.159.83.61:9000/home/icon/journey3.png',
+    icon: 'http://110.40.183.254:9000/home/icon/journey3.png',
     text: '第三站：回到此时此刻',
     progress: 3,
   },
   {
-    icon: 'http://115.159.83.61:9000/home/icon/journey4.png',
+    icon: 'http://110.40.183.254:9000/home/icon/journey4.png',
     text: '第四站：面对你的痛苦',
     progress: 4,
   },
   {
-    icon: 'http://115.159.83.61:9000/home/icon/journey5.png',
+    icon: 'http://110.40.183.254:9000/home/icon/journey5.png',
     text: '第五站：接纳当下的你',
     progress: 5,
   },
   {
-    icon: 'http://115.159.83.61:9000/home/icon/journey6.png',
+    icon: 'http://110.40.183.254:9000/home/icon/journey6.png',
     text: '第六站：朝着价值出发',
     progress: 6,
   },
   {
-    icon: 'http://115.159.83.61:9000/home/icon/journey7.png',
+    icon: 'http://110.40.183.254:9000/home/icon/journey7.png',
     text: '第七站：开启新的旅程',
     progress: 7,
   },
 ])
 const journeySteps1 = ref([
   {
-    icon: 'http://115.159.83.61:9000/home/icon/journey0.png',
+    icon: 'http://110.40.183.254:9000/home/icon/journey0.png',
     text: '导入：开启你的旅程',
     progress: 0,
   },
   {
-    icon: 'http://115.159.83.61:9000/home/icon/journey1.png',
+    icon: 'http://110.40.183.254:9000/home/icon/journey1.png',
     text: '第一站：认识情绪困扰',
     progress: 1,
   },
   {
-    icon: 'http://115.159.83.61:9000/home/icon/journey2.png',
+    icon: 'http://110.40.183.254:9000/home/icon/journey2.png',
     text: '第二站：探索情绪源头',
     progress: 2,
   },
   {
-    icon: 'http://115.159.83.61:9000/home/icon/journey3.png',
+    icon: 'http://110.40.183.254:9000/home/icon/journey3.png',
     text: '第三站：调整消极认知',
     progress: 3,
   },
   {
-    icon: 'http://115.159.83.61:9000/home/icon/journey4.png',
+    icon: 'http://110.40.183.254:9000/home/icon/journey4.png',
     text: '第四站：情绪调节驿站',
     progress: 4,
   },
   {
-    icon: 'http://115.159.83.61:9000/home/icon/journey5.png',
+    icon: 'http://110.40.183.254:9000/home/icon/journey5.png',
     text: '第五站：寻找社会支持',
     progress: 5,
   },
   {
-    icon: 'http://115.159.83.61:9000/home/icon/journey6.png',
+    icon: 'http://110.40.183.254:9000/home/icon/journey6.png',
     text: '第六站：探索幸福之路',
     progress: 6,
   },
   {
-    icon: 'http://115.159.83.61:9000/home/icon/journey7.png',
+    icon: 'http://110.40.183.254:9000/home/icon/journey7.png',
     text: '第七站：自我关怀指南',
     progress: 7,
   },

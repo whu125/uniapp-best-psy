@@ -29,7 +29,7 @@
           </view>
           <view class="right_box">
             <image
-              src="http://115.159.83.61:9000/tool/tool-list.png"
+              src="http://110.40.183.254:9000/tool/tool-list.png"
               style="width: 45px; height: 45px"
             />
           </view>

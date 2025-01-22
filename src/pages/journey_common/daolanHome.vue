@@ -103,37 +103,37 @@ const contentList = [
   },
   {
     navbarTitle: '第一站: 导览',
-    logoUrl: 'http://115.159.83.61:9000/journey1/journeyHome1.png',
+    logoUrl: 'http://110.40.183.254:9000/journey1/journeyHome1.png',
     text: ['情绪是一切的起点,', '是我们的一部分'],
   },
   {
     navbarTitle: '第二站: 导览',
-    logoUrl: 'http://115.159.83.61:9000/journey2/journeyHome2.png',
+    logoUrl: 'http://110.40.183.254:9000/journey2/journeyHome2.png',
     text: ['从想法开始, 了解你的情绪,', '还有你自己。'],
   },
   {
     navbarTitle: '第三站: 导览',
-    logoUrl: 'http://115.159.83.61:9000/journey3/journeyHome3.png',
+    logoUrl: 'http://110.40.183.254:9000/journey3/journeyHome3.png',
     text: ['回到我们真正拥有的此时此刻,', '是获得内心平静的第一步'],
   },
   {
     navbarTitle: '第四站: 导览',
-    logoUrl: 'http://115.159.83.61:9000/journey4/journeyHome4.png',
+    logoUrl: 'http://110.40.183.254:9000/journey4/journeyHome4.png',
     text: ['放下控制的绳子,', '尝试用另一种方式与情绪和感受相处'],
   },
   {
     navbarTitle: '第五站: 导览',
-    logoUrl: 'http://115.159.83.61:9000/journey5/journeyHome5.png',
+    logoUrl: 'http://110.40.183.254:9000/journey5/journeyHome5.png',
     text: ['用接纳的态度,', '拥抱独一无二的你'],
   },
   {
     navbarTitle: '第六站: 导览',
-    logoUrl: 'http://115.159.83.61:9000/journey6/journeyHome6.png',
+    logoUrl: 'http://110.40.183.254:9000/journey6/journeyHome6.png',
     text: ['人生最重要的不是所在的位置, 而是你所', '朝的方向, 对你来说, 什么是最重要的?'],
   },
   {
     navbarTitle: '第七站: 导览',
-    logoUrl: 'http://115.159.83.61:9000/journey7/journeyHome7.png',
+    logoUrl: 'http://110.40.183.254:9000/journey7/journeyHome7.png',
     text: ['行动是生活的魔法'],
   },
   {
@@ -143,37 +143,37 @@ const contentList = [
   },
   {
     navbarTitle: '第一站: 导览',
-    logoUrl: 'http://115.159.83.61:9000/journey9/journeyHome9.png',
+    logoUrl: 'http://110.40.183.254:9000/journey9/journeyHome9.png',
     text: ['情绪是一切的起点,是我们的一部分'],
   },
   {
     navbarTitle: '第二站: 导览',
-    logoUrl: 'http://115.159.83.61:9000/journey10/journeyHome10.png',
+    logoUrl: 'http://110.40.183.254:9000/journey10/journeyHome10.png',
     text: ['探寻情绪的源头，看看情绪从哪里来'],
   },
   {
     navbarTitle: '第三站: 导览',
-    logoUrl: 'http://115.159.83.61:9000/journey11/journeyHome11.png',
+    logoUrl: 'http://110.40.183.254:9000/journey11/journeyHome11.png',
     text: ['思考决定感受，缓解情绪，从调整认知开始'],
   },
   {
     navbarTitle: '第四站: 导览',
-    logoUrl: 'http://115.159.83.61:9000/journey12/journeyHome12.png',
+    logoUrl: 'http://110.40.183.254:9000/journey12/journeyHome12.png',
     text: ['让每一份负面情绪得到温柔化解，', '让每一颗心灵找到平静与力量'],
   },
   {
     navbarTitle: '第五站: 导览',
-    logoUrl: 'http://115.159.83.61:9000/journey13/journeyHome13.png',
+    logoUrl: 'http://110.40.183.254:9000/journey13/journeyHome13.png',
     text: ['用温暖的关系编织守护网'],
   },
   {
     navbarTitle: '第六站: 导览',
-    logoUrl: 'http://115.159.83.61:9000/journey14/journeyHome14.png',
+    logoUrl: 'http://110.40.183.254:9000/journey14/journeyHome14.png',
     text: ['用心生活，用手创造，你拥有的每一个瞬间', '都是最珍贵的'],
   },
   {
     navbarTitle: '第七站: 导览',
-    logoUrl: 'http://115.159.83.61:9000/journey15/journeyHome15.png',
+    logoUrl: 'http://110.40.183.254:9000/journey15/journeyHome15.png',
     text: ['从今天开始，好好照顾自己'],
   },
 ]
@@ -315,7 +315,7 @@ const toExpand = async () => {
   width: 100%;
   height: auto;
   padding: 20px;
-  background-image: url('http://115.159.83.61:9000/common/daolanHomeBg3.png');
+  background-image: url('http://110.40.183.254:9000/common/daolanHomeBg3.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   border-radius: 10px;
@@ -328,7 +328,7 @@ const toExpand = async () => {
   justify-content: center;
   width: 45%;
   height: auto;
-  background-image: url('http://115.159.83.61:9000/common/daolanHomeBg1.png');
+  background-image: url('http://110.40.183.254:9000/common/daolanHomeBg1.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   border-radius: 10px;
@@ -341,7 +341,7 @@ const toExpand = async () => {
   justify-content: center;
   width: 45%;
   height: auto;
-  background-image: url('http://115.159.83.61:9000/common/daolanHomeBg2.png');
+  background-image: url('http://110.40.183.254:9000/common/daolanHomeBg2.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   border-radius: 10px;

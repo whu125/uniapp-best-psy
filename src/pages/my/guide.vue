@@ -13,7 +13,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-common">
         <image
-          src="http://115.159.83.61:9000/home/guideIcon/guideHead.png"
+          src="http://110.40.183.254:9000/home/guideIcon/guideHead.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -25,7 +25,7 @@
           <img
             style="width: 60rpx; height: 60rpx"
             mode="aspectFit"
-            src="http://115.159.83.61:9000/home/guideIcon/enter.png"
+            src="http://110.40.183.254:9000/home/guideIcon/enter.png"
           />
         </view>
       </view>
@@ -38,23 +38,23 @@ import { IMyPage, useInterStore } from '@/store/inter'
 
 const guideSteps = ref([
   {
-    icon: 'http://115.159.83.61:9000/home/guideIcon/guideIcon1.png',
+    icon: 'http://110.40.183.254:9000/home/guideIcon/guideIcon1.png',
     text: '干预过程是什么样的?',
   },
   {
-    icon: 'http://115.159.83.61:9000/home/guideIcon/guideIcon2.png',
+    icon: 'http://110.40.183.254:9000/home/guideIcon/guideIcon2.png',
     text: '我需要做什么?',
   },
   {
-    icon: 'http://115.159.83.61:9000/home/guideIcon/guideIcon3.png',
+    icon: 'http://110.40.183.254:9000/home/guideIcon/guideIcon3.png',
     text: '这些彩蛋等待你发现',
   },
   {
-    icon: 'http://115.159.83.61:9000/home/guideIcon/guideIcon4.png',
+    icon: 'http://110.40.183.254:9000/home/guideIcon/guideIcon4.png',
     text: '如何最大化干预效果?',
   },
   {
-    icon: 'http://115.159.83.61:9000/home/guideIcon/guideIcon5.png',
+    icon: 'http://110.40.183.254:9000/home/guideIcon/guideIcon5.png',
     text: '常见问题答疑',
   },
 ])
@@ -62,23 +62,23 @@ const guideSteps = ref([
 const pageContentList = ref<IMyPage[]>([
   {
     navbarTitle: '新手指南',
-    imgUrl: 'http://115.159.83.61:9000/home/2mine-2(1).png',
+    imgUrl: 'http://110.40.183.254:9000/home/2mine-2(1).png',
   },
   {
     navbarTitle: '新手指南',
-    imgUrl: 'http://115.159.83.61:9000/home/2mine-2(2).png',
+    imgUrl: 'http://110.40.183.254:9000/home/2mine-2(2).png',
   },
   {
     navbarTitle: '新手指南',
-    imgUrl: 'http://115.159.83.61:9000/home/2mine-2(3).png',
+    imgUrl: 'http://110.40.183.254:9000/home/2mine-2(3).png',
   },
   {
     navbarTitle: '新手指南',
-    imgUrl: 'http://115.159.83.61:9000/home/2mine-2(4).png',
+    imgUrl: 'http://110.40.183.254:9000/home/2mine-2(4).png',
   },
   {
     navbarTitle: '新手指南',
-    imgUrl: 'http://115.159.83.61:9000/home/2mine-2(5).png',
+    imgUrl: 'http://110.40.183.254:9000/home/2mine-2(5).png',
   },
 ])
 

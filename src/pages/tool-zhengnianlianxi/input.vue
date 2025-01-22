@@ -47,7 +47,7 @@
         </view>
       </view>
       <view @click="doSubmit" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/finish.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/finish.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">保存手记</view>
       </view>
     </view>

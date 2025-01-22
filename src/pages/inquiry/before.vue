@@ -84,22 +84,22 @@ const navbarTitle = ref<string>('')
 
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const imageMap = new Map([
-  [0, 'http://115.159.83.61:9000/common/before.png'],
-  [1, 'http://115.159.83.61:9000/journey1/before1.png'],
-  [2, 'http://115.159.83.61:9000/journey2/before2.png'],
-  [3, 'http://115.159.83.61:9000/journey3/before3.png'],
-  [4, 'http://115.159.83.61:9000/journey4/before4.png'],
-  [5, 'http://115.159.83.61:9000/journey5/before5.png'],
-  [6, 'http://115.159.83.61:9000/journey6/before6.png'],
-  [7, 'http://115.159.83.61:9000/journey7/before7.png'],
-  [8, 'http://115.159.83.61:9000/journey8/before8.png'],
-  [9, 'http://115.159.83.61:9000/journey9/before9.png'],
-  [10, 'http://115.159.83.61:9000/journey10/before10.png'],
-  [11, 'http://115.159.83.61:9000/journey11/before11.png'],
-  [12, 'http://115.159.83.61:9000/journey12/before12.png'],
-  [13, 'http://115.159.83.61:9000/journey13/before13.png'],
-  [14, 'http://115.159.83.61:9000/journey14/before14.png'],
-  [15, 'http://115.159.83.61:9000/journey15/before15.png'],
+  [0, 'http://110.40.183.254:9000/common/before.png'],
+  [1, 'http://110.40.183.254:9000/journey1/before1.png'],
+  [2, 'http://110.40.183.254:9000/journey2/before2.png'],
+  [3, 'http://110.40.183.254:9000/journey3/before3.png'],
+  [4, 'http://110.40.183.254:9000/journey4/before4.png'],
+  [5, 'http://110.40.183.254:9000/journey5/before5.png'],
+  [6, 'http://110.40.183.254:9000/journey6/before6.png'],
+  [7, 'http://110.40.183.254:9000/journey7/before7.png'],
+  [8, 'http://110.40.183.254:9000/journey8/before8.png'],
+  [9, 'http://110.40.183.254:9000/journey9/before9.png'],
+  [10, 'http://110.40.183.254:9000/journey10/before10.png'],
+  [11, 'http://110.40.183.254:9000/journey11/before11.png'],
+  [12, 'http://110.40.183.254:9000/journey12/before12.png'],
+  [13, 'http://110.40.183.254:9000/journey13/before13.png'],
+  [14, 'http://110.40.183.254:9000/journey14/before14.png'],
+  [15, 'http://110.40.183.254:9000/journey15/before15.png'],
 ])
 const currContent = ref()
 

@@ -302,7 +302,7 @@ const handleAgreementChange = () => {
   flex-direction: column;
   height: 100vh;
   font-family: Arial, sans-serif;
-  background-image: url('http://115.159.83.61:9000/common/login-bg.png');
+  background-image: url('http://110.40.183.254:9000/common/login-bg.png');
   background-position: center;
   background-size: cover;
 }

@@ -21,7 +21,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img">
         <image
-          src="http://115.159.83.61:9000/common/daolanStart.png"
+          src="http://110.40.183.254:9000/common/daolanStart.png"
           mode="scaleToFill"
           style="width: 100%"
         />

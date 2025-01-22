@@ -392,7 +392,7 @@ const message = useMessage()
 const globalPageControlStore = useGlobalPageControlStore()
 const toast = useToast()
 const pageType = ref<string>('normal')
-const prevIconUrl = ref<string>('http://115.159.83.61:9000/common/prev.png')
+const prevIconUrl = ref<string>('http://110.40.183.254:9000/common/prev.png')
 const pageContent = ref<IInterPage>({
   pageId: -1,
   interId: -1,
@@ -539,15 +539,15 @@ const toPage = (buttonUrl: string) => {
   loadFlag.value = true
   // botton 页面的跳转逻辑 根据按钮的图片名称判断需要跳转到哪个页面
   // 干预1页面14
-  if (buttonUrl === 'http://115.159.83.61:9000/journey1/renwu1(1).png') {
+  if (buttonUrl === 'http://110.40.183.254:9000/journey1/renwu1(1).png') {
     interStore.setPageIndex(15)
     globalPageControlStore.globalPageControlInfo.toDaolanHome = true
   }
   // 干预2页面6
-  if (buttonUrl === 'http://115.159.83.61:9000/journey2/daolan3.png') {
+  if (buttonUrl === 'http://110.40.183.254:9000/journey2/daolan3.png') {
     interStore.setPageIndex(7)
     globalPageControlStore.globalPageControlInfo.firstStepPage6_2 = true
-  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/daolan4.png') {
+  } else if (buttonUrl === 'http://110.40.183.254:9000/journey2/daolan4.png') {
     if (globalPageControlStore.globalPageControlInfo.firstStepPage6_2 === false) {
       toast.warning('请先查看第一步')
       return
@@ -555,10 +555,10 @@ const toPage = (buttonUrl: string) => {
       interStore.setPageIndex(8)
     }
     // 干预2页面15
-  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/daolan15.png') {
+  } else if (buttonUrl === 'http://110.40.183.254:9000/journey2/daolan15.png') {
     interStore.setPageIndex(16)
     globalPageControlStore.globalPageControlInfo.firstStepPage15_2 = true
-  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/daolan16.png') {
+  } else if (buttonUrl === 'http://110.40.183.254:9000/journey2/daolan16.png') {
     if (globalPageControlStore.globalPageControlInfo.firstStepPage15_2 === false) {
       toast.warning('请先查看第一步')
       return
@@ -567,10 +567,10 @@ const toPage = (buttonUrl: string) => {
     }
   }
   // 干预2页面24
-  if (buttonUrl === 'http://115.159.83.61:9000/journey2/renwu3.png') {
+  if (buttonUrl === 'http://110.40.183.254:9000/journey2/renwu3.png') {
     interStore.setPageIndex(25)
     globalPageControlStore.globalPageControlInfo.firstStepPage24_2 = true
-  } else if (buttonUrl === 'http://115.159.83.61:9000/journey2/renwu5.png') {
+  } else if (buttonUrl === 'http://110.40.183.254:9000/journey2/renwu5.png') {
     if (globalPageControlStore.globalPageControlInfo.firstStepPage24_2 === false) {
       toast.warning('请先查看第一步')
       return
@@ -580,10 +580,10 @@ const toPage = (buttonUrl: string) => {
     }
   }
   // 干预3页面27
-  if (buttonUrl === 'http://115.159.83.61:9000/journey3/renwu2(1).png') {
+  if (buttonUrl === 'http://110.40.183.254:9000/journey3/renwu2(1).png') {
     interStore.setPageIndex(28)
     globalPageControlStore.globalPageControlInfo.firstStepPage27_3 = true
-  } else if (buttonUrl === 'http://115.159.83.61:9000/journey3/renwu2(3).png') {
+  } else if (buttonUrl === 'http://110.40.183.254:9000/journey3/renwu2(3).png') {
     if (globalPageControlStore.globalPageControlInfo.firstStepPage27_3 === false) {
       toast.warning('请先查看第一步')
       return
@@ -593,10 +593,10 @@ const toPage = (buttonUrl: string) => {
     }
   }
   // 干预4页面37
-  if (buttonUrl === 'http://115.159.83.61:9000/journey4/renwu2(2).png') {
+  if (buttonUrl === 'http://110.40.183.254:9000/journey4/renwu2(2).png') {
     interStore.setPageIndex(39)
     globalPageControlStore.globalPageControlInfo.secondStepPage37_4 = true
-  } else if (buttonUrl === 'http://115.159.83.61:9000/journey4/renwu2(3).png') {
+  } else if (buttonUrl === 'http://110.40.183.254:9000/journey4/renwu2(3).png') {
     if (globalPageControlStore.globalPageControlInfo.secondStepPage37_4 === false) {
       toast.warning('请先查看第一步')
       return
@@ -606,10 +606,10 @@ const toPage = (buttonUrl: string) => {
     }
   }
   // 干预5页面19
-  if (buttonUrl === 'http://115.159.83.61:9000/journey5/renwu2(1).png') {
+  if (buttonUrl === 'http://110.40.183.254:9000/journey5/renwu2(1).png') {
     interStore.setPageIndex(20)
     globalPageControlStore.globalPageControlInfo.firstStepPage18_5 = true
-  } else if (buttonUrl === 'http://115.159.83.61:9000/journey5/renwu2(2).png') {
+  } else if (buttonUrl === 'http://110.40.183.254:9000/journey5/renwu2(2).png') {
     if (globalPageControlStore.globalPageControlInfo.firstStepPage18_5 === false) {
       toast.warning('请先查看第一步')
       return
@@ -619,15 +619,15 @@ const toPage = (buttonUrl: string) => {
     }
   }
   // 干预6页面18
-  if (buttonUrl === 'http://115.159.83.61:9000/journey6/renwu2(1).png') {
+  if (buttonUrl === 'http://110.40.183.254:9000/journey6/renwu2(1).png') {
     interStore.setPageIndex(19)
     globalPageControlStore.globalPageControlInfo.toDaolanHome = true
   }
   // 干预7页面14
-  if (buttonUrl === 'http://115.159.83.61:9000/journey7/renwu2(1).png') {
+  if (buttonUrl === 'http://110.40.183.254:9000/journey7/renwu2(1).png') {
     interStore.setPageIndex(15)
     globalPageControlStore.globalPageControlInfo.firstStepPage14_7 = true
-  } else if (buttonUrl === 'http://115.159.83.61:9000/journey7/renwu2(2).png') {
+  } else if (buttonUrl === 'http://110.40.183.254:9000/journey7/renwu2(2).png') {
     if (globalPageControlStore.globalPageControlInfo.firstStepPage14_7 === false) {
       toast.warning('请先查看第一步')
       return

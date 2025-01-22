@@ -16,7 +16,7 @@
       <view style="height: 150rpx"></view>
       <view>
         <img
-          src="http://115.159.83.61:9000/tool/tool_logo.png"
+          src="http://110.40.183.254:9000/tool/tool_logo.png"
           style="width: 300px; height: 430px"
         />
       </view>
@@ -67,53 +67,53 @@ const currGroupId = ref<number>(userStore.userInfo.groupId)
 const toolList1 = ref([
   {
     toolName: '心情日记',
-    iconUrl: 'http://115.159.83.61:9000/tool/xinqingriji.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/xinqingriji.png',
   },
   {
     toolName: '三件小事',
-    iconUrl: 'http://115.159.83.61:9000/tool/nengliangriji.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/nengliangriji.png',
   },
 ])
 const toolList0 = ref([
   {
     toolName: '情绪采集',
-    iconUrl: 'http://115.159.83.61:9000/tool/xinqingriji.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/xinqingriji.png',
   },
   {
     toolName: '自动思维',
-    iconUrl: 'http://115.159.83.61:9000/tool/zidongsiwei.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/zidongsiwei.png',
   },
   {
     toolName: '认知解离',
-    iconUrl: 'http://115.159.83.61:9000/tool/renzhijieli.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/renzhijieli.png',
   },
   {
     toolName: '回避档案',
-    iconUrl: 'http://115.159.83.61:9000/tool/huibidangan.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/huibidangan.png',
   },
   {
     toolName: '专注当下',
-    iconUrl: 'http://115.159.83.61:9000/tool/zhuanzhudangxia.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/zhuanzhudangxia.png',
   },
   {
     toolName: '正念练习',
-    iconUrl: 'http://115.159.83.61:9000/tool/zhengnianlianxi.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/zhengnianlianxi.png',
   },
   {
     toolName: '接纳练习',
-    iconUrl: 'http://115.159.83.61:9000/tool/jienalianxi.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/jienalianxi.png',
   },
   {
     toolName: '价值手册',
-    iconUrl: 'http://115.159.83.61:9000/tool/jiazhishouce.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/jiazhishouce.png',
   },
   {
     toolName: '行动计划',
-    iconUrl: 'http://115.159.83.61:9000/tool/xingdongjihua.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/xingdongjihua.png',
   },
   {
     toolName: '应对计划',
-    iconUrl: 'http://115.159.83.61:9000/tool/yingduifufa.png',
+    iconUrl: 'http://110.40.183.254:9000/tool/yingduifufa.png',
   },
 ])
 

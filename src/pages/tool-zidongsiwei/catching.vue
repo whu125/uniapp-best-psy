@@ -15,7 +15,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/journey2/renwu7.png"
+          src="http://110.40.183.254:9000/journey2/renwu7.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -54,7 +54,7 @@
         </view>
       </view>
       <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/next.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">下一步</view>
       </view>
     </view>
@@ -64,7 +64,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/journey2/renwu8.png"
+          src="http://110.40.183.254:9000/journey2/renwu8.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -78,7 +78,7 @@
         </view>
       </view>
       <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/next.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">下一步</view>
       </view>
     </view>
@@ -88,7 +88,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/journey2/renwu9.png"
+          src="http://110.40.183.254:9000/journey2/renwu9.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -106,7 +106,7 @@
         </view>
       </view>
       <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/next.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">下一步</view>
       </view>
     </view>
@@ -116,7 +116,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/tool/zidongsiwei/step4.png"
+          src="http://110.40.183.254:9000/tool/zidongsiwei/step4.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -130,7 +130,7 @@
         </view>
       </view>
       <view @click="doSubmit" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/finish.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/finish.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">完成，存入封印册！</view>
       </view>
     </view>
@@ -158,16 +158,16 @@ const submitObj = ref<IZidongsiwei>({
 const userStore = useUserStore()
 const message = useMessage()
 const selectUrls = ref([
-  'http://115.159.83.61:9000/journey2/renwu10.png',
-  'http://115.159.83.61:9000/journey2/renwu11.png',
-  'http://115.159.83.61:9000/journey2/renwu12.png',
-  'http://115.159.83.61:9000/journey2/renwu13.png',
-  'http://115.159.83.61:9000/journey2/renwu14.png',
-  'http://115.159.83.61:9000/journey2/renwu18.png',
-  'http://115.159.83.61:9000/journey2/renwu19.png',
-  'http://115.159.83.61:9000/journey2/renwu20.png',
-  'http://115.159.83.61:9000/journey2/renwu21.png',
-  'http://115.159.83.61:9000/journey2/renwu22.png',
+  'http://110.40.183.254:9000/journey2/renwu10.png',
+  'http://110.40.183.254:9000/journey2/renwu11.png',
+  'http://110.40.183.254:9000/journey2/renwu12.png',
+  'http://110.40.183.254:9000/journey2/renwu13.png',
+  'http://110.40.183.254:9000/journey2/renwu14.png',
+  'http://110.40.183.254:9000/journey2/renwu18.png',
+  'http://110.40.183.254:9000/journey2/renwu19.png',
+  'http://110.40.183.254:9000/journey2/renwu20.png',
+  'http://110.40.183.254:9000/journey2/renwu21.png',
+  'http://110.40.183.254:9000/journey2/renwu22.png',
 ])
 const selectedItem = ref<number>(0)
 const houxuyingxiang = ref<string>('')

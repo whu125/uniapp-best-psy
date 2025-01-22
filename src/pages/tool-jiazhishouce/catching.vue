@@ -15,7 +15,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/tool/jiazhishouce/shenghuolingyu.png"
+          src="http://110.40.183.254:9000/tool/jiazhishouce/shenghuolingyu.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -27,7 +27,7 @@
         </view>
       </view>
       <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/next.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">下一页</view>
       </view>
     </view>
@@ -37,7 +37,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/tool/jiazhishouce/jiazhimiaoshu.png"
+          src="http://110.40.183.254:9000/tool/jiazhishouce/jiazhimiaoshu.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -51,7 +51,7 @@
         </view>
       </view>
       <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/next.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">下一页</view>
       </view>
     </view>
@@ -61,7 +61,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/journey6/renwu6.png"
+          src="http://110.40.183.254:9000/journey6/renwu6.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -73,7 +73,7 @@
         </view>
       </view>
       <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/next.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">下一页</view>
       </view>
     </view>
@@ -83,7 +83,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/journey6/renwu7.png"
+          src="http://110.40.183.254:9000/journey6/renwu7.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -97,7 +97,7 @@
         </view>
       </view>
       <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/next.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/next.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">下一页</view>
       </view>
     </view>
@@ -107,7 +107,7 @@
       <view style="height: 15%"></view>
       <view class="middle-img-input">
         <image
-          src="http://115.159.83.61:9000/journey6/renwu8.png"
+          src="http://110.40.183.254:9000/journey6/renwu8.png"
           mode="widthFix"
           style="width: 100%"
         />
@@ -122,7 +122,7 @@
         </view>
       </view>
       <view @click="toNext" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/finish.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/finish.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">完成我的手册</view>
       </view>
     </view>
@@ -132,13 +132,13 @@
       <view style="height: 15%"></view>
       <view class="middle-img-common">
         <image
-          src="http://115.159.83.61:9000/journey6/renwu9.png"
+          src="http://110.40.183.254:9000/journey6/renwu9.png"
           mode="widthFix"
           style="width: 100%"
         />
       </view>
       <view @click="doSubmit" class="operation-area">
-        <img src="http://115.159.83.61:9000/common/back.png" style="width: 50px; height: 50px" />
+        <img src="http://110.40.183.254:9000/common/back.png" style="width: 50px; height: 50px" />
         <view style="width: 100%; font-size: 18px; text-align: center">返回工具箱主页</view>
       </view>
     </view>

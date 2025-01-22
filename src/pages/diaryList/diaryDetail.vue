@@ -29,7 +29,7 @@
         </view>
         <view class="right_box">
           <image
-            src="http://115.159.83.61:9000/tool/tool-list.png"
+            src="http://110.40.183.254:9000/tool/tool-list.png"
             style="width: 45px; height: 45px"
           />
         </view>
@@ -65,12 +65,12 @@ const content = ref<IGetFeelingItem>({
   dateTime: '',
 })
 const imageMap = new Map([
-  ['开心', 'http://115.159.83.61:9000/tool/moodDiary/mood-happy.png'],
-  ['平静', 'http://115.159.83.61:9000/tool/moodDiary/mood-calm.png'],
-  ['生气', 'http://115.159.83.61:9000/tool/moodDiary/mood-angry.png'],
-  ['沮丧', 'http://115.159.83.61:9000/tool/moodDiary/mood-upset.png'],
-  ['焦虑', 'http://115.159.83.61:9000/tool/moodDiary/mood-anxious.png'],
-  ['悲伤', 'http://115.159.83.61:9000/tool/moodDiary/mood-sad.png'],
+  ['开心', 'http://110.40.183.254:9000/tool/moodDiary/mood-happy.png'],
+  ['平静', 'http://110.40.183.254:9000/tool/moodDiary/mood-calm.png'],
+  ['生气', 'http://110.40.183.254:9000/tool/moodDiary/mood-angry.png'],
+  ['沮丧', 'http://110.40.183.254:9000/tool/moodDiary/mood-upset.png'],
+  ['焦虑', 'http://110.40.183.254:9000/tool/moodDiary/mood-anxious.png'],
+  ['悲伤', 'http://110.40.183.254:9000/tool/moodDiary/mood-sad.png'],
 ])
 onLoad((options) => {
   content.value = JSON.parse(decodeURIComponent(options.detail))
